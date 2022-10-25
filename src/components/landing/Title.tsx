@@ -3,7 +3,7 @@ import Button from "../layout/Button";
 
 const Title = () => {
   return (
-    <div className="flex flex-col mx-auto justify-center border border-5 mt-5">
+    <div className="flex flex-col mx-auto justify-center border border-5 mt-5 h-96 bg-red-100">
       <h1 className="text-3xl text-center">
         Comfortly reserve your company conference rooms with few clicks.
       </h1>
