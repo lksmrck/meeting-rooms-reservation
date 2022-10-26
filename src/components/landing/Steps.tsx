@@ -3,9 +3,9 @@ import Button from "../layout/Button";
 import CR from "../../assets/CR.jpeg";
 
 const buttonsArray = [
-  { id: 1, clicked: false },
-  { id: 2, clicked: false },
-  { id: 3, clicked: false },
+  { id: 1, clicked: false, text: "Log In" },
+  { id: 2, clicked: false, text: "See free room" },
+  { id: 3, clicked: false, text: "Book it" },
 ];
 
 const Steps = () => {
@@ -18,28 +18,30 @@ const Steps = () => {
         : { ...button, clicked: false }
     );
     setButtons(newButtons);
-    console.log(id);
   };
 
   return (
-    <div className="h-96 flex justify-center bg-slate-300">
-      <div className="h-96">
+    <div className="h-96 flex justify-center bg-slate-300 ">
+      <div className="h-96 flex items-center">
         <img src={CR} width="100px" height="100px" />
         <p>{buttons[0].clicked ? "kliknuto 1" : ""}</p>
         <p>{buttons[1].clicked ? "kliknuto 2" : ""}</p>
         <p>{buttons[2].clicked ? "kliknuto 3" : ""}</p>
       </div>
-      <div className="h-96 flex flex-col">
+      <div className="h-96 flex flex-col my-24">
         {buttons.map((button) => {
           return (
-            <Button
-              text={button.id}
-              onClick={() => onClickButton(button.id)}
-              //Pokud je tlačítko kliknuto, změní se bgcolor
-              additionalStyle={
-                buttons[button.id - 1].clicked ? "bg-emerald-600" : ""
-              }
-            />
+            <div className="flex justify-start items-center">
+              <Button
+                text={button.id}
+                onClick={() => onClickButton(button.id)}
+                //Pokud je tlačítko kliknuto, změní se bgcolor
+                additionalStyle={
+                  buttons[button.id - 1].clicked ? "bg-emerald-600" : ""
+                }
+              />
+              <p>{button.text}</p>
+            </div>
           );
         })}
       </div>

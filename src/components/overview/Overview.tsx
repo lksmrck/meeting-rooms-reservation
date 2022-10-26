@@ -1,7 +1,9 @@
-import React from "react";
-
 const Overview = () => {
-  return <div>Overview</div>;
+  return (
+    <section>
+      <div className=""></div>
+    </section>
+  );
 };
 
 export default Overview;
