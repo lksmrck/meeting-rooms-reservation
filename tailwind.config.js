@@ -6,6 +6,10 @@ module.exports = {
       fontFamily: {
         fuzzy: "Fuzzy Bubbles ",
       },
+      gridTemplateColumns: {
+        //24 columns grid (pro časová pásma)
+        24: "repeat(24, minmax(0, 1fr))",
+      },
     },
   },
   plugins: [],
