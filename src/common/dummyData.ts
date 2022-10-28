@@ -49,7 +49,34 @@ export const rooms = [{id: 1, roomData: [
     {room: 2, block: 22, time: "17:30 - 18:00", reserved: false},
     {room: 2, block: 23, time: "18:00 - 18:30", reserved: false},
     {room: 2, block: 24, time: "18:30 - 19:00", reserved: false},
-    ]}]
+    ]}, 
+    {id: 2, roomData: [
+        {room: 3, block: 1, time: "7:00 - 7:30", reserved: false}, 
+        {room: 3, block: 2, time: "7:30 - 8:00", reserved: false},
+        {room: 3, block: 3, time: "8:00 - 8:30", reserved: false},
+        {room: 3, block: 4, time: "8:30 - 9:00", reserved: false},
+        {room: 3, block: 5, time: "9:00 - 9:30", reserved: false},
+        {room: 3, block: 6, time: "9:30 - 10:00", reserved: false},
+        {room: 3, block: 7, time: "10:00 - 10:30", reserved: false},
+        {room: 3, block: 8, time: "10:30 - 11:00", reserved: false},
+        {room: 3, block: 9, time: "11:00 - 11:30", reserved: false},
+        {room: 3, block: 10, time: "11:30 - 12:00", reserved: false},
+        {room: 3, block: 11, time: "12:00 - 12:30", reserved: false},
+        {room: 3, block: 12, time: "12:30 - 13:00", reserved: false},
+        {room: 3, block: 13, time: "13:00 - 13:30", reserved: false},
+        {room: 3, block: 14, time: "13:30 - 14:00", reserved: false},
+        {room: 3, block: 15, time: "14:00 - 14:30", reserved: false},
+        {room: 3, block: 16, time: "14:30 - 15:00", reserved: false},
+        {room: 3, block: 17, time: "15:00 - 15:30", reserved: false},
+        {room: 3, block: 18, time: "15:30 - 16:00", reserved: false},
+        {room: 3, block: 19, time: "16:00 - 16:30", reserved: false},
+        {room: 3, block: 20, time: "16:30 - 17:00", reserved: false},
+        {room: 3, block: 21, time: "17:00 - 17:30", reserved: false},
+        {room: 3, block: 22, time: "17:30 - 18:00", reserved: false},
+        {room: 3, block: 23, time: "18:00 - 18:30", reserved: false},
+        {room: 3, block: 24, time: "18:30 - 19:00", reserved: false},
+        ]}
+     ]
 
 export const timeBlocks = [
     {id: 1, time: "7:00 - 7:30"},

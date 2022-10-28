@@ -4,7 +4,7 @@ import Button from "./Button";
 
 const Navbar = () => {
   return (
-    <section className="h-20 bg-blue-200 flex">
+    <section className="h-20 bg-th_blue_two flex">
       <nav className="py-10 mb-12 flex justify-between items-center w-screen">
         <ul className="flex items-center">
           <li className="mr-2 ml-5">Room Reserver</li>
