@@ -5,13 +5,18 @@ import { rooms } from "../common/dummyData";
 
 const initialRoom = rooms.find((room) => room.id == 1);
 
+type ReservationObject = {
+  block: number;
+  reserved: boolean;
+};
+
 interface AppContextInterface {
   openModal: boolean;
   setOpenModal: Dispatch<SetStateAction<boolean>>;
   selectedRoom: any;
   setSelectedRoom: /* Dispatch<SetStateAction<number | null>>; */ any;
-  selectedTime: number[] | null; //array z vybraných časových bloků
-  setSelectedTime: Dispatch<SetStateAction<number[] | null>>;
+  selectedTime: ReservationObject[] | null; //array z vybraných časových bloků
+  setSelectedTime: Dispatch<SetStateAction<ReservationObject[] | null>>;
 }
 
 const AppContext = createContext<AppContextInterface | null>(null);
@@ -26,7 +31,9 @@ export const AppContextProvider: React.FC<{
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   //3. Handling výběru časových bloků - čísla bloků 1-24
-  const [selectedTime, setSelectedTime] = useState<number[] | null>([]);
+  const [selectedTime, setSelectedTime] = useState<ReservationObject[] | null>(
+    [] as ReservationObject[]
+  );
 
   return (
     <AppContext.Provider

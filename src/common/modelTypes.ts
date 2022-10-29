@@ -28,3 +28,4 @@ export type Reservation = {
     roomID: number,
     blocks: number | number[]
 }
+
