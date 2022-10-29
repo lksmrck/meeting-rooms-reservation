@@ -1,4 +1,4 @@
-export const rooms = [{id: 1, roomData: [
+export const rooms = [{id: 1, name:"Paris", roomData: [
 {room: 1, block: 1, time: "7:00 - 7:30", reserved: false}, 
 {room: 1, block: 2, time: "7:30 - 8:00", reserved: false},
 {room: 1, block: 3, time: "8:00 - 8:30", reserved: false},
@@ -24,7 +24,7 @@ export const rooms = [{id: 1, roomData: [
 {room: 1, block: 23, time: "18:00 - 18:30", reserved: false},
 {room: 1, block: 24, time: "18:30 - 19:00", reserved: false},
 ]}, 
-{id: 2, roomData: [
+{id: 2,name: "London", roomData: [
     {room: 2, block: 1, time: "7:00 - 7:30", reserved: false}, 
     {room: 2, block: 2, time: "7:30 - 8:00", reserved: false},
     {room: 2, block: 3, time: "8:00 - 8:30", reserved: false},
@@ -50,7 +50,7 @@ export const rooms = [{id: 1, roomData: [
     {room: 2, block: 23, time: "18:00 - 18:30", reserved: false},
     {room: 2, block: 24, time: "18:30 - 19:00", reserved: false},
     ]}, 
-    {id: 2, roomData: [
+    {id: 3, name: "Madrid", roomData: [
         {room: 3, block: 1, time: "7:00 - 7:30", reserved: false}, 
         {room: 3, block: 2, time: "7:30 - 8:00", reserved: false},
         {room: 3, block: 3, time: "8:00 - 8:30", reserved: false},

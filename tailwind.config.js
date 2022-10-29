@@ -17,6 +17,8 @@ module.exports = {
         th_blue_two: "#81C6E8",
         th_blue_three: "#5DA7DB",
         th_blue_four: "#5837D0",
+        //gray - backdrop
+        th_backdrop: "#000000bf",
       },
     },
   },
