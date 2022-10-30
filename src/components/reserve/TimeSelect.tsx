@@ -7,7 +7,7 @@ const TimeSelect: React.FC = () => {
   const appContext = useContext(AppContext);
   const [reservedBlocks, setReservedBlocks] = useState(0);
 
-  //Počítadlo rezervovaných bloků
+  //Počítadlo vybraných bloků k rezervaci - s každým vybraným blokem přičte 1 do local state,
   useEffect(() => {
     setReservedBlocks(0);
     appContext?.selectedTime.map((data: any) => {
@@ -17,14 +17,10 @@ const TimeSelect: React.FC = () => {
     });
   }, [appContext?.selectedTime]);
 
-  //USEEFFECT při prvním renderu, že se do SELECTEDTIME pošle room objekt, kde budou bloky + RESERVED: TRUE/FALSE
-
   const onClickHandler = (blockNumber: number): void => {
-    //Logika -> Vybírá se právě 1 schůzka. Tzn, že lze vybírat jen souvislé časové bloky - nelze vybrat např. blok 7:00-7:30 a k tomu 12:00-12:30
+    //Logika -> Vybírá se právě 1 schůzka. Tzn, že lze vybírat jen souvislé časové bloky - nelze vybrat např. blok 7:00-7:30 a k tomu 12:00-12:30, ale lze vybrat postupně všechny bloky od 7:00 až do 12:30.
     //Podminky
-    //0. Check které bloky už jsou rezervované !
-    //1. Pokud je prazdne pole (jeste neni nic vybrano) lze kliknout na cokoliv a vybrat.
-
+    //1. Pokud ještě není vybrán žádný blok, lze kliknout na kterýkoliv a vybrat.
     if (appContext?.selectedTime && reservedBlocks == 0) {
       const newReservationArray = appContext.selectedTime.map((data: any) => {
         if (data.block == blockNumber) {
@@ -35,13 +31,13 @@ const TimeSelect: React.FC = () => {
 
       appContext.setSelectedTime(newReservationArray);
     }
-    //2. Pokud má pole 1 vybraný blok, tak lze vybrat pouze blok+1 nebo blok-1
+    //2. Pokud je právě 1 vybraný blok, tak lze vybrat pouze blok+1 nebo blok-1 nebo odvybrat vybraný blok
     if (appContext?.selectedTime && reservedBlocks == 1) {
       const reservedBlock = appContext?.selectedTime.filter((obj: any) => {
-        return obj.block === blockNumber;
+        return obj.reserved;
       }); //uložen rezervovaný blok
+
       if (
-        //TADY PROBLEM
         blockNumber == reservedBlock[0].block ||
         blockNumber == reservedBlock[0].block + 1 ||
         blockNumber == reservedBlock[0].block - 1
@@ -93,6 +89,7 @@ const TimeSelect: React.FC = () => {
     }
   };
 
+  //DOM - timeblocks
   const timeBlocksDom = timeBlocks.map((block) => {
     return (
       <div
@@ -104,6 +101,7 @@ const TimeSelect: React.FC = () => {
     );
   });
 
+  //DOM - podle room
   const roomDom = appContext?.selectedRoom.roomData.map((roomData: any) => {
     const selectedBlock = appContext?.selectedTime?.find(
       (room: any) => room.block == roomData.block
