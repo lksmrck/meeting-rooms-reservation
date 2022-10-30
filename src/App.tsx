@@ -12,10 +12,9 @@ const App = () => {
       <Navbar />
       {/*     <Landing />
       <Footer /> */}
-      {/* <Overview /> */}
-      {/*   <Form /> */}
+      {/*  <Overview /> */}
+
       <Reserve />
-      {/*    <TimeSelect /> */}
     </div>
   );
 };
