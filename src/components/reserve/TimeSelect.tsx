@@ -18,7 +18,8 @@ const TimeSelect: React.FC = () => {
   }, [appContext?.selectedTime]);
 
   const onClickHandler = (blockNumber: number): void => {
-    //Logika -> Vybírá se právě 1 schůzka. Tzn, že lze vybírat jen souvislé časové bloky - nelze vybrat např. blok 7:00-7:30 a k tomu 12:00-12:30, ale lze vybrat postupně všechny bloky od 7:00 až do 12:30.
+    //Logika -> Vybírá se právě 1 schůzka. Tzn, že lze vybírat jen souvislé časové bloky - nelze vybrat např. blok 7:00-7:30 a k tomu 12:00-12:30,
+    //ale lze vybrat postupně všechny bloky od 7:00 až do 12:30.
     //Podminky
     //1. Pokud ještě není vybrán žádný blok, lze kliknout na kterýkoliv a vybrat.
     if (appContext?.selectedTime && reservedBlocks == 0) {
@@ -35,7 +36,7 @@ const TimeSelect: React.FC = () => {
     if (appContext?.selectedTime && reservedBlocks == 1) {
       const reservedBlock = appContext?.selectedTime.filter((obj: any) => {
         return obj.reserved;
-      }); //uložen rezervovaný blok
+      }); //uložen rezervovaný object
 
       if (
         blockNumber == reservedBlock[0].block ||

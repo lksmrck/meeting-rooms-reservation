@@ -7,7 +7,12 @@ import {
 /*   import { HoldingItem } from "../../common/modelTypes";
   import { HoldingsTransactionsActions } from "../../common/actionTypes"; */
 
-export default (rooms = [], action: any /* HoldingsTransactionsActions */) => {
+import { rooms as DUMMY_DATA } from "../../common/dummyData";
+
+export default (
+  rooms = DUMMY_DATA,
+  action: any /* HoldingsTransactionsActions */
+) => {
   switch (action.type) {
     case FETCH_ALL_RESERVATIONS:
       return action.payload;
