@@ -6,6 +6,7 @@ import Form from "./components/reserve/Form";
 import Reserve from "./components/reserve/Reserve";
 import TimeSelect from "./components/reserve/TimeSelect";
 import Overview from "./components/overview/Overview";
+import Auth from "./components/auth/Auth";
 
 const App = () => {
   return (
@@ -14,8 +15,9 @@ const App = () => {
       {/*     <Landing />
       <Footer /> */}
       {/* <DailyOverview /> */}
-      <Overview />
+      {/* <Overview /> */}
       {/* <Reserve /> */}
+      <Auth />
     </div>
   );
 };
