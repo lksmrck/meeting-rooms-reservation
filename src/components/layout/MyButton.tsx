@@ -1,10 +1,11 @@
 import React from "react";
 
 interface ButtonProps {
-  text: string | number;
+  text?: string | number;
   type?: "button" | "submit";
   onClick?: React.MouseEventHandler<HTMLButtonElement>; //pak odebrat otaznik
   additionalStyle?: string;
+  icon?: any;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -12,6 +13,7 @@ const Button: React.FC<ButtonProps> = ({
   type,
   onClick,
   additionalStyle,
+  icon,
 }) => {
   return (
     <button
@@ -19,7 +21,8 @@ const Button: React.FC<ButtonProps> = ({
       className={`bg-red-300 rounded-lg px-4 py-2 hover:bg-red-500 shadow-md m-2 transition-all active:transform active:scale-95 active:shadow-sm ${additionalStyle}`}
       onClick={onClick}
     >
-      {text}
+      {icon ? icon : ""}
+      {text ? text : ""}
     </button>
   );
 };

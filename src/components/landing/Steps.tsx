@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Button from "../layout/Button";
+import Button from "../layout/MyButton";
 import CR from "../../assets/CR.jpeg";
 
 const buttonsArray = [

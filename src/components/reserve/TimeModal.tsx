@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Select from "../layout/Select";
 import { rooms } from "../../common/dummyData";
 import Backdrop from "../layout/Backdrop";
-import Button from "../layout/Button";
+import Button from "../layout/MyButton";
 import AppContext from "../../state/AppContext";
 
 const TimeModal: React.FC = () => {

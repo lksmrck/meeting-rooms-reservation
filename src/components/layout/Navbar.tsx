@@ -1,6 +1,6 @@
 import React from "react";
 import { BsFillMoonStarsFill } from "react-icons/bs";
-import Button from "./Button";
+import Button from "./MyButton";
 
 const Navbar = () => {
   return (

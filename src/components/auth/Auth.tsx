@@ -1,6 +1,6 @@
 import React from "react";
 import Input from "../layout/Input";
-import Button from "../layout/Button";
+import Button from "../layout/MyButton";
 
 const Auth = () => {
   return (
