@@ -5,9 +5,14 @@ import Select from "../layout/Select";
 import { rooms } from "../../common/dummyData";
 import AppContext from "../../state/AppContext";
 import { meetingTypes } from "../../constants/data";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { db } from "../../config/firebase";
 
 const Form: React.FC = () => {
   const appContext = useContext(AppContext);
+  if (!appContext) return null;
+  //nepouzito zatim
+  const { setOpenModal } = appContext;
 
   //FormData
   //1.meeting name
@@ -21,6 +26,18 @@ const Form: React.FC = () => {
 
   const onChangeInputHandler = (e: React.ChangeEvent<HTMLInputElement>): void =>
     setName(e.target.value);
+
+  const onSubmitHandler = async (e: any) => {
+    e.preventDefault();
+
+    const response = await addDoc(collection(db, "cities"), {
+      name: "Los Angeles",
+      state: "CA",
+      country: "USA",
+      timeStamp: serverTimestamp(), //čas přidání
+    });
+    console.log(response.id);
+  };
 
   return (
     <section className="flex justify-center mt-4">
@@ -40,7 +57,7 @@ const Form: React.FC = () => {
             text="Add guests"
             //VYUZIT
             onClick={() => {
-              appContext?.setOpenModal(true);
+              setOpenModal(true);
             }}
           />
 
