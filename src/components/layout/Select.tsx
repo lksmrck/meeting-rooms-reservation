@@ -11,13 +11,15 @@ type SelectProps = {
 
 const Select: React.FC<SelectProps> = ({ checkbox, name, id, options }) => {
   const appContext = useContext(AppContext);
-  const [selectedRoom, setSelectedRoom] = useState<any>();
+  /*  const [selectedRoom, setSelectedRoom] = useState<any>(); */
+  if (!appContext) return null;
+  const { selectedRoom, setSelectedRoom } = appContext;
 
   const onChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>): void => {
     const roomNumber = parseInt(e.target.value);
     const room = rooms.find((option: any) => option.id == roomNumber);
 
-    appContext?.setSelectedRoom(room);
+    setSelectedRoom(room);
   };
   const onChangeSelectCheckbox = () => {};
 
@@ -26,7 +28,7 @@ const Select: React.FC<SelectProps> = ({ checkbox, name, id, options }) => {
     if (checkbox) {
       return (
         <div>
-          {appContext?.selectedRoom.roomData.map((data: any) => {
+          {selectedRoom.roomData.map((data: any) => {
             return !data.reserved ? (
               <div>
                 <input type="checkbox" id={id} name={data.time} />

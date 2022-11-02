@@ -1,5 +1,6 @@
 import React from "react";
 import { BsFillMoonStarsFill } from "react-icons/bs";
+
 import Button from "./MyButton";
 
 const Navbar = () => {
@@ -12,7 +13,7 @@ const Navbar = () => {
             <BsFillMoonStarsFill />
           </li>
         </ul>
-        <Button text="Sign In" />
+        <Button text="Sign In" onClick={() => "pushni me"} />
       </nav>
     </section>
   );
