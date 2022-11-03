@@ -16,12 +16,6 @@ interface AuthContextInterface {
   user: any;
   setUser: Dispatch<SetStateAction<any>>;
 }
-/* 
-export function createCtx<A>(defaultValue: A) {
-    type UpdateType = Dispatch<SetStateAction<typeof defaultValue>>;
-    const defaultUpdate: UpdateType =() => defaultValue;
-    const ctx = createContext({})
-} */
 
 const AuthContext = createContext({} as AuthContextInterface);
 

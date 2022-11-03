@@ -1,6 +1,9 @@
 import { timeBlocks, rooms } from "../../common/dummyData";
 
 const Overview = () => {
+  //Tady bude dispatch, kdy se stáhnout data z Firebase na základě datumu v ReservationContext a Firmy.
+  //Rooms budou defaultně nerezervované. Pouze rezervace se budou ukládat.
+
   const timeBlocksDom = timeBlocks.map((block) => {
     return (
       <div

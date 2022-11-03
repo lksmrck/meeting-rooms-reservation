@@ -9,11 +9,6 @@ import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../../config/firebase";
 
 const Form: React.FC = () => {
-  const appContext = useContext(AppContext);
-  if (!appContext) return null;
-  //nepouzito zatim
-  const { setOpenModal } = appContext;
-
   //FormData
   //1.meeting name
   const [name, setName] = useState<string>();
@@ -24,19 +19,27 @@ const Form: React.FC = () => {
 
   //4.meeting type
 
+  const appContext = useContext(AppContext);
+  if (!appContext) return null;
+  //nepouzito zatim
+  const { setOpenModal } = appContext;
+
   const onChangeInputHandler = (e: React.ChangeEvent<HTMLInputElement>): void =>
     setName(e.target.value);
 
   const onSubmitHandler = async (e: any) => {
     e.preventDefault();
-
-    const response = await addDoc(collection(db, "cities"), {
-      name: "Los Angeles",
-      state: "CA",
-      country: "USA",
-      timeStamp: serverTimestamp(), //čas přidání
-    });
-    console.log(response.id);
+    try {
+      const response = await addDoc(collection(db, "cities"), {
+        name: "Los Angeles",
+        state: "CA",
+        country: "USA",
+        timeStamp: serverTimestamp(), //čas přidání
+      });
+      console.log(response.id);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

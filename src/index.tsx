@@ -8,6 +8,7 @@ import thunk from "redux-thunk";
 import { BrowserRouter } from "react-router-dom";
 import { AppContextProvider } from "./state/AppContext";
 import { AuthContextProvider } from "./state/AuthContext";
+import { ReservationContextProvider } from "./state/ReservationContext";
 import { reducers } from "./state/reducers";
 const store = createStore(reducers, compose(applyMiddleware(thunk)));
 
@@ -25,11 +26,13 @@ const root = ReactDOM.createRoot(
 root.render(
   <Provider store={store}>
     <AuthContextProvider>
-      <AppContextProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </AppContextProvider>
+      <ReservationContextProvider>
+        <AppContextProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </AppContextProvider>
+      </ReservationContextProvider>
     </AuthContextProvider>
   </Provider>
 );

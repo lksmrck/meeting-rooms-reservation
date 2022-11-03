@@ -27,23 +27,33 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/">
+          <Route index element={<Landing />} />
           <Route path="login" element={<Auth />} />
           <Route
-            index
+            path="overview"
             element={
               <RequireAuth>
                 <Overview />
               </RequireAuth>
             }
           />
+          <Route
+            //UPRAVIT - přidat do path room id
+            path="reserve"
+            element={
+              <RequireAuth>
+                <Reserve />
+              </RequireAuth>
+            }
+          />
 
           {/*     <Landing />
-      <Footer /> */}
+           */}
           {/* <DailyOverview /> */}
           {/* <Overview /> */}
-          {/* <Reserve /> */}
         </Route>
       </Routes>
+      <Footer />
     </div>
   );
 };
