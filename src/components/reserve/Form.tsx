@@ -5,11 +5,18 @@ import Select from "../layout/Select";
 import { rooms } from "../../common/dummyData";
 import AppContext from "../../state/AppContext";
 import { meetingTypes } from "../../constants/data";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  serverTimestamp,
+  getDocs,
+} from "firebase/firestore";
 import { db } from "../../config/firebase";
 
 const Form: React.FC = () => {
+  const [fetchData, setFetchData] = useState();
   //FormData
+
   //1.meeting name
   const [name, setName] = useState<string>();
   //2.room
@@ -29,7 +36,7 @@ const Form: React.FC = () => {
 
   const onSubmitHandler = async (e: any) => {
     e.preventDefault();
-    try {
+    /*  try {
       const response = await addDoc(collection(db, "cities"), {
         name: "Los Angeles",
         state: "CA",
@@ -39,7 +46,22 @@ const Form: React.FC = () => {
       console.log(response.id);
     } catch (error) {
       console.log(error);
-    }
+    } */
+  };
+
+  const testFetch = async () => {
+    const querySnapshot = await getDocs(
+      collection(db, "companies/firstCompany/meetings")
+    );
+
+    let list: any = [];
+    querySnapshot.forEach((doc) => {
+      list.push(doc.data());
+      // doc.data() is never undefined for query doc snapshots
+      console.log(doc.id, " => ", doc.data());
+    });
+    /* setFetchData(list); */
+    console.log(list);
   };
 
   return (
@@ -64,18 +86,10 @@ const Form: React.FC = () => {
             }}
           />
 
-          {/* <label htmlFor="guests">Guests</label>
-          <Input
-            id="guests"
-            name="guests"
-            type="checkbox"
-            placeholder="Meeting type"
-          /> */}
-
           <Select name="rooms" id="rooms" options={meetingTypes} />
           <div className="flex justify-center ">
             <Button type="submit" text="Reserve" />
-            <Button text="Back" />
+            <Button text="Back" onClick={testFetch} />
           </div>
         </form>
       </div>

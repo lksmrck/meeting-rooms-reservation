@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import { timeBlocks, rooms } from "../../common/dummyData";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
@@ -7,17 +9,18 @@ import AuthContext from "../../state/AuthContext";
 const Overview = () => {
   //Tady bude dispatch, kdy se stáhnout data z Firebase na základě datumu v ReservationContext a Firmy.
   //Rooms budou defaultně nerezervované. Pouze rezervace se budou ukládat.
+  useEffect(() => {}, []);
 
   const navigate = useNavigate();
 
   const reservationContext = useContext(ReservationContext);
   const authContext = useContext(AuthContext);
+
   if (!reservationContext) return null;
   const { setPickedBlock } = reservationContext;
 
   if (!authContext) return null;
   const { user } = authContext;
-  console.log(user.email);
 
   const onClickBlockHandler = (room: number, block: number): void => {
     //Uloží do Contextu room a block, na které user clicknul, aby se dalo pak použít v detailní rezervaci jako přednastaveno

@@ -32,8 +32,7 @@ export const AuthContextProvider: React.FC<{
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(user));
 
-    //Firebase query - uložení company, pod kterou user pracuje do AuthContextu
-
+    //Firebase query -> při změně usera uložení company, pod kterou user pracuje
     const fetchCompany = async () => {
       const docRef = doc(db, "users", user.email);
       const docSnap = await getDoc(docRef);

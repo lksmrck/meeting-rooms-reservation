@@ -4,6 +4,7 @@ import Title from "../components/landing/Title";
 import Input from "../components/layout/Input";
 import Auth from "../components/auth/Auth";
 import Steps from "../components/landing/Steps";
+import Reference from "../components/landing/Reference";
 
 const Landing = () => {
   return (
@@ -11,7 +12,7 @@ const Landing = () => {
       <Title />
       <Features />
       <Steps />
-      {/* <Auth /> */}
+      <Reference />
     </div>
   );
 };

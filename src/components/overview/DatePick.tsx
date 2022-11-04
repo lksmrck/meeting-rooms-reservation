@@ -5,7 +5,7 @@ import ReservationContext from "../../state/ReservationContext";
 import { useNavigate } from "react-router-dom";
 
 const DatePick = () => {
-  const [date, setDate] = useState(new Date());
+  /* const [date, setDate] = useState(new Date()); */
   const navigate = useNavigate();
 
   const reservationContext = useContext(ReservationContext);
@@ -13,14 +13,14 @@ const DatePick = () => {
   const { pickedDate, setPickedDate } = reservationContext;
 
   const pickDateHandler = (date: Date) => {
-    setDate(date);
+    /*   setDate(date); */
     setPickedDate(date);
     navigate("/overview");
   };
 
   return (
     <div className="flex justify-center w-64 ">
-      <Calendar onChange={pickDateHandler} value={date} />
+      <Calendar onChange={pickDateHandler} value={pickedDate} />
     </div>
   );
 };

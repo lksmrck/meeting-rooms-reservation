@@ -36,9 +36,7 @@ const Steps = () => {
                 text={button.id}
                 onClick={() => onClickButton(button.id)}
                 //Pokud je tlačítko kliknuto, změní se bgcolor
-                additionalStyle={
-                  buttons[button.id - 1].clicked ? "bg-emerald-600" : ""
-                }
+                bgColor={buttons[button.id - 1].clicked ? "blue" : ""}
               />
               <p>{button.text}</p>
             </div>

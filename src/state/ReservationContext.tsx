@@ -23,6 +23,8 @@ const ReservationContext = createContext({} as ReservationContextInterface);
 export const ReservationContextProvider: React.FC<{
   children: ReactNode;
 }> = ({ children }) => {
+  //Default data místnosti za 1 den, upraví se potom podle toho co je rezervováno (po fetchi z firebase)
+  const [defaultDayData, setDefaultDayData] = useState();
   //Home (Calendar)
   const [pickedDate, setPickedDate] = useState<Date>(new Date());
   //Overview

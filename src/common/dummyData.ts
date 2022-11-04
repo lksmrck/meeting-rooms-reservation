@@ -142,16 +142,15 @@ export const ONEDUMMYROOM = [
         {id: 3, name: "London"}
     ]
 
+    //Bude v subkolekci s číslem místnosti!
     const FBmeetings = [
         {date: "21.11.2022",
-        room: 1, 
         blocks: [3,4,5], 
         name: "Call with supervisor", 
         type: "call", 
         guests: ["supervisor@supervsior.cz", "druhysupervisor@supervisor.cz"] },
     
         {date: "23.11.2022",
-        room: 2, 
         blocks: [7,8], 
         name: "Board meeting", 
         type: "face to face", 
