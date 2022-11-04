@@ -14,20 +14,20 @@ const Auth = () => {
   const authContext = useContext(AuthContext);
 
   if (!authContext) return null;
-  const { /* user , */ setUser } = authContext;
+  const { user, setUser } = authContext;
 
-  const loginHandler = (e: any) => {
+  const loginHandler = async (e: any) => {
     e.preventDefault();
 
     //Firebase docs -  https://firebase.google.com/docs/auth/web/password-auth
-
+    //Firebase Auth
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
         setUser(user);
-        console.log(user);
-        navigate("/");
+        console.log(user.email);
+        navigate("/home");
         // ...
       })
       .catch((error) => {

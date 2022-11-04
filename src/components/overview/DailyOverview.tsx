@@ -1,8 +1,29 @@
 import { timeBlocks, rooms } from "../../common/dummyData";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import ReservationContext from "../../state/ReservationContext";
+import AuthContext from "../../state/AuthContext";
 
 const Overview = () => {
   //Tady bude dispatch, kdy se stáhnout data z Firebase na základě datumu v ReservationContext a Firmy.
   //Rooms budou defaultně nerezervované. Pouze rezervace se budou ukládat.
+
+  const navigate = useNavigate();
+
+  const reservationContext = useContext(ReservationContext);
+  const authContext = useContext(AuthContext);
+  if (!reservationContext) return null;
+  const { setPickedBlock } = reservationContext;
+
+  if (!authContext) return null;
+  const { user } = authContext;
+  console.log(user.email);
+
+  const onClickBlockHandler = (room: number, block: number): void => {
+    //Uloží do Contextu room a block, na které user clicknul, aby se dalo pak použít v detailní rezervaci jako přednastaveno
+    setPickedBlock({ room, block });
+    /*  navigate("/reserve"); */
+  };
 
   const timeBlocksDom = timeBlocks.map((block) => {
     return (
@@ -33,6 +54,7 @@ const Overview = () => {
               className={`h-10 ${
                 roomData.reserved ? "bg-red-600" : "bg-white"
               } w-20 text-xs border border-green-600`}
+              onClick={() => onClickBlockHandler(room.id, roomData.block)}
             >
               {roomData.room}
             </div>

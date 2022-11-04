@@ -5,7 +5,7 @@ import DailyOverview from "./components/overview/DailyOverview";
 import Form from "./components/reserve/Form";
 import Reserve from "./components/reserve/Reserve";
 import TimeSelect from "./components/reserve/TimeSelect";
-import Overview from "./components/overview/Overview";
+import Home from "./components/overview/Home";
 import Auth from "./components/auth/Auth";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useContext } from "react";
@@ -16,7 +16,7 @@ const App = () => {
   if (!authContext) return null;
   const { user } = authContext;
   /*   const currentUser = false; */
-  console.log(user);
+  /*   console.log(user.email); */
 
   const RequireAuth = ({ children }: any) => {
     return user ? children : <Navigate to="/login" />;
@@ -30,10 +30,10 @@ const App = () => {
           <Route index element={<Landing />} />
           <Route path="login" element={<Auth />} />
           <Route
-            path="overview"
+            path="home"
             element={
               <RequireAuth>
-                <Overview />
+                <Home />
               </RequireAuth>
             }
           />
@@ -46,11 +46,15 @@ const App = () => {
               </RequireAuth>
             }
           />
-
-          {/*     <Landing />
-           */}
-          {/* <DailyOverview /> */}
-          {/* <Overview /> */}
+          <Route
+            //UPRAVIT - přidat do path room id
+            path="overview"
+            element={
+              <RequireAuth>
+                <DailyOverview />
+              </RequireAuth>
+            }
+          />
         </Route>
       </Routes>
       <Footer />

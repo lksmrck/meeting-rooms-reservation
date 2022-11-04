@@ -15,7 +15,7 @@ const DatePick = () => {
   const pickDateHandler = (date: Date) => {
     setDate(date);
     setPickedDate(date);
-    navigate("/reserve");
+    navigate("/overview");
   };
 
   return (

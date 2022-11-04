@@ -4,10 +4,26 @@ import {
   UPDATE_RESERVATION,
   DELETE_RESERVATION,
 } from "../../constants/actionTypes";
-/*   import { HoldingItem } from "../../common/modelTypes";
-  import { HoldingsTransactionsActions } from "../../common/actionTypes"; */
-
 import { rooms as DUMMY_DATA } from "../../common/dummyData";
+
+type Room = {
+  id: number;
+  name: string;
+};
+
+type Meeting = {
+  date: Date;
+  room: number;
+  blocks: number[];
+  name: string;
+  type: string;
+  guests: string[];
+};
+
+type ReservationsType = {
+  rooms: Room[];
+  meetings: Meeting[];
+};
 
 export default (
   rooms = DUMMY_DATA,

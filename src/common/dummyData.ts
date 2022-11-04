@@ -131,3 +131,34 @@ export const ONEDUMMYROOM = [
     {room: 1, block: 23, time: "18:00 - 18:30", reserved: false},
     {room: 1, block: 24, time: "18:30 - 19:00", reserved: false},
     ]
+
+
+    //Firebase models
+
+    //Companies -> name of company ->
+    const FBrooms = [
+        {id: 1, name: "Paris"}, 
+        {id:2, name:"Brooklyn"},
+        {id: 3, name: "London"}
+    ]
+
+    const FBmeetings = [
+        {date: "21.11.2022",
+        room: 1, 
+        blocks: [3,4,5], 
+        name: "Call with supervisor", 
+        type: "call", 
+        guests: ["supervisor@supervsior.cz", "druhysupervisor@supervisor.cz"] },
+    
+        {date: "23.11.2022",
+        room: 2, 
+        blocks: [7,8], 
+        name: "Board meeting", 
+        type: "face to face", 
+        guests: ["boardmember1@supervsior.cz", "boardmember2@supervisor.cz", "boardmember3@supervisor.cz"] 
+    }
+]
+
+    const FBusers = [
+        {id: 1, name: "Pavel Novak", email: "novak@novak.com", rights: "admin"}, 
+        {id: 2, name: "Karel Fullner", email: "fullner@novak.com", rights: "read"}]

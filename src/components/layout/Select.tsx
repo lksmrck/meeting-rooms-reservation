@@ -3,13 +3,17 @@ import AppContext from "../../state/AppContext";
 import { rooms } from "../../common/dummyData";
 
 type SelectProps = {
-  checkbox?: boolean;
+  /*   checkbox?: boolean; */
   name?: string;
   id?: string;
   options?: any;
 };
 
-const Select: React.FC<SelectProps> = ({ checkbox, name, id, options }) => {
+const Select: React.FC<SelectProps> = ({
+  /* checkbox, */ name,
+  id,
+  options,
+}) => {
   const appContext = useContext(AppContext);
   /*  const [selectedRoom, setSelectedRoom] = useState<any>(); */
   if (!appContext) return null;
@@ -24,7 +28,7 @@ const Select: React.FC<SelectProps> = ({ checkbox, name, id, options }) => {
   const onChangeSelectCheckbox = () => {};
 
   //V případě checkbox props vrátí Select s checkboxem (použito pro vybírání časových bloků pro rezervace), jinak bez checkboxu (výběr místnosti). Ve Formu použity obě možnosti.
-  {
+  /*  {
     if (checkbox) {
       return (
         <div>
@@ -40,16 +44,16 @@ const Select: React.FC<SelectProps> = ({ checkbox, name, id, options }) => {
           })}
         </div>
       );
-    } else {
-      return (
-        <select name={name} id={id} className="m-2" onChange={onChangeSelect}>
-          {options.map((option: any) => {
-            return <option value={option.id}>{option.name}</option>;
-          })}
-        </select>
-      );
-    }
+    } else */ {
+    return (
+      <select name={name} id={id} className="m-2" onChange={onChangeSelect}>
+        {options.map((option: any) => {
+          return <option value={option.id}>{option.name}</option>;
+        })}
+      </select>
+    );
   }
 };
+/* }; */
 
 export default Select;
