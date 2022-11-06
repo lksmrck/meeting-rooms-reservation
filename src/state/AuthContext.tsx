@@ -26,6 +26,7 @@ const AuthContext = createContext({} as AuthContextInterface);
 export const AuthContextProvider: React.FC<{
   children: ReactNode;
 }> = ({ children }) => {
+  //Stored data for user and company
   const [user, setUser] = useState(getLocalStorage("user") || null);
   const [company, setCompany] = useState("");
 

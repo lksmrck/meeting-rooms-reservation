@@ -18,6 +18,8 @@ interface AppContextInterface {
   setSelectedRoom: /* Dispatch<SetStateAction<number | null>>; */ any;
   selectedTime: /* ReservationObject[] */ any | null; //array z vybraných časových bloků
   setSelectedTime: Dispatch<SetStateAction<any | null>>;
+  isLoading: boolean;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
 }
 
 const AppContext = createContext<AppContextInterface | null>(null);
@@ -35,6 +37,8 @@ export const AppContextProvider: React.FC<{
   const [selectedTime, setSelectedTime] =
     useState</* ReservationObject[] any */ null>(ONEDUMMYROOM as any);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   return (
     <AppContext.Provider
       value={{
@@ -44,6 +48,8 @@ export const AppContextProvider: React.FC<{
         setOpenModal,
         selectedTime,
         setSelectedTime,
+        isLoading,
+        setIsLoading,
       }}
     >
       {children}

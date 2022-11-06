@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import AuthContext from "../../state/AuthContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../../config/firebase";
-
-import Button from "./MyButton";
+import { Button } from "@chakra-ui/react";
+/* import Button from "./MyButton"; */
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -37,7 +37,10 @@ const Navbar = () => {
             <BsFillMoonStarsFill />
           </li>
         </ul>
-        <Button text={user ? "Logout" : "Sign In"} onClick={onClickButton} />
+        {/*  <Button text={user ? "Logout" : "Sign In"} onClick={onClickButton} /> */}
+        <Button colorScheme="purple" size="md" onClick={onClickButton}>
+          {user ? "Logout" : "Sign In"}{" "}
+        </Button>
       </nav>
     </section>
   );

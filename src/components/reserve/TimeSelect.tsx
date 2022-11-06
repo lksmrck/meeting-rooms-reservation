@@ -1,13 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
 import { timeBlocks } from "../../common/dummyData";
 import AppContext from "../../state/AppContext";
+import ReservationContext from "../../state/ReservationContext";
 
 /* ZDE SLEDOVAT V LOKÁLNÍM STATE MÍSTO CONTEXTU???? - SELECTEDTIME */
 const TimeSelect: React.FC = () => {
   const appContext = useContext(AppContext);
+  const reservationContext = useContext(ReservationContext);
+
   const [reservedBlocks, setReservedBlocks] = useState(0);
 
   //Počítadlo vybraných bloků k rezervaci - s každým vybraným blokem přičte 1 do local state,
+  useEffect(() => {}, []);
+
   useEffect(() => {
     setReservedBlocks(0);
     appContext?.selectedTime.map((data: any) => {

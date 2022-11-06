@@ -4,7 +4,9 @@ import Button from "../layout/MyButton";
 import Select from "../layout/Select";
 import { rooms } from "../../common/dummyData";
 import AppContext from "../../state/AppContext";
+import AuthContext from "../../state/AuthContext";
 import { meetingTypes } from "../../constants/data";
+
 import {
   collection,
   addDoc,
@@ -25,11 +27,14 @@ const Form: React.FC = () => {
   const [guests, setGuests] = useState<string[]>([]);
 
   //4.meeting type
-
+  const authContext = useContext(AuthContext);
   const appContext = useContext(AppContext);
   if (!appContext) return null;
   //nepouzito zatim
   const { setOpenModal } = appContext;
+
+  if (!authContext) return null;
+  const { company } = authContext;
 
   const onChangeInputHandler = (e: React.ChangeEvent<HTMLInputElement>): void =>
     setName(e.target.value);
@@ -51,7 +56,7 @@ const Form: React.FC = () => {
 
   const testFetch = async () => {
     const querySnapshot = await getDocs(
-      collection(db, "companies/firstCompany/meetings")
+      collection(db, `companies/${company}/meetings`)
     );
 
     let list: any = [];

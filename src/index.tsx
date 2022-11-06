@@ -10,6 +10,8 @@ import { AppContextProvider } from "./state/AppContext";
 import { AuthContextProvider } from "./state/AuthContext";
 import { ReservationContextProvider } from "./state/ReservationContext";
 import { reducers } from "./state/reducers";
+import { ChakraProvider } from "@chakra-ui/react";
+
 const store = createStore(reducers, compose(applyMiddleware(thunk)));
 
 //Typescript + Redux requirements - from official documentation
@@ -25,14 +27,16 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <Provider store={store}>
-    <AuthContextProvider>
-      <ReservationContextProvider>
-        <AppContextProvider>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </AppContextProvider>
-      </ReservationContextProvider>
-    </AuthContextProvider>
+    <ChakraProvider>
+      <AuthContextProvider>
+        <ReservationContextProvider>
+          <AppContextProvider>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </AppContextProvider>
+        </ReservationContextProvider>
+      </AuthContextProvider>
+    </ChakraProvider>
   </Provider>
 );

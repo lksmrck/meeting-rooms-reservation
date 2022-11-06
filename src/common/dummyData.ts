@@ -133,6 +133,36 @@ export const ONEDUMMYROOM = [
     ]
 
 
+export const roomData= [
+    { block: 1, time: "7:00 - 7:30", reserved: false}, 
+    { block: 2, time: "7:30 - 8:00", reserved: false},
+    { block: 3, time: "8:00 - 8:30", reserved: false},
+    { block: 4, time: "8:30 - 9:00", reserved: false},
+    { block: 5, time: "9:00 - 9:30", reserved: false},
+    { block: 6, time: "9:30 - 10:00", reserved: false},
+    { block: 7, time: "10:00 - 10:30", reserved: false},
+    { block: 8, time: "10:30 - 11:00", reserved: false},
+    { block: 9, time: "11:00 - 11:30", reserved: false},
+    { block: 10, time: "11:30 - 12:00", reserved: false},
+    { block: 11, time: "12:00 - 12:30", reserved: false},
+    { block: 12, time: "12:30 - 13:00", reserved: false},
+    { block: 13, time: "13:00 - 13:30", reserved: false},
+    { block: 14, time: "13:30 - 14:00", reserved: false},
+    { block: 15, time: "14:00 - 14:30", reserved: false},
+    { block: 16, time: "14:30 - 15:00", reserved: false},
+    { block: 17, time: "15:00 - 15:30", reserved: false},
+    { block: 18, time: "15:30 - 16:00", reserved: false},
+    { block: 19, time: "16:00 - 16:30", reserved: false},
+    {block: 20, time: "16:30 - 17:00", reserved: false},
+    { block: 21, time: "17:00 - 17:30", reserved: false},
+    { block: 22, time: "17:30 - 18:00", reserved: false},
+    { block: 23, time: "18:00 - 18:30", reserved: false},
+    { block: 24, time: "18:30 - 19:00", reserved: false},
+    ]
+
+    const test1 = [{room: 1, blocks: [1,2,3], date: "21.11.2022"}, {room: 3, blocks: [3,4,5], date: "21.11.2022"}]
+
+
     //Firebase models
 
     //Companies -> name of company ->

@@ -1,8 +1,7 @@
 import { useState } from "react";
 import DatePick from "./DatePick";
-import { HiArrowDownCircle } from "react-icons/hi2";
-
-import { IconButton } from "@material-ui/core";
+import { IconButton } from "@chakra-ui/react";
+import { AiOutlineArrowDown } from "react-icons/ai";
 
 const Overview = () => {
   const [showCalendar, setShowCalendar] = useState(false);
@@ -13,9 +12,12 @@ const Overview = () => {
         {showCalendar ? (
           <DatePick />
         ) : (
-          <IconButton onClick={() => setShowCalendar(true)}>
-            <HiArrowDownCircle size={60} style={{ color: "purple" }} />
-          </IconButton>
+          <IconButton
+            colorScheme="purple"
+            aria-label="arrow"
+            icon={<AiOutlineArrowDown size={30} style={{ color: "white" }} />}
+            onClick={() => setShowCalendar(true)}
+          />
         )}
       </div>
     </div>
