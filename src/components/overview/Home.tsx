@@ -7,8 +7,8 @@ const Overview = () => {
   const [showCalendar, setShowCalendar] = useState(false);
 
   return (
-    <div className="flex justify-center">
-      <div>
+    <div className="flex justify-center items-center  h-screen">
+      <div className="mb-32">
         {showCalendar ? (
           <DatePick />
         ) : (
@@ -17,6 +17,8 @@ const Overview = () => {
             aria-label="arrow"
             icon={<AiOutlineArrowDown size={30} style={{ color: "white" }} />}
             onClick={() => setShowCalendar(true)}
+            className="animate-bounce"
+            size="lg"
           />
         )}
       </div>

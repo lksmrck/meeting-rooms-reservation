@@ -1,14 +1,14 @@
 import React from "react";
-import Button from "../layout/MyButton";
+import { Button } from "@chakra-ui/react";
 
 const Title = () => {
   return (
-    <div className="flex flex-col mx-auto justify-center border border-5 mt-5 h-96 bg-red-100">
-      <h1 className="text-3xl text-center">
+    <div className="flex flex-col mx-auto justify-center bg-gradient-to-r from-violet-300 to-violet-400  h-3/4 ">
+      <h1 className="text-4xl text-center text-neutral-700">
         Comfortly reserve your company conference rooms with few clicks.
       </h1>
       <div className="flex justify-center mt-5">
-        <Button text="Get Started" />
+        <Button colorScheme={"teal"}>Get Started </Button>
       </div>
     </div>
   );

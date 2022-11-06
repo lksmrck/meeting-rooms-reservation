@@ -46,7 +46,7 @@ const Overview = () => {
     return (
       <div
         key={block.id}
-        className="text-xs w-20 h-10 border border-yellow-700"
+        className=" flex justify-center items-center text-xs w-20 h-10  border border-yellow-700 rounded-md bg-gray-200"
       >
         {block.time}
       </div>
@@ -64,14 +64,17 @@ const Overview = () => {
 
   const roomsDom = roomsData.map((room: any) => {
     return (
-      <div key={room.id}>
+      <div key={room.id} className="">
+        {" "}
+        {/* [&>*]:m-0.5 */}
+        <h1>{room.name}</h1>
         {room.roomData.map((roomData: any) => {
           return (
             <div
               key={roomData.block}
-              className={`h-10 ${
-                roomData.reserved ? "bg-red-600" : "bg-white"
-              } w-20 text-xs border border-green-600`}
+              className={`h-10 rounded-md ${
+                roomData.reserved ? "bg-red-500" : "bg-white"
+              } w-20 text-xs border border-green-600 flex justify-center items-center `}
               onClick={() => onClickBlockHandler(room.id, roomData.block)}
             >
               {roomData.block}
@@ -83,17 +86,24 @@ const Overview = () => {
   });
 
   return (
-    <section
-      className={`grid`}
-      //Custom in-line style, protože Tailwind neumožňuje dynamic styling - takto udělá grid podle počtu místností (const displayCols) a přidá dynamicky width contentu.
-      style={{
-        gridTemplateColumns: `repeat(${displayCols}, minmax(0, 1fr))`,
-        width: `${displayWidth}rem`,
-      }}
-    >
-      <div className="border border-blue-400">{timeBlocksDom}</div>
-      {roomsDom}
-    </section>
+    <div className="flex justify-center bg-gradient-to-r from-violet-300 to-violet-400 ">
+      <section
+        className="grid gap-5"
+        //Custom in-line style, protože Tailwind neumožňuje dynamic styling - takto udělá grid podle počtu místností (const displayCols) a přidá dynamicky width contentu.
+        style={{
+          gridTemplateColumns: `repeat(${displayCols}, minmax(0, 1fr))`,
+          width: `${displayWidth}rem`,
+        }}
+      >
+        <div className=" -mt-0.5 ">
+          {" "}
+          {/* [&>*]:m-0.5 */}
+          <h1>Time</h1>
+          {timeBlocksDom}
+        </div>
+        {roomsDom}
+      </section>
+    </div>
   );
 };
 

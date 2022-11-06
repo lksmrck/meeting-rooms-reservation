@@ -29,18 +29,17 @@ const Navbar = () => {
   };
 
   return (
-    <section className="h-20 bg-th_blue_two flex">
-      <nav className="py-10 mb-12 flex justify-between items-center w-screen">
+    <section className="h-20 bg-violet-800 flex">
+      <nav className="flex justify-between items-center w-screen">
         <ul className="flex items-center">
-          <li className="mr-2 ml-5">Room Reserver</li>
-          <li>
-            <BsFillMoonStarsFill />
-          </li>
+          <li className=" ml-5 text-white">Room Reserver</li>
         </ul>
         {/*  <Button text={user ? "Logout" : "Sign In"} onClick={onClickButton} /> */}
-        <Button colorScheme="purple" size="md" onClick={onClickButton}>
-          {user ? "Logout" : "Sign In"}{" "}
-        </Button>
+        <div className="mr-5">
+          <Button colorScheme="teal" size="md" onClick={onClickButton}>
+            {user ? "Logout" : "Sign In"}{" "}
+          </Button>
+        </div>
       </nav>
     </section>
   );

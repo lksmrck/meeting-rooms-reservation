@@ -1,10 +1,11 @@
 import React, { useState, useContext } from "react";
-import Input from "../layout/Input";
-import Button from "../layout/MyButton";
+/* import Input from "../layout/Input"; */
+import { Button } from "@chakra-ui/react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/firebase";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../state/AuthContext";
+import { Input } from "@chakra-ui/react";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
@@ -38,10 +39,11 @@ const Auth = () => {
   };
 
   return (
-    <section className="flex justify-center mt-4">
-      <div className=" flex justify-center w-96 bg-green-50">
-        <h1>"Login"</h1>
-        <form className="w-72 p-6 [&>input]:m-1" onSubmit={loginHandler}>
+    <section className="flex justify-center items-center bg-gradient-to-r from-violet-300 to-violet-400 h-screen">
+      <div className=" flex flex-col justify-center mb-24 items-center w-96 bg-white h-96 rounded-lg">
+        <h1 className="text-2xl font-bold ">Login</h1>
+        <h3 className="mb-3 text-sm">Enter your credentials</h3>
+        <form className="w-80  [&>input]:mt-2" onSubmit={loginHandler}>
           <Input
             id="email"
             name="email"
@@ -55,11 +57,17 @@ const Auth = () => {
             type="password"
             placeholder="Enter your password"
             onChange={(e) => setPassword(e.target.value)}
+            /* htmlSize={30}
+            width="auto" */
           />
 
-          <div className="flex justify-center ">
-            <Button type="submit" text="Login" />
-            <Button text="Back" />
+          <div className="flex justify-center flex-col [&>button]:mt-1 mt-3">
+            <Button colorScheme="teal" type="submit">
+              Submit
+            </Button>
+            <Button colorScheme="teal" variant="outline">
+              Back
+            </Button>
           </div>
         </form>
       </div>

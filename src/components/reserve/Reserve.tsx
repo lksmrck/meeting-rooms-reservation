@@ -9,7 +9,7 @@ const Reserve = () => {
 
   /* return <>{appContext?.openModal ? <TimeModal /> : <Form />}</>; */
   return (
-    <div className="flex">
+    <div className="flex justify-center h-full bg-gradient-to-r from-violet-300 to-violet-400 [&>*]:m-2  ">
       <TimeSelect />
       <Form />
     </div>
