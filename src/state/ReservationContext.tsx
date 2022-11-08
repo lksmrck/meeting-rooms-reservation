@@ -12,6 +12,8 @@ interface ReservationContextInterface {
   setOpenModal: Dispatch<SetStateAction<boolean>>;
   selectedRoom: any;
   setSelectedRoom: /* Dispatch<SetStateAction<number | null>>; */
+  pickedRoom: any;
+  setPickedRoom: Dispatch<SetStateAction<any>>;
   pickedDate: string;
   setPickedDate: Dispatch<SetStateAction<string>>;
   pickedBlock: any;
@@ -31,6 +33,8 @@ export const ReservationContextProvider: React.FC<{
   const [pickedDate, setPickedDate] = useState<string>("");
   //Overview
   const [pickedBlock, setPickedBlock] = useState({ room: "", block: "" });
+  //Vybraná místnost - komplet data
+  const [pickedRoom, setPickedRoom] = useState({});
 
   //TEST
   useEffect(() => {
@@ -45,6 +49,8 @@ export const ReservationContextProvider: React.FC<{
         setPickedDate,
         pickedBlock,
         setPickedBlock,
+        pickedRoom,
+        setPickedRoom,
       }}
     >
       {children}

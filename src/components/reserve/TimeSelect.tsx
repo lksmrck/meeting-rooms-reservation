@@ -2,44 +2,59 @@ import React, { useContext, useEffect, useState } from "react";
 import { timeBlocks } from "../../common/dummyData";
 import AppContext from "../../state/AppContext";
 import ReservationContext from "../../state/ReservationContext";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../config/firebase";
 
 /* ZDE SLEDOVAT V LOKÁLNÍM STATE MÍSTO CONTEXTU???? - SELECTEDTIME */
 const TimeSelect: React.FC = () => {
   const appContext = useContext(AppContext);
+  const { selectedTime, setSelectedTime, selectedRoom } = appContext;
   const reservationContext = useContext(ReservationContext);
+  const { pickedBlock, pickedRoom } = reservationContext;
 
   const [reservedBlocks, setReservedBlocks] = useState(0);
 
   //Počítadlo vybraných bloků k rezervaci - s každým vybraným blokem přičte 1 do local state,
-  useEffect(() => {}, []);
-
+  /*  useEffect(() => {
+    const fetchData = async () => {
+      const querySnapshot = await getDocs(
+        collection(db, "companies/secondCompany/rooms")
+      );
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+      });
+    };
+    fetchData();
+  }, []); */
+  console.log(pickedRoom);
   useEffect(() => {
     setReservedBlocks(0);
-    appContext?.selectedTime.map((data: any) => {
+    selectedTime.map((data: any) => {
       if (data.reserved) {
         setReservedBlocks(reservedBlocks + 1);
       }
     });
-  }, [appContext?.selectedTime]);
+  }, [selectedTime]);
 
   const onClickHandler = (blockNumber: number): void => {
     //Logika -> Vybírá se právě 1 schůzka. Tzn, že lze vybírat jen souvislé časové bloky - nelze vybrat např. blok 7:00-7:30 a k tomu 12:00-12:30,
     //ale lze vybrat postupně všechny bloky od 7:00 až do 12:30.
     //Podminky
     //1. Pokud ještě není vybrán žádný blok, lze kliknout na kterýkoliv a vybrat.
-    if (appContext?.selectedTime && reservedBlocks == 0) {
-      const newReservationArray = appContext.selectedTime.map((data: any) => {
+    if (selectedTime && reservedBlocks == 0) {
+      const newReservationArray = selectedTime.map((data: any) => {
         if (data.block == blockNumber) {
           return { ...data, reserved: !data.reserved };
         }
         return data;
       });
 
-      appContext.setSelectedTime(newReservationArray);
+      setSelectedTime(newReservationArray);
     }
     //2. Pokud je právě 1 vybraný blok, tak lze vybrat pouze blok+1 nebo blok-1 nebo odvybrat vybraný blok
-    if (appContext?.selectedTime && reservedBlocks == 1) {
-      const reservedBlock = appContext?.selectedTime.filter((obj: any) => {
+    if (selectedTime && reservedBlocks == 1) {
+      const reservedBlock = selectedTime.filter((obj: any) => {
         return obj.reserved;
       }); //uložen rezervovaný object
 
@@ -48,20 +63,20 @@ const TimeSelect: React.FC = () => {
         blockNumber == reservedBlock[0].block + 1 ||
         blockNumber == reservedBlock[0].block - 1
       ) {
-        const newReservationArray = appContext.selectedTime.map((data: any) => {
+        const newReservationArray = selectedTime.map((data: any) => {
           if (data.block == blockNumber) {
             return { ...data, reserved: !data.reserved };
           }
           return data;
         });
 
-        appContext.setSelectedTime(newReservationArray);
+        setSelectedTime(newReservationArray);
       }
     }
     //3. Pokud je více než 1 vybraný blok, tak:
-    if (appContext?.selectedTime && reservedBlocks > 1) {
+    if (selectedTime && reservedBlocks > 1) {
       //Vyfiltorvání bloků, u kterých je reserved = true
-      const reservedBlocks = appContext?.selectedTime.filter((obj: any) => {
+      const reservedBlocks = selectedTime.filter((obj: any) => {
         return obj.reserved;
       });
       // 3.1 Získám nejmenší block ID (n) (pak půjde kliknout pouze n-1 (přidat) nebo n (odebrat))
@@ -83,14 +98,14 @@ const TimeSelect: React.FC = () => {
         blockNumber == minBlock ||
         blockNumber == maxBlock
       ) {
-        const newReservationArray = appContext.selectedTime.map((data: any) => {
+        const newReservationArray = selectedTime.map((data: any) => {
           if (data.block == blockNumber) {
             return { ...data, reserved: !data.reserved };
           }
           return data;
         });
 
-        appContext.setSelectedTime(newReservationArray);
+        setSelectedTime(newReservationArray);
       }
     }
   };
@@ -108,10 +123,10 @@ const TimeSelect: React.FC = () => {
   });
 
   //DOM - podle room
-  const roomDom = appContext?.selectedRoom.roomData.map((roomData: any) => {
-    const selectedBlock = appContext?.selectedTime?.find(
+  const roomDom = pickedRoom[0].roomData.map((roomData: any) => {
+    /*   const selectedBlock = selectedTime?.find(
       (room: any) => room.block == roomData.block
-    );
+    ); */
     return (
       <div
         key={roomData.block}
@@ -120,9 +135,9 @@ const TimeSelect: React.FC = () => {
         }  w-20 text-xs border border-green-600`}
         onClick={() => onClickHandler(roomData.block)}
         //Style, protože Tailwind neumožňuje jednoduché dynamické formátování (zde v případě, že se vybere block, tak se změní bgColor)
-        style={{
+        /*   style={{
           backgroundColor: selectedBlock?.reserved ? "#23895d" : "white",
-        }}
+        }} */
       >
         {roomData.block}
       </div>

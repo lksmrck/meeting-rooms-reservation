@@ -1,4 +1,4 @@
-import { timeBlocks, rooms } from "../../common/dummyData";
+import { timeBlocks, rooms, roomData } from "../../common/dummyData";
 import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import ReservationContext from "../../state/ReservationContext";
@@ -16,7 +16,8 @@ const Overview = () => {
   const reservationContext = useContext(ReservationContext);
   const authContext = useContext(AuthContext);
 
-  const { setPickedBlock, pickedDate, setPickedDate } = reservationContext;
+  const { setPickedBlock, pickedDate, setPickedDate, setPickedRoom } =
+    reservationContext;
 
   const { user, company } = authContext;
 
@@ -39,7 +40,19 @@ const Overview = () => {
   const onClickBlockHandler = (room: number, block: number): void => {
     //Uloží do Contextu room a block, na které user clicknul, aby se dalo pak použít v detailní rezervaci jako přednastaveno
     setPickedBlock({ room, block });
-    /*  navigate("/reserve"); */
+    const clickedRoom = roomsData.filter((roomData: any) => {
+      return roomData.id == room;
+    });
+    //přidána property selected: false ke každému bloku. U reserve se tam bude přidělovat kliknutí a podle toho se barvit.
+    const adjustedClickedRoom = clickedRoom.map((room: any) => {
+      const adjusted = room.roomData.map((data: any) => {
+        return { ...data, selected: false };
+      });
+      return { ...room, roomData: adjusted };
+    });
+
+    setPickedRoom(adjustedClickedRoom);
+    navigate("/reserve");
   };
 
   const timeBlocksDom = timeBlocks.map((block) => {

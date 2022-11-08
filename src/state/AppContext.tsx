@@ -16,13 +16,13 @@ interface AppContextInterface {
   setOpenModal: Dispatch<SetStateAction<boolean>>;
   selectedRoom: any;
   setSelectedRoom: /* Dispatch<SetStateAction<number | null>>; */ any;
-  selectedTime: /* ReservationObject[] */ any | null; //array z vybraných časových bloků
+  selectedTime: /* ReservationObject[] */ any; //array z vybraných časových bloků
   setSelectedTime: Dispatch<SetStateAction<any | null>>;
   isLoading: boolean;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
 }
 
-const AppContext = createContext<AppContextInterface | null>(null);
+const AppContext = createContext({} as AppContextInterface);
 
 export const AppContextProvider: React.FC<{
   children: ReactNode;
