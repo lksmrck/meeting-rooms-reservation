@@ -34,7 +34,7 @@ export const ReservationContextProvider: React.FC<{
   //Overview
   const [pickedBlock, setPickedBlock] = useState({ room: "", block: "" });
   //Vybraná místnost - komplet data
-  const [pickedRoom, setPickedRoom] = useState({});
+  const [pickedRoom, setPickedRoom] = useState();
 
   //TEST
   useEffect(() => {

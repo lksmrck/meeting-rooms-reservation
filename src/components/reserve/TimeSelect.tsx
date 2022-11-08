@@ -31,11 +31,12 @@ const TimeSelect: React.FC = () => {
   useEffect(() => {
     setReservedBlocks(0);
     selectedTime.map((data: any) => {
+      //pickedRoom
       if (data.reserved) {
         setReservedBlocks(reservedBlocks + 1);
       }
     });
-  }, [selectedTime]);
+  }, [selectedTime]); //pickedRoom
 
   const onClickHandler = (blockNumber: number): void => {
     //Logika -> Vybírá se právě 1 schůzka. Tzn, že lze vybírat jen souvislé časové bloky - nelze vybrat např. blok 7:00-7:30 a k tomu 12:00-12:30,
@@ -123,7 +124,7 @@ const TimeSelect: React.FC = () => {
   });
 
   //DOM - podle room
-  const roomDom = pickedRoom[0].roomData.map((roomData: any) => {
+  const roomDom = pickedRoom.roomData.map((roomData: any) => {
     /*   const selectedBlock = selectedTime?.find(
       (room: any) => room.block == roomData.block
     ); */

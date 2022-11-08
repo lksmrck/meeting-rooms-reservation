@@ -40,16 +40,14 @@ const Overview = () => {
   const onClickBlockHandler = (room: number, block: number): void => {
     //Uloží do Contextu room a block, na které user clicknul, aby se dalo pak použít v detailní rezervaci jako přednastaveno
     setPickedBlock({ room, block });
-    const clickedRoom = roomsData.filter((roomData: any) => {
+    const clickedRoom = roomsData.find((roomData: any) => {
       return roomData.id == room;
     });
     //přidána property selected: false ke každému bloku. U reserve se tam bude přidělovat kliknutí a podle toho se barvit.
-    const adjustedClickedRoom = clickedRoom.map((room: any) => {
-      const adjusted = room.roomData.map((data: any) => {
-        return { ...data, selected: false };
-      });
-      return { ...room, roomData: adjusted };
+    const adjustedRoomData = clickedRoom.roomData.map((data: any) => {
+      return { ...data, selected: false };
     });
+    const adjustedClickedRoom = { ...clickedRoom, roomData: adjustedRoomData };
 
     setPickedRoom(adjustedClickedRoom);
     navigate("/reserve");
