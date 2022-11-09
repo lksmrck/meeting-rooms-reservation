@@ -6,11 +6,11 @@ import ReservationContext from "../../state/ReservationContext";
 /* ZDE SLEDOVAT V LOKÁLNÍM STATE MÍSTO CONTEXTU???? - SELECTEDTIME */
 const TimeSelect: React.FC = () => {
   const appContext = useContext(AppContext);
-  const { selectedTime, setSelectedTime, selectedRoom } = appContext;
+  /* const { selectedTime, setSelectedTime, selectedRoom } = appContext; */
   const reservationContext = useContext(ReservationContext);
   const { pickedBlock, pickedRoom, setPickedRoom } = reservationContext;
 
-  const [reservedBlocks, setReservedBlocks] = useState(0);
+  const [selectedBlocks, setSelectedBlocks] = useState(0);
 
   //Počítadlo vybraných bloků k rezervaci - s každým vybraným blokem přičte 1 do local state,
   /*  useEffect(() => {
@@ -20,12 +20,12 @@ const TimeSelect: React.FC = () => {
 
   useEffect(() => {
     console.log("effect trigger");
-    /* setReservedBlocks(0); */
-    setReservedBlocks(0);
+    /* setSelectedBlocks(0); */
+    setSelectedBlocks(0);
     const counter = pickedRoom.roomData.map((data: any) => {
       //pickedRoom
       if (data.selected) {
-        setReservedBlocks((prevState: number) => prevState + 1);
+        setSelectedBlocks((prevState: number) => prevState + 1);
         //PREJMENOVAT NA SELECTEDBLOCKS
       }
     });
@@ -44,9 +44,9 @@ const TimeSelect: React.FC = () => {
     });
 
     if (clickReservedCheck) return null;
-    if (pickedRoom && reservedBlocks == 0) {
+    if (pickedRoom && selectedBlocks == 0) {
       console.log("trigger - 0");
-      console.log(reservedBlocks);
+      console.log(selectedBlocks);
       const updatedRoomData = pickedRoom.roomData.map((data: any) => {
         if (data.block == blockNumber) {
           return { ...data, selected: !data.selected };
@@ -58,7 +58,7 @@ const TimeSelect: React.FC = () => {
       setPickedRoom(updatedRoom);
     }
     //2. Pokud je právě 1 vybraný blok, tak lze vybrat pouze blok+1 nebo blok-1 nebo odvybrat vybraný blok
-    if (pickedRoom && reservedBlocks == 1) {
+    if (pickedRoom && selectedBlocks == 1) {
       console.log("trigger - 1");
       console.log("first");
       const reservedBlock = pickedRoom.roomData.filter((obj: any) => {
@@ -82,21 +82,21 @@ const TimeSelect: React.FC = () => {
       }
     }
     //3. Pokud je více než 1 vybraný blok, tak:
-    if (pickedRoom && reservedBlocks > 1) {
+    if (pickedRoom && selectedBlocks > 1) {
       console.log("trigger - vice nez 1 ");
       //Vyfiltorvání bloků, u kterých je reserved = true
-      const reservedBlocks = pickedRoom.roomData.filter((obj: any) => {
+      const selectedBlocks = pickedRoom.roomData.filter((obj: any) => {
         return obj.selected;
       });
       // 3.1 Získám nejmenší block ID (n) (pak půjde kliknout pouze n-1 (přidat) nebo n (odebrat))
       const minBlock = Math.min(
-        ...reservedBlocks.map((obj: any) => {
+        ...selectedBlocks.map((obj: any) => {
           return obj.block;
         })
       );
       // 3.2. Získám největší block ID (n) (pak půjde kliknout pouze n+1 (přidat) nebo n (odebrat))
       const maxBlock = Math.max(
-        ...reservedBlocks.map((obj: any) => {
+        ...selectedBlocks.map((obj: any) => {
           return obj.block;
         })
       );

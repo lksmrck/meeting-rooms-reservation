@@ -7,6 +7,7 @@ import AppContext from "../../state/AppContext";
 import AuthContext from "../../state/AuthContext";
 import { meetingTypes } from "../../constants/data";
 import { Input } from "@chakra-ui/react";
+import GuestsModal from "./GuestsModal";
 
 import {
   collection,
@@ -15,6 +16,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { db } from "../../config/firebase";
+import ReservationContext from "../../state/ReservationContext";
 
 const Form: React.FC = () => {
   const [fetchData, setFetchData] = useState();
@@ -22,20 +24,20 @@ const Form: React.FC = () => {
 
   //1.meeting name
   const [name, setName] = useState<string>();
-  //2.room
 
-  //3.guests
+  //2.guests
   const [guests, setGuests] = useState<string[]>([]);
 
-  //4.meeting type
+  //4.meeting type --> Přes reservation context. V Select componentu.
   const authContext = useContext(AuthContext);
   const appContext = useContext(AppContext);
-  if (!appContext) return null;
+  const reservationContext = useContext(ReservationContext);
+
   //nepouzito zatim
   const { setOpenModal } = appContext;
 
-  if (!authContext) return null;
   const { company } = authContext;
+  /*   const { pickedRoom } = reservationContext; */
 
   const onChangeInputHandler = (e: React.ChangeEvent<HTMLInputElement>): void =>
     setName(e.target.value);
@@ -72,8 +74,11 @@ const Form: React.FC = () => {
 
   return (
     <section className="flex justify-center mt-4 ">
-      <div className=" flex justify-center  bg-green-50 h-1/3 rounded-lg items-center">
-        <form className="flex flex-col w-72 p-6 [&>input]:m-1 ">
+      <div className=" flex flex-col justify-center  bg-green-50 h-1/3 rounded-lg items-center">
+        <h1 className="text-lg font-bold flex justify-center">
+          Create a meeting
+        </h1>
+        <form className="flex flex-col w-72 p-6 [&>input]:mb-4 ">
           <Input
             id="name"
             name="name"
@@ -82,9 +87,7 @@ const Form: React.FC = () => {
             onChange={onChangeInputHandler}
             style={{ backgroundColor: "white" }}
           />
-          {/* Select room */}
-          <Select name="rooms" id="rooms" options={rooms} />
-          {/* Button to open the modal with checkboxes to reserve time blocks */}
+
           <Button
             colorScheme={"purple"}
             //VYUZIT
@@ -94,6 +97,7 @@ const Form: React.FC = () => {
           >
             Add guests
           </Button>
+          <GuestsModal />
 
           <Select name="rooms" id="rooms" options={meetingTypes} />
           <div className="flex flex-col justify-center [&>button]:mt-1 ">

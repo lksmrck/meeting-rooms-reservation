@@ -7,6 +7,7 @@ import AppContext from "../../state/AppContext";
 import { Button } from "@chakra-ui/react";
 import { companyRoomsFetch } from "./companyRoomsFetch";
 import { companyMeetingsFetch } from "./companyMeetingsFetch";
+import { companyMeetingsFetchTwo } from "./companyMeetingsFetchTwo";
 
 const Overview = () => {
   const [roomsData, setRoomsData] = useState<any>([]);
@@ -21,6 +22,11 @@ const Overview = () => {
 
   const { user, company } = authContext;
 
+  const testRooms = [
+    { id: 1, name: "test jedna" },
+    { id: 2, name: "testdva" },
+    { id: 3, name: "testTri" },
+  ];
   /*  const { isLoading, setIsLoading } = appContext; */
 
   //1. Firebase query - stáhne všechny rooms za danou firmu.
@@ -35,6 +41,8 @@ const Overview = () => {
       setRoomsData,
       pickedDate
     );
+
+    /*  companyMeetingsFetchTwo("secondCompany"); */
   }, [companyRooms]);
 
   const onClickBlockHandler = (room: number, block: number): void => {

@@ -18,6 +18,8 @@ interface ReservationContextInterface {
   setPickedDate: Dispatch<SetStateAction<string>>;
   pickedBlock: any;
   setPickedBlock: Dispatch<SetStateAction<any>>;
+  meetingType: string;
+  setMeetingType: Dispatch<SetStateAction<string>>;
 }
 
 const ReservationContext = createContext({} as ReservationContextInterface);
@@ -33,9 +35,10 @@ export const ReservationContextProvider: React.FC<{
   const [pickedDate, setPickedDate] = useState<string>("");
   //Overview
   const [pickedBlock, setPickedBlock] = useState({ room: "", block: "" });
-  //Vybraná místnost - komplet data
+  //Vybraná místnost - komplet data o rezervacích
   const [pickedRoom, setPickedRoom] = useState();
 
+  const [meetingType, setMeetingType] = useState("");
   //TEST
   useEffect(() => {
     /*  console.log(pickedDate.toLocaleDateString()); */
@@ -51,6 +54,8 @@ export const ReservationContextProvider: React.FC<{
         setPickedBlock,
         pickedRoom,
         setPickedRoom,
+        meetingType,
+        setMeetingType,
       }}
     >
       {children}
