@@ -40,9 +40,15 @@ const Auth = () => {
 
   return (
     <section className="flex justify-center items-center bg-gradient-to-r from-violet-300 to-violet-400 h-screen">
-      <div className=" flex flex-col justify-center mb-24 items-center w-96 bg-white h-96 rounded-lg">
-        <h1 className="text-2xl font-bold ">Login</h1>
-        <h3 className="mb-3 text-sm">Enter your credentials</h3>
+      <div className=" flex flex-col justify-center mb-24 items-center w-96 bg-white h-96 rounded-lg relative">
+        <div
+          style={{ borderRadius: "0% 0% 50% 50%" }}
+          className="h-20 w-full bg-slate-700 absolute top-0 flex flex-col items-center justify-center"
+        >
+          <h1 className="text-2xl font-bold text-gray-50">Login</h1>
+          <h3 className=" text-sm text-gray-50">Enter your credentials</h3>
+        </div>
+
         <form className="w-80  [&>input]:mt-2" onSubmit={loginHandler}>
           <Input
             id="email"

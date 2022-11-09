@@ -35,7 +35,7 @@ const GuestsModal = () => {
   };
 
   const onSubmitGuests = (e: React.SyntheticEvent) => {
-    console.log("submit");
+    setOpenModal(false);
   };
 
   return (
@@ -50,7 +50,7 @@ const GuestsModal = () => {
               return (
                 <Input
                   size="sm"
-                  placeholder="Add guests e-mails"
+                  placeholder="Please enter guests e-mail"
                   name={input}
                   id={input}
                   onChange={onAddGuests}
