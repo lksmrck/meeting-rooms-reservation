@@ -1,11 +1,11 @@
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../config/firebase";
-import { roomData } from "../../common/dummyData";
+import { roomData } from '../../common/dummyData';
 
-export const companyMeetingsFetchTwo = (company: string) => {
+export const roomsMeetingsFetch = (company: string, date: string, setRooms: any, setRoomsData: any ) => {
 
- const roomsFetchDva = async () => {
-    console.log("čus");
+ const roomsFetch = async () => {
+
     const querySnapshot = await getDocs(
       collection(db, `companies/${company}/rooms`)
     );
@@ -13,14 +13,28 @@ export const companyMeetingsFetchTwo = (company: string) => {
     let todaysMeetings: any = [];
     //Rozpad bloků + id místnosti
     let blocksBreakdown: any = [];
+    //Rooms dané firmy (id a jméno. Pak posláno do state v mother componentu)
+    let companyRooms: any =[]
 
    //Vytvořím proměnné s meetingy v daném dnu + jejich breakdown pro lepší pracování s daty.
     querySnapshot.forEach((doc) => {
-      console.log(doc.data().meetings)
+      companyRooms.push({id: doc.data().id, name: doc.data().name})
+
+      if(!doc.data().meetings) return null
+     const filteredMeetings = doc.data().meetings.filter((meeting: any) => {
+        return meeting.date == date
+      })
+      if (filteredMeetings) {filteredMeetings.forEach((meeting: any) => {
+        todaysMeetings.push(meeting); 
+        meeting.blocks.forEach((block: any) => {
+          blocksBreakdown.push(
+            {room: meeting.room, block})})})}
     });
+    //set state do DailyOverview componentu 
+    setRooms(companyRooms)
 
     //Rezervované bloky -> Najdu v každé room bloky, u kterých bude potřeba upravit property reserved na TRUE.
- /*    const updatedRooms: any = companyRooms.map((room: any) => {
+       const updatedRooms: any = companyRooms.map((room: any) => {
       const blocks = blocksBreakdown.map((bd: any) => {
         if (bd.room == room.id) return bd.block;
       });
@@ -37,10 +51,8 @@ export const companyMeetingsFetchTwo = (company: string) => {
         roomData: newDataArray,
       };
     });
-    setState(updatedRooms); */
-
-
+    setRoomsData(updatedRooms);
   };
-  roomsFetchDva();
+  roomsFetch();
 
 }

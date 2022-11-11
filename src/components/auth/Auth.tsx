@@ -49,7 +49,7 @@ const Auth = () => {
           <h3 className=" text-sm text-gray-50">Enter your credentials</h3>
         </div>
 
-        <form className="w-80  [&>input]:mt-2" onSubmit={loginHandler}>
+        <form className="w-80 mt-12 [&>input]:mt-2" onSubmit={loginHandler}>
           <Input
             id="email"
             name="email"

@@ -1,13 +1,12 @@
-import { timeBlocks, rooms, roomData } from "../../common/dummyData";
+import { timeBlocks } from "../../common/dummyData";
 import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import ReservationContext from "../../state/ReservationContext";
 import AuthContext from "../../state/AuthContext";
 import AppContext from "../../state/AppContext";
 import { Button } from "@chakra-ui/react";
-import { companyRoomsFetch } from "./companyRoomsFetch";
-import { companyMeetingsFetch } from "./companyMeetingsFetch";
-import { companyMeetingsFetchTwo } from "./companyMeetingsFetchTwo";
+
+import { roomsMeetingsFetch } from "./roomsMeetingsFetch";
 
 const Overview = () => {
   const [roomsData, setRoomsData] = useState<any>([]);
@@ -22,28 +21,17 @@ const Overview = () => {
 
   const { user, company } = authContext;
 
-  const testRooms = [
-    { id: 1, name: "test jedna" },
-    { id: 2, name: "testdva" },
-    { id: 3, name: "testTri" },
-  ];
   /*  const { isLoading, setIsLoading } = appContext; */
 
-  //1. Firebase query - stáhne všechny rooms za danou firmu.
+  //1. Firebase query - stáhne všechny rooms za danou firmu včetně meetingů a zpracované meetingy vč. upravených objektů o meetingy ve vybraném dnu uloží do state. Viz. funkce..
   useEffect(() => {
-    companyRoomsFetch("secondCompany", setCompanyRooms);
-  }, []);
-  //2. Firebase query - v momentě, kdy jsou stáhnuty firemní rooms stáhne k těm rooms aktuální meetingy v daném dnu
-  useEffect(() => {
-    companyMeetingsFetch(
-      "secondCompany",
-      companyRooms,
-      setRoomsData,
-      pickedDate
+    roomsMeetingsFetch(
+      "secondCompany", //upravit na company
+      pickedDate,
+      setCompanyRooms,
+      setRoomsData
     );
-
-    /*  companyMeetingsFetchTwo("secondCompany"); */
-  }, [companyRooms]);
+  }, []);
 
   const onClickBlockHandler = (room: number, block: number): void => {
     //Uloží do Contextu room a block, na které user clicknul, aby se dalo pak použít v detailní rezervaci jako přednastaveno
