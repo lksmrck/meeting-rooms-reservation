@@ -1,3 +1,4 @@
+import { Room } from "../common/modelTypes";
 import {
   createContext,
   ReactNode,
@@ -36,7 +37,7 @@ export const ReservationContextProvider: React.FC<{
   //Overview
   const [pickedBlock, setPickedBlock] = useState({ room: "", block: "" });
   //Vybraná místnost - komplet data o rezervacích
-  const [pickedRoom, setPickedRoom] = useState();
+  const [pickedRoom, setPickedRoom] = useState({} as Room);
 
   const [meetingType, setMeetingType] = useState("");
   //TEST
@@ -44,6 +45,20 @@ export const ReservationContextProvider: React.FC<{
     /*  console.log(pickedDate.toLocaleDateString()); */
     console.log(pickedBlock);
   }, [pickedDate, pickedBlock]);
+
+  /*   useEffect(() => {
+    const data = localStorage.getItem("roomData");
+
+    let parsedData;
+    if (data !== null) {
+      parsedData = JSON.parse(data);
+      if (!parsedData)
+        localStorage.setItem("roomData", JSON.stringify(pickedRoom));
+    } else {
+      localStorage.removeItem("roomData");
+      localStorage.setItem("roomData", JSON.stringify(pickedRoom));
+    }
+  }, [pickedRoom]); */
 
   return (
     <ReservationContext.Provider

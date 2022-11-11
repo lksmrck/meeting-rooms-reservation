@@ -8,7 +8,9 @@ const TimeSelect: React.FC = () => {
   const appContext = useContext(AppContext);
   /* const { selectedTime, setSelectedTime, selectedRoom } = appContext; */
   const reservationContext = useContext(ReservationContext);
-  const { pickedBlock, pickedRoom, setPickedRoom } = reservationContext;
+
+  const { /* setPickedBlock, */ pickedRoom, setPickedRoom } =
+    reservationContext;
 
   const [selectedBlocks, setSelectedBlocks] = useState(0);
 
@@ -18,8 +20,9 @@ const TimeSelect: React.FC = () => {
     priradit do setPickedRoom z localstate az tam pridam 
   }, []); */
 
+  const [myPickedRoom, setMyPickedRoom] = useState(pickedRoom);
+
   useEffect(() => {
-    console.log("effect trigger");
     /* setSelectedBlocks(0); */
     setSelectedBlocks(0);
     const counter = pickedRoom.roomData.map((data: any) => {
@@ -35,18 +38,17 @@ const TimeSelect: React.FC = () => {
   const onClickHandler = (blockNumber: number): void | null => {
     //Logika -> Vybírá se právě 1 schůzka. Tzn, že lze vybírat jen souvislé časové bloky - nelze vybrat např. blok 7:00-7:30 a k tomu 12:00-12:30,
     //ale lze vybrat postupně všechny bloky od 7:00 až do 12:30.
-    //Podminky
-    //1. Pokud ještě není vybrán žádný blok, lze kliknout na kterýkoliv a vybrat.
 
-    //První check -> pokud se klikne na rezerovavný block, tak zbytek funkce nepokračuje a neudělá nic.
+    //Podminky
+    //0.Pokud se klikne na rezerovavný block, tak zbytek funkce nepokračuje a neudělá nic.
     const clickReservedCheck = pickedRoom.roomData.find((room: any) => {
       return room.block == blockNumber && room.reserved;
     });
 
     if (clickReservedCheck) return null;
+
+    //1. Pokud ještě není vybrán žádný blok, lze kliknout na kterýkoliv a vybrat.
     if (pickedRoom && selectedBlocks == 0) {
-      console.log("trigger - 0");
-      console.log(selectedBlocks);
       const updatedRoomData = pickedRoom.roomData.map((data: any) => {
         if (data.block == blockNumber) {
           return { ...data, selected: !data.selected };
@@ -134,7 +136,7 @@ const TimeSelect: React.FC = () => {
   });
 
   //DOM - podle room
-  const roomDom = pickedRoom.roomData.map((roomData: any) => {
+  const roomDom = pickedRoom.roomData?.map((roomData: any) => {
     const selectedBlock = pickedRoom.roomData?.find(
       (room: any) => room.block == roomData.block
     );

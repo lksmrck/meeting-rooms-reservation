@@ -9,16 +9,13 @@ import { meetingTypes } from "../../constants/data";
 import { Input } from "@chakra-ui/react";
 import GuestsModal from "./GuestsModal";
 
-import {
-  collection,
-  addDoc,
-  serverTimestamp,
-  getDocs,
-} from "firebase/firestore";
+import { doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import ReservationContext from "../../state/ReservationContext";
+import { useNavigate } from "react-router-dom";
 
 const Form: React.FC = () => {
+  const navigate = useNavigate();
   const [fetchData, setFetchData] = useState();
   //FormData
 
@@ -33,10 +30,12 @@ const Form: React.FC = () => {
   const appContext = useContext(AppContext);
   const reservationContext = useContext(ReservationContext);
 
+  const [meetingType, setMeetingType] = useState<string>("call");
+
   //nepouzito zatim
   const { setOpenModal } = appContext;
-
   const { company } = authContext;
+  const { pickedDate, pickedRoom } = reservationContext;
   /*   const { pickedRoom } = reservationContext; */
 
   const onChangeInputHandler = (e: React.ChangeEvent<HTMLInputElement>): void =>
@@ -44,32 +43,24 @@ const Form: React.FC = () => {
 
   const onSubmitHandler = async (e: any) => {
     e.preventDefault();
-    /*  try {
-      const response = await addDoc(collection(db, "cities"), {
-        name: "Los Angeles",
-        state: "CA",
-        country: "USA",
-        timeStamp: serverTimestamp(), //čas přidání
-      });
-      console.log(response.id);
-    } catch (error) {
-      console.log(error);
-    } */
-  };
 
-  const testFetch = async () => {
-    const querySnapshot = await getDocs(
-      collection(db, `companies/${company}/meetings`)
-    );
-
-    let list: any = [];
-    querySnapshot.forEach((doc) => {
-      list.push(doc.data());
-      // doc.data() is never undefined for query doc snapshots
-      console.log(doc.id, " => ", doc.data());
+    //Čísla vybraných bloků k rezervaci
+    let blocks: number[] = [];
+    pickedRoom.roomData.forEach((data: any) => {
+      if (data.selected) blocks.push(data.block);
     });
-    /* setFetchData(list); */
-    console.log(list);
+
+    const newMeeting = {
+      date: pickedDate,
+      name,
+      type: meetingType,
+      room: "1", //pak přidat ROOM !!!!
+      blocks,
+    };
+
+    const dbRef = doc(db, `companies/secondCompany/rooms`, "1");
+    await updateDoc(dbRef, { meetings: arrayUnion(newMeeting) });
+    /*   navigate("/overview") */
   };
 
   return (
@@ -78,7 +69,10 @@ const Form: React.FC = () => {
         <h1 className="text-lg font-bold flex justify-center">
           Create a meeting
         </h1>
-        <form className="flex flex-col w-72 p-6 [&>input]:mb-4 ">
+        <form
+          className="flex flex-col w-72 p-6 [&>input]:mb-4 "
+          onSubmit={onSubmitHandler}
+        >
           <Input
             id="name"
             name="name"
@@ -99,12 +93,20 @@ const Form: React.FC = () => {
           </Button>
           <GuestsModal />
 
-          <Select name="rooms" id="rooms" options={meetingTypes} />
+          <Select
+            name="rooms"
+            id="rooms"
+            options={meetingTypes}
+            setMeetingType={setMeetingType}
+          />
           <div className="flex flex-col justify-center [&>button]:mt-1 ">
             <Button colorScheme="teal" type="submit">
               Reserve
             </Button>
-            <Button colorScheme="teal" variant="outline" onClick={testFetch}>
+            <Button
+              colorScheme="teal"
+              variant="outline" /* onClick={testFetch} */
+            >
               Back
             </Button>
           </div>

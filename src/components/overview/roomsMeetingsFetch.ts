@@ -45,7 +45,7 @@ export const roomsMeetingsFetch = (company: string, date: string, setRooms: any,
           reserved: blocks.includes(oneRoom.block),
         };
       });
-      console.log(newDataArray);
+    
       return {
         ...room,
         roomData: newDataArray,

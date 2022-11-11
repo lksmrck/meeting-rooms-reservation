@@ -16,7 +16,7 @@ const Overview = () => {
   const reservationContext = useContext(ReservationContext);
   const authContext = useContext(AuthContext);
 
-  const { setPickedBlock, pickedDate, setPickedDate, setPickedRoom } =
+  const { setPickedBlock, pickedDate, /* setPickedDate, */ setPickedRoom } =
     reservationContext;
 
   const { user, company } = authContext;

@@ -1,4 +1,4 @@
-export type Room = {
+/* export type Room = {
     id: number,
     companyID: number,
     companyName: string,
@@ -8,7 +8,7 @@ export type Room = {
         time: string,
         reserved: boolean
     }
-}
+} */
 
 export type User = {
     id: number,
@@ -28,4 +28,19 @@ export type Reservation = {
     roomID: number,
     blocks: number | number[]
 }
+
+export type RoomData = {
+    block: number,
+    time: string,
+    reserved: boolean,
+    selected?: boolean
+}
+
+export type Room = {
+id: number,
+name: string,
+roomData: RoomData[]
+
+}
+
 
