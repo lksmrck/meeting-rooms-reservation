@@ -94,8 +94,12 @@ const Form: React.FC = () => {
           >
             Add guests
           </Button>
-          <GuestsModal isOpen={guestsOpenModal} setState={setGuestsOpenModal} />
-
+          {guestsOpenModal && (
+            <GuestsModal
+              isOpen={guestsOpenModal}
+              setState={setGuestsOpenModal}
+            />
+          )}
           <Select
             name="rooms"
             id="rooms"

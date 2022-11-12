@@ -12,42 +12,36 @@ import {
 } from "@chakra-ui/react";
 import { useContext, useState } from "react";
 import AppContext from "../../state/AppContext";
-import { GoPlus } from "react-icons/go";
-import { AiOutlineMinus } from "react-icons/ai";
 
-const MeetingDetail = () => {
-  const appContext = useContext(AppContext);
-  const { openModal, setOpenModal } = appContext;
+type MeetingDetailProps = {
+  clickedMeeting: any;
+  openDetail: boolean;
+  setOpenDetail: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
-  const [inputsNumber, setInputsNumber] = useState<number[]>([1]);
-
-  const [guests, setGuests] = useState({});
-
-  const onAddGuests = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setGuests({ ...guests, [e.target.name]: e.target.value });
-  };
-  console.log(guests);
-
+const MeetingDetail: React.FC<MeetingDetailProps> = ({
+  clickedMeeting,
+  openDetail,
+  setOpenDetail,
+}) => {
   const onCancel = () => {
-    setOpenModal(false);
-    setInputsNumber([1]);
-    setGuests({});
+    setOpenDetail(false);
   };
 
   const onSubmitGuests = (e: React.SyntheticEvent) => {
-    setOpenModal(false);
+    setOpenDetail(false);
   };
 
   return (
-    <Modal isOpen={openModal} onClose={() => setOpenModal(false)}>
+    <Modal isOpen={openDetail} onClose={() => setOpenDetail(false)}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Meeting detail</ModalHeader>
         <ModalCloseButton />
         <ModalBody pb={6}>
           <section>
-            <h3>MEETING NAME</h3>
-            <h4>MEETING TYPE</h4>
+            <h3>{clickedMeeting.name}</h3>
+            <h4>{clickedMeeting.type}</h4>
             <h5>CREATOR</h5>
             <h5>GUESTS</h5>
             <h5>START</h5>

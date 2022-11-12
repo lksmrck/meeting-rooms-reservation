@@ -1,30 +1,31 @@
 import React, { useContext, useEffect, useState } from "react";
 import { timeBlocks } from "../../common/dummyData";
-import AppContext from "../../state/AppContext";
+/* import AppContext from "../../state/AppContext"; */
 import ReservationContext from "../../state/ReservationContext";
-import { meetingsFetch } from "./meetingsMetch";
+import { meetingsFetch } from "./meetingsFetch";
+import MeetingDetail from "../meetingDetail/MeetingDetail";
 
 /* ZDE SLEDOVAT V LOKÁLNÍM STATE MÍSTO CONTEXTU???? - SELECTEDTIME */
 const TimeSelect: React.FC = () => {
-  const appContext = useContext(AppContext);
-  /* const { selectedTime, setSelectedTime, selectedRoom } = appContext; */
+  /*   const appContext = useContext(AppContext); */
   const reservationContext = useContext(ReservationContext);
 
-  const { /* setPickedBlock, */ pickedRoom, setPickedRoom } =
-    reservationContext;
+  const { pickedRoom, setPickedRoom } = reservationContext;
 
   const [selectedBlocks, setSelectedBlocks] = useState(0);
-  const [meetingsDetail, setMeetingsDetail] = useState();
+  //Meeting details:
+  //Detail meetingů v daném dnu ve vybrané místnosti
+  const [meetingsDetail, setMeetingsDetail] = useState([]);
   const [openDetail, setOpenDetail] = useState(false);
+  const [clickedMeeting, setClickedMeeting] = useState();
 
-  //Počítadlo vybraných bloků k rezervaci - s každým vybraným blokem přičte 1 do local state,
   /*  useEffect(() => {
    
     priradit do setPickedRoom z localstate az tam pridam 
   }, []); */
-
   const [myPickedRoom, setMyPickedRoom] = useState(pickedRoom);
 
+  //Počítadlo vybraných bloků k rezervaci - s každým vybraným blokem přičte 1 do local state,
   useEffect(() => {
     /* setSelectedBlocks(0); */
     setSelectedBlocks(0);
@@ -32,10 +33,10 @@ const TimeSelect: React.FC = () => {
       //pickedRoom
       if (data.selected) {
         setSelectedBlocks((prevState: number) => prevState + 1);
-        //PREJMENOVAT NA SELECTEDBLOCKS
       }
     });
     console.log(pickedRoom);
+    console.log("z useeffect:" + selectedBlocks);
   }, [pickedRoom]); //pickedRoom
 
   useEffect(() => {
@@ -54,11 +55,17 @@ const TimeSelect: React.FC = () => {
     });
 
     if (clickReservedCheck) {
-      meetingsFetch("secondCompany", "21.11.2022", setMeetingsDetail);
+      meetingsDetail.forEach((detail: any) => {
+        if (detail.blocks.includes(blockNumber)) {
+          console.log("ano");
+          setClickedMeeting(detail);
+        }
+      });
+      setOpenDetail(true);
     }
 
     //1. Pokud ještě není vybrán žádný blok, lze kliknout na kterýkoliv a vybrat.
-    if (pickedRoom && selectedBlocks == 0) {
+    if (!clickReservedCheck && pickedRoom && selectedBlocks == 0) {
       const updatedRoomData = pickedRoom.roomData.map((data: any) => {
         if (data.block == blockNumber) {
           return { ...data, selected: !data.selected };
@@ -70,9 +77,9 @@ const TimeSelect: React.FC = () => {
       setPickedRoom(updatedRoom);
     }
     //2. Pokud je právě 1 vybraný blok, tak lze vybrat pouze blok+1 nebo blok-1 nebo odvybrat vybraný blok
-    if (pickedRoom && selectedBlocks == 1) {
-      console.log("trigger - 1");
-      console.log("first");
+    if (!clickReservedCheck && pickedRoom && selectedBlocks == 1) {
+      console.log("trigger - 1:" + selectedBlocks);
+
       const reservedBlock = pickedRoom.roomData.filter((obj: any) => {
         return obj.selected;
       }); //uložen rezervovaný object
@@ -94,21 +101,22 @@ const TimeSelect: React.FC = () => {
       }
     }
     //3. Pokud je více než 1 vybraný blok, tak:
-    if (pickedRoom && selectedBlocks > 1) {
-      console.log("trigger - vice nez 1 ");
+    if (!clickReservedCheck && pickedRoom && selectedBlocks > 1) {
+      console.log("trigger - vice nez 1:" + selectedBlocks);
+
       //Vyfiltorvání bloků, u kterých je reserved = true
-      const selectedBlocks = pickedRoom.roomData.filter((obj: any) => {
+      const newSelectedBlocks = pickedRoom.roomData.filter((obj: any) => {
         return obj.selected;
       });
       // 3.1 Získám nejmenší block ID (n) (pak půjde kliknout pouze n-1 (přidat) nebo n (odebrat))
       const minBlock = Math.min(
-        ...selectedBlocks.map((obj: any) => {
+        ...newSelectedBlocks.map((obj: any) => {
           return obj.block;
         })
       );
       // 3.2. Získám největší block ID (n) (pak půjde kliknout pouze n+1 (přidat) nebo n (odebrat))
       const maxBlock = Math.max(
-        ...selectedBlocks.map((obj: any) => {
+        ...newSelectedBlocks.map((obj: any) => {
           return obj.block;
         })
       );
@@ -174,6 +182,13 @@ const TimeSelect: React.FC = () => {
     <section className="grid grid-cols-2 gap-1 ">
       <div>{timeBlocksDom}</div>
       <div>{roomDom}</div>
+      {openDetail && (
+        <MeetingDetail
+          clickedMeeting={clickedMeeting}
+          openDetail={openDetail}
+          setOpenDetail={setOpenDetail}
+        />
+      )}
     </section>
   );
 };

@@ -29,7 +29,7 @@ const GuestsModal: React.FC<GuestsModalProps> = ({ isOpen, setState }) => {
   const onAddGuests = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setGuests({ ...guests, [e.target.name]: e.target.value });
   };
-  console.log(guests);
+  /*   console.log(guests); */
 
   const onCancel = () => {
     setState(false);
