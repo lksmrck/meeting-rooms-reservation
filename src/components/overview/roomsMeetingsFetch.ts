@@ -6,6 +6,7 @@ export const roomsMeetingsFetch = (company: string, date: string, setRooms: any,
 
  const roomsFetch = async () => {
 
+
     const querySnapshot = await getDocs(
       collection(db, `companies/${company}/rooms`)
     );
@@ -18,6 +19,7 @@ export const roomsMeetingsFetch = (company: string, date: string, setRooms: any,
 
    //Vytvořím proměnné s meetingy v daném dnu + jejich breakdown pro lepší pracování s daty.
     querySnapshot.forEach((doc) => {
+
       companyRooms.push({id: doc.data().id, name: doc.data().name})
 
       if(!doc.data().meetings) return null

@@ -1,4 +1,4 @@
-import { Room } from "../common/modelTypes";
+import { Room } from "../types/types";
 import {
   createContext,
   ReactNode,

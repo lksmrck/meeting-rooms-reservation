@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Input from "../components/layout/Input";
-import Button from "../components/layout/MyButton";
+import Input from "../ui/Input";
+import { Button } from "@chakra-ui/react";
 
-import { POWERUSER, READ, ADMIN } from "../constants/data";
+import { POWERUSER, READ, ADMIN } from "../../constants/data";
 
 const initialState = {
   company: "CURRENT",
@@ -71,8 +71,8 @@ const Register = () => {
           />
 
           <div className="flex justify-center ">
-            <Button type="submit" text="Login" />
-            <Button text="Back" />
+            <Button type="submit">Login </Button>
+            <Button>Back</Button>
           </div>
         </form>
       </div>

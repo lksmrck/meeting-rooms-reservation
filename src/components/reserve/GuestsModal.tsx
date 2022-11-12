@@ -10,36 +10,39 @@ import {
   Button,
   IconButton,
 } from "@chakra-ui/react";
-import { useContext, useState } from "react";
-import AppContext from "../../state/AppContext";
+import React, { useState } from "react";
+
 import { GoPlus } from "react-icons/go";
 import { AiOutlineMinus } from "react-icons/ai";
 
-const GuestsModal = () => {
-  const appContext = useContext(AppContext);
-  const { openModal, setOpenModal } = appContext;
+type GuestsModalProps = {
+  isOpen: boolean;
+  setState: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
+const GuestsModal: React.FC<GuestsModalProps> = ({ isOpen, setState }) => {
   const [inputsNumber, setInputsNumber] = useState<number[]>([1]);
 
   const [guests, setGuests] = useState({});
 
+  //Uloží guesty do array jako "1": "name", "2": "name", atd...
   const onAddGuests = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setGuests({ ...guests, [e.target.name]: e.target.value });
   };
   console.log(guests);
 
   const onCancel = () => {
-    setOpenModal(false);
+    setState(false);
     setInputsNumber([1]);
     setGuests({});
   };
 
   const onSubmitGuests = (e: React.SyntheticEvent) => {
-    setOpenModal(false);
+    setState(false);
   };
 
   return (
-    <Modal isOpen={openModal} onClose={() => setOpenModal(false)}>
+    <Modal isOpen={isOpen} onClose={() => setState(false)}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Add guests</ModalHeader>

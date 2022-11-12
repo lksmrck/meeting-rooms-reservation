@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { timeBlocks } from "../../common/dummyData";
 import AppContext from "../../state/AppContext";
 import ReservationContext from "../../state/ReservationContext";
+import { meetingsFetch } from "./meetingsMetch";
 
 /* ZDE SLEDOVAT V LOKÁLNÍM STATE MÍSTO CONTEXTU???? - SELECTEDTIME */
 const TimeSelect: React.FC = () => {
@@ -13,6 +14,8 @@ const TimeSelect: React.FC = () => {
     reservationContext;
 
   const [selectedBlocks, setSelectedBlocks] = useState(0);
+  const [meetingsDetail, setMeetingsDetail] = useState();
+  const [openDetail, setOpenDetail] = useState(false);
 
   //Počítadlo vybraných bloků k rezervaci - s každým vybraným blokem přičte 1 do local state,
   /*  useEffect(() => {
@@ -35,6 +38,11 @@ const TimeSelect: React.FC = () => {
     console.log(pickedRoom);
   }, [pickedRoom]); //pickedRoom
 
+  useEffect(() => {
+    meetingsFetch("secondCompany", "22.11.2022", setMeetingsDetail);
+    console.log(meetingsDetail);
+  }, []);
+
   const onClickHandler = (blockNumber: number): void | null => {
     //Logika -> Vybírá se právě 1 schůzka. Tzn, že lze vybírat jen souvislé časové bloky - nelze vybrat např. blok 7:00-7:30 a k tomu 12:00-12:30,
     //ale lze vybrat postupně všechny bloky od 7:00 až do 12:30.
@@ -45,7 +53,9 @@ const TimeSelect: React.FC = () => {
       return room.block == blockNumber && room.reserved;
     });
 
-    if (clickReservedCheck) return null;
+    if (clickReservedCheck) {
+      meetingsFetch("secondCompany", "21.11.2022", setMeetingsDetail);
+    }
 
     //1. Pokud ještě není vybrán žádný blok, lze kliknout na kterýkoliv a vybrat.
     if (pickedRoom && selectedBlocks == 0) {

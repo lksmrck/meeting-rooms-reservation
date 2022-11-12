@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 /* import Input from "../layout/Input"; */
 import { Button } from "@chakra-ui/react";
-import Select from "../layout/Select";
+import Select from "../ui/Select";
 import { rooms } from "../../common/dummyData";
 import AppContext from "../../state/AppContext";
 import AuthContext from "../../state/AuthContext";
@@ -24,6 +24,7 @@ const Form: React.FC = () => {
 
   //2.guests
   const [guests, setGuests] = useState<string[]>([]);
+  const [guestsOpenModal, setGuestsOpenModal] = useState(false);
 
   //4.meeting type --> Přes reservation context. V Select componentu.
   const authContext = useContext(AuthContext);
@@ -60,7 +61,8 @@ const Form: React.FC = () => {
 
     const dbRef = doc(db, `companies/secondCompany/rooms`, "1");
     await updateDoc(dbRef, { meetings: arrayUnion(newMeeting) });
-    /*   navigate("/overview") */
+    setName("");
+    navigate("/overview");
   };
 
   return (
@@ -79,6 +81,7 @@ const Form: React.FC = () => {
             type="text"
             placeholder="Enter the meeting name"
             onChange={onChangeInputHandler}
+            value={name}
             style={{ backgroundColor: "white" }}
           />
 
@@ -86,12 +89,12 @@ const Form: React.FC = () => {
             colorScheme={"purple"}
             //VYUZIT
             onClick={() => {
-              setOpenModal(true);
+              setGuestsOpenModal(true);
             }}
           >
             Add guests
           </Button>
-          <GuestsModal />
+          <GuestsModal isOpen={guestsOpenModal} setState={setGuestsOpenModal} />
 
           <Select
             name="rooms"
