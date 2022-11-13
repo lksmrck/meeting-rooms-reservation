@@ -6,12 +6,13 @@ import {
   ModalCloseButton,
   ModalFooter,
   ModalBody,
-  Input,
   Button,
   IconButton,
 } from "@chakra-ui/react";
 import { useContext, useState } from "react";
 import AppContext from "../../state/AppContext";
+import { timeBlocks } from "../../common/dummyData";
+import { timeDataCalc } from "./timeDataCalc";
 
 type MeetingDetailProps = {
   clickedMeeting: any;
@@ -24,6 +25,8 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
   openDetail,
   setOpenDetail,
 }) => {
+  const [timeDetail, setTimeDetail] = useState(timeDataCalc(clickedMeeting));
+
   const onCancel = () => {
     setOpenDetail(false);
   };
@@ -39,21 +42,34 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
         <ModalHeader>Meeting detail</ModalHeader>
         <ModalCloseButton />
         <ModalBody pb={6}>
-          <section>
-            <h3>{clickedMeeting.name}</h3>
-            <h4>{clickedMeeting.type}</h4>
-            <h5>CREATOR</h5>
-            <h5>GUESTS</h5>
-            <h5>START</h5>
-            <h5>ENDS</h5>
-            <h5>LENGTH</h5>
+          <section className="grid grid-cols-2">
+            <div className="[&>*] font-bold">
+              <h3>Meeting name: </h3>
+              <h4>Meeting type: </h4>
+              <h5>Created by: </h5>
+              <h5>Guests:</h5>
+              <h5>Start time: </h5>
+              <h5>End time: </h5>
+              <h5>Hours duration: </h5>
+            </div>
+            <div>
+              <h3>{clickedMeeting.name}</h3>
+              <h4>{clickedMeeting.type}</h4>
+              <h5>{clickedMeeting.creator}</h5>
+              <h5>
+                {clickedMeeting.guests ? clickedMeeting.guests : "No guests"}
+              </h5>
+              <h5>{timeDetail.start}</h5>
+              <h5>{timeDetail.end}</h5>
+              <h5>{timeDetail.meetingLength} </h5>
+            </div>
           </section>
         </ModalBody>
         <ModalFooter className="[&>button]:m-1 ">
           <Button colorScheme="teal" onClick={onSubmitGuests}>
-            Save
+            Edit
           </Button>
-          <Button onClick={onCancel}>Cancel</Button>
+          <Button onClick={onCancel}>Back</Button>
         </ModalFooter>
       </ModalContent>
     </Modal>

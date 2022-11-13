@@ -1,14 +1,11 @@
 import React, { useState, useContext } from "react";
-/* import Input from "../layout/Input"; */
 import { Button } from "@chakra-ui/react";
 import MeetingType from "./MeetingType";
-
 import AppContext from "../../state/AppContext";
 import AuthContext from "../../state/AuthContext";
 import { meetingTypes } from "../../constants/data";
 import { Input } from "@chakra-ui/react";
 import GuestsModal from "./GuestsModal";
-
 import { doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import ReservationContext from "../../state/ReservationContext";
@@ -17,8 +14,8 @@ import { useNavigate } from "react-router-dom";
 const Form: React.FC = () => {
   const navigate = useNavigate();
   const [fetchData, setFetchData] = useState();
-  //FormData
 
+  //FormData
   //1.meeting name
   const [name, setName] = useState<string>();
 
@@ -26,7 +23,7 @@ const Form: React.FC = () => {
   const [guests, setGuests] = useState<string[]>([]);
   const [guestsOpenModal, setGuestsOpenModal] = useState(false);
   const onAddGuests = (guests: any) => {
-    setGuests((prevGuests: any[]) => [...prevGuests, guests]);
+    setGuests(guests);
   };
 
   //3.meeting type --> Přes reservation context. V Select componentu.
@@ -36,17 +33,18 @@ const Form: React.FC = () => {
 
   const [meetingType, setMeetingType] = useState<string>("call");
 
-  //nepouzito zatim
   const { setOpenModal } = appContext;
   const { company, user } = authContext;
   const { pickedDate, pickedRoom } = reservationContext;
-  /*   const { pickedRoom } = reservationContext; */
+
+  const [missingFormData, setMissingFormData] = useState(false);
 
   const onChangeInputHandler = (e: React.ChangeEvent<HTMLInputElement>): void =>
     setName(e.target.value);
 
   const onSubmitHandler = async (e: any) => {
     e.preventDefault();
+    setMissingFormData(false);
 
     //Čísla vybraných bloků k rezervaci
     let blocks: number[] = [];
@@ -63,22 +61,31 @@ const Form: React.FC = () => {
       creator: user.email,
       guests,
     };
-    console.log(newMeeting);
+    console.log(guests);
 
-    const dbRef = doc(db, `companies/secondCompany/rooms`, "1"); //UPRAVIT DYNAMICKY
-    await updateDoc(dbRef, { meetings: arrayUnion(newMeeting) });
-    setName("");
-    navigate("/overview");
+    //Check, zda je vyplněný název meetingu a vybrané bloky. Zbytek dat je nepovinný, nebo se vezme automaticky.
+    if (
+      newMeeting.blocks.length > 1 &&
+      newMeeting.name &&
+      newMeeting.name.length >= 1
+    ) {
+      const dbRef = doc(db, `companies/secondCompany/rooms`, "1"); //UPRAVIT DYNAMICKY
+      await updateDoc(dbRef, { meetings: arrayUnion(newMeeting) });
+      setName("");
+      navigate("/overview");
+    } else {
+      setMissingFormData(true);
+    }
   };
 
   return (
-    <section className="flex justify-center mt-4 ">
-      <div className=" flex flex-col justify-center  bg-green-50 h-1/3 rounded-lg items-center">
+    <section className="flex justify-center  ">
+      <div className=" flex flex-col justify-center  bg-green-50 h-2/5 rounded-lg ">
         <h1 className="text-lg font-bold flex justify-center">
           Create a meeting
         </h1>
         <form
-          className="flex flex-col w-72 p-6 [&>input]:mb-4 "
+          className="flex flex-col w-72 p-4 [&>input]:mb-4"
           onSubmit={onSubmitHandler}
         >
           <Input
@@ -93,7 +100,6 @@ const Form: React.FC = () => {
 
           <Button
             colorScheme={"purple"}
-            //VYUZIT
             onClick={() => {
               setGuestsOpenModal(true);
             }}
@@ -127,6 +133,11 @@ const Form: React.FC = () => {
               Back
             </Button>
           </div>
+          {missingFormData && (
+            <p className="w-72  text-xs text-red-600">
+              Please fill in meeting name and pick meeting blocks to reserve.
+            </p>
+          )}
         </form>
       </div>
     </section>

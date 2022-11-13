@@ -104,7 +104,7 @@ const TimeSelect: React.FC = () => {
     if (!clickReservedCheck && pickedRoom && selectedBlocks > 1) {
       console.log("trigger - vice nez 1:" + selectedBlocks);
 
-      //Vyfiltorvání bloků, u kterých je reserved = true
+      //Vyfiltorvání bloků, u kterých je selected = true
       const newSelectedBlocks = pickedRoom.roomData.filter((obj: any) => {
         return obj.selected;
       });
