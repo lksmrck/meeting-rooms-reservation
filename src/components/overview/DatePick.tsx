@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import { useState, useContext } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import ReservationContext from "../../state/ReservationContext";
@@ -22,7 +22,7 @@ const DatePick = () => {
   };
 
   return (
-    <div className="flex justify-center w-64 ">
+    <div className="flex justify-center w-72 ">
       <Calendar onChange={pickDateHandler} value={date} />
     </div>
   );

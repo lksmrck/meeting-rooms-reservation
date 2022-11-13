@@ -5,6 +5,7 @@ import ReservationContext from "../../state/ReservationContext";
 import AuthContext from "../../state/AuthContext";
 import AppContext from "../../state/AppContext";
 import { Button } from "@chakra-ui/react";
+import { getRandomColor } from "../../utils/getRandomColor";
 
 import { roomsMeetingsFetch } from "./roomsMeetingsFetch";
 
@@ -80,10 +81,11 @@ const Overview = () => {
           return (
             <div
               key={roomData.block}
-              className={`h-10 rounded-md ${
-                roomData.reserved ? "bg-red-500" : "bg-white"
-              } w-20 text-xs border border-green-600 flex justify-center items-center `}
+              className={`h-10 rounded-md  w-20 text-xs border border-green-600 flex justify-center items-center cursor-pointer hover:scale-105`}
               onClick={() => onClickBlockHandler(room.id, roomData.block)}
+              style={{
+                backgroundColor: roomData.reserved ? getRandomColor() : "white",
+              }}
             >
               {roomData.block}
             </div>

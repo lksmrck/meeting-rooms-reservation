@@ -43,7 +43,7 @@ const Auth = () => {
       <div className=" flex flex-col justify-center mb-24 items-center w-96 bg-white h-96 rounded-lg relative">
         <div
           style={{ borderRadius: "0% 0% 50% 50%" }}
-          className="h-20 w-full bg-slate-700 absolute top-0 flex flex-col items-center justify-center"
+          className="h-20 w-full bg-teal-600 absolute top-0 flex flex-col items-center justify-center"
         >
           <h1 className="text-2xl font-bold text-gray-50">Login</h1>
           <h3 className=" text-sm text-gray-50">Enter your credentials</h3>
@@ -63,11 +63,9 @@ const Auth = () => {
             type="password"
             placeholder="Enter your password"
             onChange={(e) => setPassword(e.target.value)}
-            /* htmlSize={30}
-            width="auto" */
           />
 
-          <div className="flex justify-center flex-col [&>button]:mt-1 mt-3">
+          <div className="flex justify-center flex-col [&>button]:mt-1 mt-8">
             <Button colorScheme="teal" type="submit">
               Submit
             </Button>

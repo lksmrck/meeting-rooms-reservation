@@ -161,7 +161,7 @@ const TimeSelect: React.FC = () => {
     return (
       <div
         key={roomData.block}
-        className={`h-10 rounded-md flex justify-center items-center w-20 text-xs border border-green-600`}
+        className={`h-10 rounded-md flex justify-center items-center w-20 text-xs border border-green-600 hover:scale-105`}
         onClick={() => onClickHandler(roomData.block)}
         //Style, protože Tailwind neumožňuje jednoduché dynamické formátování (zde v případě, že se vybere block, tak se změní bgColor)
         style={{
