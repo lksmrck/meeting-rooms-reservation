@@ -17,32 +17,40 @@ import { AiOutlineMinus } from "react-icons/ai";
 
 type GuestsModalProps = {
   isOpen: boolean;
-  setState: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  onAddGuests: (guests: any) => void;
 };
 
-const GuestsModal: React.FC<GuestsModalProps> = ({ isOpen, setState }) => {
+const GuestsModal: React.FC<GuestsModalProps> = ({
+  isOpen,
+  setIsOpen,
+  onAddGuests,
+}) => {
   const [inputsNumber, setInputsNumber] = useState<number[]>([1]);
 
-  const [guests, setGuests] = useState({});
+  const [guests, setGuests] = useState([] as any[]);
 
-  //Uloží guesty do array jako "1": "name", "2": "name", atd...
-  const onAddGuests = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setGuests({ ...guests, [e.target.name]: e.target.value });
+  //Přidá každého guesta do array a removuje při odebrání inputu.
+  const onChangeGuests = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    let newArr: string[] = [...guests];
+    newArr[Number(e.target.name) - 1] = e.target.value;
+    setGuests(newArr);
   };
-  /*   console.log(guests); */
 
   const onCancel = () => {
-    setState(false);
+    setIsOpen(false);
     setInputsNumber([1]);
-    setGuests({});
+    setGuests([]);
+    onAddGuests([]);
   };
 
   const onSubmitGuests = (e: React.SyntheticEvent) => {
-    setState(false);
+    onAddGuests(guests);
+    setIsOpen(false);
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={() => setState(false)}>
+    <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Add guests</ModalHeader>
@@ -56,7 +64,7 @@ const GuestsModal: React.FC<GuestsModalProps> = ({ isOpen, setState }) => {
                   placeholder="Please enter guests e-mail"
                   name={input}
                   id={input}
-                  onChange={onAddGuests}
+                  onChange={onChangeGuests}
                 />
               );
             })}
@@ -67,11 +75,12 @@ const GuestsModal: React.FC<GuestsModalProps> = ({ isOpen, setState }) => {
                   size="sm"
                   icon={<AiOutlineMinus />}
                   aria-label="minus"
-                  onClick={() =>
-                    setInputsNumber((prevState: number[]) =>
-                      prevState.slice(0, -1)
-                    )
-                  }
+                  onClick={() => {
+                    setInputsNumber((prevNumber: number[]) =>
+                      prevNumber.slice(0, -1)
+                    );
+                    setGuests((prevGuests: any) => prevGuests.slice(0, -1));
+                  }}
                 ></IconButton>
               ) : (
                 ""
@@ -82,7 +91,6 @@ const GuestsModal: React.FC<GuestsModalProps> = ({ isOpen, setState }) => {
                 icon={<GoPlus />}
                 aria-label="plus"
                 onClick={() => {
-                  console.log(inputsNumber);
                   setInputsNumber((prevState: number[]) => [
                     ...prevState,
                     prevState.length + 1,

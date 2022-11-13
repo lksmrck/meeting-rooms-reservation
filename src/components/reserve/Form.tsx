@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 /* import Input from "../layout/Input"; */
 import { Button } from "@chakra-ui/react";
-import Select from "../ui/Select";
-import { rooms } from "../../common/dummyData";
+import MeetingType from "./MeetingType";
+
 import AppContext from "../../state/AppContext";
 import AuthContext from "../../state/AuthContext";
 import { meetingTypes } from "../../constants/data";
@@ -25,8 +25,11 @@ const Form: React.FC = () => {
   //2.guests
   const [guests, setGuests] = useState<string[]>([]);
   const [guestsOpenModal, setGuestsOpenModal] = useState(false);
+  const onAddGuests = (guests: any) => {
+    setGuests((prevGuests: any[]) => [...prevGuests, guests]);
+  };
 
-  //4.meeting type --> Přes reservation context. V Select componentu.
+  //3.meeting type --> Přes reservation context. V Select componentu.
   const authContext = useContext(AuthContext);
   const appContext = useContext(AppContext);
   const reservationContext = useContext(ReservationContext);
@@ -35,7 +38,7 @@ const Form: React.FC = () => {
 
   //nepouzito zatim
   const { setOpenModal } = appContext;
-  const { company } = authContext;
+  const { company, user } = authContext;
   const { pickedDate, pickedRoom } = reservationContext;
   /*   const { pickedRoom } = reservationContext; */
 
@@ -57,9 +60,12 @@ const Form: React.FC = () => {
       type: meetingType,
       room: "1", //pak přidat ROOM !!!!
       blocks,
+      creator: user.email,
+      guests,
     };
+    console.log(newMeeting);
 
-    const dbRef = doc(db, `companies/secondCompany/rooms`, "1");
+    const dbRef = doc(db, `companies/secondCompany/rooms`, "1"); //UPRAVIT DYNAMICKY
     await updateDoc(dbRef, { meetings: arrayUnion(newMeeting) });
     setName("");
     navigate("/overview");
@@ -97,10 +103,11 @@ const Form: React.FC = () => {
           {guestsOpenModal && (
             <GuestsModal
               isOpen={guestsOpenModal}
-              setState={setGuestsOpenModal}
+              setIsOpen={setGuestsOpenModal}
+              onAddGuests={onAddGuests}
             />
           )}
-          <Select
+          <MeetingType
             name="rooms"
             id="rooms"
             options={meetingTypes}
@@ -112,7 +119,10 @@ const Form: React.FC = () => {
             </Button>
             <Button
               colorScheme="teal"
-              variant="outline" /* onClick={testFetch} */
+              variant="outline"
+              onClick={() => {
+                navigate("/overview");
+              }}
             >
               Back
             </Button>
