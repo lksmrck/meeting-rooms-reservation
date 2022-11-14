@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import ReservationContext from "../../state/ReservationContext";
@@ -9,8 +9,11 @@ const DatePick = () => {
   const navigate = useNavigate();
 
   const reservationContext = useContext(ReservationContext);
-  if (!reservationContext) return null;
   const { setPickedDate } = reservationContext;
+
+  useEffect(() => {
+    setPickedDate(null);
+  }, []);
 
   const pickDateHandler = (date: Date) => {
     //State ke controllingu component value

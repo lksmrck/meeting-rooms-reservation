@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Input from "../ui/Input";
 import { Button } from "@chakra-ui/react";
 
-import { POWERUSER, READ, ADMIN } from "../../constants/data";
+import { POWERUSER, READ, ADMIN } from "../../constants/constants";
 
 const initialState = {
   company: "CURRENT",

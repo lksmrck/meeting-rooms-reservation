@@ -2,7 +2,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { roomData } from '../../common/dummyData';
 
-export const roomsMeetingsFetch = (company: string, date: string, setRooms: any, setRoomsData: any ) => {
+export const roomsMeetingsFetch = (company: string, date: string | null, setRooms: any, setRoomsData: any ) => {
 
  const roomsFetch = async () => {
 

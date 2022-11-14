@@ -29,7 +29,7 @@ const Navbar = () => {
   };
 
   return (
-    <section className="h-20 bg-violet-800 flex">
+    <section className="h-20 bg-violet-800 flex  shadow-lg shadow-slate-300">
       <nav className="flex justify-between items-center w-screen">
         <ul className="flex items-center">
           <li className=" ml-5 text-white">Room Reserver</li>

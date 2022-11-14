@@ -56,7 +56,7 @@ const Overview = () => {
     return (
       <div
         key={block.id}
-        className=" flex justify-center items-center text-xs w-20 h-10  border border-yellow-700 rounded-md bg-gray-200"
+        className=" flex justify-center items-center text-xs w-20 h-10  border border-yellow-700 rounded-md bg-gray-200 shadow-lg shadow-slate-600"
       >
         {block.time}
       </div>
@@ -81,7 +81,7 @@ const Overview = () => {
           return (
             <div
               key={roomData.block}
-              className={`h-10 rounded-md  w-20 text-xs border border-green-600 flex justify-center items-center cursor-pointer hover:scale-105`}
+              className={`h-10 rounded-md  w-20 text-xs border border-green-600 flex justify-center items-center cursor-pointer hover:scale-105 shadow-lg shadow-slate-600`}
               onClick={() => onClickBlockHandler(room.id, roomData.block)}
               style={{
                 backgroundColor: roomData.reserved ? getRandomColor() : "white",

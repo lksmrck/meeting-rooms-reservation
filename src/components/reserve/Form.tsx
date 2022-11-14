@@ -3,7 +3,7 @@ import { Button } from "@chakra-ui/react";
 import MeetingType from "./MeetingType";
 import AppContext from "../../state/AppContext";
 import AuthContext from "../../state/AuthContext";
-import { meetingTypes } from "../../constants/data";
+import { meetingTypes } from "../../constants/constants";
 import { Input } from "@chakra-ui/react";
 import GuestsModal from "./GuestsModal";
 import { doc, updateDoc, arrayUnion } from "firebase/firestore";
