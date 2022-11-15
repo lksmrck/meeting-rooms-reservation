@@ -37,14 +37,30 @@ export const roomsMeetingsFetch = (company: string, date: string | null, setRoom
 
     //Rezervované bloky -> Najdu v každé room bloky, u kterých bude potřeba upravit property reserved na TRUE.
        const updatedRooms: any = companyRooms.map((room: any) => {
+
       const blocks = blocksBreakdown.map((bd: any) => {
         if (bd.room == room.id) return bd.block;
       });
 
       const newDataArray = roomData.map((oneRoom: any) => {
+
+        let meetingsBlocksArray: number[] = []
+
+        todaysMeetings.forEach((meeting: any) => {
+          /* console.log(meeting)
+          console.log(oneRoom.block) */
+          if (meeting.blocks.includes(oneRoom.block)) {
+            meeting.blocks.forEach((block: any) => meetingsBlocksArray.push(block))
+          } 
+          
+
+        })
+        console.log(meetingsBlocksArray)
+
         return {
           ...oneRoom,
           reserved: blocks.includes(oneRoom.block),
+          meetingBlocks: meetingsBlocksArray //sem přidat meeting blocks
         };
       });
     

@@ -57,7 +57,9 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
               <h4>{clickedMeeting.type}</h4>
               <h5>{clickedMeeting.creator}</h5>
               <h5>
-                {clickedMeeting.guests ? clickedMeeting.guests : "No guests"}
+                {clickedMeeting.guests.length > 0
+                  ? clickedMeeting.guests
+                  : "No guests"}
               </h5>
               <h5>{timeDetail.start}</h5>
               <h5>{timeDetail.end}</h5>

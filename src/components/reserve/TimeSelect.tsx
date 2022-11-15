@@ -36,13 +36,12 @@ const TimeSelect: React.FC = () => {
         setSelectedBlocks((prevState: number) => prevState + 1);
       }
     });
-    console.log(pickedRoom);
-    console.log("z useeffect:" + selectedBlocks);
   }, [pickedRoom]); //pickedRoom
 
   useEffect(() => {
     meetingsFetch("secondCompany", "22.11.2022", setMeetingsDetail);
     console.log(meetingsDetail);
+    console.log(pickedRoom);
   }, []);
 
   const onClickHandler = (blockNumber: number): void | null => {
@@ -142,7 +141,7 @@ const TimeSelect: React.FC = () => {
     }
   };
 
-  //DOM - timeblocks
+  //DOM PRO TIMEBLOCKY - timeblocks
   const timeBlocksDom = timeBlocks.map((block) => {
     return (
       <div
@@ -154,210 +153,10 @@ const TimeSelect: React.FC = () => {
     );
   });
 
-  //DOM - podle room
-  const DUMMY_PICKED_ROOM = {
-    id: 1,
-    name: "jakarta",
-    roomData: [
-      {
-        room: 1,
-        block: 1,
-        time: "7:00 - 7:30",
-        reserved: true,
-        selected: false,
-        meetingBlocks: [1, 2, 3],
-      },
-      {
-        room: 1,
-        block: 2,
-        time: "7:30 - 8:00",
-        reserved: true,
-        selected: false,
-        meetingBlocks: [1, 2, 3],
-      },
-      {
-        room: 1,
-        block: 3,
-        time: "8:00 - 8:30",
-        reserved: true,
-        selected: false,
-        meetingBlocks: [1, 2, 3],
-      },
-      {
-        room: 1,
-        block: 4,
-        time: "8:30 - 9:00",
-        reserved: false,
-        selected: false,
-        meetingBlocks: [],
-      },
-      {
-        room: 1,
-        block: 5,
-        time: "9:00 - 9:30",
-        reserved: false,
-        selected: false,
-        meetingBlocks: [],
-      },
-      {
-        room: 1,
-        block: 6,
-        time: "9:30 - 10:00",
-        reserved: false,
-        selected: false,
-        meetingBlocks: [],
-      },
-      {
-        room: 1,
-        block: 7,
-        time: "10:00 - 10:30",
-        reserved: false,
-        selected: false,
-        meetingBlocks: [],
-      },
-      {
-        room: 1,
-        block: 8,
-        time: "10:30 - 11:00",
-        reserved: true,
-        selected: false,
-        meetingBlocks: [8, 9, 10],
-      },
-      {
-        room: 1,
-        block: 9,
-        time: "11:00 - 11:30",
-        reserved: true,
-        selected: false,
-        meetingBlocks: [8, 9, 10],
-      },
-      {
-        room: 1,
-        block: 10,
-        time: "11:30 - 12:00",
-        reserved: true,
-        selected: false,
-        meetingBlocks: [8, 9, 10],
-      },
-      {
-        room: 1,
-        block: 11,
-        time: "12:00 - 12:30",
-        reserved: false,
-        selected: false,
-        meetingBlocks: [],
-      },
-      {
-        room: 1,
-        block: 12,
-        time: "12:30 - 13:00",
-        reserved: false,
-        selected: false,
-        meetingBlocks: [],
-      },
-      {
-        room: 1,
-        block: 13,
-        time: "13:00 - 13:30",
-        reserved: false,
-        selected: false,
-        meetingBlocks: [],
-      },
-      {
-        room: 1,
-        block: 14,
-        time: "13:30 - 14:00",
-        reserved: false,
-        selected: false,
-        meetingBlocks: [],
-      },
-      {
-        room: 1,
-        block: 15,
-        time: "14:00 - 14:30",
-        reserved: false,
-        selected: false,
-        meetingBlocks: [],
-      },
-      {
-        room: 1,
-        block: 16,
-        time: "14:30 - 15:00",
-        reserved: false,
-        selected: false,
-        meetingBlocks: [],
-      },
-      {
-        room: 1,
-        block: 17,
-        time: "15:00 - 15:30",
-        reserved: false,
-        selected: false,
-        meetingBlocks: [],
-      },
-      {
-        room: 1,
-        block: 18,
-        time: "15:30 - 16:00",
-        reserved: false,
-        selected: false,
-        meetingBlocks: [],
-      },
-      {
-        room: 1,
-        block: 19,
-        time: "16:00 - 16:30",
-        reserved: false,
-        selected: false,
-        meetingBlocks: [],
-      },
-      {
-        room: 1,
-        block: 20,
-        time: "16:30 - 17:00",
-        reserved: false,
-        selected: false,
-        meetingBlocks: [],
-      },
-      {
-        room: 1,
-        block: 21,
-        time: "17:00 - 17:30",
-        reserved: false,
-        selected: false,
-        meetingBlocks: [],
-      },
-      {
-        room: 1,
-        block: 22,
-        time: "17:30 - 18:00",
-        reserved: false,
-        selected: false,
-        meetingBlocks: [],
-      },
-      {
-        room: 1,
-        block: 23,
-        time: "18:00 - 18:30",
-        reserved: false,
-        selected: false,
-        meetingBlocks: [],
-      },
-      {
-        room: 1,
-        block: 24,
-        time: "18:30 - 19:00",
-        reserved: false,
-        selected: false,
-        meetingBlocks: [],
-      },
-    ],
-  };
-
+  // DOM PRO ROOM - Const ve které je DOM, už roztříděný podle meetingů, kde divy mají alkované rozměry, podle toho, jaké meetingy v daném dnu jsou.
   let meetingsHelper: number[] = [];
-
   //Const pro sloupec s timeblocky dané místnosti - zobrazení tak, aby meetingy tvořily jeden velký blok a nerezervované bloky byly samostatně.
-  const roomDomTwo = DUMMY_PICKED_ROOM.roomData.map((roomData: any) => {
+  const roomDom = pickedRoom.roomData.map((roomData: any) => {
     const selectedBlock = pickedRoom.roomData?.find(
       (room: any) => room.block == roomData.block
     );
@@ -384,10 +183,7 @@ const TimeSelect: React.FC = () => {
         <div
           key={roomData.block}
           onClick={() => onClickHandler(roomData.block)}
-          className={`h-${height} bg-blue-600 rounded-md flex justify-center items-center w-28 text-xs border border-green-600 cursor-pointer hover:scale-105 shadow-lg shadow-slate-600`}
-          /* style={{
-            backgroundColor: getRandomColor(),
-          }} */
+          className={`h-${height} bg-blue-700 rounded-md flex justify-center items-center w-28 text-xs border border-green-600 cursor-pointer hover:scale-105 shadow-lg shadow-slate-600`}
         >
           Reserved
         </div>
@@ -407,34 +203,11 @@ const TimeSelect: React.FC = () => {
     );
   });
 
-  const roomDom = pickedRoom.roomData?.map((roomData: any) => {
-    const selectedBlock = pickedRoom.roomData?.find(
-      (room: any) => room.block == roomData.block
-    );
-    return (
-      <div
-        key={roomData.block}
-        className={`h-10 rounded-md flex justify-center items-center w-20 text-xs border border-green-600 cursor-pointer hover:scale-105 shadow-lg shadow-slate-600`}
-        onClick={() => onClickHandler(roomData.block)}
-        //Style, protože Tailwind neumožňuje jednoduché dynamické formátování (zde v případě, že se vybere block, tak se změní bgColor)
-        style={{
-          backgroundColor: selectedBlock.reserved
-            ? "red"
-            : !selectedBlock.reserved && selectedBlock.selected
-            ? "green"
-            : "white",
-        }}
-      >
-        {roomData.block}
-      </div>
-    );
-  });
-
   //Konečný return - 2 sloupce 1. s časovými bloky, 2. vybraná místnost
   return (
     <section className="grid grid-cols-2 gap-1 ">
       <div>{timeBlocksDom}</div>
-      <div>{roomDomTwo}</div>
+      <div>{roomDom}</div>
       {openDetail && (
         <MeetingDetail
           clickedMeeting={clickedMeeting}

@@ -73,22 +73,43 @@ const Overview = () => {
 
   //Vytvoří DOM pro místnosti uzpůsobený pro Grid
   const roomsDom = roomsData.map((room: any) => {
+    let meetingsHelper: number[] = [];
+    let height;
     return (
       <div key={room.id} className="">
-        {" "}
-        {/* [&>*]:m-0.5 */}
         <h1>{room.name}</h1>
         {room.roomData.map((roomData: any) => {
+          const includedInHelper = meetingsHelper.some((no: number) =>
+            roomData.meetingBlocks.includes(no)
+          );
+          if (includedInHelper) {
+            return "";
+          }
+          if (roomData.reserved && !includedInHelper) {
+            height = roomData.meetingBlocks.length * 10;
+
+            //Přičte block do meetingHelper, aby se vědělo, že pro tento meeting byl již DOM vytvořen
+            roomData.meetingBlocks.forEach((block: number) => {
+              meetingsHelper.push(block);
+            });
+
+            return (
+              <div
+                key={roomData.block}
+                onClick={() => onClickBlockHandler(room.id, roomData.block)}
+                className={`h-${height}  bg-blue-700 rounded-md flex justify-center items-center w-20 text-xs border border-green-600 cursor-pointer hover:scale-105 shadow-lg shadow-slate-600`}
+              >
+                Reserved
+              </div>
+            );
+          }
           return (
             <div
               key={roomData.block}
-              className={`h-10 rounded-md  w-20 text-xs border border-green-600 flex justify-center items-center cursor-pointer hover:scale-105 shadow-lg shadow-slate-600`}
               onClick={() => onClickBlockHandler(room.id, roomData.block)}
-              style={{
-                backgroundColor: roomData.reserved ? getRandomColor() : "white",
-              }}
+              className={`h-10 rounded-md bg-white flex justify-center items-center w-20 text-xs border border-green-600 cursor-pointer hover:scale-105 shadow-lg shadow-slate-600`}
             >
-              {roomData.block}
+              Free
             </div>
           );
         })}
@@ -108,7 +129,6 @@ const Overview = () => {
       >
         <div className=" -mt-0.5 ">
           {" "}
-          {/* [&>*]:m-0.5 */}
           <h1>Time</h1>
           {timeBlocksDom}
         </div>
