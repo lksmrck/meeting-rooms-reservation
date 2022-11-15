@@ -15,12 +15,6 @@ export const meetingsFetch = (company: string, date: string, setState: React.Dis
      docSnap.data().meetings.forEach((meeting: any) => {
         if (meeting.date == date) todaysMeetings.push(meeting)
       })
-  /*     todaysMeetings = filteredMeetings */
-      /* if (filteredMeetings) {filteredMeetings.forEach((meeting: any) => {
-        todaysMeetings.push(meeting); 
-    })}; */
-  /*   todaysMeetings = filteredMeetings */
-/*   console.log(filteredMeetings) */
    
 setState(todaysMeetings)
 

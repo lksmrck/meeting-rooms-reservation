@@ -20,6 +20,9 @@ module.exports = {
         //gray - backdrop
         th_backdrop: "#000000bf",
       },
+      height: {
+        30: "7.5rem",
+      },
     },
   },
   plugins: [],

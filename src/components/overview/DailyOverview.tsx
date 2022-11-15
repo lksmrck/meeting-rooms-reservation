@@ -37,6 +37,7 @@ const Overview = () => {
   }, []);
 
   const onClickBlockHandler = (room: number, block: number): void => {
+    console.log(roomsData);
     //Uloží do Contextu room a block, na které user clicknul, aby se dalo pak použít v detailní rezervaci jako přednastaveno
     setPickedBlock({ room, block });
     const clickedRoom = roomsData.find((roomData: any) => {
