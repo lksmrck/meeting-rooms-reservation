@@ -79,7 +79,7 @@ const Form: React.FC = () => {
   };
 
   return (
-    <section className="flex justify-center  ">
+    <section className="flex justify-center ml-6   ">
       <div className=" flex flex-col justify-center  bg-green-50 h-2/5 rounded-lg ">
         <h1 className="text-lg font-bold flex justify-center">
           Create a meeting

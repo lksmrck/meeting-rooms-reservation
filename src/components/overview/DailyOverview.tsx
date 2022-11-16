@@ -3,9 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import ReservationContext from "../../state/ReservationContext";
 import AuthContext from "../../state/AuthContext";
-import AppContext from "../../state/AppContext";
-import { Button } from "@chakra-ui/react";
-import { getRandomColor } from "../../utils/getRandomColor";
 
 import { roomsMeetingsFetch } from "./roomsMeetingsFetch";
 
@@ -86,7 +83,7 @@ const Overview = () => {
             return "";
           }
           if (roomData.reserved && !includedInHelper) {
-            height = roomData.meetingBlocks.length * 10;
+            height = roomData.meetingBlocks.length * 2.5;
 
             //Přičte block do meetingHelper, aby se vědělo, že pro tento meeting byl již DOM vytvořen
             roomData.meetingBlocks.forEach((block: number) => {
@@ -97,7 +94,8 @@ const Overview = () => {
               <div
                 key={roomData.block}
                 onClick={() => onClickBlockHandler(room.id, roomData.block)}
-                className={`h-${height}  bg-blue-700 rounded-md flex justify-center items-center w-20 text-xs border border-green-600 cursor-pointer hover:scale-105 shadow-lg shadow-slate-600`}
+                className={`  bg-blue-700 rounded-md flex justify-center items-center w-20 text-xs border border-green-600 cursor-pointer hover:scale-105 shadow-lg shadow-slate-600`}
+                style={{ height: `${height}rem` }}
               >
                 Reserved
               </div>

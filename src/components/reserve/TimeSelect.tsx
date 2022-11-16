@@ -4,7 +4,6 @@ import { timeBlocks } from "../../common/dummyData";
 import ReservationContext from "../../state/ReservationContext";
 import { meetingsFetch } from "./meetingsFetch";
 import MeetingDetail from "../meetingDetail/MeetingDetail";
-import { getRandomColor } from "../../utils/getRandomColor";
 
 /* ZDE SLEDOVAT V LOKÁLNÍM STATE MÍSTO CONTEXTU???? - SELECTEDTIME */
 const TimeSelect: React.FC = () => {
@@ -28,20 +27,16 @@ const TimeSelect: React.FC = () => {
 
   //Počítadlo vybraných bloků k rezervaci - s každým vybraným blokem přičte 1 do local state,
   useEffect(() => {
-    /* setSelectedBlocks(0); */
     setSelectedBlocks(0);
     const counter = pickedRoom.roomData.map((data: any) => {
-      //pickedRoom
       if (data.selected) {
         setSelectedBlocks((prevState: number) => prevState + 1);
       }
     });
-  }, [pickedRoom]); //pickedRoom
+  }, [pickedRoom]);
 
   useEffect(() => {
     meetingsFetch("secondCompany", "22.11.2022", setMeetingsDetail);
-    console.log(meetingsDetail);
-    console.log(pickedRoom);
   }, []);
 
   const onClickHandler = (blockNumber: number): void | null => {
@@ -57,7 +52,6 @@ const TimeSelect: React.FC = () => {
     if (clickReservedCheck) {
       meetingsDetail.forEach((detail: any) => {
         if (detail.blocks.includes(blockNumber)) {
-          console.log("ano");
           setClickedMeeting(detail);
         }
       });
@@ -78,8 +72,6 @@ const TimeSelect: React.FC = () => {
     }
     //2. Pokud je právě 1 vybraný blok, tak lze vybrat pouze blok+1 nebo blok-1 nebo odvybrat vybraný blok
     if (!clickReservedCheck && pickedRoom && selectedBlocks == 1) {
-      console.log("trigger - 1:" + selectedBlocks);
-
       const reservedBlock = pickedRoom.roomData.filter((obj: any) => {
         return obj.selected;
       }); //uložen rezervovaný object
@@ -102,8 +94,6 @@ const TimeSelect: React.FC = () => {
     }
     //3. Pokud je více než 1 vybraný blok, tak:
     if (!clickReservedCheck && pickedRoom && selectedBlocks > 1) {
-      console.log("trigger - vice nez 1:" + selectedBlocks);
-
       //Vyfiltorvání bloků, u kterých je selected = true
       const newSelectedBlocks = pickedRoom.roomData.filter((obj: any) => {
         return obj.selected;
@@ -120,14 +110,13 @@ const TimeSelect: React.FC = () => {
           return obj.block;
         })
       );
-      console.log(maxBlock);
+
       if (
         blockNumber == minBlock - 1 ||
         blockNumber == maxBlock + 1 ||
         blockNumber == minBlock ||
         blockNumber == maxBlock
       ) {
-        console.log("az sem");
         const updatedRoomData = pickedRoom.roomData.map((data: any) => {
           if (data.block == blockNumber) {
             return { ...data, selected: !data.selected };
@@ -172,7 +161,7 @@ const TimeSelect: React.FC = () => {
     }
 
     if (roomData.reserved && !includedInHelper) {
-      height = roomData.meetingBlocks.length * 10;
+      height = roomData.meetingBlocks.length * 2.5;
 
       //Přičte block do meetingHelper, aby se vědělo, že pro tento meeting byl již DOM vytvořen
       roomData.meetingBlocks.forEach((block: number) => {
@@ -183,7 +172,9 @@ const TimeSelect: React.FC = () => {
         <div
           key={roomData.block}
           onClick={() => onClickHandler(roomData.block)}
-          className={`h-${height} bg-blue-700 rounded-md flex justify-center items-center w-28 text-xs border border-green-600 cursor-pointer hover:scale-105 shadow-lg shadow-slate-600`}
+          className={` bg-blue-700 -ml-2 rounded-md flex justify-center items-center w-28 text-xs border border-green-600 cursor-pointer hover:scale-105 shadow-lg shadow-slate-600`}
+          //Inline styling, kvůli problémům s dynamickým stylováním přes tailwind.
+          style={{ height: `${height}rem` }}
         >
           Reserved
         </div>
@@ -193,7 +184,7 @@ const TimeSelect: React.FC = () => {
       <div
         key={roomData.block}
         onClick={() => onClickHandler(roomData.block)}
-        className={`h-10 rounded-md flex justify-center items-center w-28 text-xs border border-green-600 cursor-pointer hover:scale-105 shadow-lg shadow-slate-600`}
+        className={`h-10 -ml-2 rounded-md flex justify-center items-center w-28 text-xs border border-green-600 cursor-pointer hover:scale-105 shadow-lg shadow-slate-600`}
         style={{
           backgroundColor: selectedBlock.selected ? "green" : "white",
         }}
@@ -205,7 +196,7 @@ const TimeSelect: React.FC = () => {
 
   //Konečný return - 2 sloupce 1. s časovými bloky, 2. vybraná místnost
   return (
-    <section className="grid grid-cols-2 gap-1 ">
+    <section className="grid grid-cols-2">
       <div>{timeBlocksDom}</div>
       <div>{roomDom}</div>
       {openDetail && (

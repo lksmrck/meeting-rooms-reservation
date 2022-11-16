@@ -1,7 +1,11 @@
 import React, { useState, useContext } from "react";
 /* import Input from "../layout/Input"; */
 import { Button } from "@chakra-ui/react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  setPersistence,
+  signInWithEmailAndPassword,
+  browserSessionPersistence,
+} from "firebase/auth";
 import { auth } from "../../config/firebase";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../state/AuthContext";
@@ -22,15 +26,20 @@ const Auth = () => {
 
     //Firebase docs -  https://firebase.google.com/docs/auth/web/password-auth
     //Firebase Auth
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        setUser(user);
-        console.log(user.email);
-        navigate("/home");
-        // ...
+    setPersistence(auth, browserSessionPersistence)
+      .then(() => {
+        return signInWithEmailAndPassword(auth, email, password).then(
+          (userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            setUser(user);
+
+            navigate("/home");
+            // ...
+          }
+        );
       })
+
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
