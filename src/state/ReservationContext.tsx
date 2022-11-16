@@ -35,10 +35,12 @@ export const ReservationContextProvider: React.FC<{
   const [defaultDayData, setDefaultDayData] = useState(null);
   //Home (Calendar)
   const [pickedDate, setPickedDate] = useState<string | null>(
-    getLocalStorage("date" || null)
+    getLocalStorage("date") || null
   );
   //Overview
-  const [pickedBlock, setPickedBlock] = useState({ room: "", block: "" });
+  const [pickedBlock, setPickedBlock] = useState(
+    /* getLocalStorage("room") || */ { room: "", block: "" }
+  );
   //Vybraná místnost - komplet data o rezervacích
   const [pickedRoom, setPickedRoom] = useState({} as Room);
 
@@ -47,20 +49,10 @@ export const ReservationContextProvider: React.FC<{
   useEffect(() => {
     localStorage.setItem("date", JSON.stringify(pickedDate));
   }, [pickedDate]);
-
-  /*   useEffect(() => {
-    const data = localStorage.getItem("roomData");
-
-    let parsedData;
-    if (data !== null) {
-      parsedData = JSON.parse(data);
-      if (!parsedData)
-        localStorage.setItem("roomData", JSON.stringify(pickedRoom));
-    } else {
-      localStorage.removeItem("roomData");
-      localStorage.setItem("roomData", JSON.stringify(pickedRoom));
-    }
-  }, [pickedRoom]); */
+  /* 
+  useEffect(() => {
+    localStorage.setItem("room_block", JSON.stringify(pickedBlock));
+  }, [pickedBlock]); */
 
   return (
     <ReservationContext.Provider

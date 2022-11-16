@@ -2,22 +2,27 @@ import Navbar from "./components/ui/Navbar";
 import Landing from "./pages/Landing";
 import Footer from "./components/ui/Footer";
 import DailyOverview from "./components/overview/DailyOverview";
-import Form from "./components/reserve/Form";
 import Reserve from "./components/reserve/Reserve";
-import TimeSelect from "./components/reserve/TimeSelect";
 import Home from "./components/overview/Home";
 import Auth from "./components/auth/Auth";
-import { Routes, Route, Navigate } from "react-router-dom";
-import { useContext } from "react";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { useContext, useEffect } from "react";
 import AuthContext from "./state/AuthContext";
+import { timeCheck } from "./utils/timeCheck";
 
 const App = () => {
   const authContext = useContext(AuthContext);
-  if (!authContext) return null;
-  const { user } = authContext;
-  /*   const currentUser = false; */
-  /*   console.log(user.email); */
 
+  const { user, setUser } = authContext;
+
+  const location = useLocation();
+
+  //Při každé změně route se obnoví session timer pro automatické odhlášení
+  useEffect(() => {
+    if (user) timeCheck(setUser);
+  }, [location]);
+
+  //Protect paths - lze navštívit po loginu
   const RequireAuth = ({ children }: any) => {
     return user ? children : <Navigate to="/login" />;
   };

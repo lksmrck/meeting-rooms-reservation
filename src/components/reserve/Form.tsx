@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Button } from "@chakra-ui/react";
+import { Button, IconButton } from "@chakra-ui/react";
 import MeetingType from "./MeetingType";
 import AppContext from "../../state/AppContext";
 import AuthContext from "../../state/AuthContext";
@@ -10,6 +10,7 @@ import { doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import ReservationContext from "../../state/ReservationContext";
 import { useNavigate } from "react-router-dom";
+import { FiEdit } from "react-icons/fi";
 
 const Form: React.FC = () => {
   const navigate = useNavigate();
@@ -61,7 +62,6 @@ const Form: React.FC = () => {
       creator: user.email,
       guests,
     };
-    console.log(guests);
 
     //Check, zda je vyplněný název meetingu a vybrané bloky. Zbytek dat je nepovinný, nebo se vezme automaticky.
     if (
@@ -98,14 +98,45 @@ const Form: React.FC = () => {
             style={{ backgroundColor: "white" }}
           />
 
-          <Button
-            colorScheme={"purple"}
-            onClick={() => {
-              setGuestsOpenModal(true);
-            }}
-          >
-            Add guests
-          </Button>
+          {guests.length > 0 ? (
+            <>
+              <p className="text-sm font-bold">Guests</p>
+              <div className="flex">
+                <p className="  flex items-end text-sm bg-white w-56 border rounded-md h-7 break-words overflow-x-scroll whitespace-nowrap scrollbar-hide">
+                  {guests.map((guest: string, i: number) => {
+                    return (
+                      <span className=" ml-1">
+                        {guest}
+                        {/* Za každým, kromě posledního guesta bude čárka */}
+                        {i + 1 == guests.length ? "" : ","}
+                      </span>
+                    );
+                  })}
+                </p>
+                <IconButton
+                  colorScheme="teal"
+                  aria-label="edit"
+                  icon={<FiEdit size={14} style={{ color: "white" }} />}
+                  /* onClick={() => setShowCalendar(true)} */
+                  className="ml-3 mt-0.5"
+                  onClick={() => {
+                    setGuestsOpenModal(true);
+                  }}
+                  size="xs"
+                />
+              </div>
+            </>
+          ) : (
+            <Button
+              colorScheme={"purple"}
+              onClick={() => {
+                setGuestsOpenModal(true);
+              }}
+            >
+              Add guests
+            </Button>
+          )}
+
           {guestsOpenModal && (
             <GuestsModal
               isOpen={guestsOpenModal}

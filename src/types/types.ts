@@ -34,6 +34,7 @@ export type RoomData = {
     time: string,
     reserved: boolean,
     selected?: boolean
+    meetingBlocks?: number[]
 }
 
 export type Room = {

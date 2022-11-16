@@ -17,6 +17,7 @@ const Navbar = () => {
   const onClickButton = () => {
     if (user) {
       setUser(null);
+      localStorage.removeItem("setupTime");
       signOut(auth)
         .then(() => {
           navigate("/");

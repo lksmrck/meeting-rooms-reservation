@@ -52,6 +52,7 @@ const GuestsModal: React.FC<GuestsModalProps> = ({
   return (
     <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
       <ModalOverlay />
+
       <ModalContent>
         <ModalHeader>Add guests</ModalHeader>
         <ModalCloseButton />
