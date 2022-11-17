@@ -3,27 +3,26 @@ import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import ReservationContext from "../../state/ReservationContext";
 import AuthContext from "../../state/AuthContext";
-
+import RoomsDom from "./RoomsDom";
 import { roomsMeetingsFetch } from "./roomsMeetingsFetch";
 
 const Overview = () => {
-  const [roomsData, setRoomsData] = useState<any>([]);
-  const navigate = useNavigate();
+  //Array s infem o firemních místnostech (ID, name)
   const [companyRooms, setCompanyRooms] = useState<any>([]);
+  //Detailní info o rooms + blocks + meetings ve vybraném dnu
+  const [roomsData, setRoomsData] = useState<any>([]);
 
   const reservationContext = useContext(ReservationContext);
   const authContext = useContext(AuthContext);
 
-  const { setPickedBlock, pickedDate, /* setPickedDate, */ setPickedRoom } =
-    reservationContext;
+  const { setPickedBlock, pickedDate, setPickedRoom } = reservationContext;
 
   const { user, company } = authContext;
-
+  const navigate = useNavigate();
   /*  const { isLoading, setIsLoading } = appContext; */
 
   //1. Firebase query - stáhne všechny rooms za danou firmu včetně meetingů a zpracované meetingy vč. upravených objektů o meetingy ve vybraném dnu uloží do state. Viz. funkce..
   useEffect(() => {
-    console.log("jedu");
     roomsMeetingsFetch(
       "secondCompany", //upravit na company
       pickedDate,
@@ -68,53 +67,6 @@ const Overview = () => {
   //Počet sloupců pro GRID
   const displayCols = roomsNumber + 1;
 
-  //Vytvoří DOM pro místnosti uzpůsobený pro Grid
-  const roomsDom = roomsData.map((room: any) => {
-    let meetingsHelper: number[] = [];
-    let height;
-    return (
-      <div key={room.id} className="">
-        <h1>{room.name}</h1>
-        {room.roomData.map((roomData: any) => {
-          const includedInHelper = meetingsHelper.some((no: number) =>
-            roomData.meetingBlocks.includes(no)
-          );
-          if (includedInHelper) {
-            return "";
-          }
-          if (roomData.reserved && !includedInHelper) {
-            height = roomData.meetingBlocks.length * 2.5;
-
-            //Přičte block do meetingHelper, aby se vědělo, že pro tento meeting byl již DOM vytvořen
-            roomData.meetingBlocks.forEach((block: number) => {
-              meetingsHelper.push(block);
-            });
-
-            return (
-              <div
-                key={roomData.block}
-                onClick={() => onClickBlockHandler(room.id, roomData.block)}
-                className={`  bg-blue-700 rounded-md flex justify-center items-center w-20 text-xs border border-green-600 cursor-pointer hover:scale-105 shadow-lg shadow-slate-600`}
-                style={{ height: `${height}rem` }}
-              >
-                Reserved
-              </div>
-            );
-          }
-          return (
-            <div
-              key={roomData.block}
-              onClick={() => onClickBlockHandler(room.id, roomData.block)}
-              className={`h-10 rounded-md bg-white flex justify-center items-center w-20 text-xs border border-green-600 cursor-pointer hover:scale-105 shadow-lg shadow-slate-600`}
-            >
-              Free
-            </div>
-          );
-        })}
-      </div>
-    );
-  });
-
   return (
     <div className="flex justify-center bg-gradient-to-r from-violet-300 to-violet-400 ">
       <section
@@ -130,7 +82,10 @@ const Overview = () => {
           <h1>Time</h1>
           {timeBlocksDom}
         </div>
-        {roomsDom}
+        <RoomsDom
+          roomsData={roomsData}
+          onClickBlockHandler={onClickBlockHandler}
+        />
       </section>
     </div>
   );
