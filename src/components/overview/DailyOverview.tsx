@@ -15,7 +15,7 @@ const Overview = () => {
   const reservationContext = useContext(ReservationContext);
   const authContext = useContext(AuthContext);
 
-  const { setPickedBlock, pickedDate, setPickedRoom } = reservationContext;
+  const { pickedDate, setPickedRoom } = reservationContext;
 
   const { user, company } = authContext;
   const navigate = useNavigate();
@@ -29,13 +29,11 @@ const Overview = () => {
       setCompanyRooms,
       setRoomsData
     );
-    console.log(roomsData);
   }, []);
 
   const onClickBlockHandler = (room: number, block: number): void => {
-    console.log(roomsData);
     //Uloží do Contextu room a block, na které user clicknul, aby se dalo pak použít v detailní rezervaci jako přednastaveno
-    setPickedBlock({ room, block });
+
     const clickedRoom = roomsData.find((roomData: any) => {
       return roomData.id == room;
     });
@@ -53,7 +51,7 @@ const Overview = () => {
     return (
       <div
         key={block.id}
-        className=" flex justify-center items-center text-xs w-20 h-10  border border-yellow-700 rounded-md bg-gray-200 shadow-lg shadow-slate-600"
+        className=" flex justify-center items-center text-xs w-20 h-10  border border-stone-700 rounded-md bg-gray-200 shadow-lg shadow-slate-600 "
       >
         {block.time}
       </div>
@@ -70,16 +68,17 @@ const Overview = () => {
   return (
     <div className="flex justify-center bg-gradient-to-r from-violet-300 to-violet-400 ">
       <section
-        className="grid gap-5"
+        className="grid gap-5 mt-2"
         //Custom in-line style, protože Tailwind neumožňuje dynamic styling - takto udělá grid podle počtu místností (const displayCols) a přidá dynamicky width contentu.
         style={{
           gridTemplateColumns: `repeat(${displayCols}, minmax(0, 1fr))`,
           width: `${displayWidth}rem`,
         }}
       >
-        <div className=" -mt-0.5 ">
-          {" "}
-          <h1>Time</h1>
+        <div>
+          <div className="text-xs w-20 h-10 flex justify-center items-center  border border-stone-700 rounded-md bg-emerald-700 text-white font-bold mb-1 cursor-pointer">
+            Time
+          </div>
           {timeBlocksDom}
         </div>
         <RoomsDom

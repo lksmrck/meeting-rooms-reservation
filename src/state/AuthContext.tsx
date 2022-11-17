@@ -28,7 +28,7 @@ export const AuthContextProvider: React.FC<{
 }> = ({ children }) => {
   //Stored data for user and company
   const [user, setUser] = useState(getLocalStorage("user") || null);
-  const [company, setCompany] = useState("");
+  const [company, setCompany] = useState(getLocalStorage("company") || null);
 
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(user));
@@ -39,7 +39,8 @@ export const AuthContextProvider: React.FC<{
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        setCompany(docSnap.data().company);
+        /* setCompany(docSnap.data().company); */
+        localStorage.setItem("company", JSON.stringify(docSnap.data().company));
       } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");

@@ -17,7 +17,9 @@ const RoomsDom: React.FC<RoomsDomProps> = ({
 
     return (
       <div key={room.id} className="">
-        <h1>{room.name}</h1>
+        <div className="text-xs w-20 h-10 flex justify-center items-center border border-stone-700  rounded-md bg-emerald-700 text-white font-bold mb-1 cursor-pointer">
+          {room.name}
+        </div>
         {room.roomData.map((roomData: any) => {
           const includedInHelper = meetingsHelper.some((blockNo: number) =>
             roomData.meetingBlocks.includes(blockNo)
@@ -37,7 +39,7 @@ const RoomsDom: React.FC<RoomsDomProps> = ({
               <div
                 key={roomData.block}
                 onClick={() => onClickBlockHandler(room.id, roomData.block)}
-                className={`  bg-blue-700 rounded-md flex justify-center items-center w-20 text-xs border border-green-600 cursor-pointer hover:scale-105 shadow-lg shadow-slate-600`}
+                className={`bg-blue-700 hover:bg-blue-800 rounded-md flex justify-center items-center w-20 text-xs  border border-stone-700 cursor-pointer hover:scale-105 shadow-lg shadow-slate-600`}
                 style={{ height: `${height}rem` }}
               >
                 Reserved
@@ -48,7 +50,7 @@ const RoomsDom: React.FC<RoomsDomProps> = ({
             <div
               key={roomData.block}
               onClick={() => onClickBlockHandler(room.id, roomData.block)}
-              className={`h-10 rounded-md bg-white flex justify-center items-center w-20 text-xs border border-green-600 cursor-pointer hover:scale-105 shadow-lg shadow-slate-600`}
+              className={`h-10 rounded-md bg-white hover:bg-slate-100 flex justify-center items-center w-20 text-xs border border-stone-700 cursor-pointer hover:scale-105 shadow-lg shadow-slate-600`}
             >
               Free
             </div>

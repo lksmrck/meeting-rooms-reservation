@@ -10,16 +10,11 @@ import {
 } from "react";
 
 interface ReservationContextInterface {
-  /*   openModal: boolean;
-  setOpenModal: Dispatch<SetStateAction<boolean>>;
-  selectedRoom: any;
-  setSelectedRoom: /* Dispatch<SetStateAction<number | null>>; */
   pickedRoom: any;
   setPickedRoom: Dispatch<SetStateAction<any>>;
   pickedDate: string | null;
   setPickedDate: Dispatch<SetStateAction<string | null>>;
-  pickedBlock: any;
-  setPickedBlock: Dispatch<SetStateAction<any>>;
+
   meetingType: string;
   setMeetingType: Dispatch<SetStateAction<string>>;
 }
@@ -37,30 +32,27 @@ export const ReservationContextProvider: React.FC<{
   const [pickedDate, setPickedDate] = useState<string | null>(
     getLocalStorage("date") || null
   );
-  //Overview
-  const [pickedBlock, setPickedBlock] = useState(
-    /* getLocalStorage("room") || */ { room: "", block: "" }
-  );
+
   //Vybraná místnost - komplet data o rezervacích
-  const [pickedRoom, setPickedRoom] = useState({} as Room);
+  const [pickedRoom, setPickedRoom] = useState(
+    getLocalStorage("pickedRoom") || ({} as Room)
+  );
 
   const [meetingType, setMeetingType] = useState("");
 
   useEffect(() => {
     localStorage.setItem("date", JSON.stringify(pickedDate));
   }, [pickedDate]);
-  /* 
+
   useEffect(() => {
-    localStorage.setItem("room_block", JSON.stringify(pickedBlock));
-  }, [pickedBlock]); */
+    localStorage.setItem("pickedRoom", JSON.stringify(pickedRoom));
+  }, [pickedRoom]);
 
   return (
     <ReservationContext.Provider
       value={{
         pickedDate,
         setPickedDate,
-        pickedBlock,
-        setPickedBlock,
         pickedRoom,
         setPickedRoom,
         meetingType,

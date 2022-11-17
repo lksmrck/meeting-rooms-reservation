@@ -6,7 +6,6 @@ export const roomsMeetingsFetch = (company: string, date: string | null, setRoom
 
  const roomsFetch = async () => {
 
-
     const querySnapshot = await getDocs(
       collection(db, `companies/${company}/rooms`)
     );
@@ -50,30 +49,25 @@ export const roomsMeetingsFetch = (company: string, date: string | null, setRoom
         let meetingsBlocksArray: number[] = []
 
         filteredTodaysMeetings.forEach((meeting: any) => {
-          /* console.log(meeting)
-          console.log(oneRoom.block) */
           if (meeting.blocks.includes(oneRoom.block)) {
             meeting.blocks.forEach((block: any) => meetingsBlocksArray.push(block))
           } 
           
 
         })
-/*         console.log(meetingsBlocksArray) */
-
         return {
           ...oneRoom,
           reserved: blocks.includes(oneRoom.block),
-          meetingBlocks: meetingsBlocksArray //sem přidat meeting blocks
+          meetingBlocks: meetingsBlocksArray
         };
       });
-    
+  
       return {
         ...room,
         roomData: newDataArray,
       };
     });
     setRoomsData(updatedRooms);
-    console.log(updatedRooms)
   };
   roomsFetch();
 

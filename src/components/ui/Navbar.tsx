@@ -11,13 +11,12 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const authContext = useContext(AuthContext);
-  if (!authContext) return null;
   const { user, setUser } = authContext;
 
   const onClickButton = () => {
     if (user) {
       setUser(null);
-      localStorage.removeItem("setupTime");
+      localStorage.clear();
       signOut(auth)
         .then(() => {
           navigate("/");

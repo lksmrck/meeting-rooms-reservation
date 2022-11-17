@@ -4,9 +4,12 @@ import { timeBlocks } from "../../common/dummyData";
 import ReservationContext from "../../state/ReservationContext";
 import { meetingsFetch } from "./meetingsFetch";
 import MeetingDetail from "../meetingDetail/MeetingDetail";
+import OneRoomDom from "./OneRoomDom";
+import { useNavigate } from "react-router-dom";
 
 /* ZDE SLEDOVAT V LOKÁLNÍM STATE MÍSTO CONTEXTU???? - SELECTEDTIME */
 const TimeSelect: React.FC = () => {
+  const navigate = useNavigate();
   /*   const appContext = useContext(AppContext); */
   const reservationContext = useContext(ReservationContext);
 
@@ -19,12 +22,6 @@ const TimeSelect: React.FC = () => {
   const [openDetail, setOpenDetail] = useState(false);
   const [clickedMeeting, setClickedMeeting] = useState();
 
-  /*  useEffect(() => {
-   
-    priradit do setPickedRoom z localstate az tam pridam 
-  }, []); */
-  const [myPickedRoom, setMyPickedRoom] = useState(pickedRoom);
-
   //Počítadlo vybraných bloků k rezervaci - s každým vybraným blokem přičte 1 do local state,
   useEffect(() => {
     setSelectedBlocks(0);
@@ -36,10 +33,15 @@ const TimeSelect: React.FC = () => {
   }, [pickedRoom]);
 
   useEffect(() => {
-    meetingsFetch("secondCompany", "22.11.2022", setMeetingsDetail);
+    console.log("jedu");
+    if (Object.keys(pickedRoom).length === 0) {
+      navigate("/overview");
+    } else {
+      meetingsFetch("secondCompany", "22.11.2022", setMeetingsDetail);
+    }
   }, []);
 
-  const onClickHandler = (blockNumber: number): void | null => {
+  const blockClickHandler = (blockNumber: number): void | null => {
     //Logika -> Vybírá se právě 1 schůzka. Tzn, že lze vybírat jen souvislé časové bloky - nelze vybrat např. blok 7:00-7:30 a k tomu 12:00-12:30,
     //ale lze vybrat postupně všechny bloky od 7:00 až do 12:30.
     console.log(meetingsDetail);
@@ -142,63 +144,16 @@ const TimeSelect: React.FC = () => {
     );
   });
 
-  // DOM PRO ROOM - Const ve které je DOM, už roztříděný podle meetingů, kde divy mají alkované rozměry, podle toho, jaké meetingy v daném dnu jsou.
-  let meetingsHelper: number[] = [];
-  //Const pro sloupec s timeblocky dané místnosti - zobrazení tak, aby meetingy tvořily jeden velký blok a nerezervované bloky byly samostatně.
-  const roomDom = pickedRoom.roomData.map((roomData: any) => {
-    const selectedBlock = pickedRoom.roomData?.find(
-      (room: any) => room.block == roomData.block
-    );
-    let height;
-
-    //Check zda bloky v meetingBlocks u každého bloku jsou obsaženy v meetingsHelper array.
-    const includedInHelper = meetingsHelper.some((no: number) =>
-      roomData.meetingBlocks.includes(no)
-    );
-
-    if (includedInHelper) {
-      return "";
-    }
-
-    if (roomData.reserved && !includedInHelper) {
-      height = roomData.meetingBlocks.length * 2.5;
-
-      //Přičte block do meetingHelper, aby se vědělo, že pro tento meeting byl již DOM vytvořen
-      roomData.meetingBlocks.forEach((block: number) => {
-        meetingsHelper.push(block);
-      });
-
-      return (
-        <div
-          key={roomData.block}
-          onClick={() => onClickHandler(roomData.block)}
-          className={` bg-blue-700 -ml-2 rounded-md flex justify-center items-center w-28 text-xs border border-green-600 cursor-pointer hover:scale-105 shadow-lg shadow-slate-600`}
-          //Inline styling, kvůli problémům s dynamickým stylováním přes tailwind.
-          style={{ height: `${height}rem` }}
-        >
-          Reserved
-        </div>
-      );
-    }
-    return (
-      <div
-        key={roomData.block}
-        onClick={() => onClickHandler(roomData.block)}
-        className={`h-10 -ml-2 rounded-md flex justify-center items-center w-28 text-xs border border-green-600 cursor-pointer hover:scale-105 shadow-lg shadow-slate-600`}
-        style={{
-          backgroundColor: selectedBlock.selected ? "green" : "white",
-        }}
-      >
-        Free
-      </div>
-    );
-  });
-
   //Konečný return - 2 sloupce 1. s časovými bloky, 2. vybraná místnost
   return (
     <section className="grid grid-cols-2">
       <div>{timeBlocksDom}</div>
-      <div>{roomDom}</div>
+      <div>
+        <OneRoomDom
+          pickedRoom={pickedRoom}
+          blockClickHandler={blockClickHandler}
+        />
+      </div>
       {openDetail && (
         <MeetingDetail
           clickedMeeting={clickedMeeting}
