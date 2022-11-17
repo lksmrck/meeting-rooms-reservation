@@ -7,11 +7,9 @@ import {
   ModalFooter,
   ModalBody,
   Button,
-  IconButton,
 } from "@chakra-ui/react";
-import { useContext, useState } from "react";
-import AppContext from "../../state/AppContext";
-import { timeBlocks } from "../../common/dummyData";
+import { useState } from "react";
+
 import { timeDataCalc } from "./timeDataCalc";
 
 type MeetingDetailProps = {
@@ -58,7 +56,9 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
               <h5>{clickedMeeting.creator}</h5>
               <h5>
                 {clickedMeeting.guests.length > 0
-                  ? clickedMeeting.guests
+                  ? clickedMeeting.guests.length > 1
+                    ? `Meeting has ${clickedMeeting.guests.length} guests`
+                    : `Meeting has ${clickedMeeting.guests.length} guest`
                   : "No guests"}
               </h5>
               <h5>{timeDetail.start}</h5>

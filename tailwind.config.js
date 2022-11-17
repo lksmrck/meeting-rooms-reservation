@@ -10,18 +10,22 @@ module.exports = {
         //24 columns grid (pro časová pásma)
         24: "repeat(24, minmax(0, 1fr))",
       },
-      //Project color palette
-      colors: {
-        //blue-ish - from lightest to darkest
-        th_blue_one: "#7DE5ED",
-        th_blue_two: "#81C6E8",
-        th_blue_three: "#5DA7DB",
-        th_blue_four: "#5837D0",
-        //gray - backdrop
-        th_backdrop: "#000000bf",
-      },
       height: {
         30: "7.5rem",
+      },
+      keyframes: {
+        floatUp: {
+          "0%, 100%": { transform: "translatey(0px)" },
+          "50%": { transform: "translatey(-10px)" },
+        },
+        floatDown: {
+          "0%, 100%": { transform: "translatey(0px)" },
+          "50%": { transform: "translatey(10px)" },
+        },
+      },
+      animation: {
+        floatUp: "floatUp 5s ease-in-out infinite",
+        floatDown: "floatDown 5s ease-in-out infinite",
       },
     },
   },

@@ -7,21 +7,25 @@ const Overview = () => {
   const [showCalendar, setShowCalendar] = useState(false);
 
   return (
-    <div className="flex justify-center items-center  h-screen">
-      <div className="mb-32">
-        {showCalendar ? (
-          <DatePick />
-        ) : (
+    <div className="flex justify-center items-center h-screen">
+      {showCalendar ? (
+        <DatePick />
+      ) : (
+        <div className="flex flex-col justify-center items-center mb-32">
+          <h1 className="text-xl mb-10">
+            Welcome to Room Reserver. Continue by opening the calendar by button
+            below.
+          </h1>
           <IconButton
             colorScheme="purple"
             aria-label="arrow"
             icon={<AiOutlineArrowDown size={30} style={{ color: "white" }} />}
             onClick={() => setShowCalendar(true)}
-            className="animate-bounce"
+            className="animate-bounce w-52"
             size="lg"
           />
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

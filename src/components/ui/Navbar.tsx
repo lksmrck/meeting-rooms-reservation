@@ -38,7 +38,7 @@ const Navbar = () => {
         {/*  <Button text={user ? "Logout" : "Sign In"} onClick={onClickButton} /> */}
         <div className="mr-5">
           <Button colorScheme="teal" size="md" onClick={onClickButton}>
-            {user ? "Logout" : "Sign In"}{" "}
+            {user ? "Logout" : "Sign In"}
           </Button>
         </div>
       </nav>

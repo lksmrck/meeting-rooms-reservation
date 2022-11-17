@@ -25,8 +25,13 @@ const DatePick = () => {
   };
 
   return (
-    <div className="flex justify-center w-72 ">
-      <Calendar onChange={pickDateHandler} value={date} />
+    <div className="flex flex-col justify-center items-center w-auto mb-32 ">
+      <h1 className="text-lg mb-4">
+        Please pick a date to reserve or browse meetings.
+      </h1>
+      <div className="w-72 flex items-center justify-center">
+        <Calendar onChange={pickDateHandler} value={date} />
+      </div>
     </div>
   );
 };
