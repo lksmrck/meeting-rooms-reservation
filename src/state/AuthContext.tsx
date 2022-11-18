@@ -39,7 +39,7 @@ export const AuthContextProvider: React.FC<{
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        /* setCompany(docSnap.data().company); */
+        setCompany(docSnap.data().company);
         localStorage.setItem("company", JSON.stringify(docSnap.data().company));
       } else {
         // doc.data() will be undefined in this case

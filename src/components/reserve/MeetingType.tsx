@@ -21,7 +21,12 @@ const MeetingType: React.FC<SelectProps> = ({
   };
   {
     return (
-      <select name={name} id={id} className="m-2" onChange={onChangeSelect}>
+      <select
+        name={name}
+        id={id}
+        className="mt-2 mb-4"
+        onChange={onChangeSelect}
+      >
         {options.map((option: any) => {
           return <option value={option.name}>{option.name}</option>;
         })}

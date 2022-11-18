@@ -8,9 +8,12 @@ import {
   ModalBody,
   Button,
 } from "@chakra-ui/react";
-import { useState } from "react";
-
+import { useState, useContext } from "react";
 import { timeDataCalc } from "./timeDataCalc";
+import AuthContext from "../../state/AuthContext";
+import ReservationContext from "../../state/ReservationContext";
+import { removeMeeting } from "../reserve/removeMeeting";
+import { useNavigate } from "react-router-dom";
 
 type MeetingDetailProps = {
   clickedMeeting: any;
@@ -25,12 +28,22 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
 }) => {
   const [timeDetail, setTimeDetail] = useState(timeDataCalc(clickedMeeting));
 
+  const authContext = useContext(AuthContext);
+  const reservationContext = useContext(ReservationContext);
+
+  const { company } = authContext;
+  const { pickedDate, pickedRoom } = reservationContext;
+
+  const navigate = useNavigate();
+
   const onCancel = () => {
     setOpenDetail(false);
   };
 
-  const onSubmitGuests = (e: React.SyntheticEvent) => {
+  const onSubmitDetail = (e: React.SyntheticEvent) => {
+    removeMeeting("secondCompany", clickedMeeting, pickedRoom.id);
     setOpenDetail(false);
+    navigate("/overview");
   };
 
   return (
@@ -68,7 +81,7 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
           </section>
         </ModalBody>
         <ModalFooter className="[&>button]:m-1 ">
-          <Button colorScheme="teal" onClick={onSubmitGuests}>
+          <Button colorScheme="teal" onClick={onSubmitDetail}>
             Edit
           </Button>
           <Button onClick={onCancel}>Back</Button>

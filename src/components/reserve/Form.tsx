@@ -54,25 +54,32 @@ const Form: React.FC = () => {
     });
 
     const newMeeting = {
+      id: Math.floor(Math.random() * 100000),
       date: pickedDate,
       name,
       type: meetingType,
-      room: "1", //pak přidat ROOM !!!!
+      room: pickedRoom.id, //pak přidat ROOM !!!!
       blocks,
       creator: user.email,
       guests,
     };
+    console.log(newMeeting);
 
     //Check, zda je vyplněný název meetingu a vybrané bloky. Zbytek dat je nepovinný, nebo se vezme automaticky.
     if (
-      newMeeting.blocks.length > 1 &&
+      newMeeting.blocks.length > 0 &&
       newMeeting.name &&
       newMeeting.name.length >= 1
     ) {
-      const dbRef = doc(db, `companies/secondCompany/rooms`, "1"); //UPRAVIT DYNAMICKY
+      const dbRef = doc(
+        db,
+        `companies/secondCompany/rooms`,
+        String(pickedRoom.id)
+      ); //UPRAVIT DYNAMICKY
       await updateDoc(dbRef, { meetings: arrayUnion(newMeeting) });
       setName("");
       navigate("/overview");
+      setMissingFormData(false);
     } else {
       setMissingFormData(true);
     }

@@ -11,7 +11,7 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const authContext = useContext(AuthContext);
-  const { user, setUser } = authContext;
+  const { user, setUser, company } = authContext;
 
   const onClickButton = () => {
     if (user) {
@@ -35,7 +35,15 @@ const Navbar = () => {
           <li className=" ml-5 text-white">Room Reserver</li>
         </ul>
         {/*  <Button text={user ? "Logout" : "Sign In"} onClick={onClickButton} /> */}
-        <div className="mr-5">
+
+        <div className="mr-5 flex">
+          {user && company && (
+            <div className="flex text-white bg-violet-900 rounded-lg justify-center items-center mr-5">
+              <h2 className="font-bold mr-4 ml-2">{user.email}</h2>
+              <h3 className="text-sm mr-2">{company}</h3>
+            </div>
+          )}
+
           <Button colorScheme="teal" size="md" onClick={onClickButton}>
             {user ? "Logout" : "Sign In"}
           </Button>

@@ -13,7 +13,7 @@ const TimeSelect: React.FC = () => {
   /*   const appContext = useContext(AppContext); */
   const reservationContext = useContext(ReservationContext);
 
-  const { pickedRoom, setPickedRoom } = reservationContext;
+  const { pickedRoom, setPickedRoom, pickedDate } = reservationContext;
 
   const [selectedBlocks, setSelectedBlocks] = useState(0);
   //Meeting details:
@@ -33,12 +33,12 @@ const TimeSelect: React.FC = () => {
   }, [pickedRoom]);
 
   useEffect(() => {
-    console.log("jedu");
-    if (Object.keys(pickedRoom).length === 0) {
-      navigate("/overview");
-    } else {
-      meetingsFetch("secondCompany", "22.11.2022", setMeetingsDetail);
-    }
+    meetingsFetch(
+      "secondCompany",
+      pickedDate,
+      setMeetingsDetail,
+      pickedRoom.id
+    );
   }, []);
 
   const blockClickHandler = (blockNumber: number): void | null => {

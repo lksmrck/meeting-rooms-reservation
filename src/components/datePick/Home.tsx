@@ -11,8 +11,8 @@ const Overview = () => {
       {showCalendar ? (
         <DatePick />
       ) : (
-        <div className="flex flex-col justify-center items-center mb-32">
-          <h1 className="text-xl mb-10">
+        <div className="flex flex-col justify-center items-center mb-32 w-80 lg:w-full">
+          <h1 className="text-md lg:text-xl mb-10">
             Welcome to Room Reserver. Continue by opening the calendar by button
             below.
           </h1>
