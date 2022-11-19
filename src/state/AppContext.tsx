@@ -1,16 +1,13 @@
 import { createContext, ReactNode, useState } from "react";
 import { Dispatch } from "react";
 import { SetStateAction } from "react";
-import { rooms } from "../common/dummyData";
-
-const initialRoom = rooms.find((room) => room.id == 1);
+import { Error } from "../types/types";
 
 interface AppContextInterface {
-  openModal: boolean;
-  setOpenModal: Dispatch<SetStateAction<boolean>>;
-
   isLoading: boolean;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
+  error: Error;
+  setError: Dispatch<SetStateAction<Error>>;
 }
 
 const AppContext = createContext({} as AppContextInterface);
@@ -18,19 +15,16 @@ const AppContext = createContext({} as AppContextInterface);
 export const AppContextProvider: React.FC<{
   children: ReactNode;
 }> = ({ children }) => {
-  //2. Handling otevření modal okna s time blocky při rezervaci
-  const [openModal, setOpenModal] = useState<boolean>(false);
-
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState({ error: false, message: "" } as Error);
 
   return (
     <AppContext.Provider
       value={{
-        openModal,
-        setOpenModal,
-
         isLoading,
         setIsLoading,
+        error,
+        setError,
       }}
     >
       {children}

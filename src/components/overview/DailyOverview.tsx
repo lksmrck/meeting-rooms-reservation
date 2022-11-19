@@ -4,8 +4,10 @@ import { useContext, useEffect, useState } from "react";
 import ReservationContext from "../../state/ReservationContext";
 import AuthContext from "../../state/AuthContext";
 import RoomsDom from "./RoomsDom";
-import { roomsMeetingsFetch } from "./roomsMeetingsFetch";
+import { useRoomsMeetingsFetch } from "./use-roomsMeetingsFetch";
 import TimeBlocksDom from "./TimeBlocksDom";
+
+import LoadingSpinner from "../ui/LoadingSpinner/LoadingSpinner";
 
 const Overview = () => {
   //Array s infem o firemních místnostech (ID, name)
@@ -13,18 +15,17 @@ const Overview = () => {
   //Detailní info o rooms + blocks + meetings ve vybraném dnu
   const [roomsData, setRoomsData] = useState<any>([]);
 
-  const reservationContext = useContext(ReservationContext);
-  const authContext = useContext(AuthContext);
+  const { pickedDate, setPickedRoom } = useContext(ReservationContext);
 
-  const { pickedDate, setPickedRoom } = reservationContext;
-
-  const { user, company } = authContext;
+  const { user, company } = useContext(AuthContext);
   const navigate = useNavigate();
-  /*  const { isLoading, setIsLoading } = appContext; */
+
+  const { roomsFetch, isLoading } = useRoomsMeetingsFetch();
 
   //1. Firebase query - stáhne všechny rooms za danou firmu včetně meetingů a zpracované meetingy vč. upravených objektů o meetingy ve vybraném dnu uloží do state. Viz. funkce..
   useEffect(() => {
-    roomsMeetingsFetch(
+    console.log("bezi ue");
+    roomsFetch(
       "secondCompany", //upravit na company
       pickedDate,
       setCompanyRooms,
@@ -43,7 +44,7 @@ const Overview = () => {
       return { ...data, selected: false };
     });
     const adjustedClickedRoom = { ...clickedRoom, roomData: adjustedRoomData };
-
+    //Pošle se vyfiltrovaná room do react contextu. Odtud se pak bere v Reserve componentu
     setPickedRoom(adjustedClickedRoom);
     navigate("/reserve");
   };
@@ -58,7 +59,7 @@ const Overview = () => {
   return (
     <div className="flex justify-center bg-gradient-to-r from-violet-300 to-violet-400 ">
       <section
-        className="grid gap-5 mt-2"
+        className={` ${isLoading ? "flex" : "grid"} gap-5 mt-2`}
         //Custom in-line style, protože Tailwind neumožňuje dynamic styling - takto udělá grid podle počtu místností (const displayCols) a přidá dynamicky width contentu.
         style={{
           gridTemplateColumns: `repeat(${displayCols}, minmax(0, 1fr))`,
@@ -71,10 +72,16 @@ const Overview = () => {
           </div>
           <TimeBlocksDom />
         </div>
-        <RoomsDom
-          roomsData={roomsData}
-          onClickBlockHandler={onClickBlockHandler}
-        />
+        {isLoading ? (
+          <div className="ml-10">
+            <LoadingSpinner />
+          </div>
+        ) : (
+          <RoomsDom
+            roomsData={roomsData}
+            onClickBlockHandler={onClickBlockHandler}
+          />
+        )}
       </section>
     </div>
   );

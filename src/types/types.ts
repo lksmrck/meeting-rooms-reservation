@@ -38,7 +38,10 @@ export type Room = {
 id: number,
 name: string,
 roomData: RoomData[]
-
 }
 
+export type Error = {
+  error: boolean,
+  message: string
+}
 

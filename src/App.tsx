@@ -8,12 +8,18 @@ import Auth from "./components/auth/Auth";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import AuthContext from "./state/AuthContext";
+import AppContext from "./state/AppContext";
 import { timeCheck } from "./utils/timeCheck";
+import ErrorScreen from "./pages/screens/ErrorScreen";
+import { useNavigate } from "react-router-dom";
 
 const App = () => {
+  const navigate = useNavigate();
   const authContext = useContext(AuthContext);
+  const appContext = useContext(AppContext);
 
   const { user, setUser } = authContext;
+  const { error } = appContext;
 
   const location = useLocation();
 
@@ -22,16 +28,25 @@ const App = () => {
     if (user) timeCheck(setUser);
   }, [location]);
 
+  useEffect(() => {
+    if (error.error) navigate("/something-wrong");
+  }, [error]);
+
   //Protect paths - lze navštívit po loginu
   const RequireAuth = ({ children }: any) => {
     return user ? children : <Navigate to="/login" />;
   };
 
   return (
-    <div>
+    <>
       <Navbar />
       <Routes>
         <Route path="/">
+          {error.error ? (
+            <Route path="something-wrong" element={<ErrorScreen />} />
+          ) : (
+            ""
+          )}
           <Route index element={<Landing />} />
           <Route path="login" element={<Auth />} />
           <Route
@@ -62,8 +77,9 @@ const App = () => {
           />
         </Route>
       </Routes>
-      <Footer />
-    </div>
+
+      {/*  <Footer /> */}
+    </>
   );
 };
 

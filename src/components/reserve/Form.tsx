@@ -28,15 +28,12 @@ const Form: React.FC = () => {
   };
 
   //3.meeting type --> Přes reservation context. V Select componentu.
-  const authContext = useContext(AuthContext);
-  const appContext = useContext(AppContext);
-  const reservationContext = useContext(ReservationContext);
 
   const [meetingType, setMeetingType] = useState<string>("call");
 
-  const { setOpenModal } = appContext;
-  const { company, user } = authContext;
-  const { pickedDate, pickedRoom } = reservationContext;
+  /*  const { setOpenModal } = useContext(AppContext);; */
+  const { company, user } = useContext(AuthContext);
+  const { pickedDate, pickedRoom } = useContext(ReservationContext);
 
   const [missingFormData, setMissingFormData] = useState(false);
 
