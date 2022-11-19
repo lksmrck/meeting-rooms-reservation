@@ -5,6 +5,7 @@ import ReservationContext from "../../state/ReservationContext";
 import AuthContext from "../../state/AuthContext";
 import RoomsDom from "./RoomsDom";
 import { roomsMeetingsFetch } from "./roomsMeetingsFetch";
+import TimeBlocksDom from "./TimeBlocksDom";
 
 const Overview = () => {
   //Array s infem o firemních místnostech (ID, name)
@@ -47,17 +48,6 @@ const Overview = () => {
     navigate("/reserve");
   };
 
-  const timeBlocksDom = timeBlocks.map((block) => {
-    return (
-      <div
-        key={block.id}
-        className=" flex justify-center items-center text-xs w-20 h-10  border border-stone-700 rounded-md bg-gray-200 shadow-lg shadow-slate-600 "
-      >
-        {block.time}
-      </div>
-    );
-  });
-
   //Vypočítá šířku celého obsahu podle počtu místnosti - = 5rem) na místnost + 5rem za time blocks.
   const roomsNumber = roomsData.length;
   const displayWidth = roomsNumber * 5 + 5;
@@ -79,7 +69,7 @@ const Overview = () => {
           <div className="text-xs w-20 h-10 flex justify-center items-center  border border-stone-700 rounded-md bg-emerald-700 text-white font-bold mb-1 cursor-pointer">
             Time
           </div>
-          {timeBlocksDom}
+          <TimeBlocksDom />
         </div>
         <RoomsDom
           roomsData={roomsData}

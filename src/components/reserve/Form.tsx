@@ -43,7 +43,7 @@ const Form: React.FC = () => {
   const onChangeInputHandler = (e: React.ChangeEvent<HTMLInputElement>): void =>
     setName(e.target.value);
 
-  const onSubmitHandler = async (e: any) => {
+  const submitHandler = async (e: any) => {
     e.preventDefault();
     setMissingFormData(false);
 
@@ -54,7 +54,7 @@ const Form: React.FC = () => {
     });
 
     const newMeeting = {
-      id: Math.floor(Math.random() * 100000),
+      id: Date.now(),
       date: pickedDate,
       name,
       type: meetingType,
@@ -93,7 +93,7 @@ const Form: React.FC = () => {
         </h1>
         <form
           className="flex flex-col w-72 p-4 [&>input]:mb-4"
-          onSubmit={onSubmitHandler}
+          onSubmit={submitHandler}
         >
           <Input
             id="name"

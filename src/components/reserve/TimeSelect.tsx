@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { timeBlocks } from "../../common/dummyData";
 /* import AppContext from "../../state/AppContext"; */
 import ReservationContext from "../../state/ReservationContext";
 import { meetingsFetch } from "./meetingsFetch";
 import MeetingDetail from "../meetingDetail/MeetingDetail";
 import OneRoomDom from "./OneRoomDom";
 import { useNavigate } from "react-router-dom";
+import TimeBlocksDom from "../overview/TimeBlocksDom";
 
 /* ZDE SLEDOVAT V LOKÁLNÍM STATE MÍSTO CONTEXTU???? - SELECTEDTIME */
 const TimeSelect: React.FC = () => {
@@ -132,22 +132,12 @@ const TimeSelect: React.FC = () => {
     }
   };
 
-  //DOM PRO TIMEBLOCKY - timeblocks
-  const timeBlocksDom = timeBlocks.map((block) => {
-    return (
-      <div
-        key={block.id}
-        className="text-xs w-20 h-10 border border-yellow-700 bg-white rounded-md flex justify-center items-center shadow-lg shadow-slate-600"
-      >
-        {block.time}
-      </div>
-    );
-  });
-
   //Konečný return - 2 sloupce 1. s časovými bloky, 2. vybraná místnost
   return (
     <section className="grid grid-cols-2">
-      <div>{timeBlocksDom}</div>
+      <div>
+        <TimeBlocksDom />
+      </div>
       <div>
         <OneRoomDom
           pickedRoom={pickedRoom}
