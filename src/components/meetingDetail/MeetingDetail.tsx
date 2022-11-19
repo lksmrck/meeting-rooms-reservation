@@ -8,18 +8,18 @@ import {
   ModalBody,
   Button,
 } from "@chakra-ui/react";
-import { useState, useContext } from "react";
+import { useState, useContext, Dispatch, SetStateAction } from "react";
 import { timeDataCalc } from "./timeDataCalc";
 import AuthContext from "../../state/AuthContext";
 import ReservationContext from "../../state/ReservationContext";
 import { removeMeeting } from "../reserve/removeMeeting";
 import { useNavigate } from "react-router-dom";
-import { Input } from "@chakra-ui/react";
+import { Meeting } from "../../types/types";
 
 type MeetingDetailProps = {
-  clickedMeeting: any;
+  clickedMeeting: Meeting;
   openDetail: boolean;
-  setOpenDetail: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpenDetail: Dispatch<SetStateAction<boolean>>;
 };
 
 const MeetingDetail: React.FC<MeetingDetailProps> = ({
@@ -105,7 +105,7 @@ guests: ["karel", "pavel"]
             Delete
           </Button>
           {/* Edit button se zobrazí pouze, pokud user = tvůrce meetingu */}
-          {clickedMeeting.creator == user && (
+          {clickedMeeting.creator == user.email && (
             <Button colorScheme="orange" onClick={editMeetingHandler}>
               Edit
             </Button>

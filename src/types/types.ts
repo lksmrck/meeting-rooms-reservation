@@ -1,32 +1,29 @@
-/* export type Room = {
+//roomsMeetingsFetch
+export type BlocksBreakdown = {
+    room: number,
+    block: number
+  }
+  export type Meeting = {
     id: number,
-    companyID: number,
-    companyName: string,
-    roomData: {
-        room: number,
-        block: number,
-        time: string,
-        reserved: boolean
-    }
-} */
+    name: string,
+    room: number,
+    type: string,
+  creator: string,
+  date: string,
+  guests: string[] | []
+  blocks: number[]
+  }
+  
+  export type CompanyRoom = {
+    id: number,
+    name: string
+  }
 
 export type User = {
     id: number,
     companyID: number,
     companyName: number,
     rights: "ADMIN" | "USER" | "POWERUSER"
-}
-
-export type Reservation = {
-    companyID: number,
-    companyName: string,
-    creatorID: number, //user ID
-    creatorName: string,
-    attendantsID: number, //ucastnici - muzou se lisit od creatora (schuzku vytvari asistentka), ale budou moct menit schuzku.
-    attendantsName: string,
-    creationDate: Date,
-    roomID: number,
-    blocks: number | number[]
 }
 
 export type RoomData = {

@@ -6,6 +6,7 @@ import MeetingDetail from "../meetingDetail/MeetingDetail";
 import OneRoomDom from "./OneRoomDom";
 import { useNavigate } from "react-router-dom";
 import TimeBlocksDom from "../overview/TimeBlocksDom";
+import { Meeting } from "../../types/types";
 
 /* ZDE SLEDOVAT V LOKÁLNÍM STATE MÍSTO CONTEXTU???? - SELECTEDTIME */
 const TimeSelect: React.FC = () => {
@@ -18,9 +19,9 @@ const TimeSelect: React.FC = () => {
   const [selectedBlocks, setSelectedBlocks] = useState(0);
   //Meeting details:
   //Detail meetingů v daném dnu ve vybrané místnosti
-  const [meetingsDetail, setMeetingsDetail] = useState([]);
+  const [meetingsDetail, setMeetingsDetail] = useState([] as Meeting[]);
   const [openDetail, setOpenDetail] = useState(false);
-  const [clickedMeeting, setClickedMeeting] = useState();
+  const [clickedMeeting, setClickedMeeting] = useState({} as Meeting);
 
   //Počítadlo vybraných bloků k rezervaci - s každým vybraným blokem přičte 1 do local state,
   useEffect(() => {
