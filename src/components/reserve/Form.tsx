@@ -15,7 +15,9 @@ import { RoomData } from "../../types/types";
 
 const Form: React.FC = () => {
   const navigate = useNavigate();
-  const [fetchData, setFetchData] = useState();
+
+  //Po submitnutí je button disabled, aby se nedalo kliknout víckrát během jednoho submitu
+  const [disabledBtn, setDisabledBtn] = useState(false);
 
   //FormData
   //1.meeting name
@@ -43,6 +45,7 @@ const Form: React.FC = () => {
 
   const submitHandler = async (e: React.SyntheticEvent) => {
     e.preventDefault();
+    setDisabledBtn(true);
     setMissingFormData(false);
 
     //Čísla vybraných bloků k rezervaci
@@ -156,7 +159,7 @@ const Form: React.FC = () => {
             setMeetingType={setMeetingType}
           />
           <div className="flex flex-col justify-center [&>button]:mt-1 ">
-            <Button colorScheme="teal" type="submit">
+            <Button colorScheme="teal" type="submit" disabled={disabledBtn}>
               Reserve
             </Button>
             <Button

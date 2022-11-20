@@ -12,7 +12,7 @@ import { useState, useContext, Dispatch, SetStateAction } from "react";
 import { timeDataCalc } from "./timeDataCalc";
 import AuthContext from "../../state/AuthContext";
 import ReservationContext from "../../state/ReservationContext";
-import { useRemoveMeeting } from "../reserve/use-removeMeeting";
+import { useRemoveMeeting } from "../../hooks/use-removeMeeting";
 import { useNavigate } from "react-router-dom";
 import { Meeting } from "../../types/types";
 import LoadingSpinner from "../ui/LoadingSpinner/LoadingSpinner";

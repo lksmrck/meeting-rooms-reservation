@@ -1,14 +1,14 @@
 import { Dispatch, SetStateAction } from "react";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../config/firebase";
-import { roomData } from "../../common/dummyData";
+import { db } from "../config/firebase";
+import { roomData } from "../common/dummyData";
 import {
   BlocksBreakdown,
   CompanyRoom,
   Meeting,
   RoomData,
   Room,
-} from "../../types/types";
+} from "../types/types";
 import { useState } from "react";
 
 /* import { useContext } from "react";
@@ -21,11 +21,10 @@ export const useRoomsMeetingsFetch = () => {
   const roomsFetch = async (
     company: string,
     date: string | null,
-    setRooms: Dispatch<SetStateAction<CompanyRoom[]>>,
+    /*   setRooms: Dispatch<SetStateAction<CompanyRoom[]>>, */
     setRoomsData: Dispatch<SetStateAction<Room[]>>
   ) => {
-    /*  console.log("zacina fetch");
-    setIsLoading(true); */
+    console.log("bezi rooms fetch");
     setIsLoading(true);
     const querySnapshot = await getDocs(
       collection(db, `companies/${company}/rooms`)
@@ -57,7 +56,7 @@ export const useRoomsMeetingsFetch = () => {
       }
     });
     //set state do DailyOverview componentu
-    setRooms(companyRooms);
+    /*  setRooms(companyRooms); */
 
     //Rezervované bloky -> Najdu v každé room bloky, u kterých bude potřeba upravit property reserved na TRUE.
     const updatedRooms: Room[] = companyRooms.map((room: CompanyRoom) => {

@@ -10,6 +10,8 @@ import {
 } from "react";
 
 interface ReservationContextInterface {
+  roomsData: Room[];
+  setRoomsData: Dispatch<SetStateAction<Room[]>>;
   pickedRoom: Room;
   setPickedRoom: Dispatch<SetStateAction<Room>>;
   pickedDate: string | null;
@@ -25,6 +27,9 @@ export const ReservationContextProvider: React.FC<{
   const [pickedDate, setPickedDate] = useState<string | null>(
     getLocalStorage("date") || null
   );
+
+  //Rooms data
+  const [roomsData, setRoomsData] = useState([] as Room[]);
 
   //Vybraná místnost - komplet data o rezervacích
   const [pickedRoom, setPickedRoom] = useState(
@@ -42,6 +47,8 @@ export const ReservationContextProvider: React.FC<{
   return (
     <ReservationContext.Provider
       value={{
+        roomsData,
+        setRoomsData,
         pickedDate,
         setPickedDate,
         pickedRoom,

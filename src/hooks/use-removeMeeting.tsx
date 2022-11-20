@@ -1,21 +1,24 @@
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { db } from "../../config/firebase";
+import { db } from "../config/firebase";
 import { useContext, useState } from "react";
-import AppContext from "../../state/AppContext";
-import { Meeting } from "../../types/types";
+import AppContext from "../state/AppContext";
+import ReservationContext from "../state/ReservationContext";
+import { Meeting, Room } from "../types/types";
 
 //Detail meetingů v daném vybraném dnu.
 export const useRemoveMeeting = () => {
   const { setError } = useContext(AppContext);
+  const { setRoomsData, roomsData } = useContext(ReservationContext);
+
   const [isLoading, setIsLoading] = useState(false);
 
   const removeData = async (
     company: string,
     clickedMeeting: Meeting,
-    room: number
+    roomNo: number
   ) => {
     setIsLoading(true);
-    const dbRef = doc(db, `companies/${company}/rooms`, String(room));
+    const dbRef = doc(db, `companies/${company}/rooms`, String(roomNo));
     const docSnap = await getDoc(dbRef);
 
     let updatedMeetings: Meeting[] = [];
@@ -27,6 +30,23 @@ export const useRemoveMeeting = () => {
       await updateDoc(dbRef, {
         meetings: updatedMeetings,
       });
+
+      //DODELAT
+      setRoomsData((prevData: any) =>
+        prevData.map((room: any) => {
+          if (room.id == roomNo) {
+            room.roomData.map((data: any) => {
+              console.log(data);
+              if (clickedMeeting.blocks.includes(data.block)) {
+                console.log(data);
+                return { ...data, reserved: false };
+              }
+            });
+          }
+          return room;
+        })
+      );
+      console.log(roomsData);
       setIsLoading(false);
     } else {
       setIsLoading(false);

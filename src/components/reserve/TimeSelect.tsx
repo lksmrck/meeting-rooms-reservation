@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 /* import AppContext from "../../state/AppContext"; */
 import ReservationContext from "../../state/ReservationContext";
-import { meetingsFetch } from "./meetingsFetch";
+import { useMeetingsFetch } from "../../hooks/use-meetingsFetch";
 import MeetingDetail from "../meetingDetail/MeetingDetail";
 import OneRoomDom from "./OneRoomDom";
 import { useNavigate } from "react-router-dom";
@@ -14,7 +14,8 @@ const TimeSelect: React.FC = () => {
   /*   const appContext = useContext(AppContext); */
   const reservationContext = useContext(ReservationContext);
 
-  const { pickedRoom, setPickedRoom, pickedDate } = reservationContext;
+  const { pickedRoom, setPickedRoom, pickedDate, roomsData } =
+    reservationContext;
 
   const [selectedBlocks, setSelectedBlocks] = useState(0);
   //Meeting details:
@@ -22,6 +23,8 @@ const TimeSelect: React.FC = () => {
   const [meetingsDetail, setMeetingsDetail] = useState([] as Meeting[]);
   const [openDetail, setOpenDetail] = useState(false);
   const [clickedMeeting, setClickedMeeting] = useState({} as Meeting);
+
+  const { fetchMeetings } = useMeetingsFetch();
 
   //Počítadlo vybraných bloků k rezervaci - s každým vybraným blokem přičte 1 do local state,
   useEffect(() => {
@@ -34,12 +37,13 @@ const TimeSelect: React.FC = () => {
   }, [pickedRoom]);
 
   useEffect(() => {
-    meetingsFetch(
+    fetchMeetings(
       "secondCompany",
       pickedDate,
       setMeetingsDetail,
       pickedRoom.id
     );
+    console.log(roomsData);
   }, []);
 
   const blockClickHandler = (blockNumber: number): void | null => {
