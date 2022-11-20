@@ -33,7 +33,7 @@ const Overview = () => {
     );
   }, []);
 
-  const onClickBlockHandler = (room: number, block: number): void => {
+  const clickBlockHandler = (room: number, block: number): void => {
     //Uloží do Contextu room a block, na které user clicknul, aby se dalo pak použít v detailní rezervaci jako přednastaveno
 
     const clickedRoom = roomsData.find((roomData: any) => {
@@ -79,7 +79,7 @@ const Overview = () => {
         ) : (
           <RoomsDom
             roomsData={roomsData}
-            onClickBlockHandler={onClickBlockHandler}
+            clickBlockHandler={clickBlockHandler}
           />
         )}
       </section>

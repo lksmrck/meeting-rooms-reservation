@@ -21,7 +21,7 @@ const Auth = () => {
   if (!authContext) return null;
   const { user, setUser } = authContext;
 
-  const loginHandler = async (e: any) => {
+  const loginHandler = async (e: React.SyntheticEvent) => {
     e.preventDefault();
 
     //Firebase docs -  https://firebase.google.com/docs/auth/web/password-auth

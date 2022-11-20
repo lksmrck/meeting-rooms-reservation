@@ -11,6 +11,7 @@ import { db } from "../../config/firebase";
 import ReservationContext from "../../state/ReservationContext";
 import { useNavigate } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
+import { RoomData } from "../../types/types";
 
 const Form: React.FC = () => {
   const navigate = useNavigate();
@@ -21,9 +22,9 @@ const Form: React.FC = () => {
   const [name, setName] = useState<string>();
 
   //2.guests
-  const [guests, setGuests] = useState<string[]>([]);
+  const [guests, setGuests] = useState<string[] | []>([]);
   const [guestsOpenModal, setGuestsOpenModal] = useState(false);
-  const onAddGuests = (guests: any) => {
+  const onAddGuests = (guests: string[]) => {
     setGuests(guests);
   };
 
@@ -40,13 +41,13 @@ const Form: React.FC = () => {
   const onChangeInputHandler = (e: React.ChangeEvent<HTMLInputElement>): void =>
     setName(e.target.value);
 
-  const submitHandler = async (e: any) => {
+  const submitHandler = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     setMissingFormData(false);
 
     //Čísla vybraných bloků k rezervaci
     let blocks: number[] = [];
-    pickedRoom.roomData.forEach((data: any) => {
+    pickedRoom.roomData.forEach((data: RoomData) => {
       if (data.selected) blocks.push(data.block);
     });
 
@@ -57,7 +58,7 @@ const Form: React.FC = () => {
       type: meetingType,
       room: pickedRoom.id, //pak přidat ROOM !!!!
       blocks,
-      creator: user.email,
+      creator: user!.email,
       guests,
     };
     console.log(newMeeting);

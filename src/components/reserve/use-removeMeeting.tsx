@@ -2,6 +2,7 @@ import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { useContext, useState } from "react";
 import AppContext from "../../state/AppContext";
+import { Meeting } from "../../types/types";
 
 //Detail meetingů v daném vybraném dnu.
 export const useRemoveMeeting = () => {
@@ -10,16 +11,16 @@ export const useRemoveMeeting = () => {
 
   const removeData = async (
     company: string,
-    clickedMeeting: any,
+    clickedMeeting: Meeting,
     room: number
   ) => {
     setIsLoading(true);
     const dbRef = doc(db, `companies/${company}/rooms`, String(room));
     const docSnap = await getDoc(dbRef);
 
-    let updatedMeetings: any = [];
+    let updatedMeetings: Meeting[] = [];
     if (docSnap.exists()) {
-      await docSnap.data().meetings.forEach((meeting: any) => {
+      await docSnap.data().meetings.forEach((meeting: Meeting) => {
         if (meeting.id !== clickedMeeting.id) updatedMeetings.push(meeting);
       });
 

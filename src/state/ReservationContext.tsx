@@ -10,13 +10,10 @@ import {
 } from "react";
 
 interface ReservationContextInterface {
-  pickedRoom: any;
-  setPickedRoom: Dispatch<SetStateAction<any>>;
+  pickedRoom: Room;
+  setPickedRoom: Dispatch<SetStateAction<Room>>;
   pickedDate: string | null;
   setPickedDate: Dispatch<SetStateAction<string | null>>;
-
-  meetingType: string;
-  setMeetingType: Dispatch<SetStateAction<string>>;
 }
 
 const ReservationContext = createContext({} as ReservationContextInterface);
@@ -24,10 +21,6 @@ const ReservationContext = createContext({} as ReservationContextInterface);
 export const ReservationContextProvider: React.FC<{
   children: ReactNode;
 }> = ({ children }) => {
-  //Default
-  const [defaultRoomsOverview, setDefaultRoomsOverview] = useState(null);
-  //Default data místnosti za 1 den, upraví se potom podle toho co je rezervováno (po fetchi z firebase)
-  const [defaultDayData, setDefaultDayData] = useState(null);
   //Home (Calendar)
   const [pickedDate, setPickedDate] = useState<string | null>(
     getLocalStorage("date") || null
@@ -37,8 +30,6 @@ export const ReservationContextProvider: React.FC<{
   const [pickedRoom, setPickedRoom] = useState(
     getLocalStorage("pickedRoom") || ({} as Room)
   );
-
-  const [meetingType, setMeetingType] = useState("");
 
   useEffect(() => {
     localStorage.setItem("date", JSON.stringify(pickedDate));
@@ -55,8 +46,6 @@ export const ReservationContextProvider: React.FC<{
         setPickedDate,
         pickedRoom,
         setPickedRoom,
-        meetingType,
-        setMeetingType,
       }}
     >
       {children}

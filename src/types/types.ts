@@ -45,3 +45,14 @@ export type Error = {
   message: string
 }
 
+export type TimeBlock = {
+  id: number,
+  time: string,
+  start: string,
+  end: string
+}
+
+export type MeetingCategory = {
+  id: number,
+  name: string
+}

@@ -1,7 +1,8 @@
 import { timeBlocks } from "../../common/dummyData";
+import { TimeBlock } from "../../types/types";
 
 const TimeBlocksDom: React.FC = () => {
-  const timeBlocksDom = timeBlocks.map((block: any) => {
+  const timeBlocksDom = timeBlocks.map((block: TimeBlock) => {
     return (
       <div
         key={block.id}

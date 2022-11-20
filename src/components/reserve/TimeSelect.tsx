@@ -6,7 +6,7 @@ import MeetingDetail from "../meetingDetail/MeetingDetail";
 import OneRoomDom from "./OneRoomDom";
 import { useNavigate } from "react-router-dom";
 import TimeBlocksDom from "../overview/TimeBlocksDom";
-import { Meeting } from "../../types/types";
+import { Meeting, RoomData } from "../../types/types";
 
 /* ZDE SLEDOVAT V LOKÁLNÍM STATE MÍSTO CONTEXTU???? - SELECTEDTIME */
 const TimeSelect: React.FC = () => {
@@ -26,7 +26,7 @@ const TimeSelect: React.FC = () => {
   //Počítadlo vybraných bloků k rezervaci - s každým vybraným blokem přičte 1 do local state,
   useEffect(() => {
     setSelectedBlocks(0);
-    const counter = pickedRoom.roomData.map((data: any) => {
+    const counter = pickedRoom.roomData.map((data: RoomData) => {
       if (data.selected) {
         setSelectedBlocks((prevState: number) => prevState + 1);
       }
@@ -48,12 +48,12 @@ const TimeSelect: React.FC = () => {
     console.log(meetingsDetail);
     //Podminky
     //0.Pokud se klikne na rezerovavný block, tak zbytek funkce nepokračuje a neudělá nic.
-    const clickReservedCheck = pickedRoom.roomData.find((room: any) => {
+    const clickReservedCheck = pickedRoom.roomData.find((room: RoomData) => {
       return room.block == blockNumber && room.reserved;
     });
 
     if (clickReservedCheck) {
-      meetingsDetail.forEach((detail: any) => {
+      meetingsDetail.forEach((detail: Meeting) => {
         if (detail.blocks.includes(blockNumber)) {
           setClickedMeeting(detail);
         }
@@ -63,7 +63,7 @@ const TimeSelect: React.FC = () => {
 
     //1. Pokud ještě není vybrán žádný blok, lze kliknout na kterýkoliv a vybrat.
     if (!clickReservedCheck && pickedRoom && selectedBlocks == 0) {
-      const updatedRoomData = pickedRoom.roomData.map((data: any) => {
+      const updatedRoomData = pickedRoom.roomData.map((data: RoomData) => {
         if (data.block == blockNumber) {
           return { ...data, selected: !data.selected };
         }
@@ -75,8 +75,8 @@ const TimeSelect: React.FC = () => {
     }
     //2. Pokud je právě 1 vybraný blok, tak lze vybrat pouze blok+1 nebo blok-1 nebo odvybrat vybraný blok
     if (!clickReservedCheck && pickedRoom && selectedBlocks == 1) {
-      const reservedBlock = pickedRoom.roomData.filter((obj: any) => {
-        return obj.selected;
+      const reservedBlock = pickedRoom.roomData.filter((data: RoomData) => {
+        return data.selected;
       }); //uložen rezervovaný object
 
       if (
@@ -84,7 +84,7 @@ const TimeSelect: React.FC = () => {
         blockNumber == reservedBlock[0].block + 1 ||
         blockNumber == reservedBlock[0].block - 1
       ) {
-        const updatedRoomData = pickedRoom.roomData.map((data: any) => {
+        const updatedRoomData = pickedRoom.roomData.map((data: RoomData) => {
           if (data.block == blockNumber) {
             return { ...data, selected: !data.selected };
           }
@@ -98,18 +98,18 @@ const TimeSelect: React.FC = () => {
     //3. Pokud je více než 1 vybraný blok, tak:
     if (!clickReservedCheck && pickedRoom && selectedBlocks > 1) {
       //Vyfiltorvání bloků, u kterých je selected = true
-      const newSelectedBlocks = pickedRoom.roomData.filter((obj: any) => {
-        return obj.selected;
+      const newSelectedBlocks = pickedRoom.roomData.filter((data: RoomData) => {
+        return data.selected;
       });
       // 3.1 Získám nejmenší block ID (n) (pak půjde kliknout pouze n-1 (přidat) nebo n (odebrat))
       const minBlock = Math.min(
-        ...newSelectedBlocks.map((obj: any) => {
+        ...newSelectedBlocks.map((obj: RoomData) => {
           return obj.block;
         })
       );
       // 3.2. Získám největší block ID (n) (pak půjde kliknout pouze n+1 (přidat) nebo n (odebrat))
       const maxBlock = Math.max(
-        ...newSelectedBlocks.map((obj: any) => {
+        ...newSelectedBlocks.map((obj: RoomData) => {
           return obj.block;
         })
       );
@@ -120,7 +120,7 @@ const TimeSelect: React.FC = () => {
         blockNumber == minBlock ||
         blockNumber == maxBlock
       ) {
-        const updatedRoomData = pickedRoom.roomData.map((data: any) => {
+        const updatedRoomData = pickedRoom.roomData.map((data: RoomData) => {
           if (data.block == blockNumber) {
             return { ...data, selected: !data.selected };
           }

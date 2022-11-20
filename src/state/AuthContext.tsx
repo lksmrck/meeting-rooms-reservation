@@ -9,14 +9,15 @@ import {
 } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
+import { User as FirebaseUser } from "firebase/auth";
 
 interface AuthContextInterface {
   /*   openModal: boolean;
   setOpenModal: Dispatch<SetStateAction<boolean>>;
   selectedRoom: any;
   setSelectedRoom: /* Dispatch<SetStateAction<number | null>>; */
-  user: any;
-  setUser: Dispatch<SetStateAction<any>>;
+  user: FirebaseUser | null;
+  setUser: Dispatch<SetStateAction<FirebaseUser | null>>;
   company: string;
   setCompany: Dispatch<SetStateAction<string>>;
 }

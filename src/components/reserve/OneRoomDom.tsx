@@ -1,7 +1,8 @@
 import React from "react";
+import { Room, RoomData } from "../../types/types";
 
 type OneRoomDomProps = {
-  pickedRoom: any;
+  pickedRoom: any; //Room type háže  chybu
   blockClickHandler: any;
 };
 
@@ -12,7 +13,7 @@ const OneRoomDom: React.FC<OneRoomDomProps> = ({
   // DOM PRO ROOM - Const ve které je DOM, už roztříděný podle meetingů, kde divy mají alkované rozměry, podle toho, jaké meetingy v daném dnu jsou.
   let meetingsHelper: number[] = [];
   //Const pro sloupec s timeblocky dané místnosti - zobrazení tak, aby meetingy tvořily jeden velký blok a nerezervované bloky byly samostatně.
-  const roomDom = pickedRoom.roomData.map((roomData: any) => {
+  const roomDom = pickedRoom.roomData.map((roomData: RoomData) => {
     const selectedBlock = pickedRoom.roomData?.find(
       (room: any) => room.block == roomData.block
     );
@@ -20,7 +21,7 @@ const OneRoomDom: React.FC<OneRoomDomProps> = ({
 
     //Check zda bloky v meetingBlocks u každého bloku jsou obsaženy v meetingsHelper array.
     const includedInHelper = meetingsHelper.some((no: number) =>
-      roomData.meetingBlocks.includes(no)
+      roomData.meetingBlocks?.includes(no)
     );
 
     if (includedInHelper) {
@@ -28,10 +29,10 @@ const OneRoomDom: React.FC<OneRoomDomProps> = ({
     }
 
     if (roomData.reserved && !includedInHelper) {
-      height = roomData.meetingBlocks.length * 2.5;
+      height = roomData.meetingBlocks!.length * 2.5;
 
       //Přičte block do meetingHelper, aby se vědělo, že pro tento meeting byl již DOM vytvořen
-      roomData.meetingBlocks.forEach((block: number) => {
+      roomData.meetingBlocks?.forEach((block: number) => {
         meetingsHelper.push(block);
       });
 
@@ -53,7 +54,7 @@ const OneRoomDom: React.FC<OneRoomDomProps> = ({
         onClick={() => blockClickHandler(roomData.block)}
         className={`h-10 rounded-md bg-white  -ml-2 flex justify-center items-center w-28 text-xs border border-stone-700 cursor-pointer hover:scale-105  shadow-lg shadow-slate-600`}
         style={{
-          backgroundColor: selectedBlock.selected ? "green" : "white",
+          backgroundColor: selectedBlock!.selected ? "green" : "white",
         }}
       >
         Free

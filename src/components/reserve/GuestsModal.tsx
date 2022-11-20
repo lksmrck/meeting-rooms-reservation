@@ -18,7 +18,7 @@ import { AiOutlineMinus } from "react-icons/ai";
 type GuestsModalProps = {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  onAddGuests: (guests: any) => void;
+  onAddGuests: (guests: string[]) => void;
 };
 
 const GuestsModal: React.FC<GuestsModalProps> = ({
@@ -28,7 +28,7 @@ const GuestsModal: React.FC<GuestsModalProps> = ({
 }) => {
   const [inputsNumber, setInputsNumber] = useState<number[]>([1]);
 
-  const [guests, setGuests] = useState([] as any[]);
+  const [guests, setGuests] = useState([] as string[]);
 
   //Přidá každého guesta do array a removuje při odebrání inputu.
   const onChangeGuests = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -58,13 +58,13 @@ const GuestsModal: React.FC<GuestsModalProps> = ({
         <ModalCloseButton />
         <ModalBody pb={6}>
           <form>
-            {inputsNumber.map((input: any) => {
+            {inputsNumber.map((input: number) => {
               return (
                 <Input
                   size="sm"
                   placeholder="Please enter guests e-mail"
-                  name={input}
-                  id={input}
+                  name={String(input)}
+                  id={String(input)}
                   onChange={onChangeGuests}
                 />
               );
@@ -80,7 +80,9 @@ const GuestsModal: React.FC<GuestsModalProps> = ({
                     setInputsNumber((prevNumber: number[]) =>
                       prevNumber.slice(0, -1)
                     );
-                    setGuests((prevGuests: any) => prevGuests.slice(0, -1));
+                    setGuests((prevGuests: string[]) =>
+                      prevGuests.slice(0, -1)
+                    );
                   }}
                 ></IconButton>
               ) : (

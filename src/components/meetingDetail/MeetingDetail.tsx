@@ -98,7 +98,7 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
             Delete
           </Button>
           {/* Edit button se zobrazí pouze, pokud user = tvůrce meetingu */}
-          {clickedMeeting.creator == user.email && (
+          {clickedMeeting.creator == user!.email && (
             <Button colorScheme="orange" onClick={editMeetingHandler}>
               Edit
             </Button>
