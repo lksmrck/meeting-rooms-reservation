@@ -6,7 +6,6 @@ import RoomsDom from "./RoomsDom";
 import { useRoomsMeetingsFetch } from "../../hooks/use-roomsMeetingsFetch";
 import TimeBlocksDom from "./TimeBlocksDom";
 import { CompanyRoom, Room, RoomData } from "../../types/types";
-import { rooms } from "../../common/dummyData";
 
 import LoadingSpinner from "../ui/LoadingSpinner/LoadingSpinner";
 
@@ -60,23 +59,6 @@ const Overview = () => {
   //Počet sloupců pro GRID
   const displayCols = roomsNumber + 1;
 
-  //TEST
-  /*  const [rooomData, setRooomData] = useState(rooms);
-
-  const meeting = { room: 1, blocks: [3, 4, 5] };
-  const clickMe = () => {
-    setRooomData((prevData): any => {
-      prevData[0].roomData.map((data: any) => {
-        if (meeting.blocks.includes(data.block)) {
-          console.log(data);
-          return { ...data, reserved: false };
-        }
-        return data;
-      });
-    });
-    console.log(rooomData);
-  }; */
-
   return (
     <div className="flex justify-center bg-gradient-to-r from-violet-300 to-violet-400 ">
       <section
@@ -104,10 +86,6 @@ const Overview = () => {
           />
         )}
       </section>
-      {/*  <button onClick={clickMe}> CLICK</button> */}
-      {/*   <div>{rooomData[0].roomData[2].reserved ? "true" : "false"}</div>
-      <div>{rooomData[0].roomData[3].reserved ? "true" : "false"}</div>
-      <div>{rooomData[0].roomData[4].reserved ? "true" : "false"}</div> */}
     </div>
   );
 };

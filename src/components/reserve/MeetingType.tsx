@@ -1,11 +1,10 @@
-import React, { SetStateAction, useContext } from "react";
-import ReservationContext from "../../state/ReservationContext";
+import React, { SetStateAction } from "react";
 import { MeetingCategory } from "../../types/types";
 
 type SelectProps = {
-  name?: string;
-  id?: string;
-  options?: MeetingCategory[];
+  name: string;
+  id: string;
+  options: MeetingCategory[];
   setMeetingType: React.Dispatch<SetStateAction<string>>;
 };
 
@@ -15,8 +14,6 @@ const MeetingType: React.FC<SelectProps> = ({
   options,
   setMeetingType,
 }) => {
-  const reservationContext = useContext(ReservationContext);
-
   const onChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>): void => {
     setMeetingType(e.target.value);
   };

@@ -36,11 +36,12 @@ export const useRemoveMeeting = () => {
         prevData.map((room: any) => {
           if (room.id == roomNo) {
             room.roomData.map((data: any) => {
-              console.log(data);
+              console.log("jo");
               if (clickedMeeting.blocks.includes(data.block)) {
-                console.log(data);
+                console.log("jojo");
                 return { ...data, reserved: false };
               }
+              return data;
             });
           }
           return room;

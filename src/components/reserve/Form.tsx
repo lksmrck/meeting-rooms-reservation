@@ -159,7 +159,11 @@ const Form: React.FC = () => {
             setMeetingType={setMeetingType}
           />
           <div className="flex flex-col justify-center [&>button]:mt-1 ">
-            <Button colorScheme="teal" type="submit" disabled={disabledBtn}>
+            <Button
+              colorScheme="teal"
+              type="submit"
+              disabled={disabledBtn && !missingFormData}
+            >
               Reserve
             </Button>
             <Button
