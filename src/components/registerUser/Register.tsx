@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Input from "../ui/Input";
+import { Input } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
 
 import { POWERUSER, READ, ADMIN } from "../../constants/constants";

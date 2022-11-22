@@ -9,20 +9,17 @@ import {
   RoomData,
   Room,
 } from "../types/types";
-import { useState } from "react";
-
-/* import { useContext } from "react";
-import AppContext from "../../state/AppContext"; */
+import { useState, useContext } from "react";
+import ReservationContext from "../state/ReservationContext";
 
 export const useRoomsMeetingsFetch = () => {
-  /*  const { setIsLoading } = useContext(AppContext); */
   const [isLoading, setIsLoading] = useState(false);
+  const { setRoomsData } = useContext(ReservationContext);
 
   const roomsFetch = async (
     company: string,
-    date: string | null,
-    /*   setRooms: Dispatch<SetStateAction<CompanyRoom[]>>, */
-    setRoomsData: Dispatch<SetStateAction<Room[]>>
+    date: string | null
+    /*   setRoomsData: Dispatch<SetStateAction<Room[]>> */
   ) => {
     console.log("bezi rooms fetch");
     setIsLoading(true);
@@ -56,7 +53,6 @@ export const useRoomsMeetingsFetch = () => {
       }
     });
     //set state do DailyOverview componentu
-    /*  setRooms(companyRooms); */
 
     //Rezervované bloky -> Najdu v každé room bloky, u kterých bude potřeba upravit property reserved na TRUE.
     const updatedRooms: Room[] = companyRooms.map((room: CompanyRoom) => {
@@ -71,7 +67,9 @@ export const useRoomsMeetingsFetch = () => {
         if (bd.room == room.id) return bd.block;
       });
 
+      //Úprava roomData array, které půjde ke každé room (obsahuje blocky, časy, reserved a selected statusy)
       const newDataArray = roomData.map((oneRoom: RoomData) => {
+        //Pomocné array
         let meetingsBlocksArray: number[] = [];
 
         filteredTodaysMeetings.forEach((meeting: Meeting) => {
@@ -87,7 +85,6 @@ export const useRoomsMeetingsFetch = () => {
           meetingBlocks: meetingsBlocksArray,
         };
       });
-
       return {
         ...room,
         roomData: newDataArray,

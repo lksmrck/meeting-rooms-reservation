@@ -7,6 +7,7 @@ import OneRoomDom from "./OneRoomDom";
 import { useNavigate } from "react-router-dom";
 import TimeBlocksDom from "../overview/TimeBlocksDom";
 import { Meeting, RoomData } from "../../types/types";
+import LoadingSpinner from "../ui/LoadingSpinner/LoadingSpinner";
 
 /* ZDE SLEDOVAT V LOKÁLNÍM STATE MÍSTO CONTEXTU???? - SELECTEDTIME */
 const TimeSelect: React.FC = () => {
@@ -24,32 +25,42 @@ const TimeSelect: React.FC = () => {
   const [openDetail, setOpenDetail] = useState(false);
   const [clickedMeeting, setClickedMeeting] = useState({} as Meeting);
 
-  const { fetchMeetings } = useMeetingsFetch();
+  const { fetchMeetings, isLoading } = useMeetingsFetch();
 
   //Počítadlo vybraných bloků k rezervaci - s každým vybraným blokem přičte 1 do local state,
   useEffect(() => {
+    let isCurrent = true;
+    if (!isCurrent) return;
     setSelectedBlocks(0);
     const counter = pickedRoom.roomData.map((data: RoomData) => {
       if (data.selected) {
         setSelectedBlocks((prevState: number) => prevState + 1);
       }
     });
+    return () => {
+      isCurrent = false;
+    };
   }, [pickedRoom]);
 
   useEffect(() => {
+    let isCurrent = true;
+
+    if (!isCurrent) return;
     fetchMeetings(
       "secondCompany",
       pickedDate,
       setMeetingsDetail,
       pickedRoom.id
     );
-    console.log(roomsData);
+    return () => {
+      isCurrent = false;
+    };
   }, []);
 
   const blockClickHandler = (blockNumber: number): void | null => {
     //Logika -> Vybírá se právě 1 schůzka. Tzn, že lze vybírat jen souvislé časové bloky - nelze vybrat např. blok 7:00-7:30 a k tomu 12:00-12:30,
     //ale lze vybrat postupně všechny bloky od 7:00 až do 12:30.
-    console.log(meetingsDetail);
+
     //Podminky
     //0.Pokud se klikne na rezerovavný block, tak zbytek funkce nepokračuje a neudělá nic.
     const clickReservedCheck = pickedRoom.roomData.find((room: RoomData) => {
@@ -144,10 +155,14 @@ const TimeSelect: React.FC = () => {
         <TimeBlocksDom />
       </div>
       <div>
-        <OneRoomDom
-          pickedRoom={pickedRoom}
-          blockClickHandler={blockClickHandler}
-        />
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <OneRoomDom
+            pickedRoom={pickedRoom}
+            blockClickHandler={blockClickHandler}
+          />
+        )}
       </div>
       {openDetail && (
         <MeetingDetail

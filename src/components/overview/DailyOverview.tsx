@@ -26,12 +26,15 @@ const Overview = () => {
 
   //1. Firebase query - stáhne všechny rooms za danou firmu včetně meetingů a zpracované meetingy vč. upravených objektů o meetingy ve vybraném dnu uloží do state. Viz. funkce..
   useEffect(() => {
+    let isCurrent = true;
+    if (!isCurrent) return;
     roomsFetch(
       "secondCompany", //upravit na company
-      pickedDate,
-      /* setCompanyRooms, */
-      setRoomsData
+      pickedDate
     );
+    return () => {
+      isCurrent = false;
+    };
   }, []);
 
   const clickBlockHandler = (room: number, block: number): void => {

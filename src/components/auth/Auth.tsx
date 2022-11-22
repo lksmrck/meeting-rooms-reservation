@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-/* import Input from "../layout/Input"; */
 import { Button } from "@chakra-ui/react";
 import {
   setPersistence,
@@ -16,10 +15,7 @@ const Auth = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const authContext = useContext(AuthContext);
-
-  if (!authContext) return null;
-  const { user, setUser } = authContext;
+  const { user, setUser } = useContext(AuthContext);
 
   const loginHandler = async (e: React.SyntheticEvent) => {
     e.preventDefault();
