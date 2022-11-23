@@ -28,7 +28,8 @@ export type User = {
 
 export type RoomData = {
     block: number,
-    time: string,
+    start: string,
+    end: string,
     reserved: boolean,
     selected?: boolean
     meetingBlocks?: number[]

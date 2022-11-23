@@ -35,13 +35,15 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
   //Editing state
   const [isEditing, setIsEditing] = useState(false);
   const [updatedMeeting, setUpdatedMeeting] = useState(clickedMeeting);
+
   //State na local loading - aby nebyl problém se synchronizací s Firebase (update a nasledny fetch updated)
   const [fbIsLoading, setFbIsLoading] = useState(false);
 
   const { company, user } = useContext(AuthContext);
   const { pickedDate, pickedRoom } = useContext(ReservationContext);
 
-  const blocks = clickedMeeting.blocks;
+  const { blocks } = clickedMeeting;
+
   const adjustedRoomData = pickedRoom.roomData.map((data: any) => {
     if (blocks.includes(data.block)) return { ...data, reserved: false };
     return data;
@@ -53,18 +55,27 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
     roomData: adjustedRoomData,
   });
 
-  const { removeData, isLoading } = useRemoveMeeting(); //
+  //State pro edit time
+  const possibleStartTime = localPickedRoom.roomData.filter((data: any) => {
+    return data.reserved == false;
+  });
+
+  const [startTimeOptions, setStartTimeOptions] = useState(possibleStartTime);
+  const [endTimeOptions, setEndTimeOptions] = useState([]);
+
+  const { removeData, isLoading } = useRemoveMeeting();
 
   const navigate = useNavigate();
 
   const onCancel = () => {
     setOpenDetail(false);
+    setIsEditing(false);
   };
 
   const deleteMeetingHandler = (e: React.SyntheticEvent) => {
     setFbIsLoading(true);
     removeData("secondCompany", clickedMeeting, pickedRoom.id);
-
+    //Timeout aby nebyl problém se synchronizací s Firebase (update a nasledny fetch updated) - byly problémy s načítáním dat po odstranění mtg.
     setTimeout(() => {
       navigate("/overview");
       setFbIsLoading(false);
@@ -73,7 +84,7 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
   };
 
   const editMeetingHandler = () => {
-    setOpenDetail(false);
+    setIsEditing(true);
   };
 
   return (
@@ -118,7 +129,7 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
                     <Input value={updatedMeeting.type} />
                     <Input value={updatedMeeting.creator} />
                     <Input value={updatedMeeting.guests} />
-                    <UpdateMeetingTime options={["s", "s"]} start />
+                    <UpdateMeetingTime options={startTimeOptions} start />
                     <UpdateMeetingTime options={["s", "s"]} end />
                   </>
                 )}
