@@ -12,6 +12,7 @@ import ReservationContext from "../../state/ReservationContext";
 import { useNavigate } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
 import { RoomData } from "../../types/types";
+import DisplayedGuests from "./DisplayedGuests";
 
 const Form: React.FC = () => {
   const navigate = useNavigate();
@@ -21,7 +22,8 @@ const Form: React.FC = () => {
 
   //FormData
   //1.meeting name
-  const [name, setName] = useState<string>();
+  /* const [name, setName] = useState<string>(); */
+  const [formData, setFormData] = useState({ name: "", type: "call" });
 
   //2.guests
   const [guests, setGuests] = useState<string[] | []>([]);
@@ -32,7 +34,7 @@ const Form: React.FC = () => {
 
   //3.meeting type --> Přes reservation context. V Select componentu.
 
-  const [meetingType, setMeetingType] = useState<string>("call");
+  /* const [meetingType, setMeetingType] = useState<string>("call"); */
 
   /*  const { setOpenModal } = useContext(AppContext);; */
   const { company, user } = useContext(AuthContext);
@@ -40,8 +42,9 @@ const Form: React.FC = () => {
 
   const [missingFormData, setMissingFormData] = useState(false);
 
-  const onChangeInputHandler = (e: React.ChangeEvent<HTMLInputElement>): void =>
-    setName(e.target.value);
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>): void =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  /* setName(e.target.value); */
 
   const submitHandler = async (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -57,8 +60,10 @@ const Form: React.FC = () => {
     const newMeeting = {
       id: Date.now(),
       date: pickedDate,
-      name,
-      type: meetingType,
+      name: formData.name,
+      /*  name, */
+      /* type: meetingType, */
+      type: formData.type,
       room: pickedRoom.id, //pak přidat ROOM !!!!
       blocks,
       creator: user!.email,
@@ -78,7 +83,8 @@ const Form: React.FC = () => {
         String(pickedRoom.id)
       ); //UPRAVIT DYNAMICKY
       await updateDoc(dbRef, { meetings: arrayUnion(newMeeting) });
-      setName("");
+      /*  setName(""); */
+      setFormData({ name: "", type: "" });
       navigate("/overview");
       setMissingFormData(false);
     } else {
@@ -101,39 +107,16 @@ const Form: React.FC = () => {
             name="name"
             type="text"
             placeholder="Enter the meeting name"
-            onChange={onChangeInputHandler}
-            value={name}
+            onChange={onChangeInput}
+            value={formData.name}
             style={{ backgroundColor: "white" }}
           />
 
           {guests.length > 0 ? (
-            <>
-              <p className="text-sm font-bold">Guests</p>
-              <div className="flex">
-                <p className="  flex items-end text-sm bg-white w-56 border rounded-md h-7 break-words overflow-x-scroll whitespace-nowrap scrollbar-hide">
-                  {guests.map((guest: string, i: number) => {
-                    return (
-                      <span className=" ml-1">
-                        {guest}
-                        {/* Za každým, kromě posledního guesta bude čárka */}
-                        {i + 1 == guests.length ? "" : ","}
-                      </span>
-                    );
-                  })}
-                </p>
-                <IconButton
-                  colorScheme="teal"
-                  aria-label="edit"
-                  icon={<FiEdit size={14} style={{ color: "white" }} />}
-                  /* onClick={() => setShowCalendar(true)} */
-                  className="ml-3 mt-0.5"
-                  onClick={() => {
-                    setGuestsOpenModal(true);
-                  }}
-                  size="xs"
-                />
-              </div>
-            </>
+            <DisplayedGuests
+              guests={guests}
+              setGuestsOpenModal={setGuestsOpenModal}
+            />
           ) : (
             <Button
               colorScheme={"purple"}
@@ -153,10 +136,11 @@ const Form: React.FC = () => {
             />
           )}
           <MeetingType
-            name="rooms"
-            id="rooms"
+            name="type"
+            id="type"
             options={meetingTypes}
-            setMeetingType={setMeetingType}
+            onChange={onChangeInput}
+            margin
           />
           <div className="flex flex-col justify-center [&>button]:mt-1 ">
             <Button

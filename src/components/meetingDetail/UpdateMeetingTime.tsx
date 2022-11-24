@@ -1,4 +1,4 @@
-import React, { SetStateAction } from "react";
+import React /* SetStateAction, useState */ from "react";
 
 type SelectProps = {
   name?: string;
@@ -6,33 +6,33 @@ type SelectProps = {
   options: any;
   start?: boolean;
   end?: boolean;
+  setUpdatedTime: any;
+  updatedTime: any;
 };
 
 const UpdateMeetingTime: React.FC<SelectProps> = ({
-  /*   name,
-  id,
-  options,
-  setMeetingType, */
+  updatedTime,
+  setUpdatedTime,
   options,
   start,
   end,
 }) => {
-  /*   const onChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-    setMeetingType(e.target.value);
-  }; */
+  const onChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>): void => {
+    setUpdatedTime({ ...updatedTime, [e.target.name]: e.target.value });
+  };
 
   {
     return (
       <select
         name={start ? "start" : "end"}
         id={start ? "start" : "end"}
-        className="mt-2 mb-4"
-        /*  onChange={onChangeSelect} */
+        className=" mt-0.5 bg-slate-50 text-sm pl-2"
+        onChange={onChangeSelect}
       >
         {options!.map((option: any) => {
           return (
-            <option value={start ? option.start : option.end}>
-              {start ? option.start : option.end}
+            <option value={start ? option?.start : option?.end}>
+              {start ? option?.start : option?.end}
             </option>
           );
         })}

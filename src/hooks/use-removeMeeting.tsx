@@ -38,7 +38,6 @@ export const useRemoveMeeting = () => {
             room.roomData.map((data: any) => {
               console.log("jo");
               if (clickedMeeting.blocks.includes(data.block)) {
-                console.log("jojo");
                 return { ...data, reserved: false };
               }
               return data;
@@ -47,7 +46,7 @@ export const useRemoveMeeting = () => {
           return room;
         })
       );
-      console.log(roomsData);
+
       setIsLoading(false);
     } else {
       setIsLoading(false);

@@ -12,7 +12,7 @@ import LoadingSpinner from "../ui/LoadingSpinner/LoadingSpinner";
 /* ZDE SLEDOVAT V LOKÁLNÍM STATE MÍSTO CONTEXTU???? - SELECTEDTIME */
 const TimeSelect: React.FC = () => {
   const navigate = useNavigate();
-  /*   const appContext = useContext(AppContext); */
+
   const reservationContext = useContext(ReservationContext);
 
   const { pickedRoom, setPickedRoom, pickedDate, roomsData } =
