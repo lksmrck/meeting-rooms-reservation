@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Button, IconButton } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import MeetingType from "./MeetingType";
 import AppContext from "../../state/AppContext";
 import AuthContext from "../../state/AuthContext";
@@ -10,12 +10,15 @@ import { doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import ReservationContext from "../../state/ReservationContext";
 import { useNavigate } from "react-router-dom";
-import { FiEdit } from "react-icons/fi";
+
 import { RoomData } from "../../types/types";
 import DisplayedGuests from "./DisplayedGuests";
 
 const Form: React.FC = () => {
   const navigate = useNavigate();
+  /*  const { isGuestModalOpen, setIsGuestModalOpen } = useContext(AppContext); */
+  const { company, user } = useContext(AuthContext);
+  const { pickedDate, pickedRoom } = useContext(ReservationContext);
 
   //Po submitnutí je button disabled, aby se nedalo kliknout víckrát během jednoho submitu
   const [disabledBtn, setDisabledBtn] = useState(false);
@@ -27,7 +30,7 @@ const Form: React.FC = () => {
 
   //2.guests
   const [guests, setGuests] = useState<string[] | []>([]);
-  const [guestsOpenModal, setGuestsOpenModal] = useState(false);
+  const [isGuestModalOpen, setIsGuestModalOpen] = useState(false);
   const onAddGuests = (guests: string[]) => {
     setGuests(guests);
   };
@@ -35,10 +38,6 @@ const Form: React.FC = () => {
   //3.meeting type --> Přes reservation context. V Select componentu.
 
   /* const [meetingType, setMeetingType] = useState<string>("call"); */
-
-  /*  const { setOpenModal } = useContext(AppContext);; */
-  const { company, user } = useContext(AuthContext);
-  const { pickedDate, pickedRoom } = useContext(ReservationContext);
 
   const [missingFormData, setMissingFormData] = useState(false);
 
@@ -93,7 +92,7 @@ const Form: React.FC = () => {
   };
 
   return (
-    <section className="flex justify-center ml-6   ">
+    <section className="flex justify-center ml-6">
       <div className=" flex flex-col justify-center  bg-green-50 h-2/5 rounded-lg ">
         <h1 className="text-lg font-bold flex justify-center">
           Create a meeting
@@ -115,23 +114,24 @@ const Form: React.FC = () => {
           {guests.length > 0 ? (
             <DisplayedGuests
               guests={guests}
-              setGuestsOpenModal={setGuestsOpenModal}
+              setGuestsOpenModal={setIsGuestModalOpen}
+              form
             />
           ) : (
             <Button
               colorScheme={"purple"}
               onClick={() => {
-                setGuestsOpenModal(true);
+                setIsGuestModalOpen(true);
               }}
             >
               Add guests
             </Button>
           )}
 
-          {guestsOpenModal && (
+          {isGuestModalOpen && (
             <GuestsModal
-              isOpen={guestsOpenModal}
-              setIsOpen={setGuestsOpenModal}
+              isOpen={isGuestModalOpen}
+              setIsOpen={setIsGuestModalOpen}
               onAddGuests={onAddGuests}
             />
           )}

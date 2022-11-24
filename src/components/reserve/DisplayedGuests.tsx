@@ -5,17 +5,19 @@ import { FiEdit } from "react-icons/fi";
 type DisplayedGuestsProps = {
   guests: any;
   setGuestsOpenModal: any;
+  form?: boolean;
 };
 
 const DisplayedGuests: React.FC<DisplayedGuestsProps> = ({
   guests,
   setGuestsOpenModal,
+  form,
 }) => {
   return (
     <div>
-      <p className="text-sm font-bold">Guests</p>
+      {form && <p className="text-sm font-bold">Guests</p>}
       <div className="flex">
-        <p className="  flex items-end text-sm bg-white w-56 border rounded-md h-7 break-words overflow-x-scroll whitespace-nowrap scrollbar-hide">
+        <p className=" pl-2 cursor-pointer flex items-end text-sm bg-white w-56 border rounded-md h-7 break-words overflow-x-scroll whitespace-nowrap scrollbar-hide">
           {guests.map((guest: string, i: number) => {
             return (
               <span className=" ml-1">

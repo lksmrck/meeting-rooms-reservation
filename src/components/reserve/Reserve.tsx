@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import Form from "./Form";
-import AppContext from "../../state/AppContext";
+
 import TimeSelect from "./TimeSelect";
 
 const Reserve = () => {

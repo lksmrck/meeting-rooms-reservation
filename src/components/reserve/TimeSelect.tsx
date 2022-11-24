@@ -13,10 +13,8 @@ import LoadingSpinner from "../ui/LoadingSpinner/LoadingSpinner";
 const TimeSelect: React.FC = () => {
   const navigate = useNavigate();
 
-  const reservationContext = useContext(ReservationContext);
-
   const { pickedRoom, setPickedRoom, pickedDate, roomsData } =
-    reservationContext;
+    useContext(ReservationContext);
 
   const [selectedBlocks, setSelectedBlocks] = useState(0);
   //Meeting details:

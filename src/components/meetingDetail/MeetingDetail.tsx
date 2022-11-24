@@ -26,6 +26,8 @@ import LoadingSpinner from "../ui/LoadingSpinner/LoadingSpinner";
 import UpdateMeetingTime from "./UpdateMeetingTime";
 import MeetingType from "../reserve/MeetingType";
 import { meetingTypes } from "../../constants/constants";
+import GuestsModal from "../reserve/GuestsModal";
+import DisplayedGuests from "../reserve/DisplayedGuests";
 
 type MeetingDetailProps = {
   clickedMeeting: Meeting;
@@ -44,6 +46,8 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
   const [isEditing, setIsEditing] = useState(false);
   const [updatedMeeting, setUpdatedMeeting] = useState(clickedMeeting);
   const [updatedTime, setUpdatedTime] = useState({ start: "", end: "" });
+  const [isGuestModalOpen, setIsGuestModalOpen] = useState(false);
+  const [updatedGuests, setUpdatedGuests] = useState([] as string[]);
 
   //State na local loading - aby nebyl problém se synchronizací s Firebase (update a nasledny fetch updated)
   const [fbIsLoading, setFbIsLoading] = useState(false);
@@ -167,13 +171,6 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
                       onChange={onChangeMeeting}
                       className=""
                     />
-                    {/* DÁT SELECT */}
-                    {/*  <Input
-                      name="type"
-                      value={updatedMeeting.type}
-                      size="xs"
-                      onChange={onChangeMeeting}
-                    /> */}
 
                     <MeetingType
                       id="type"
@@ -184,12 +181,22 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
                     />
 
                     <Input value={updatedMeeting.creator} size="sm" disabled />
-                    <Input
-                      name="guests"
-                      value={updatedMeeting.guests}
-                      size="sm"
-                      onChange={onChangeMeeting}
-                    />
+
+                    {updatedMeeting.guests.length > 0 ? (
+                      <DisplayedGuests
+                        guests={updatedMeeting.guests}
+                        setGuestsOpenModal={setIsGuestModalOpen}
+                      />
+                    ) : (
+                      <p>No Guests</p>
+                    )}
+                    {isGuestModalOpen && (
+                      <GuestsModal
+                        isOpen={isGuestModalOpen}
+                        setIsOpen={setIsGuestModalOpen}
+                        onAddGuests={setUpdatedGuests}
+                      />
+                    )}
                     <div className="flex flex-col border">
                       <UpdateMeetingTime
                         options={startTimeOptions}

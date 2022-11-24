@@ -8,6 +8,8 @@ interface AppContextInterface {
   setIsLoading: Dispatch<SetStateAction<boolean>>;
   error: Error;
   setError: Dispatch<SetStateAction<Error>>;
+  isGuestModalOpen: boolean;
+  setIsGuestModalOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 const AppContext = createContext({} as AppContextInterface);
@@ -15,6 +17,9 @@ const AppContext = createContext({} as AppContextInterface);
 export const AppContextProvider: React.FC<{
   children: ReactNode;
 }> = ({ children }) => {
+  //State na otevření modalu s vyplněním guestů - jednodušší distribuce do komponentů
+  const [isGuestModalOpen, setIsGuestModalOpen] = useState(false);
+
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState({ error: false, message: "" } as Error);
 
@@ -25,6 +30,8 @@ export const AppContextProvider: React.FC<{
         setIsLoading,
         error,
         setError,
+        isGuestModalOpen,
+        setIsGuestModalOpen,
       }}
     >
       {children}
