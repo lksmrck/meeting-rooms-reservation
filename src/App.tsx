@@ -38,7 +38,7 @@ const App = () => {
   };
 
   return (
-    <>
+    <div className="sm:overflow-y-scroll sm:scrollbar-hide">
       <Navbar />
       <Routes>
         <Route path="/">
@@ -79,7 +79,7 @@ const App = () => {
       </Routes>
 
       {/*  <Footer /> */}
-    </>
+    </div>
   );
 };
 

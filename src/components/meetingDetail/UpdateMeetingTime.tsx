@@ -1,4 +1,4 @@
-import React /* SetStateAction, useState */ from "react";
+import React from "react";
 
 type SelectProps = {
   name?: string;
@@ -18,8 +18,8 @@ const UpdateMeetingTime: React.FC<SelectProps> = ({
   end,
 }) => {
   const onChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-    setUpdatedTime({ ...updatedTime, [e.target.name]: e.target.value });
-    console.log(updatedTime);
+    if (e.target.value)
+      setUpdatedTime({ ...updatedTime, [e.target.name]: e.target.value });
   };
 
   {
@@ -30,9 +30,15 @@ const UpdateMeetingTime: React.FC<SelectProps> = ({
         className=" mt-0.5 bg-slate-50 text-sm pl-2"
         onChange={onChangeSelect}
       >
+        <option value="none" selected disabled hidden>
+          Select an Option
+        </option>
         {options!.map((option: any) => {
           return (
-            <option value={start ? option?.start : option?.end}>
+            <option
+              key={start ? option?.start : option?.end}
+              value={start ? option?.start : option?.end}
+            >
               {start ? option?.start : option?.end}
             </option>
           );

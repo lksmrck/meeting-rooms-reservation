@@ -1,11 +1,9 @@
-import React, { useContext } from "react";
-import { BsFillMoonStarsFill } from "react-icons/bs";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../state/AuthContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../../config/firebase";
 import { Button } from "@chakra-ui/react";
-/* import Button from "./MyButton"; */
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -32,19 +30,24 @@ const Navbar = () => {
     <section className="h-20 bg-violet-800 flex  shadow-lg shadow-slate-300">
       <nav className="flex justify-between items-center w-screen">
         <ul className="flex items-center">
-          <li className=" ml-5 text-white">Room Reserver</li>
+          <li className=" lg:ml-5 ml-2 text-white">Room Reserver</li>
         </ul>
-        {/*  <Button text={user ? "Logout" : "Sign In"} onClick={onClickButton} /> */}
-
-        <div className="mr-5 flex">
+        <div className=" flex justify-center ">
           {user && company && (
-            <div className="flex text-white bg-violet-900 rounded-lg justify-center items-center mr-5">
-              <h2 className="font-bold mr-4 ml-2">{user.email}</h2>
-              <h3 className="text-sm mr-2">{company}</h3>
+            <div className="flex text-white bg-violet-900 rounded-lg justify-center items-center pr-1 mr-2 lg:mr-4">
+              <h2 className=" text-xs font-bold mr-3 ml-2 lg:text-md ">
+                {user.email}
+              </h2>
+              <h3 className="text-xs lg:text-sm">{company}</h3>
             </div>
           )}
 
-          <Button colorScheme="teal" size="md" onClick={onClickButton}>
+          <Button
+            colorScheme="teal"
+            size="md"
+            onClick={onClickButton}
+            className="mr-2"
+          >
             {user ? "Logout" : "Sign In"}
           </Button>
         </div>

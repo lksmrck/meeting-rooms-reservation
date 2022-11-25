@@ -1,5 +1,5 @@
-import { timeBlocks } from '../../common/dummyData';
-import { Meeting, TimeBlock } from '../../types/types';
+import { timeBlocks } from '../common/dummyData';
+import { Meeting, TimeBlock } from '../types/types';
 
 export const timeDataCalc = (selectedMeeting: Meeting) => {
     const minBlock = Math.min(...selectedMeeting.blocks)

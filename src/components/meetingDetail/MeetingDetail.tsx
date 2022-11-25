@@ -7,29 +7,17 @@ import {
   ModalFooter,
   ModalBody,
   Button,
-  Input,
 } from "@chakra-ui/react";
-import {
-  useState,
-  useContext,
-  useEffect,
-  Dispatch,
-  SetStateAction,
-} from "react";
-import { timeDataCalc } from "./timeDataCalc";
+import { useState, useContext, Dispatch, SetStateAction } from "react";
 import AuthContext from "../../state/AuthContext";
 import ReservationContext from "../../state/ReservationContext";
 import { useRemoveMeeting } from "../../hooks/use-removeMeeting";
 import { useNavigate } from "react-router-dom";
 import { Meeting } from "../../types/types";
 import LoadingSpinner from "../ui/LoadingSpinner/LoadingSpinner";
-import UpdateMeetingTime from "./UpdateMeetingTime";
-import MeetingType from "../reserve/form/MeetingType";
-import { meetingTypes } from "../../constants/constants";
-import GuestsModal from "../reserve/form/GuestsModal";
-import DisplayedGuests from "../reserve/form/DisplayedGuests";
 import DetailDomEditMode from "./DetailDomEditMode";
 import DetailDom from "./DetailDom";
+import { timeToBlocks } from "../../utils/timeToBlocks";
 
 type MeetingDetailProps = {
   clickedMeeting: Meeting;
@@ -42,14 +30,13 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
   openDetail,
   setOpenDetail,
 }) => {
-  const [timeDetail, setTimeDetail] = useState(timeDataCalc(clickedMeeting));
-
   //Editing state
   const [isEditing, setIsEditing] = useState(false);
   const [updatedMeeting, setUpdatedMeeting] = useState(clickedMeeting);
-  const [updatedTime, setUpdatedTime] = useState({ start: "", end: "" });
-  const [isGuestModalOpen, setIsGuestModalOpen] = useState(false);
-  const [updatedGuests, setUpdatedGuests] = useState([] as string[]);
+  const [updatedTime, setUpdatedTime] = useState({
+    /* start: "", end: ""  */
+  });
+  const [updatedGuests, setUpdatedGuests] = useState(updatedMeeting.guests);
 
   //State na local loading - aby nebyl problém se synchronizací s Firebase (update a nasledny fetch updated)
   const [fbIsLoading, setFbIsLoading] = useState(false);
@@ -57,14 +44,18 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
   const { company, user } = useContext(AuthContext);
   const { pickedDate, pickedRoom } = useContext(ReservationContext);
 
-  const { blocks } = clickedMeeting;
-
   const { removeData, isLoading } = useRemoveMeeting();
 
   const navigate = useNavigate();
 
   const onCancel = () => {
-    isEditing ? setIsEditing(false) : setOpenDetail(false);
+    if (isEditing) {
+      setIsEditing(false);
+      setUpdatedTime({});
+      setUpdatedMeeting(clickedMeeting);
+    } else {
+      setOpenDetail(false);
+    }
   };
 
   const deleteMeetingHandler = (e: React.SyntheticEvent) => {
@@ -75,7 +66,7 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
       navigate("/overview");
       setFbIsLoading(false);
       setOpenDetail(false);
-    }, 750);
+    }, 1000);
   };
 
   const editModeToggler = () => {
@@ -87,9 +78,24 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
     console.log(updatedMeeting);
   };
 
-  const updateMeetingHandler = (e: any) => {
+  const submitUpdatedMeeting = (e: any) => {
+    const { id, date, name, type } = updatedMeeting;
+
     e.preventDefault();
-    console.log(updatedMeeting);
+
+    const blocks = timeToBlocks(updatedTime);
+
+    const formData: any = {
+      id,
+      date,
+      name,
+      type,
+      room: pickedRoom.id,
+      blocks,
+      creator: user!.email,
+      guests: updatedGuests,
+    };
+    console.log(formData);
   };
 
   return (
@@ -106,6 +112,9 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
               <DetailDomEditMode
                 onChangeMeeting={onChangeMeeting}
                 updatedMeeting={updatedMeeting}
+                updatedTime={updatedTime}
+                setUpdatedTime={setUpdatedTime}
+                setUpdatedGuests={setUpdatedGuests}
               />
             ) : (
               <DetailDom clickedMeeting={clickedMeeting} />
@@ -123,7 +132,7 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
           {isEditing && (
             <Button
               colorScheme="teal"
-              onClick={updateMeetingHandler}
+              onClick={submitUpdatedMeeting}
               type="submit"
             >
               Update meeting

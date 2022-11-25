@@ -5,7 +5,6 @@ import { auth } from "../config/firebase";
 
 export const timeCheck = (setUser: any) => {
 
-
 let hours = 0.5; 
 
 let now = new Date().getTime();

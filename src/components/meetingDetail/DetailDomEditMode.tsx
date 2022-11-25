@@ -10,18 +10,21 @@ import ReservationContext from "../../state/ReservationContext";
 type DetailDomEditModeProps = {
   updatedMeeting: any;
   onChangeMeeting: any;
+  updatedTime: any;
+  setUpdatedTime: any;
+  setUpdatedGuests: any;
 };
 
 const DetailDomEditMode: React.FC<DetailDomEditModeProps> = ({
   updatedMeeting,
   onChangeMeeting,
+  updatedTime,
+  setUpdatedTime,
+  setUpdatedGuests,
 }) => {
   const { pickedRoom } = useContext(ReservationContext);
 
   const [isGuestModalOpen, setIsGuestModalOpen] = useState(false);
-
-  const [updatedTime, setUpdatedTime] = useState({ start: "", end: "" });
-  const [updatedGuests, setUpdatedGuests] = useState([] as string[]);
 
   const { blocks } = updatedMeeting;
 
@@ -44,12 +47,12 @@ const DetailDomEditMode: React.FC<DetailDomEditModeProps> = ({
 
   const [endTimeOptions, setEndTimeOptions] = useState<any>([]);
   useEffect(() => {
+    //Loop, na přiřazení možného končícího času meetingu (updatuje se vždy po zadání počátečního času)
     let possibleEndTime: any = [];
     //Loop začne od i => vybrané počáteční datum meetingu
     let i = localPickedRoom.roomData.findIndex(
       (x) => x.start == updatedTime.start
     );
-    //Loop, na přiřazení možného končícího času meetingu (updatuje se vždy po zadání počátečního času)
     for (i; i < 24; i++) {
       if (i == 23) {
         possibleEndTime.push(localPickedRoom.roomData[i]);
@@ -71,7 +74,9 @@ const DetailDomEditMode: React.FC<DetailDomEditModeProps> = ({
         <h5>Created by: </h5>
         <h5>Guests:</h5>
         <h5 className="mt-0.5">Start time: </h5>
-        <h5 className="mt-0.5">End time: </h5>
+        {updatedTime.hasOwnProperty("start") && (
+          <h5 className="mt-0.5">End time: </h5>
+        )}
       </div>
       <div>
         <Input
@@ -79,7 +84,6 @@ const DetailDomEditMode: React.FC<DetailDomEditModeProps> = ({
           value={updatedMeeting.name}
           size="sm"
           onChange={onChangeMeeting}
-          className=""
         />
 
         <MeetingType
@@ -110,15 +114,13 @@ const DetailDomEditMode: React.FC<DetailDomEditModeProps> = ({
             setUpdatedTime={setUpdatedTime}
             updatedTime={updatedTime}
           />
-          {endTimeOptions && endTimeOptions?.length > 0 ? (
+          {updatedTime.hasOwnProperty("start") && (
             <UpdateMeetingTime
               options={endTimeOptions}
               end
               setUpdatedTime={setUpdatedTime}
               updatedTime={updatedTime}
             />
-          ) : (
-            ""
           )}
         </div>
       </div>

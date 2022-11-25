@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { timeDataCalc } from "./timeDataCalc";
+import { timeDataCalc } from "../../utils/timeDataCalc";
 
 type DetailDomProps = {
   clickedMeeting: any;
