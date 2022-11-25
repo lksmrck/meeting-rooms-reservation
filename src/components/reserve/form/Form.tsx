@@ -1,22 +1,20 @@
 import React, { useState, useContext } from "react";
 import { Button } from "@chakra-ui/react";
 import MeetingType from "./MeetingType";
-import AppContext from "../../state/AppContext";
-import AuthContext from "../../state/AuthContext";
-import { meetingTypes } from "../../constants/constants";
+import AuthContext from "../../../state/AuthContext";
+import { meetingTypes } from "../../../constants/constants";
 import { Input } from "@chakra-ui/react";
 import GuestsModal from "./GuestsModal";
 import { doc, updateDoc, arrayUnion } from "firebase/firestore";
-import { db } from "../../config/firebase";
-import ReservationContext from "../../state/ReservationContext";
+import { db } from "../../../config/firebase";
+import ReservationContext from "../../../state/ReservationContext";
 import { useNavigate } from "react-router-dom";
 
-import { RoomData } from "../../types/types";
+import { RoomData } from "../../../types/types";
 import DisplayedGuests from "./DisplayedGuests";
 
 const Form: React.FC = () => {
   const navigate = useNavigate();
-  /*  const { isGuestModalOpen, setIsGuestModalOpen } = useContext(AppContext); */
   const { company, user } = useContext(AuthContext);
   const { pickedDate, pickedRoom } = useContext(ReservationContext);
 
@@ -25,7 +23,6 @@ const Form: React.FC = () => {
 
   //FormData
   //1.meeting name
-  /* const [name, setName] = useState<string>(); */
   const [formData, setFormData] = useState({ name: "", type: "call" });
 
   //2.guests
@@ -35,15 +32,10 @@ const Form: React.FC = () => {
     setGuests(guests);
   };
 
-  //3.meeting type --> Přes reservation context. V Select componentu.
-
-  /* const [meetingType, setMeetingType] = useState<string>("call"); */
-
   const [missingFormData, setMissingFormData] = useState(false);
 
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>): void =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  /* setName(e.target.value); */
 
   const submitHandler = async (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -60,15 +52,12 @@ const Form: React.FC = () => {
       id: Date.now(),
       date: pickedDate,
       name: formData.name,
-      /*  name, */
-      /* type: meetingType, */
       type: formData.type,
-      room: pickedRoom.id, //pak přidat ROOM !!!!
+      room: pickedRoom.id,
       blocks,
       creator: user!.email,
       guests,
     };
-    console.log(newMeeting);
 
     //Check, zda je vyplněný název meetingu a vybrané bloky. Zbytek dat je nepovinný, nebo se vezme automaticky.
     if (

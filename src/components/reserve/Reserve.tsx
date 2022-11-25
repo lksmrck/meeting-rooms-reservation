@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import Form from "./Form";
+import Form from "./form/Form";
 
-import TimeSelect from "./TimeSelect";
+import TimeSelect from "./timeSelect/TimeSelect";
 
 const Reserve = () => {
   /*  const appContext = useContext(AppContext) */ /* return <>{appContext?.openModal ? <TimeModal /> : <Form />}</>; */

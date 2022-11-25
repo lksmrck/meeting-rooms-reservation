@@ -1,5 +1,5 @@
 import React from "react";
-import { Room, RoomData } from "../../types/types";
+import { Room, RoomData } from "../../../types/types";
 
 type OneRoomDomProps = {
   pickedRoom: any; //Room type háže  chybu

@@ -24,10 +24,12 @@ import { useNavigate } from "react-router-dom";
 import { Meeting } from "../../types/types";
 import LoadingSpinner from "../ui/LoadingSpinner/LoadingSpinner";
 import UpdateMeetingTime from "./UpdateMeetingTime";
-import MeetingType from "../reserve/MeetingType";
+import MeetingType from "../reserve/form/MeetingType";
 import { meetingTypes } from "../../constants/constants";
-import GuestsModal from "../reserve/GuestsModal";
-import DisplayedGuests from "../reserve/DisplayedGuests";
+import GuestsModal from "../reserve/form/GuestsModal";
+import DisplayedGuests from "../reserve/form/DisplayedGuests";
+import DetailDomEditMode from "./DetailDomEditMode";
+import DetailDom from "./DetailDom";
 
 type MeetingDetailProps = {
   clickedMeeting: Meeting;
@@ -57,53 +59,12 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
 
   const { blocks } = clickedMeeting;
 
-  const adjustedRoomData = pickedRoom.roomData.map((data: any) => {
-    if (blocks.includes(data.block)) return { ...data, reserved: false };
-    return data;
-  });
-
-  //Upravená pickedRoom tak, že u blocků ,které jsou v meetingu, který jde do editu se nastaví reserved = false
-  const [localPickedRoom, setLocalPickedRoom] = useState({
-    ...pickedRoom,
-    roomData: adjustedRoomData,
-  });
-
-  //State pro edit time => vyfiltrované bloky, které mají reserved = false {block: 1, start: 7:00, end: 7:00, reserved: false, selected: false}
-  const possibleStartTime = localPickedRoom.roomData.filter((data: any) => {
-    return data.reserved == false;
-  });
-  const [startTimeOptions, setStartTimeOptions] = useState(possibleStartTime);
-
-  const [endTimeOptions, setEndTimeOptions] = useState<any>([]);
-  useEffect(() => {
-    let possibleEndTime: any = [];
-    //Loop začne od i => vybrané počáteční datum meetingu
-    let i = localPickedRoom.roomData.findIndex(
-      (x) => x.start == updatedTime.start
-    );
-    //Loop, na přiřazení možného končícího času meetingu (updatuje se vždy po zadání počátečního času)
-    for (i; i < 24; i++) {
-      if (i == 23) {
-        possibleEndTime.push(localPickedRoom.roomData[i]);
-        setEndTimeOptions(possibleEndTime);
-      } else if (!localPickedRoom?.roomData[i]?.reserved) {
-        possibleEndTime.push(localPickedRoom.roomData[i]);
-      } else if (localPickedRoom?.roomData[i]?.reserved) {
-        setEndTimeOptions(possibleEndTime);
-        console.log("break");
-
-        break;
-      } /* else return; */
-    }
-  }, [updatedTime]);
-
   const { removeData, isLoading } = useRemoveMeeting();
 
   const navigate = useNavigate();
 
   const onCancel = () => {
-    setOpenDetail(false);
-    setIsEditing(false);
+    isEditing ? setIsEditing(false) : setOpenDetail(false);
   };
 
   const deleteMeetingHandler = (e: React.SyntheticEvent) => {
@@ -126,6 +87,11 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
     console.log(updatedMeeting);
   };
 
+  const updateMeetingHandler = (e: any) => {
+    e.preventDefault();
+    console.log(updatedMeeting);
+  };
+
   return (
     <Modal isOpen={openDetail} onClose={() => setOpenDetail(false)}>
       <ModalOverlay />
@@ -136,102 +102,34 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
           <LoadingSpinner />
         ) : (
           <ModalBody pb={6}>
-            <section className="grid grid-cols-2">
-              <div className="[&>*] font-bold">
-                <h3>Meeting name: </h3>
-                <h4>Meeting type: </h4>
-                <h5>Created by: </h5>
-                <h5>Guests:</h5>
-                <h5 className="mt-0.5">Start time: </h5>
-                <h5 className="mt-0.5">End time: </h5>
-                {!isEditing && <h5 className="mt-0.5">Hours duration: </h5>}
-              </div>
-              <div>
-                {!isEditing ? (
-                  <>
-                    <h3>{clickedMeeting.name}</h3>
-                    <h3>{clickedMeeting.type}</h3>
-                    <h3>{clickedMeeting.creator}</h3>
-                    <h3>
-                      {clickedMeeting.guests.length > 0
-                        ? clickedMeeting.guests.length > 1
-                          ? `Meeting has ${clickedMeeting.guests.length} guests`
-                          : `Meeting has ${clickedMeeting.guests.length} guest`
-                        : "No guests"}
-                    </h3>
-                    <h3 className="mt-0.5">{timeDetail.start}</h3>
-                    <h3 className="mt-0.5">{timeDetail.end}</h3>
-                  </>
-                ) : (
-                  <>
-                    <Input
-                      name="name"
-                      value={updatedMeeting.name}
-                      size="sm"
-                      onChange={onChangeMeeting}
-                      className=""
-                    />
-
-                    <MeetingType
-                      id="type"
-                      name="type"
-                      options={meetingTypes}
-                      onChange={onChangeMeeting}
-                      small
-                    />
-
-                    <Input value={updatedMeeting.creator} size="sm" disabled />
-
-                    {updatedMeeting.guests.length > 0 ? (
-                      <DisplayedGuests
-                        guests={updatedMeeting.guests}
-                        setGuestsOpenModal={setIsGuestModalOpen}
-                      />
-                    ) : (
-                      <p>No Guests</p>
-                    )}
-                    {isGuestModalOpen && (
-                      <GuestsModal
-                        isOpen={isGuestModalOpen}
-                        setIsOpen={setIsGuestModalOpen}
-                        onAddGuests={setUpdatedGuests}
-                      />
-                    )}
-                    <div className="flex flex-col border">
-                      <UpdateMeetingTime
-                        options={startTimeOptions}
-                        start
-                        setUpdatedTime={setUpdatedTime}
-                        updatedTime={updatedTime}
-                      />
-                      {endTimeOptions && endTimeOptions?.length > 0 ? (
-                        <UpdateMeetingTime
-                          options={endTimeOptions}
-                          end
-                          setUpdatedTime={setUpdatedTime}
-                          updatedTime={updatedTime}
-                        />
-                      ) : (
-                        ""
-                      )}
-                    </div>
-                  </>
-                )}
-
-                {!isEditing && (
-                  <h3 className="mt-0.5">{timeDetail.meetingLength}</h3>
-                )}
-              </div>
-            </section>
+            {isEditing ? (
+              <DetailDomEditMode
+                onChangeMeeting={onChangeMeeting}
+                updatedMeeting={updatedMeeting}
+              />
+            ) : (
+              <DetailDom clickedMeeting={clickedMeeting} />
+            )}
           </ModalBody>
         )}
 
         <ModalFooter className="[&>button]:m-1 ">
-          <Button colorScheme="red" onClick={deleteMeetingHandler}>
-            Delete
-          </Button>
+          {!isEditing && (
+            <Button colorScheme="red" onClick={deleteMeetingHandler}>
+              Delete
+            </Button>
+          )}
           {/* Edit button se zobrazí pouze, pokud user = tvůrce meetingu */}
-          {clickedMeeting.creator == user!.email && (
+          {isEditing && (
+            <Button
+              colorScheme="teal"
+              onClick={updateMeetingHandler}
+              type="submit"
+            >
+              Update meeting
+            </Button>
+          )}
+          {clickedMeeting.creator == user!.email && !isEditing && (
             <Button colorScheme="orange" onClick={editModeToggler}>
               Edit
             </Button>

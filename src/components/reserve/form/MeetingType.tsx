@@ -1,11 +1,10 @@
 import React, { SetStateAction } from "react";
-import { MeetingCategory } from "../../types/types";
+import { MeetingCategory } from "../../../types/types";
 
 type SelectProps = {
   name: string;
   id: string;
   options: MeetingCategory[];
-  /*   setMeetingType: React.Dispatch<SetStateAction<string>>; */
   onChange: any;
   small?: boolean;
   margin?: boolean;
@@ -15,14 +14,11 @@ const MeetingType: React.FC<SelectProps> = ({
   name,
   id,
   options,
-  /*   setMeetingType, */
+
   onChange,
   small,
   margin,
 }) => {
-  /*  const onChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-    setMeetingType(e.target.value);
-  }; */
   {
     return (
       <select

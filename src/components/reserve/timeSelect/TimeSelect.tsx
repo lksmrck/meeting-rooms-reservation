@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 /* import AppContext from "../../state/AppContext"; */
-import ReservationContext from "../../state/ReservationContext";
-import { useMeetingsFetch } from "../../hooks/use-meetingsFetch";
-import MeetingDetail from "../meetingDetail/MeetingDetail";
+import ReservationContext from "../../../state/ReservationContext";
+import { useMeetingsFetch } from "../../../hooks/use-meetingsFetch";
+import MeetingDetail from "../../meetingDetail/MeetingDetail";
 import OneRoomDom from "./OneRoomDom";
 import { useNavigate } from "react-router-dom";
-import TimeBlocksDom from "../overview/TimeBlocksDom";
-import { Meeting, RoomData } from "../../types/types";
-import LoadingSpinner from "../ui/LoadingSpinner/LoadingSpinner";
+import TimeBlocksDom from "../../overview/TimeBlocksDom";
+import { Meeting, RoomData } from "../../../types/types";
+import LoadingSpinner from "../../ui/LoadingSpinner/LoadingSpinner";
 
 /* ZDE SLEDOVAT V LOKÁLNÍM STATE MÍSTO CONTEXTU???? - SELECTEDTIME */
 const TimeSelect: React.FC = () => {

@@ -19,6 +19,7 @@ const UpdateMeetingTime: React.FC<SelectProps> = ({
 }) => {
   const onChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>): void => {
     setUpdatedTime({ ...updatedTime, [e.target.name]: e.target.value });
+    console.log(updatedTime);
   };
 
   {
