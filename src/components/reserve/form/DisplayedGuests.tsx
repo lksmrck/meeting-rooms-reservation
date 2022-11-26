@@ -16,8 +16,12 @@ const DisplayedGuests: React.FC<DisplayedGuestsProps> = ({
   return (
     <div>
       {form && <p className="text-sm font-bold">Guests</p>}
-      <div className="flex">
-        <p className=" pl-2 cursor-pointer flex items-end text-sm bg-white w-56 border rounded-md h-7 break-words overflow-x-scroll whitespace-nowrap scrollbar-hide">
+      <div className="flex my-0.5">
+        <p
+          className={` h-8 pl-2 cursor-pointer flex items-center text-sm bg-white w-56 border ${
+            form ? "rounded-md" : "rounded-sm"
+          }  break-words overflow-x-scroll whitespace-nowrap scrollbar-hide`}
+        >
           {guests.length > 0 ? (
             guests.map((guest: string, i: number) => {
               return (

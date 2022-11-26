@@ -18,6 +18,7 @@ import LoadingSpinner from "../ui/LoadingSpinner/LoadingSpinner";
 import DetailDomEditMode from "./DetailDomEditMode";
 import DetailDom from "./DetailDom";
 import { timeToBlocks } from "../../utils/timeToBlocks";
+import { useAddMeeting } from "../../hooks/use-addMeeting";
 
 type MeetingDetailProps = {
   clickedMeeting: Meeting;
@@ -44,6 +45,7 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
   const { company, user } = useContext(AuthContext);
   const { pickedDate, pickedRoom } = useContext(ReservationContext);
 
+  const { addMeeting } = useAddMeeting();
   const { removeData, isLoading } = useRemoveMeeting();
 
   const navigate = useNavigate();
@@ -79,12 +81,10 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
   };
 
   const submitUpdatedMeeting = (e: any) => {
-    const { id, date, name, type } = updatedMeeting;
-
+    setFbIsLoading(true);
     e.preventDefault();
-
+    const { id, date, name, type } = updatedMeeting;
     const blocks = timeToBlocks(updatedTime);
-
     const formData: any = {
       id,
       date,
@@ -96,6 +96,19 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
       guests: updatedGuests,
     };
     console.log(formData);
+
+    removeData("secondCompany", clickedMeeting, pickedRoom.id);
+    /*   addMeeting(formData, "/reserve"); */
+
+    setTimeout(() => {
+      addMeeting(formData, "/reserve");
+    }, 500);
+
+    setTimeout(() => {
+      setFbIsLoading(false);
+      setOpenDetail(false);
+      setIsEditing(false);
+    }, 500);
   };
 
   return (

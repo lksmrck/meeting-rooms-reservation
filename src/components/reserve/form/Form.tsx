@@ -12,11 +12,13 @@ import { useNavigate } from "react-router-dom";
 
 import { RoomData } from "../../../types/types";
 import DisplayedGuests from "./DisplayedGuests";
+import { useAddMeeting } from "../../../hooks/use-addMeeting";
 
 const Form: React.FC = () => {
   const navigate = useNavigate();
   const { company, user } = useContext(AuthContext);
   const { pickedDate, pickedRoom } = useContext(ReservationContext);
+  const { addMeeting } = useAddMeeting();
 
   //Po submitnutí je button disabled, aby se nedalo kliknout víckrát během jednoho submitu
   const [disabledBtn, setDisabledBtn] = useState(false);
@@ -66,16 +68,18 @@ const Form: React.FC = () => {
       newMeeting.name &&
       newMeeting.name.length >= 1
     ) {
-      const dbRef = doc(
+      addMeeting(newMeeting, "/overview", setFormData);
+      setMissingFormData(false);
+      /*      const dbRef = doc(
         db,
         `companies/secondCompany/rooms`,
         String(pickedRoom.id)
       ); //UPRAVIT DYNAMICKY
       await updateDoc(dbRef, { meetings: arrayUnion(newMeeting) });
-      /*  setName(""); */
+
       setFormData({ name: "", type: "" });
       navigate("/overview");
-      setMissingFormData(false);
+      setMissingFormData(false); */
     } else {
       setMissingFormData(true);
     }

@@ -35,7 +35,7 @@ const Navbar = () => {
         <div className=" flex justify-center ">
           {user && company && (
             <div className="flex text-white bg-violet-900 rounded-lg justify-center items-center pr-1 mr-2 lg:mr-4">
-              <h2 className=" text-xs font-bold mr-3 ml-2 lg:text-md ">
+              <h2 className="text-xs font-bold mr-3 ml-2 lg:text-base ">
                 {user.email}
               </h2>
               <h3 className="text-xs lg:text-sm">{company}</h3>
@@ -46,7 +46,7 @@ const Navbar = () => {
             colorScheme="teal"
             size="md"
             onClick={onClickButton}
-            className="mr-2"
+            className="mr-2 lg:mr-9"
           >
             {user ? "Logout" : "Sign In"}
           </Button>
