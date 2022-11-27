@@ -5,3 +5,6 @@ export const meetingTypes = [{id: 1, name: "Call"}, {id: 2, name: "Face to face"
 export const READ = "READ" 
 export const POWERUSER = "POWERUSER" 
 export const ADMIN = "ADMIN" 
+
+//
+export const NONE = "NONE"

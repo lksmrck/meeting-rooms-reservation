@@ -41,7 +41,6 @@ const Navbar = () => {
               <h3 className="text-xs lg:text-sm">{company}</h3>
             </div>
           )}
-
           <Button
             colorScheme="teal"
             size="md"

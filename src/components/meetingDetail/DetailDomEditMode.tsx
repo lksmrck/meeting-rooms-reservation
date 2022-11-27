@@ -1,4 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  Dispatch,
+  SetStateAction,
+  ChangeEvent,
+} from "react";
 import { Input } from "@chakra-ui/react";
 import MeetingType from "../reserve/form/MeetingType";
 import { meetingTypes } from "../../constants/constants";
@@ -6,13 +13,17 @@ import DisplayedGuests from "../reserve/form/DisplayedGuests";
 import GuestsModal from "../reserve/form/GuestsModal";
 import UpdateMeetingTime from "./UpdateMeetingTime";
 import ReservationContext from "../../state/ReservationContext";
+import { Meeting, RoomData } from "../../types/types";
 
 type DetailDomEditModeProps = {
-  updatedMeeting: any;
-  onChangeMeeting: any;
-  updatedTime: any;
-  setUpdatedTime: any;
-  setUpdatedGuests: any;
+  updatedMeeting: Meeting;
+  onChangeMeeting: (e: ChangeEvent<HTMLInputElement>) => void;
+  updatedTime: { start: string | null; end: string | null };
+  setUpdatedTime: Dispatch<
+    SetStateAction<{ start: string | null; end: string | null }>
+  >;
+  setUpdatedGuests: Dispatch<SetStateAction<string[]>>;
+  setMissingFormData: Dispatch<SetStateAction<boolean>>;
 };
 
 const DetailDomEditMode: React.FC<DetailDomEditModeProps> = ({
@@ -21,6 +32,7 @@ const DetailDomEditMode: React.FC<DetailDomEditModeProps> = ({
   updatedTime,
   setUpdatedTime,
   setUpdatedGuests,
+  setMissingFormData,
 }) => {
   const { pickedRoom } = useContext(ReservationContext);
 
@@ -28,7 +40,7 @@ const DetailDomEditMode: React.FC<DetailDomEditModeProps> = ({
 
   const { blocks } = updatedMeeting;
 
-  const adjustedRoomData = pickedRoom.roomData.map((data: any) => {
+  const adjustedRoomData = pickedRoom.roomData.map((data: RoomData) => {
     if (blocks.includes(data.block)) return { ...data, reserved: false };
     return data;
   });
@@ -40,16 +52,19 @@ const DetailDomEditMode: React.FC<DetailDomEditModeProps> = ({
   });
 
   //State pro edit time => vyfiltrované bloky, které mají reserved = false {block: 1, start: 7:00, end: 7:00, reserved: false, selected: false}
-  const possibleStartTime = localPickedRoom.roomData.filter((data: any) => {
-    return data.reserved == false;
-  });
+  const possibleStartTime = localPickedRoom.roomData.filter(
+    (data: RoomData) => {
+      return data.reserved == false;
+    }
+  );
   const [startTimeOptions, setStartTimeOptions] = useState(possibleStartTime);
 
-  const [endTimeOptions, setEndTimeOptions] = useState<any>([]);
+  const [endTimeOptions, setEndTimeOptions] = useState<RoomData[]>([]);
   useEffect(() => {
     //Loop, na přiřazení možného končícího času meetingu (updatuje se vždy po zadání počátečního času)
-    let possibleEndTime: any = [];
+    let possibleEndTime: RoomData[] = [];
     //Loop začne od i => vybrané počáteční datum meetingu
+
     let i = localPickedRoom.roomData.findIndex(
       (x) => x.start == updatedTime.start
     );
@@ -113,6 +128,7 @@ const DetailDomEditMode: React.FC<DetailDomEditModeProps> = ({
             start
             setUpdatedTime={setUpdatedTime}
             updatedTime={updatedTime}
+            setMissingFormData={setMissingFormData}
           />
           {updatedTime.hasOwnProperty("start") && (
             <UpdateMeetingTime
@@ -120,6 +136,7 @@ const DetailDomEditMode: React.FC<DetailDomEditModeProps> = ({
               end
               setUpdatedTime={setUpdatedTime}
               updatedTime={updatedTime}
+              setMissingFormData={setMissingFormData}
             />
           )}
         </div>

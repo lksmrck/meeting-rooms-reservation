@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { roomData } from "../common/dummyData";
@@ -16,12 +15,7 @@ export const useRoomsMeetingsFetch = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { setRoomsData } = useContext(ReservationContext);
 
-  const roomsFetch = async (
-    company: string,
-    date: string | null
-    /*   setRoomsData: Dispatch<SetStateAction<Room[]>> */
-  ) => {
-    console.log("bezi rooms fetch");
+  const roomsFetch = async (company: string, date: string | null) => {
     setIsLoading(true);
     const querySnapshot = await getDocs(
       collection(db, `companies/${company}/rooms`)

@@ -33,7 +33,7 @@ export const useRemoveMeeting = () => {
 
       //DODELAT
       //Úprava state, ve kterém držím meetingy v daném dnu
-      setRoomsData((prevData: any) =>
+      /*     setRoomsData((prevData: any) =>
         prevData.map((room: any) => {
           if (room.id == roomNo) {
             room.roomData.map((data: any) => {
@@ -46,7 +46,7 @@ export const useRemoveMeeting = () => {
           }
           return room;
         })
-      );
+      ); */
 
       setIsLoading(false);
     } else {

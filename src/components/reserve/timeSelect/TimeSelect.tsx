@@ -30,7 +30,7 @@ const TimeSelect: React.FC = () => {
     let isCurrent = true;
     if (!isCurrent) return;
     setSelectedBlocks(0);
-    const counter = pickedRoom.roomData.map((data: RoomData) => {
+    pickedRoom.roomData.forEach((data: RoomData) => {
       if (data.selected) {
         setSelectedBlocks((prevState: number) => prevState + 1);
       }

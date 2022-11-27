@@ -1,25 +1,31 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
+import { NONE } from "../../constants/constants";
+import { RoomData } from "../../types/types";
 
-type SelectProps = {
+type UpdateMeetingTimeProps = {
   name?: string;
   id?: string;
-  options: any;
+  options: RoomData[];
   start?: boolean;
   end?: boolean;
-  setUpdatedTime: any;
-  updatedTime: any;
+  updatedTime: { start: string | null; end: string | null };
+  setUpdatedTime: Dispatch<
+    SetStateAction<{ start: string | null; end: string | null }>
+  >;
+  setMissingFormData: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const UpdateMeetingTime: React.FC<SelectProps> = ({
+const UpdateMeetingTime: React.FC<UpdateMeetingTimeProps> = ({
   updatedTime,
   setUpdatedTime,
   options,
   start,
   end,
+  setMissingFormData,
 }) => {
   const onChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-    if (e.target.value)
-      setUpdatedTime({ ...updatedTime, [e.target.name]: e.target.value });
+    setUpdatedTime({ ...updatedTime, [e.target.name]: e.target.value });
+    setMissingFormData(false);
   };
 
   {
@@ -30,7 +36,7 @@ const UpdateMeetingTime: React.FC<SelectProps> = ({
         className=" mt-0.5 bg-slate-50 text-sm pl-2"
         onChange={onChangeSelect}
       >
-        <option value="none" selected disabled hidden>
+        <option value={NONE} selected disabled hidden>
           Select an Option
         </option>
         {options!.map((option: any) => {

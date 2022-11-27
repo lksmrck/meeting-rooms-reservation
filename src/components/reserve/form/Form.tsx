@@ -5,8 +5,6 @@ import AuthContext from "../../../state/AuthContext";
 import { meetingTypes } from "../../../constants/constants";
 import { Input } from "@chakra-ui/react";
 import GuestsModal from "./GuestsModal";
-import { doc, updateDoc, arrayUnion } from "firebase/firestore";
-import { db } from "../../../config/firebase";
 import ReservationContext from "../../../state/ReservationContext";
 import { useNavigate } from "react-router-dom";
 
@@ -23,11 +21,10 @@ const Form: React.FC = () => {
   //Po submitnutí je button disabled, aby se nedalo kliknout víckrát během jednoho submitu
   const [disabledBtn, setDisabledBtn] = useState(false);
 
-  //FormData
-  //1.meeting name
+  //Data z formu
   const [formData, setFormData] = useState({ name: "", type: "call" });
 
-  //2.guests
+  //Guests
   const [guests, setGuests] = useState<string[] | []>([]);
   const [isGuestModalOpen, setIsGuestModalOpen] = useState(false);
   const onAddGuests = (guests: string[]) => {
@@ -63,23 +60,9 @@ const Form: React.FC = () => {
     };
 
     //Check, zda je vyplněný název meetingu a vybrané bloky. Zbytek dat je nepovinný, nebo se vezme automaticky.
-    if (
-      newMeeting.blocks.length > 0 &&
-      newMeeting.name &&
-      newMeeting.name.length >= 1
-    ) {
+    if (blocks.length > 0 && name && name.length >= 1) {
       addMeeting(newMeeting, "/overview", setFormData);
       setMissingFormData(false);
-      /*      const dbRef = doc(
-        db,
-        `companies/secondCompany/rooms`,
-        String(pickedRoom.id)
-      ); //UPRAVIT DYNAMICKY
-      await updateDoc(dbRef, { meetings: arrayUnion(newMeeting) });
-
-      setFormData({ name: "", type: "" });
-      navigate("/overview");
-      setMissingFormData(false); */
     } else {
       setMissingFormData(true);
     }
@@ -87,7 +70,7 @@ const Form: React.FC = () => {
 
   return (
     <section className="flex justify-center ml-6">
-      <div className=" flex flex-col justify-center  bg-green-50 h-2/5 rounded-lg ">
+      <div className=" flex flex-col justify-center bg-green-50 h-2/5 rounded-lg ">
         <h1 className="text-lg font-bold flex justify-center">
           Create a meeting
         </h1>

@@ -34,10 +34,12 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
   //Editing state
   const [isEditing, setIsEditing] = useState(false);
   const [updatedMeeting, setUpdatedMeeting] = useState(clickedMeeting);
-  const [updatedTime, setUpdatedTime] = useState({
-    /* start: "", end: ""  */
-  });
+  const [updatedTime, setUpdatedTime] = useState<{
+    start: string | null;
+    end: string | null;
+  }>({ start: null, end: null });
   const [updatedGuests, setUpdatedGuests] = useState(updatedMeeting.guests);
+  const [missingFormData, setMissingFormData] = useState(false);
 
   //State na local loading - aby nebyl problém se synchronizací s Firebase (update a nasledny fetch updated)
   const [fbIsLoading, setFbIsLoading] = useState(false);
@@ -53,22 +55,22 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
   const onCancel = () => {
     if (isEditing) {
       setIsEditing(false);
-      setUpdatedTime({});
+      setUpdatedTime({ start: null, end: null });
+      setMissingFormData(false);
       setUpdatedMeeting(clickedMeeting);
     } else {
       setOpenDetail(false);
+      setMissingFormData(false);
     }
   };
 
   const deleteMeetingHandler = (e: React.SyntheticEvent) => {
     setFbIsLoading(true);
-    removeData("secondCompany", clickedMeeting, pickedRoom.id);
-    //Timeout aby nebyl problém se synchronizací s Firebase (update a nasledny fetch updated) - byly problémy s načítáním dat po odstranění mtg.
-    setTimeout(() => {
+    removeData("secondCompany", clickedMeeting, pickedRoom.id).then(() => {
       navigate("/overview");
       setFbIsLoading(false);
       setOpenDetail(false);
-    }, 1000);
+    });
   };
 
   const editModeToggler = () => {
@@ -77,12 +79,13 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
 
   const onChangeMeeting = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUpdatedMeeting({ ...updatedMeeting, [e.target.name]: e.target.value });
-    console.log(updatedMeeting);
+    if (missingFormData) setMissingFormData(false);
   };
 
   const submitUpdatedMeeting = (e: any) => {
-    setFbIsLoading(true);
     e.preventDefault();
+    setMissingFormData(false);
+    setFbIsLoading(true);
     const { id, date, name, type } = updatedMeeting;
     const blocks = timeToBlocks(updatedTime);
     const formData: any = {
@@ -95,20 +98,23 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
       creator: user!.email,
       guests: updatedGuests,
     };
-    console.log(formData);
 
-    removeData("secondCompany", clickedMeeting, pickedRoom.id);
-    /*   addMeeting(formData, "/reserve"); */
-
-    setTimeout(() => {
-      addMeeting(formData, "/reserve");
-    }, 500);
-
-    setTimeout(() => {
+    if (
+      name.length > 0 &&
+      updatedTime.start != null &&
+      updatedTime.end != null
+    ) {
+      removeData("secondCompany", clickedMeeting, pickedRoom.id).then(() => {
+        addMeeting(formData, "/reserve").then(() => {
+          setFbIsLoading(false);
+          setOpenDetail(false);
+          setIsEditing(false);
+        });
+      });
+    } else {
+      setMissingFormData(true);
       setFbIsLoading(false);
-      setOpenDetail(false);
-      setIsEditing(false);
-    }, 500);
+    }
   };
 
   return (
@@ -128,9 +134,15 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
                 updatedTime={updatedTime}
                 setUpdatedTime={setUpdatedTime}
                 setUpdatedGuests={setUpdatedGuests}
+                setMissingFormData={setMissingFormData}
               />
             ) : (
               <DetailDom clickedMeeting={clickedMeeting} />
+            )}
+            {missingFormData && (
+              <p className=" text-red-600">
+                Please fill in name and time of the meeting.
+              </p>
             )}
           </ModalBody>
         )}
