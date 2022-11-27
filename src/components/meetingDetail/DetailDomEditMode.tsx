@@ -24,6 +24,7 @@ type DetailDomEditModeProps = {
   >;
   setUpdatedGuests: Dispatch<SetStateAction<string[]>>;
   setMissingFormData: Dispatch<SetStateAction<boolean>>;
+  updatedGuests: any;
 };
 
 const DetailDomEditMode: React.FC<DetailDomEditModeProps> = ({
@@ -33,12 +34,13 @@ const DetailDomEditMode: React.FC<DetailDomEditModeProps> = ({
   setUpdatedTime,
   setUpdatedGuests,
   setMissingFormData,
+  updatedGuests,
 }) => {
   const { pickedRoom } = useContext(ReservationContext);
 
   const [isGuestModalOpen, setIsGuestModalOpen] = useState(false);
 
-  const { blocks } = updatedMeeting;
+  const { blocks, creator, name, guests } = updatedMeeting;
 
   const adjustedRoomData = pickedRoom.roomData.map((data: RoomData) => {
     if (blocks.includes(data.block)) return { ...data, reserved: false };
@@ -94,12 +96,7 @@ const DetailDomEditMode: React.FC<DetailDomEditModeProps> = ({
         )}
       </div>
       <div>
-        <Input
-          name="name"
-          value={updatedMeeting.name}
-          size="sm"
-          onChange={onChangeMeeting}
-        />
+        <Input name="name" value={name} size="sm" onChange={onChangeMeeting} />
 
         <MeetingType
           id="type"
@@ -109,9 +106,9 @@ const DetailDomEditMode: React.FC<DetailDomEditModeProps> = ({
           small
         />
 
-        <Input value={updatedMeeting.creator} size="sm" disabled />
+        <Input value={creator} size="sm" disabled />
         <DisplayedGuests
-          guests={updatedMeeting.guests}
+          guests={updatedGuests}
           setGuestsOpenModal={setIsGuestModalOpen}
         />
 
@@ -120,9 +117,10 @@ const DetailDomEditMode: React.FC<DetailDomEditModeProps> = ({
             isOpen={isGuestModalOpen}
             setIsOpen={setIsGuestModalOpen}
             onAddGuests={setUpdatedGuests}
+            addedGuests={updatedGuests}
           />
         )}
-        <div className="flex flex-col border">
+        <div className="flex flex-col ">
           <UpdateMeetingTime
             options={startTimeOptions}
             start
@@ -130,7 +128,7 @@ const DetailDomEditMode: React.FC<DetailDomEditModeProps> = ({
             updatedTime={updatedTime}
             setMissingFormData={setMissingFormData}
           />
-          {updatedTime.hasOwnProperty("start") && (
+          {updatedTime.start != null && (
             <UpdateMeetingTime
               options={endTimeOptions}
               end

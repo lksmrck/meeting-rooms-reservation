@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import TimeBlocksDom from "../../overview/TimeBlocksDom";
 import { Meeting, RoomData } from "../../../types/types";
 import LoadingSpinner from "../../ui/LoadingSpinner/LoadingSpinner";
+import { updatePickedRoom } from "../../../utils/updatePickedRoom";
 
 /* ZDE SLEDOVAT V LOKÁLNÍM STATE MÍSTO CONTEXTU???? - SELECTEDTIME */
 const TimeSelect: React.FC = () => {
@@ -41,8 +42,8 @@ const TimeSelect: React.FC = () => {
   }, [pickedRoom]);
 
   useEffect(() => {
+    /*    console.log(pickedRoom); */
     let isCurrent = true;
-
     if (!isCurrent) return;
     fetchMeetings(
       "secondCompany",
@@ -50,6 +51,13 @@ const TimeSelect: React.FC = () => {
       setMeetingsDetail,
       pickedRoom.id
     );
+    console.log(meetingsDetail);
+    /*   .then(() => {
+        updatePickedRoom(pickedRoom, setPickedRoom, meetingsDetail);
+      })
+      .then(() => {
+        console.log(pickedRoom);
+      }); */
     return () => {
       isCurrent = false;
     };
@@ -60,7 +68,7 @@ const TimeSelect: React.FC = () => {
     //ale lze vybrat postupně všechny bloky od 7:00 až do 12:30.
 
     //Podminky
-    //0.Pokud se klikne na rezerovavný block, tak zbytek funkce nepokračuje a neudělá nic.
+    //0.Pokud se klikne na rezerovavný block, tak zbytek funkce nepokračuje a ale místo toho zobrazí meeting
     const clickReservedCheck = pickedRoom.roomData.find((room: RoomData) => {
       return room.block == blockNumber && room.reserved;
     });

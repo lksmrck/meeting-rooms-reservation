@@ -110,6 +110,7 @@ const Form: React.FC = () => {
               isOpen={isGuestModalOpen}
               setIsOpen={setIsGuestModalOpen}
               onAddGuests={onAddGuests}
+              addedGuests={guests}
             />
           )}
           <MeetingType

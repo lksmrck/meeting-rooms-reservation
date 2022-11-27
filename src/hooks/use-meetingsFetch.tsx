@@ -8,6 +8,7 @@ import AppContext from "../state/AppContext";
 export const useMeetingsFetch = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { setError } = useContext(AppContext);
+
   const fetchMeetings = async (
     company: string,
     date: string | null,
@@ -23,8 +24,9 @@ export const useMeetingsFetch = () => {
       docSnap.data().meetings.forEach((meeting: Meeting) => {
         if (meeting.date == date) todaysMeetings.push(meeting);
       });
-
       setState(todaysMeetings);
+
+      console.log(todaysMeetings);
       setIsLoading(false);
     } else {
       setIsLoading(false);

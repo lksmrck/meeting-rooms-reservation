@@ -19,6 +19,8 @@ import DetailDomEditMode from "./DetailDomEditMode";
 import DetailDom from "./DetailDom";
 import { timeToBlocks } from "../../utils/timeToBlocks";
 import { useAddMeeting } from "../../hooks/use-addMeeting";
+import { updatePickedRoom } from "../../utils/updatePickedRoom";
+import { useMeetingsFetch } from "../../hooks/use-meetingsFetch";
 
 type MeetingDetailProps = {
   clickedMeeting: Meeting;
@@ -41,12 +43,16 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
   const [updatedGuests, setUpdatedGuests] = useState(updatedMeeting.guests);
   const [missingFormData, setMissingFormData] = useState(false);
 
+  const [meetingsDetail, setMeetingsDetail] = useState([] as Meeting[]);
+
   //State na local loading - aby nebyl problém se synchronizací s Firebase (update a nasledny fetch updated)
   const [fbIsLoading, setFbIsLoading] = useState(false);
 
   const { company, user } = useContext(AuthContext);
-  const { pickedDate, pickedRoom } = useContext(ReservationContext);
+  const { pickedDate, pickedRoom, setPickedRoom } =
+    useContext(ReservationContext);
 
+  const { fetchMeetings } = useMeetingsFetch();
   const { addMeeting } = useAddMeeting();
   const { removeData, isLoading } = useRemoveMeeting();
 
@@ -105,11 +111,22 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
       updatedTime.end != null
     ) {
       removeData("secondCompany", clickedMeeting, pickedRoom.id).then(() => {
-        addMeeting(formData, "/reserve").then(() => {
-          setFbIsLoading(false);
-          setOpenDetail(false);
-          setIsEditing(false);
-        });
+        addMeeting(formData)
+          .then(() => {
+            updatePickedRoom(
+              pickedRoom,
+              setPickedRoom,
+              clickedMeeting,
+              formData
+            );
+          })
+          .then(() => {
+            console.log(pickedRoom);
+
+            setFbIsLoading(false);
+            setOpenDetail(false);
+            setIsEditing(false);
+          });
       });
     } else {
       setMissingFormData(true);
@@ -135,6 +152,7 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
                 setUpdatedTime={setUpdatedTime}
                 setUpdatedGuests={setUpdatedGuests}
                 setMissingFormData={setMissingFormData}
+                updatedGuests={updatedGuests}
               />
             ) : (
               <DetailDom clickedMeeting={clickedMeeting} />

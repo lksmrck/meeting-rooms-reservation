@@ -33,7 +33,7 @@ const UpdateMeetingTime: React.FC<UpdateMeetingTimeProps> = ({
       <select
         name={start ? "start" : "end"}
         id={start ? "start" : "end"}
-        className=" mt-0.5 bg-slate-50 text-sm pl-2"
+        className=" h-8 rounded-sm mb-0.5 border bg-slate-50 text-sm pl-2"
         onChange={onChangeSelect}
       >
         <option value={NONE} selected disabled hidden>

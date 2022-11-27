@@ -10,7 +10,7 @@ import {
   Button,
   IconButton,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useState, SyntheticEvent, ChangeEvent } from "react";
 
 import { GoPlus } from "react-icons/go";
 import { AiOutlineMinus } from "react-icons/ai";
@@ -19,19 +19,27 @@ type GuestsModalProps = {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   onAddGuests: (guests: string[]) => void;
+  addedGuests: string[];
 };
 
 const GuestsModal: React.FC<GuestsModalProps> = ({
   isOpen,
   setIsOpen,
   onAddGuests,
+  addedGuests,
 }) => {
-  const [inputsNumber, setInputsNumber] = useState<number[]>([1]);
+  const [guests, setGuests] = useState(addedGuests);
+  const initialInputsNumber = guests.map((guest: string, index: number) => {
+    return index + 1;
+  });
 
-  const [guests, setGuests] = useState([] as string[]);
+  //Array na základě kt. se pak mapujou inputy - pokud jsou už ve state nějací guesti, tak bude počáteční state array s čísly guestů např [1,2,3]. Pokud nejsou guesti ve state, tak bude initial state [1]
+  const [inputsNumber, setInputsNumber] = useState<number[]>(
+    initialInputsNumber.length > 1 ? initialInputsNumber : [1]
+  );
 
   //Přidá každého guesta do array a removuje při odebrání inputu.
-  const onChangeGuests = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const onChangeGuests = (e: ChangeEvent<HTMLInputElement>): void => {
     let newArr: string[] = [...guests];
     newArr[Number(e.target.name) - 1] = e.target.value;
     setGuests(newArr);
@@ -44,7 +52,7 @@ const GuestsModal: React.FC<GuestsModalProps> = ({
     onAddGuests([]);
   };
 
-  const onSubmitGuests = (e: React.SyntheticEvent) => {
+  const onSubmitGuests = (e: SyntheticEvent) => {
     onAddGuests(guests);
     setIsOpen(false);
   };
@@ -52,7 +60,6 @@ const GuestsModal: React.FC<GuestsModalProps> = ({
   return (
     <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
       <ModalOverlay />
-
       <ModalContent>
         <ModalHeader>Add guests</ModalHeader>
         <ModalCloseButton />
@@ -66,12 +73,13 @@ const GuestsModal: React.FC<GuestsModalProps> = ({
                   name={String(input)}
                   id={String(input)}
                   onChange={onChangeGuests}
+                  value={guests[input - 1]}
                 />
               );
             })}
 
             <div className="flex justify-end">
-              {inputsNumber.length > 1 ? (
+              {inputsNumber.length > 1 && (
                 <IconButton
                   size="sm"
                   icon={<AiOutlineMinus />}
@@ -85,8 +93,6 @@ const GuestsModal: React.FC<GuestsModalProps> = ({
                     );
                   }}
                 ></IconButton>
-              ) : (
-                ""
               )}
 
               <IconButton

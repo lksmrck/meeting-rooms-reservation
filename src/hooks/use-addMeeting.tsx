@@ -11,7 +11,7 @@ export const useAddMeeting = () => {
 
   const addMeeting = async (
     newMeeting: any,
-    navigateURL: string,
+    navigateURL?: string,
     setFormData?: Dispatch<SetStateAction<{ name: string; type: string }>>,
     update = false
   ) => {
@@ -23,7 +23,7 @@ export const useAddMeeting = () => {
 
     await updateDoc(dbRef, { meetings: arrayUnion(newMeeting) });
     if (setFormData) setFormData({ name: "", type: "" });
-    navigate(navigateURL);
+    navigateURL && navigate(navigateURL);
 
     if (update) {
     }
