@@ -13,6 +13,7 @@ import { timeCheck } from "./utils/timeCheck";
 import ErrorScreen from "./pages/screens/ErrorScreen";
 import { useNavigate } from "react-router-dom";
 import RoomsList from "./components/admin/RoomsList";
+import UsersList from "./components/admin/UsersList";
 
 const App = () => {
   const navigate = useNavigate();
@@ -78,10 +79,18 @@ const App = () => {
           />
         </Route>
         <Route
-          path="settings"
+          path="settings/rooms"
           element={
             <RequireAuth>
               <RoomsList />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="settings/users"
+          element={
+            <RequireAuth>
+              <UsersList />
             </RequireAuth>
           }
         />

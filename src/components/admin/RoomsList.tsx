@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useRoomsAdminFncs } from "../../hooks/use-roomsAdminFncs";
 import { IconButton } from "@chakra-ui/react";
 import { AiOutlinePlusSquare } from "react-icons/ai";

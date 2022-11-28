@@ -22,7 +22,6 @@ const Auth = () => {
   const loginHandler = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     setIsLoading(true);
-
     //Firebase docs -  https://firebase.google.com/docs/auth/web/password-auth
     //Firebase Auth
     setPersistence(auth, browserSessionPersistence)
@@ -32,7 +31,6 @@ const Auth = () => {
             // Signed in
             const user = userCredential.user;
             setUser(user);
-
             navigate("/home");
             setIsLoading(false);
             // ...
