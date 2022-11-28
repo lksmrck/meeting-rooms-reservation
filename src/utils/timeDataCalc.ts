@@ -1,6 +1,7 @@
 import { timeBlocks } from '../common/dummyData';
 import { Meeting, TimeBlock } from '../types/types';
 
+//Time data týkající se meetingu k zobrazení v meeting detailu.
 export const timeDataCalc = (selectedMeeting: Meeting) => {
     const minBlock = Math.min(...selectedMeeting.blocks)
     const maxBlock = Math.max(...selectedMeeting.blocks)

@@ -12,6 +12,7 @@ import AppContext from "./state/AppContext";
 import { timeCheck } from "./utils/timeCheck";
 import ErrorScreen from "./pages/screens/ErrorScreen";
 import { useNavigate } from "react-router-dom";
+import RoomsList from "./components/admin/RoomsList";
 
 const App = () => {
   const navigate = useNavigate();
@@ -76,6 +77,14 @@ const App = () => {
             }
           />
         </Route>
+        <Route
+          path="settings"
+          element={
+            <RequireAuth>
+              <RoomsList />
+            </RequireAuth>
+          }
+        />
       </Routes>
 
       {/*  <Footer /> */}

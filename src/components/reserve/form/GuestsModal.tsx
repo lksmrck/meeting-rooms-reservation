@@ -48,8 +48,8 @@ const GuestsModal: React.FC<GuestsModalProps> = ({
   const onCancel = () => {
     setIsOpen(false);
     setInputsNumber([1]);
-    setGuests([]);
-    onAddGuests([]);
+    /* setGuests([]);
+    onAddGuests([]); */
   };
 
   const onSubmitGuests = (e: SyntheticEvent) => {

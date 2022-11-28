@@ -15,7 +15,10 @@ export const useRoomsMeetingsFetch = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { setRoomsData } = useContext(ReservationContext);
 
-  const roomsFetch = async (company: string, date: string | null) => {
+  const roomsAndMeetingsFetch = async (
+    company: string,
+    date: string | null
+  ) => {
     setIsLoading(true);
     const querySnapshot = await getDocs(
       collection(db, `companies/${company}/rooms`)
@@ -46,7 +49,6 @@ export const useRoomsMeetingsFetch = () => {
         });
       }
     });
-    //set state do DailyOverview componentu
 
     //Rezervované bloky -> Najdu v každé room bloky, u kterých bude potřeba upravit property reserved na TRUE.
     const updatedRooms: Room[] = companyRooms.map((room: CompanyRoom) => {
@@ -90,6 +92,6 @@ export const useRoomsMeetingsFetch = () => {
 
   return {
     isLoading,
-    roomsFetch,
+    roomsAndMeetingsFetch,
   };
 };

@@ -37,9 +37,7 @@ const DetailDomEditMode: React.FC<DetailDomEditModeProps> = ({
   updatedGuests,
 }) => {
   const { pickedRoom } = useContext(ReservationContext);
-
   const [isGuestModalOpen, setIsGuestModalOpen] = useState(false);
-
   const { blocks, creator, name, guests } = updatedMeeting;
 
   const adjustedRoomData = pickedRoom.roomData.map((data: RoomData) => {

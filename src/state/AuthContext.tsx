@@ -12,10 +12,6 @@ import { db } from "../config/firebase";
 import { User as FirebaseUser } from "firebase/auth";
 
 interface AuthContextInterface {
-  /*   openModal: boolean;
-  setOpenModal: Dispatch<SetStateAction<boolean>>;
-  selectedRoom: any;
-  setSelectedRoom: /* Dispatch<SetStateAction<number | null>>; */
   user: FirebaseUser | null;
   setUser: Dispatch<SetStateAction<FirebaseUser | null>>;
   company: string;

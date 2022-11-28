@@ -30,24 +30,6 @@ export const useRemoveMeeting = () => {
       await updateDoc(dbRef, {
         meetings: updatedMeetings,
       });
-
-      //DODELAT
-      //Úprava state, ve kterém držím meetingy v daném dnu
-      /*     setRoomsData((prevData: any) =>
-        prevData.map((room: any) => {
-          if (room.id == roomNo) {
-            room.roomData.map((data: any) => {
-              console.log("jo");
-              if (clickedMeeting.blocks.includes(data.block)) {
-                return { ...data, reserved: false };
-              }
-              return data;
-            });
-          }
-          return room;
-        })
-      ); */
-
       setIsLoading(false);
     } else {
       setIsLoading(false);

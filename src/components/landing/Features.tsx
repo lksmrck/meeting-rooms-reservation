@@ -4,8 +4,6 @@ import { MdOutlineSportsScore } from "react-icons/md";
 import { GiClick } from "react-icons/gi";
 
 const Features = () => {
-  //Tady 3 výhody + react icons
-
   return (
     <div className="h-3/4">
       <div className="flex justify-center  bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 items-center h-full">

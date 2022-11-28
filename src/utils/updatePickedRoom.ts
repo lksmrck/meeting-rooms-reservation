@@ -1,3 +1,4 @@
+//Update pickedRoom state po updatování meetingu
 export const updatePickedRoom =  (pickedRoom: any, setPickedRoom: any, deletedMeeting:any, newMeeting:any ) => {
     
     const firstIterate = pickedRoom.roomData.map((roomData: any) => {

@@ -10,24 +10,19 @@ import { CompanyRoom, Room, RoomData } from "../../types/types";
 import LoadingSpinner from "../ui/LoadingSpinner/LoadingSpinner";
 
 const Overview = () => {
-  //Array s infem o firemních místnostech (ID, name)
-  /*   const [companyRooms, setCompanyRooms] = useState<CompanyRoom[]>([]); */
-  //Detailní info o rooms + blocks + meetings ve vybraném dnu
-  /* const [roomsData, setRoomsData] = useState<any[]>([]); */
-
   const { pickedDate, setPickedRoom, roomsData, setRoomsData } =
     useContext(ReservationContext);
 
   /* const { user, company } = useContext(AuthContext); */
   const navigate = useNavigate();
 
-  const { roomsFetch, isLoading } = useRoomsMeetingsFetch();
+  const { roomsAndMeetingsFetch, isLoading } = useRoomsMeetingsFetch();
 
   //1. Firebase query - stáhne všechny rooms za danou firmu včetně meetingů a zpracované meetingy vč. upravených objektů o meetingy ve vybraném dnu uloží do state. Viz. funkce..
   useEffect(() => {
     let isCurrent = true;
     if (!isCurrent) return;
-    roomsFetch(
+    roomsAndMeetingsFetch(
       "secondCompany", //upravit na company
       pickedDate
     );

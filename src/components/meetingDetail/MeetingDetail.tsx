@@ -26,12 +26,14 @@ type MeetingDetailProps = {
   clickedMeeting: Meeting;
   openDetail: boolean;
   setOpenDetail: Dispatch<SetStateAction<boolean>>;
+  setMeetingsDetail: any;
 };
 
 const MeetingDetail: React.FC<MeetingDetailProps> = ({
   clickedMeeting,
   openDetail,
   setOpenDetail,
+  setMeetingsDetail,
 }) => {
   //Editing state
   const [isEditing, setIsEditing] = useState(false);
@@ -42,8 +44,6 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
   }>({ start: null, end: null });
   const [updatedGuests, setUpdatedGuests] = useState(updatedMeeting.guests);
   const [missingFormData, setMissingFormData] = useState(false);
-
-  const [meetingsDetail, setMeetingsDetail] = useState([] as Meeting[]);
 
   //State na local loading - aby nebyl problém se synchronizací s Firebase (update a nasledny fetch updated)
   const [fbIsLoading, setFbIsLoading] = useState(false);
@@ -83,7 +83,7 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
     setIsEditing(true);
   };
 
-  const onChangeMeeting = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const changeMeetingHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUpdatedMeeting({ ...updatedMeeting, [e.target.name]: e.target.value });
     if (missingFormData) setMissingFormData(false);
   };
@@ -113,6 +113,14 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
       removeData("secondCompany", clickedMeeting, pickedRoom.id).then(() => {
         addMeeting(formData)
           .then(() => {
+            fetchMeetings(
+              "secondCompany",
+              pickedDate,
+              setMeetingsDetail,
+              pickedRoom.id
+            );
+          })
+          .then(() => {
             updatePickedRoom(
               pickedRoom,
               setPickedRoom,
@@ -121,8 +129,6 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
             );
           })
           .then(() => {
-            console.log(pickedRoom);
-
             setFbIsLoading(false);
             setOpenDetail(false);
             setIsEditing(false);
@@ -146,7 +152,7 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
           <ModalBody pb={6}>
             {isEditing ? (
               <DetailDomEditMode
-                onChangeMeeting={onChangeMeeting}
+                onChangeMeeting={changeMeetingHandler}
                 updatedMeeting={updatedMeeting}
                 updatedTime={updatedTime}
                 setUpdatedTime={setUpdatedTime}

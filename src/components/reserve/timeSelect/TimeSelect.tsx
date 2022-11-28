@@ -42,7 +42,6 @@ const TimeSelect: React.FC = () => {
   }, [pickedRoom]);
 
   useEffect(() => {
-    /*    console.log(pickedRoom); */
     let isCurrent = true;
     if (!isCurrent) return;
     fetchMeetings(
@@ -51,13 +50,7 @@ const TimeSelect: React.FC = () => {
       setMeetingsDetail,
       pickedRoom.id
     );
-    console.log(meetingsDetail);
-    /*   .then(() => {
-        updatePickedRoom(pickedRoom, setPickedRoom, meetingsDetail);
-      })
-      .then(() => {
-        console.log(pickedRoom);
-      }); */
+
     return () => {
       isCurrent = false;
     };
@@ -175,6 +168,7 @@ const TimeSelect: React.FC = () => {
           clickedMeeting={clickedMeeting}
           openDetail={openDetail}
           setOpenDetail={setOpenDetail}
+          setMeetingsDetail={setMeetingsDetail}
         />
       )}
     </section>
