@@ -155,7 +155,9 @@ const TimeSelect: React.FC = () => {
       </div>
       <div>
         {isLoading ? (
-          <LoadingSpinner />
+          <div className="w-28 -ml-2">
+            <LoadingSpinner />
+          </div>
         ) : (
           <OneRoomDom
             pickedRoom={pickedRoom}

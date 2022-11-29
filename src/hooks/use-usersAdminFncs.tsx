@@ -30,8 +30,8 @@ export const useUsersAdminFncs = () => {
 
   const addUser = async (formData: any, setUsersArray: any) => {
     setIsLoading(true);
-    const { name, company, email, password } = formData;
-
+    const { company, email, password } = formData;
+    console.log(formData);
     //1. create user in auth
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredentials: any) => {
@@ -39,13 +39,12 @@ export const useUsersAdminFncs = () => {
         const { user } = userCredentials;
         setDoc(doc(db, `companies/${company}/users`, user.uid), {
           ...formData,
-          timeStamp: serverTimestamp(),
         });
         //3. Create user in overall DB (vytáhne se odtud jen company a uid, aby se pak mohla tahat data.)
         setDoc(doc(db, `users`, user.uid), {
           ...formData,
-          timeStamp: serverTimestamp(),
         });
+
         setUsersArray((prevArray: any) => [...prevArray, formData]);
       })
 
@@ -66,7 +65,7 @@ export const useUsersAdminFncs = () => {
     setIsLoading(true);
     await deleteDoc(doc(db, `companies/${company}/users`, String(userID)));
     setUsersArray((prevArray: any) =>
-      prevArray.filter((room: any) => room.id != userID)
+      prevArray.filter((user: any) => user.id != userID)
     );
     setIsLoading(false);
   };

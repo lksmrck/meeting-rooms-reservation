@@ -17,7 +17,7 @@ const RoomsDom: React.FC<RoomsDomProps> = ({
     let height;
 
     return (
-      <div key={room.id} className="">
+      <div key={room.id}>
         <div className="text-xs w-20 h-10 flex justify-center items-center border border-stone-700  rounded-md bg-emerald-700 text-white font-bold mb-1 cursor-pointer">
           {room.name}
         </div>

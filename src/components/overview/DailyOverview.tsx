@@ -54,6 +54,8 @@ const Overview = () => {
   //Počet sloupců pro GRID
   const displayCols = roomsNumber + 1;
 
+  //Loading spinner width
+
   return (
     <div className="flex justify-center bg-gradient-to-r from-violet-300 to-violet-400 ">
       <section
@@ -71,9 +73,7 @@ const Overview = () => {
           <TimeBlocksDom />
         </div>
         {isLoading ? (
-          <div className="ml-10">
-            <LoadingSpinner />
-          </div>
+          <LoadingSpinner />
         ) : (
           <RoomsDom
             roomsData={roomsData}

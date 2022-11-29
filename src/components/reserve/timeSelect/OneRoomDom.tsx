@@ -25,7 +25,7 @@ const OneRoomDom: React.FC<OneRoomDomProps> = ({
     );
 
     if (includedInHelper) {
-      return "";
+      return;
     }
 
     if (roomData.reserved && !includedInHelper) {

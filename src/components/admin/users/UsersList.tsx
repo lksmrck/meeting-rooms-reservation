@@ -20,6 +20,8 @@ const UsersList = () => {
     company: "secondCompany",
     email: "mail@mail.cz",
     password: "afsfasdasdasa",
+    rights: "admin",
+    creationDate: new Date().toLocaleString(),
   };
 
   const addUserHandler = () => {
@@ -28,21 +30,16 @@ const UsersList = () => {
 
   const deleteUserHandler = (userId: any) => {
     deleteUser("secondCompany", userId, setUsers);
-    console.log(userId);
   };
 
   return (
     <div className="ml-2 w-screen flex justify-center flex-col items-center ">
       {isLoading ? (
-        /*  <div className=" h-24"> */
         <LoadingSpinner />
       ) : (
-        /*    </div> */
         <>
           <ul className="lg:w-4/12 w-4/5 border shadow-md rounded-lg bg-slate-300 ">
             {users.map((user: any) => {
-              const secs = user.timeStamp.seconds;
-              const date = new Date(secs * 1000);
               return (
                 <div className="flex mt-1 border-b-2">
                   <li className="flex w-4/5 ml-1 mb-1 justify-between">
@@ -53,7 +50,7 @@ const UsersList = () => {
                       <h3>{user.rights}</h3>
                     </div>
                     <div>
-                      <h3>{date.toLocaleString()}</h3>
+                      <h3>{user.creationDate}</h3>
                     </div>
                   </li>
                   <div className="w-1/5 flex justify-end  mb-1">
