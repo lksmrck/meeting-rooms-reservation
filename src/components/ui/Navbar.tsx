@@ -41,7 +41,9 @@ const Navbar = () => {
                   colorScheme="facebook"
                   aria-label="plus"
                   icon={<FiSettings size={25} style={{ color: "#f0fdf4" }} />}
-                  onClick={() => console.log("click")}
+                  onClick={() => {
+                    navigate(`/settings`);
+                  }}
                   className="h-10 w-10 mr-2"
                   size="md"
                 />

@@ -32,7 +32,8 @@ export const AuthContextProvider: React.FC<{
 
     //Firebase query -> při změně usera uložení company, pod kterou user pracuje
     const fetchCompany = async () => {
-      const docRef = doc(db, "users", user.email);
+      const docRef = doc(db, "users", user.uid);
+
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {

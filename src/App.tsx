@@ -12,8 +12,9 @@ import AppContext from "./state/AppContext";
 import { timeCheck } from "./utils/timeCheck";
 import ErrorScreen from "./pages/screens/ErrorScreen";
 import { useNavigate } from "react-router-dom";
-import RoomsList from "./components/admin/RoomsList";
-import UsersList from "./components/admin/UsersList";
+import RoomsList from "./components/admin/rooms/RoomsList";
+import UsersList from "./components/admin/users/UsersList";
+import Settings from "./components/admin/Settings";
 
 const App = () => {
   const navigate = useNavigate();
@@ -44,10 +45,8 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/">
-          {error.error ? (
+          {error.error && (
             <Route path="something-wrong" element={<ErrorScreen />} />
-          ) : (
-            ""
           )}
           <Route index element={<Landing />} />
           <Route path="login" element={<Auth />} />
@@ -78,6 +77,14 @@ const App = () => {
             }
           />
         </Route>
+        <Route
+          path="settings"
+          element={
+            <RequireAuth>
+              <Settings />
+            </RequireAuth>
+          }
+        />
         <Route
           path="settings/rooms"
           element={

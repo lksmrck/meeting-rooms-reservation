@@ -7,6 +7,7 @@ import {
   serverTimestamp,
   getDocs,
   collection,
+  deleteDoc,
 } from "firebase/firestore";
 import { db } from "../config/firebase";
 
@@ -20,8 +21,9 @@ export const useUsersAdminFncs = () => {
       collection(db, `companies/${company}/users`)
     );
     querySnapshot.forEach((doc) => {
-      usersList.push({ id: doc.data().id, name: doc.data().name });
+      usersList.push({ ...doc.data(), id: doc.id });
     });
+    console.log(usersList);
     setUsersArray(usersList);
     setIsLoading(false);
   };
@@ -39,8 +41,14 @@ export const useUsersAdminFncs = () => {
           ...formData,
           timeStamp: serverTimestamp(),
         });
+        //3. Create user in overall DB (vytáhne se odtud jen company a uid, aby se pak mohla tahat data.)
+        setDoc(doc(db, `users`, user.uid), {
+          ...formData,
+          timeStamp: serverTimestamp(),
+        });
         setUsersArray((prevArray: any) => [...prevArray, formData]);
       })
+
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
@@ -50,9 +58,16 @@ export const useUsersAdminFncs = () => {
     setIsLoading(false);
   };
 
-  const deleteUser = async () => {
+  const deleteUser = async (
+    company: string,
+    userID: any,
+    setUsersArray: any
+  ) => {
     setIsLoading(true);
-
+    await deleteDoc(doc(db, `companies/${company}/users`, String(userID)));
+    setUsersArray((prevArray: any) =>
+      prevArray.filter((room: any) => room.id != userID)
+    );
     setIsLoading(false);
   };
 
