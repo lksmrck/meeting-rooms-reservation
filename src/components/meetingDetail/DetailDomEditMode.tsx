@@ -7,7 +7,7 @@ import React, {
   ChangeEvent,
 } from "react";
 import { Input } from "@chakra-ui/react";
-import MeetingType from "../reserve/form/MeetingType";
+import MeetingType from "../reserve/form/FormSelect";
 import { meetingTypes } from "../../constants/constants";
 import DisplayedGuests from "../reserve/form/DisplayedGuests";
 import GuestsModal from "../reserve/form/GuestsModal";
@@ -94,7 +94,13 @@ const DetailDomEditMode: React.FC<DetailDomEditModeProps> = ({
         )}
       </div>
       <div>
-        <Input name="name" value={name} size="sm" onChange={onChangeMeeting} />
+        <Input
+          name="name"
+          value={name}
+          size="sm"
+          onChange={onChangeMeeting}
+          focusBorderColor="teal.400"
+        />
 
         <MeetingType
           id="type"

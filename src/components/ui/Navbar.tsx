@@ -5,12 +5,13 @@ import { signOut } from "firebase/auth";
 import { auth } from "../../config/firebase";
 import { Button, IconButton } from "@chakra-ui/react";
 import { FiSettings } from "react-icons/fi";
+import AppContext from "../../state/AppContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
 
-  const authContext = useContext(AuthContext);
-  const { user, setUser, company } = authContext;
+  const { user, setUser, company } = useContext(AuthContext);
+  const { setError } = useContext(AppContext);
 
   const onClickButton = () => {
     if (user) {
@@ -21,7 +22,7 @@ const Navbar = () => {
           navigate("/");
         })
         .catch((error) => {
-          console.log(error);
+          setError({ error: true, message: error.message });
         });
     }
     navigate("/login");

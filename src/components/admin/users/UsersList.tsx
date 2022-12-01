@@ -4,15 +4,16 @@ import { AiOutlinePlusSquare } from "react-icons/ai";
 import { AiOutlineMinusSquare } from "react-icons/ai";
 import LoadingSpinner from "../../ui/LoadingSpinner/LoadingSpinner";
 import { useUsersAdminFncs } from "../../../hooks/use-usersAdminFncs";
+import AddUserModal from "./AddUserModal";
 
 const UsersList = () => {
   const [users, setUsers] = useState([]);
+  const [addUserModalOpen, setAddUserModalOpen] = useState(false);
 
   const { fetchUsers, addUser, deleteUser, isLoading } = useUsersAdminFncs();
 
   useEffect(() => {
     fetchUsers("secondCompany", setUsers);
-    console.log(users);
   }, []);
 
   const formData = {
@@ -36,6 +37,12 @@ const UsersList = () => {
     <div className="ml-2 w-screen flex justify-center flex-col items-center ">
       {isLoading ? (
         <LoadingSpinner />
+      ) : addUserModalOpen ? (
+        <AddUserModal
+          isOpen={addUserModalOpen}
+          setIsOpen={setAddUserModalOpen}
+          setUsers={setUsers}
+        />
       ) : (
         <>
           <ul className="lg:w-4/12 w-4/5 border shadow-md rounded-lg bg-slate-300 ">
@@ -80,7 +87,9 @@ const UsersList = () => {
             icon={
               <AiOutlinePlusSquare size={25} style={{ color: "#f0fdf4" }} />
             }
-            onClick={addUserHandler}
+            onClick={() => {
+              setAddUserModalOpen(true);
+            }}
             className="h-10 w-10 mt-2"
             size="md"
           />

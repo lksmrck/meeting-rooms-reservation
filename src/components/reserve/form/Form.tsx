@@ -1,16 +1,16 @@
 import React, { useState, useContext } from "react";
 import { Button } from "@chakra-ui/react";
-import MeetingType from "./MeetingType";
+import MeetingType from "./FormSelect";
 import AuthContext from "../../../state/AuthContext";
 import { meetingTypes } from "../../../constants/constants";
 import { Input } from "@chakra-ui/react";
 import GuestsModal from "./GuestsModal";
 import ReservationContext from "../../../state/ReservationContext";
 import { useNavigate } from "react-router-dom";
-
 import { RoomData } from "../../../types/types";
 import DisplayedGuests from "./DisplayedGuests";
 import { useAddMeeting } from "../../../hooks/use-addMeeting";
+import { CALL } from "../../../constants/constants";
 
 const Form: React.FC = () => {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const Form: React.FC = () => {
   const [disabledBtn, setDisabledBtn] = useState(false);
 
   //Data z formu
-  const [formData, setFormData] = useState({ name: "", type: "call" });
+  const [formData, setFormData] = useState({ name: "", type: CALL });
 
   //Guests
   const [guests, setGuests] = useState<string[] | []>([]);
@@ -86,6 +86,7 @@ const Form: React.FC = () => {
             onChange={onChangeInput}
             value={formData.name}
             style={{ backgroundColor: "white" }}
+            focusBorderColor="teal.400"
           />
 
           {guests.length > 0 ? (
