@@ -66,8 +66,8 @@ const Overview = () => {
           width: `${displayWidth}rem`,
         }}
       >
-        <div>
-          <div className="text-xs w-20 h-10 flex justify-center items-center  border border-stone-700 rounded-md bg-emerald-700 text-white font-bold mb-1 cursor-pointer">
+        <div className=" -ml-4">
+          <div className="text-xs w-24 h-10 flex justify-center items-center  border border-stone-700 rounded-md bg-emerald-900 text-white font-bold mb-1 cursor-pointer">
             Time
           </div>
           <TimeBlocksDom />

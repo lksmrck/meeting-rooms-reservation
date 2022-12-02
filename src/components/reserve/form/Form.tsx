@@ -12,7 +12,11 @@ import DisplayedGuests from "./DisplayedGuests";
 import { useAddMeeting } from "../../../hooks/use-addMeeting";
 import { CALL } from "../../../constants/constants";
 
-const Form: React.FC = () => {
+type FormProps = {
+  blocksPickError: { error: boolean; message: string };
+};
+
+const Form: React.FC<FormProps> = ({ blocksPickError }) => {
   const navigate = useNavigate();
   const { company, user } = useContext(AuthContext);
   const { pickedDate, pickedRoom } = useContext(ReservationContext);
@@ -31,15 +35,18 @@ const Form: React.FC = () => {
     setGuests(guests);
   };
 
-  const [missingFormData, setMissingFormData] = useState(false);
+  const [missingFormDataError, setMissingFormDataError] = useState(false);
 
-  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>): void =>
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setMissingFormDataError(false);
+    setDisabledBtn(false);
+  };
 
   const submitHandler = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     setDisabledBtn(true);
-    setMissingFormData(false);
+    setMissingFormDataError(false);
 
     //Čísla vybraných bloků k rezervaci
     let blocks: number[] = [];
@@ -62,9 +69,9 @@ const Form: React.FC = () => {
     //Check, zda je vyplněný název meetingu a vybrané bloky. Zbytek dat je nepovinný, nebo se vezme automaticky.
     if (blocks.length > 0 && name && name.length >= 1) {
       addMeeting(newMeeting, "/overview", setFormData);
-      setMissingFormData(false);
+      setMissingFormDataError(false);
     } else {
-      setMissingFormData(true);
+      setMissingFormDataError(true);
     }
   };
 
@@ -119,13 +126,14 @@ const Form: React.FC = () => {
             id="type"
             options={meetingTypes}
             onChange={onChangeInput}
-            margin
+            label="Select meeting type:"
+            additionalStyle="mt-2 mb-2 text-sm"
           />
           <div className="flex flex-col justify-center [&>button]:mt-1 ">
             <Button
               colorScheme="teal"
               type="submit"
-              disabled={disabledBtn && !missingFormData}
+              disabled={disabledBtn && !missingFormDataError}
             >
               Reserve
             </Button>
@@ -139,11 +147,13 @@ const Form: React.FC = () => {
               Back
             </Button>
           </div>
-          {missingFormData && (
-            <p className="w-72  text-xs text-red-600">
-              Please fill in meeting name and pick meeting blocks to reserve.
-            </p>
-          )}
+          <p className="h-1 text-xs text-red-600">
+            {blocksPickError.error && blocksPickError.message}
+          </p>
+          <p className="mt-3 h-1 text-xs text-red-600">
+            {missingFormDataError &&
+              "Please fill in meeting name and pick meeting blocks."}
+          </p>
         </form>
       </div>
     </section>

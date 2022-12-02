@@ -48,14 +48,14 @@ const AddRoomModal: React.FC<AddRoomModalProps> = ({
     <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Add user</ModalHeader>
+        <ModalHeader>Add room</ModalHeader>
         <ModalCloseButton />
         <ModalBody pb={6}>
           <form>
             <Input
               size="sm"
               type="text"
-              placeholder="Jakarta"
+              placeholder="e.g. Example Room "
               name="name"
               id="name"
               onChange={inputChangeHandler}

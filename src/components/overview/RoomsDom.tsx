@@ -1,5 +1,6 @@
 import React from "react";
 import { Room, RoomData } from "../../types/types";
+import { Button } from "@chakra-ui/react";
 
 type RoomsDomProps = {
   roomsData: any;
@@ -26,7 +27,7 @@ const RoomsDom: React.FC<RoomsDomProps> = ({
             roomData.meetingBlocks?.includes(blockNo)
           );
           if (includedInHelper) {
-            return "";
+            return;
           }
           if (roomData.reserved && !includedInHelper) {
             height = roomData.meetingBlocks!.length * 2.5;
@@ -37,24 +38,46 @@ const RoomsDom: React.FC<RoomsDomProps> = ({
             });
 
             return (
-              <div
+              <Button
+                key={roomData.block}
+                size="sm"
+                className="hover:translate-x-1 w-20 border border-stone-700 shadow-md shadow-slate-600 "
+                colorScheme="blue"
+                style={{ height: `${height}rem` }}
+                onClick={() => clickBlockHandler(room.id, roomData.block)}
+              >
+                Reserved
+              </Button>
+
+              /*  <div
                 key={roomData.block}
                 onClick={() => clickBlockHandler(room.id, roomData.block)}
                 className={`bg-blue-700 hover:bg-blue-800 rounded-md flex justify-center items-center w-20 text-xs  border border-stone-700 cursor-pointer hover:scale-105 shadow-lg shadow-slate-600`}
                 style={{ height: `${height}rem` }}
               >
                 Reserved
-              </div>
+              </div> */
             );
           }
           return (
-            <div
+            <Button
+              key={roomData.block}
+              size="sm"
+              className="hover:scale-105 w-20 border h-10 border-stone-700 shadow-md shadow-slate-600  "
+              colorScheme="gray"
+              style={{ height: `2.5rem` }}
+              onClick={() => clickBlockHandler(room.id, roomData.block)}
+            >
+              Free
+            </Button>
+
+            /*  <div
               key={roomData.block}
               onClick={() => clickBlockHandler(room.id, roomData.block)}
               className={`h-10 rounded-md bg-white hover:bg-slate-100 flex justify-center items-center w-20 text-xs border border-stone-700 cursor-pointer hover:scale-105 shadow-lg shadow-slate-600`}
             >
               Free
-            </div>
+            </div> */
           );
         })}
       </div>

@@ -7,8 +7,8 @@ type FormSelectProps = {
   options: MeetingCategory[] | any;
   onChange: any;
   small?: boolean;
-  margin?: boolean;
   additionalStyle?: string;
+  label?: string;
 };
 
 const FormSelect: React.FC<FormSelectProps> = ({
@@ -17,23 +17,30 @@ const FormSelect: React.FC<FormSelectProps> = ({
   options,
   onChange,
   small,
-  margin,
   additionalStyle,
+  label,
 }) => {
   {
     return (
-      <select
-        name={name}
-        id={id}
-        className={`bg-slate-50 border w-full pl-2 focus:outline-teal-600 ${
-          small ? "text-sm rounded-sm" : "rounded-md"
-        } ${margin ? "mb-2 mt-2" : ""} h-8 ${additionalStyle} `}
-        onChange={onChange}
-      >
-        {options!.map((option: MeetingCategory) => {
-          return <option value={option.name}>{option.name}</option>;
-        })}
-      </select>
+      <div className={`${additionalStyle}`}>
+        {label && (
+          <label htmlFor={id} className={`ml-0.5`}>
+            {label}
+          </label>
+        )}
+        <select
+          name={name}
+          id={id}
+          className={`bg-slate-50 border w-full pl-2 focus:outline-teal-600 ${
+            small ? "text-sm rounded-sm" : "rounded-md"
+          }  h-8  `}
+          onChange={onChange}
+        >
+          {options!.map((option: MeetingCategory) => {
+            return <option value={option.name}>{option.name}</option>;
+          })}
+        </select>
+      </div>
     );
   }
 };

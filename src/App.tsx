@@ -41,7 +41,7 @@ const App = () => {
   };
 
   return (
-    <div className="sm:overflow-y-scroll sm:scrollbar-hide">
+    <div className="sm:overflow-y-scroll sm:scrollbar-hide w-screen">
       <Navbar />
       <Routes>
         <Route path="/">

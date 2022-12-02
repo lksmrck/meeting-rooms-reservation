@@ -16,7 +16,7 @@ const DisplayedGuests: React.FC<DisplayedGuestsProps> = ({
   return (
     <div>
       {form && <p className="text-sm font-bold">Guests</p>}
-      <div className="flex my-0.5">
+      <div className={`flex ${form && "my-0.5"}`}>
         <p
           className={` h-8 pl-2 cursor-pointer flex items-center text-sm bg-white w-56 border ${
             form ? "rounded-md" : "rounded-sm"
@@ -36,16 +36,18 @@ const DisplayedGuests: React.FC<DisplayedGuestsProps> = ({
             <span>No guests.</span>
           )}
         </p>
-        <IconButton
-          colorScheme="teal"
-          aria-label="edit"
-          icon={<FiEdit size={14} style={{ color: "white" }} />}
-          className="ml-3 mt-0.5"
-          onClick={() => {
-            setGuestsOpenModal(true);
-          }}
-          size="xs"
-        />
+        <div className="flex items-center justify-center">
+          <IconButton
+            colorScheme="teal"
+            aria-label="edit"
+            icon={<FiEdit size={14} style={{ color: "white" }} />}
+            className="ml-3 mt-0.5"
+            onClick={() => {
+              setGuestsOpenModal(true);
+            }}
+            size="xs"
+          />
+        </div>
       </div>
     </div>
   );

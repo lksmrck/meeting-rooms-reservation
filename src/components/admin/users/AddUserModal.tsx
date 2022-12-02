@@ -127,7 +127,9 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
               name="rights"
               options={userRights}
               onChange={inputChangeHandler}
-              additionalStyle="m-0.5 rounded-none bg-white text-sm"
+              additionalStyle="m-0.5 rounded-none bg-white text-sm mt-2"
+              label="Select user rights:"
+              small
             />
           </form>
         </ModalBody>

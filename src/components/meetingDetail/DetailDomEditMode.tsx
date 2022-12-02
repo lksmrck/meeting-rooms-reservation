@@ -83,15 +83,13 @@ const DetailDomEditMode: React.FC<DetailDomEditModeProps> = ({
 
   return (
     <form className="grid grid-cols-2">
-      <div className="[&>*] font-bold">
+      <div className="[&>*]:font-bold [&>*]:h-8 [&>*]:flex [&>*]:items-center ">
         <h3>Meeting name: </h3>
         <h4>Meeting type: </h4>
         <h5>Created by: </h5>
         <h5>Guests:</h5>
         <h5 className="mt-0.5">Start time: </h5>
-        {updatedTime.hasOwnProperty("start") && (
-          <h5 className="mt-0.5">End time: </h5>
-        )}
+        {updatedTime.start != null && <h5 className="mt-0.5">End time: </h5>}
       </div>
       <div>
         <Input
@@ -109,7 +107,6 @@ const DetailDomEditMode: React.FC<DetailDomEditModeProps> = ({
           onChange={onChangeMeeting}
           small
         />
-
         <Input value={creator} size="sm" disabled />
         <DisplayedGuests
           guests={updatedGuests}
@@ -124,7 +121,7 @@ const DetailDomEditMode: React.FC<DetailDomEditModeProps> = ({
             addedGuests={updatedGuests}
           />
         )}
-        <div className="flex flex-col ">
+        <div className="flex flex-col mt-0.5 ">
           <UpdateMeetingTime
             options={startTimeOptions}
             start

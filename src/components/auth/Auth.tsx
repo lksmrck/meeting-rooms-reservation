@@ -17,6 +17,11 @@ const Auth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
+  const [loginError, setLoginError] = useState({
+    error: false,
+    message: "",
+  });
+
   const { user, setUser } = useContext(AuthContext);
 
   const loginHandler = async (e: React.SyntheticEvent) => {
@@ -28,46 +33,46 @@ const Auth = () => {
       .then(() => {
         return signInWithEmailAndPassword(auth, email, password).then(
           (userCredential) => {
-            // Signed in
             const user = userCredential.user;
             setUser(user);
             navigate("/home");
             setIsLoading(false);
-            // ...
           }
         );
       })
 
       .catch((error) => {
         setIsLoading(false);
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorMessage);
+        setLoginError({ error: true, message: error.message });
+        /*  const errorCode = error.code; */
       });
   };
 
   return (
     <div>
-      {isLoading ? (
-        <LoadingSpinner />
-      ) : (
-        <section className="flex justify-center items-center bg-gradient-to-r from-violet-300 to-violet-400 h-screen">
-          <div className=" flex flex-col justify-center mb-24 items-center w-96 bg-white h-96 rounded-lg relative">
-            <div
-              style={{ borderRadius: "8px 8px 50% 50%" }}
-              className="h-20 w-full bg-teal-600 absolute top-0 flex flex-col items-center justify-center"
+      <section className="flex justify-center items-center bg-gradient-to-r from-violet-300 to-violet-400 h-screen ">
+        <div className=" flex flex-col justify-center mb-24 items-center w-96 bg-white h-96 rounded-lg relative shadow-lg overflow-scroll scrollbar-hide">
+          <div
+            style={{ borderRadius: "8px 8px 50% 50%" }}
+            className="h-20 w-full bg-teal-600 absolute top-0 flex flex-col items-center justify-center"
+          >
+            <h1 className="text-2xl font-bold text-gray-50">Login</h1>
+            <h3 className=" text-sm text-gray-50">Enter your credentials</h3>
+          </div>
+          {isLoading ? (
+            <LoadingSpinner />
+          ) : (
+            <form
+              className="w-80 mt-12  [&>input]:mt-2 "
+              onSubmit={loginHandler}
             >
-              <h1 className="text-2xl font-bold text-gray-50">Login</h1>
-              <h3 className=" text-sm text-gray-50">Enter your credentials</h3>
-            </div>
-
-            <form className="w-80 mt-12 [&>input]:mt-2" onSubmit={loginHandler}>
               <Input
                 id="email"
                 name="email"
                 type="e-mail"
                 placeholder="Enter your e-mail"
                 onChange={(e) => setEmail(e.target.value)}
+                focusBorderColor="teal.400"
               />
               <Input
                 id="password"
@@ -75,6 +80,7 @@ const Auth = () => {
                 type="password"
                 placeholder="Enter your password"
                 onChange={(e) => setPassword(e.target.value)}
+                focusBorderColor="teal.400"
               />
 
               <div className="flex justify-center flex-col [&>button]:mt-1 mt-8">
@@ -85,10 +91,13 @@ const Auth = () => {
                   Back
                 </Button>
               </div>
+              <p className=" text-red-600 text-sm h-1">
+                {loginError.error && loginError.message}
+              </p>
             </form>
-          </div>
-        </section>
-      )}
+          )}
+        </div>
+      </section>
     </div>
   );
 };

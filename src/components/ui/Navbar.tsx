@@ -32,7 +32,12 @@ const Navbar = () => {
     <section className="h-20 bg-violet-800 flex  shadow-lg shadow-slate-300">
       <nav className="flex justify-between items-center w-screen">
         <ul className="flex items-center">
-          <li className=" lg:ml-5 ml-2 text-white">Room Reserver</li>
+          <li
+            className=" lg:ml-5 ml-2 text-white cursor-pointer"
+            onClick={() => navigate("/home")}
+          >
+            Room Reserver
+          </li>
         </ul>
         <div className=" flex justify-center ">
           {user && company && (

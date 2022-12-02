@@ -1,4 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {
+  useContext,
+  useEffect,
+  useState,
+  Dispatch,
+  SetStateAction,
+} from "react";
 /* import AppContext from "../../state/AppContext"; */
 import ReservationContext from "../../../state/ReservationContext";
 import { useMeetingsFetch } from "../../../hooks/use-meetingsFetch";
@@ -10,14 +16,34 @@ import { Meeting, RoomData } from "../../../types/types";
 import LoadingSpinner from "../../ui/LoadingSpinner/LoadingSpinner";
 import { updatePickedRoom } from "../../../utils/updatePickedRoom";
 
-/* ZDE SLEDOVAT V LOKÁLNÍM STATE MÍSTO CONTEXTU???? - SELECTEDTIME */
-const TimeSelect: React.FC = () => {
+type TimeSelectProps = {
+  setBlocksPickError: Dispatch<
+    SetStateAction<{ error: boolean; message: string }>
+  >;
+};
+
+const TimeSelect: React.FC<TimeSelectProps> = ({ setBlocksPickError }) => {
   const navigate = useNavigate();
 
   const { pickedRoom, setPickedRoom, pickedDate, roomsData } =
     useContext(ReservationContext);
 
   const [selectedBlocks, setSelectedBlocks] = useState(0);
+
+  const setBlocksError = () => {
+    setBlocksPickError({
+      error: true,
+      message: "Please select only consecutive blocks.",
+    });
+  };
+
+  const removeBlocksError = () => {
+    setBlocksPickError({
+      error: false,
+      message: "",
+    });
+  };
+
   //Meeting details:
   //Detail meetingů v daném dnu ve vybrané místnosti
   const [meetingsDetail, setMeetingsDetail] = useState([] as Meeting[]);
@@ -61,7 +87,7 @@ const TimeSelect: React.FC = () => {
     //ale lze vybrat postupně všechny bloky od 7:00 až do 12:30.
 
     //Podminky
-    //0.Pokud se klikne na rezerovavný block, tak zbytek funkce nepokračuje a ale místo toho zobrazí meeting
+    //0.Pokud se klikne na rezerovavný block, tak zbytek funkce nepokračuje a místo toho zobrazí meeting
     const clickReservedCheck = pickedRoom.roomData.find((room: RoomData) => {
       return room.block == blockNumber && room.reserved;
     });
@@ -98,6 +124,7 @@ const TimeSelect: React.FC = () => {
         blockNumber == reservedBlock[0].block + 1 ||
         blockNumber == reservedBlock[0].block - 1
       ) {
+        removeBlocksError();
         const updatedRoomData = pickedRoom.roomData.map((data: RoomData) => {
           if (data.block == blockNumber) {
             return { ...data, selected: !data.selected };
@@ -107,6 +134,8 @@ const TimeSelect: React.FC = () => {
         const updatedRoom = { ...pickedRoom, roomData: updatedRoomData };
 
         setPickedRoom(updatedRoom);
+      } else {
+        setBlocksError();
       }
     }
     //3. Pokud je více než 1 vybraný blok, tak:
@@ -134,6 +163,7 @@ const TimeSelect: React.FC = () => {
         blockNumber == minBlock ||
         blockNumber == maxBlock
       ) {
+        removeBlocksError();
         const updatedRoomData = pickedRoom.roomData.map((data: RoomData) => {
           if (data.block == blockNumber) {
             return { ...data, selected: !data.selected };
@@ -143,6 +173,8 @@ const TimeSelect: React.FC = () => {
         const updatedRoom = { ...pickedRoom, roomData: updatedRoomData };
 
         setPickedRoom(updatedRoom);
+      } else {
+        setBlocksError();
       }
     }
   };
@@ -153,7 +185,7 @@ const TimeSelect: React.FC = () => {
       <div>
         <TimeBlocksDom />
       </div>
-      <div>
+      <div className="ml-1">
         {isLoading ? (
           <div className="w-28 -ml-2">
             <LoadingSpinner />
