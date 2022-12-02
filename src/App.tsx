@@ -1,10 +1,10 @@
 import Navbar from "./components/ui/Navbar";
 import Landing from "./pages/Landing";
 import Footer from "./components/ui/Footer";
-import DailyOverview from "./components/overview/DailyOverview";
-import Reserve from "./components/reserve/Reserve";
-import Home from "./components/datePick/Home";
-import Auth from "./components/auth/Auth";
+import DailyOverview from "./components/overview";
+import Reserve from "./components/reserve";
+import Home from "./components/datePick";
+import Auth from "./components/auth";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import AuthContext from "./state/AuthContext";
@@ -12,9 +12,9 @@ import AppContext from "./state/AppContext";
 import { timeCheck } from "./utils/timeCheck";
 import ErrorScreen from "./pages/screens/ErrorScreen";
 import { useNavigate } from "react-router-dom";
-import RoomsList from "./components/admin/rooms/RoomsList";
-import UsersList from "./components/admin/users/UsersList";
-import Settings from "./components/admin/Settings";
+import RoomsList from "./components/admin/rooms";
+import UsersList from "./components/admin/users";
+import Settings from "./components/admin";
 
 const App = () => {
   const navigate = useNavigate();

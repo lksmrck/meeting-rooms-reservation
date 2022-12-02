@@ -163,11 +163,11 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
             ) : (
               <DetailDom clickedMeeting={clickedMeeting} />
             )}
-            {missingFormData && (
-              <p className=" text-red-600">
-                Please fill in name and time of the meeting.
-              </p>
-            )}
+
+            <p className=" text-red-600 h-1 text-sm">
+              {missingFormData &&
+                "Please fill in name and time of the meeting."}
+            </p>
           </ModalBody>
         )}
 

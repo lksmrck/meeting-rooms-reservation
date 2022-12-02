@@ -8,7 +8,7 @@ import React, {
 /* import AppContext from "../../state/AppContext"; */
 import ReservationContext from "../../../state/ReservationContext";
 import { useMeetingsFetch } from "../../../hooks/use-meetingsFetch";
-import MeetingDetail from "../../meetingDetail/MeetingDetail";
+import MeetingDetail from "../../meetingDetail";
 import OneRoomDom from "./OneRoomDom";
 import { useNavigate } from "react-router-dom";
 import TimeBlocksDom from "../../overview/TimeBlocksDom";

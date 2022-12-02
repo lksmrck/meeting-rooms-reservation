@@ -42,21 +42,12 @@ const RoomsDom: React.FC<RoomsDomProps> = ({
                 key={roomData.block}
                 size="sm"
                 className="hover:translate-x-1 w-20 border border-stone-700 shadow-md shadow-slate-600 "
-                colorScheme="blue"
+                colorScheme="telegram"
                 style={{ height: `${height}rem` }}
                 onClick={() => clickBlockHandler(room.id, roomData.block)}
               >
                 Reserved
               </Button>
-
-              /*  <div
-                key={roomData.block}
-                onClick={() => clickBlockHandler(room.id, roomData.block)}
-                className={`bg-blue-700 hover:bg-blue-800 rounded-md flex justify-center items-center w-20 text-xs  border border-stone-700 cursor-pointer hover:scale-105 shadow-lg shadow-slate-600`}
-                style={{ height: `${height}rem` }}
-              >
-                Reserved
-              </div> */
             );
           }
           return (

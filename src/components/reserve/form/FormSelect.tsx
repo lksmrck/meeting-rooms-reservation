@@ -24,7 +24,7 @@ const FormSelect: React.FC<FormSelectProps> = ({
     return (
       <div className={`${additionalStyle}`}>
         {label && (
-          <label htmlFor={id} className={`ml-0.5`}>
+          <label htmlFor={id} className={`ml-0.5 font-bold`}>
             {label}
           </label>
         )}

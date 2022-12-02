@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Form from "./form/Form";
+import Form from "./form";
 
-import TimeSelect from "./timeSelect/TimeSelect";
+import TimeSelect from "./timeSelect";
 
 const Reserve = () => {
   const [blocksPickError, setBlocksPickError] = useState({

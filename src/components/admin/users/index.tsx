@@ -16,19 +16,6 @@ const UsersList = () => {
     fetchUsers("secondCompany", setUsers);
   }, []);
 
-  const formData = {
-    name: "oave",
-    company: "secondCompany",
-    email: "mail@mail.cz",
-    password: "afsfasdasdasa",
-    rights: "admin",
-    creationDate: new Date().toLocaleString(),
-  };
-
-  const addUserHandler = () => {
-    addUser(formData, setUsers);
-  };
-
   const deleteUserHandler = (userId: any) => {
     deleteUser("secondCompany", userId, setUsers);
   };
