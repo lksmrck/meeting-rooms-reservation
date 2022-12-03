@@ -1,14 +1,26 @@
 import React from "react";
 import { Button } from "@chakra-ui/react";
+import { useMediaQuery } from "@chakra-ui/react";
 
 const Title = () => {
+  const [largeScreen] = useMediaQuery("(min-width: 1024px)");
+  /*   const [smallScreen] = useMediaQuery("(min-width: 640pxpx)"); */
+
   return (
-    <div className="flex flex-col items-center justify-center bg-gradient-to-r from-violet-300 to-violet-400  h-3/4 relative ">
+    <div
+      className="flex flex-col items-center justify-center bg-cover  bg-center bg-no-repeat   bg-titleWaves h-3/4 relative "
+      /*   style={{ aspectRatio: "960/300" }} */
+      /* bg-cover  bg-center bg-no-repeat */
+    >
       <div
         className="bg-violet-800 w-full h-full absolute top-0 left-0 "
-        style={{ clipPath: "circle(400px at right -130px)" }}
+        style={{
+          clipPath: largeScreen
+            ? "circle(350px at right -130px)"
+            : "circle(250px at right -130px)",
+        }}
       ></div>
-      <div className="flex mr-44 lg:mr-0  h-30 w-40 ">
+      <div className="flex justify-start lg:mr-0  h-30 w-40 ">
         <div
           className="bg-violet-800 w-14 h-11 "
           style={{ clipPath: "circle(20px at center)" }}

@@ -181,7 +181,7 @@ const TimeSelect: React.FC<TimeSelectProps> = ({ setBlocksPickError }) => {
 
   //Konečný return - 2 sloupce 1. s časovými bloky, 2. vybraná místnost
   return (
-    <section className="grid grid-cols-2">
+    <section className="grid grid-cols-2 mx-auto md:mx-0">
       <div>
         <TimeBlocksDom />
       </div>

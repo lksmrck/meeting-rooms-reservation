@@ -11,6 +11,7 @@ import { RoomData } from "../../../types/types";
 import DisplayedGuests from "./DisplayedGuests";
 import { useAddMeeting } from "../../../hooks/use-addMeeting";
 import { CALL } from "../../../constants/constants";
+import { AiOutlinePlusCircle } from "react-icons/ai";
 
 type FormProps = {
   blocksPickError: { error: boolean; message: string };
@@ -105,6 +106,7 @@ const Form: React.FC<FormProps> = ({ blocksPickError }) => {
           ) : (
             <Button
               colorScheme={"purple"}
+              leftIcon={<AiOutlinePlusCircle size={20} />}
               onClick={() => {
                 setIsGuestModalOpen(true);
               }}

@@ -21,6 +21,8 @@ import { timeToBlocks } from "../../utils/timeToBlocks";
 import { useAddMeeting } from "../../hooks/use-addMeeting";
 import { updatePickedRoom } from "../../utils/updatePickedRoom";
 import { useMeetingsFetch } from "../../hooks/use-meetingsFetch";
+import { BsTrash } from "react-icons/bs";
+import { BsPencil } from "react-icons/bs";
 
 type MeetingDetailProps = {
   clickedMeeting: Meeting;
@@ -172,13 +174,18 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
         )}
 
         <ModalFooter className="[&>button]:m-1 ">
-          {!isEditing && (
-            <Button colorScheme="red" onClick={deleteMeetingHandler}>
+          {!isEditing && !fbIsLoading && !isLoading && (
+            <Button
+              colorScheme="red"
+              onClick={deleteMeetingHandler}
+              leftIcon={<BsTrash size={20} />}
+            >
               Delete
             </Button>
           )}
-          {/* Edit button se zobrazí pouze, pokud user = tvůrce meetingu */}
-          {isEditing && (
+
+          {/* Buttons se zobrazují, pokud se zrovna neloaduje (deleting a updating mtg) */}
+          {isEditing && !fbIsLoading && !isLoading && (
             <Button
               colorScheme="teal"
               onClick={submitUpdatedMeeting}
@@ -187,12 +194,22 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
               Update meeting
             </Button>
           )}
-          {clickedMeeting.creator == user!.email && !isEditing && (
-            <Button colorScheme="orange" onClick={editModeToggler}>
-              Edit
-            </Button>
+          {/* Edit button se zobrazí pouze, pokud user = tvůrce meetingu */}
+          {clickedMeeting.creator == user!.email &&
+            !isEditing &&
+            !fbIsLoading &&
+            !isLoading && (
+              <Button
+                colorScheme="orange"
+                onClick={editModeToggler}
+                leftIcon={<BsPencil size={20} />}
+              >
+                Edit
+              </Button>
+            )}
+          {!fbIsLoading && !isLoading && (
+            <Button onClick={onCancel}>Back</Button>
           )}
-          <Button onClick={onCancel}>Back</Button>
         </ModalFooter>
       </ModalContent>
     </Modal>

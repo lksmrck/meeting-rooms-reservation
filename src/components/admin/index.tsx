@@ -1,5 +1,7 @@
 import { Button } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { FaUserFriends } from "react-icons/fa";
+import { MdOutlineMeetingRoom } from "react-icons/md";
 
 const Settings = () => {
   const navigate = useNavigate();
@@ -10,6 +12,7 @@ const Settings = () => {
         <Button
           name="users"
           colorScheme="facebook"
+          leftIcon={<FaUserFriends />}
           onClick={() => {
             navigate(`/settings/users`);
           }}
@@ -18,6 +21,7 @@ const Settings = () => {
         </Button>
         <Button
           colorScheme="facebook"
+          leftIcon={<MdOutlineMeetingRoom />}
           onClick={() => {
             navigate(`/settings/rooms`);
           }}

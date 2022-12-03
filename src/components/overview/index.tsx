@@ -57,7 +57,7 @@ const Overview = () => {
   //Loading spinner width
 
   return (
-    <div className="flex justify-center bg-gradient-to-r from-violet-300 to-violet-400 ">
+    <div className="flex justify-center bg-gradient-to-r from-violet-300 to-violet-400 overflow-x-scroll">
       <section
         className={` ${isLoading ? "flex" : "grid"} gap-5 mt-2`}
         //Custom in-line style, protože Tailwind neumožňuje dynamic styling - takto udělá grid podle počtu místností (const displayCols) a přidá dynamicky width contentu.

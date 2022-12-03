@@ -6,7 +6,7 @@ import { GiClick } from "react-icons/gi";
 const Features = () => {
   return (
     <div className="h-3/4">
-      <div className="flex justify-center  bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 items-center h-full">
+      <div className="flex justify-center  bg-features items-center h-full overflow-hidden">
         <ul className="flex flex-col  m-10 [&>li]:w-64 lg:[&>li]:w-72   [&>li]:bg-indigo-200 [&>li]:rounded-lg [&>li]:m-3 [&>li]:lg:m-5 lg:flex-row ">
           <li className="animate-floatUp flex flex-col justify-center items-center hover:shadow-2xl cursor-pointer hover:bg-indigo-300">
             <FiTarget

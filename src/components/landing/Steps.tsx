@@ -22,7 +22,7 @@ const Steps = () => {
   };
 
   return (
-    <div className="h-3/4 flex justify-center bg-slate-300 items-center ">
+    <div className="h-3/4 flex justify-center bg-cover  bg-center bg-no-repeat bg-stepsWaves items-center ">
       <div className="h-96 flex items-center">
         <img
           src={CR}

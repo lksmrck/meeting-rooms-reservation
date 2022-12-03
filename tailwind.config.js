@@ -30,6 +30,13 @@ module.exports = {
         floatUp: "floatUp 5s ease-in-out infinite",
         floatDown: "floatDown 5s ease-in-out infinite",
       },
+      backgroundImage: {
+        stepsWaves: "url('/src/assets/stepsWaves.svg')",
+        titleWaves: "url('/src/assets/titleWaves.svg')",
+      },
+      backgroundColor: {
+        features: "#461c70",
+      },
     },
   },
   plugins: [require("tailwind-scrollbar-hide")],
