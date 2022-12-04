@@ -7,7 +7,7 @@ const Overview = () => {
   const [showCalendar, setShowCalendar] = useState(false);
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center h-content bg-gradient-to-r from-violet-100 to-violet-200 ">
       {showCalendar ? (
         <DatePick />
       ) : (

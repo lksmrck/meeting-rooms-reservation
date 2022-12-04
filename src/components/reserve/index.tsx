@@ -11,7 +11,7 @@ const Reserve = () => {
   const [mediumScreenMax] = useMediaQuery("(max-width: 768px)");
   const [openedForm, setOpenedForm] = useState(false);
   /* console.log(mediumScreenMax); */
-  console.log(openedForm);
+  /*   console.log(openedForm); */
   /*   console.log(largeScreen); */
 
   useEffect(() => {
@@ -37,7 +37,13 @@ const Reserve = () => {
           </Button>
         </div>
       )}
-      {openedForm && <Form blocksPickError={blocksPickError} />}
+      {openedForm && (
+        <Form
+          blocksPickError={blocksPickError}
+          isMaxMdScreen={mediumScreenMax}
+          setIsFormOpen={setOpenedForm}
+        />
+      )}
     </div>
   );
 };

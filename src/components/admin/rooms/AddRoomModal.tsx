@@ -1,5 +1,5 @@
 import React, { useState, useContext, Dispatch, SetStateAction } from "react";
-import { useRoomsAdminFncs } from "../../../hooks/use-roomsAdminFncs";
+import { useRoomsAdminFncs } from "../../../hooks/useRoomsAdminFncs";
 import {
   Modal,
   ModalOverlay,

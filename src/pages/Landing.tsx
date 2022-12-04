@@ -5,7 +5,7 @@ import Reference from "../components/landing/Reference";
 
 const Landing = () => {
   return (
-    <div className="h-screen">
+    <div className="h-auto ">
       <Title />
       <Features />
       <Steps />

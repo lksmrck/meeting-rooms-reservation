@@ -9,12 +9,11 @@ import {
   ModalBody,
   Input,
   Button,
-  IconButton,
 } from "@chakra-ui/react";
 import AuthContext from "../../../state/AuthContext";
 import SelectRights from "../../reserve/form/FormSelect";
-import { userRights, USER } from "../../../constants/constants";
-import { useUsersAdminFncs } from "../../../hooks/use-usersAdminFncs";
+import { userRights, USER } from "../../../common/constants";
+import { useUsersAdminFncs } from "../../../hooks/useUsersAdminFncs";
 
 type AddUserModalProps = {
   isOpen: boolean;

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Button } from "@chakra-ui/react";
 import {
   setPersistence,
@@ -6,23 +6,25 @@ import {
   browserSessionPersistence,
 } from "firebase/auth";
 import { auth } from "../../config/firebase";
-import { useNavigate } from "react-router-dom";
-import AuthContext from "../../state/AuthContext";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Input } from "@chakra-ui/react";
 import LoadingSpinner from "../ui/LoadingSpinner/LoadingSpinner";
+import useAuth from "../../hooks/useAuth";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/datepick";
 
   const [loginError, setLoginError] = useState({
     error: false,
     message: "",
   });
 
-  const { user, setUser } = useContext(AuthContext);
+  const { user, setUser } = useAuth();
 
   const loginHandler = async (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -35,7 +37,7 @@ const Auth = () => {
           (userCredential) => {
             const user = userCredential.user;
             setUser(user);
-            navigate("/home");
+            navigate(from, { replace: true });
             setIsLoading(false);
           }
         );

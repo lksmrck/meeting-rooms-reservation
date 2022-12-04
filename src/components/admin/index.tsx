@@ -7,7 +7,7 @@ const Settings = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="w-screen  flex justify-center">
+    <div className={`w-screen h-content  flex justify-center`}>
       <div className="mt-4 [&>*]:m-2">
         <Button
           name="users"

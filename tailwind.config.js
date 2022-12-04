@@ -15,7 +15,10 @@ module.exports = {
       },
       height: {
         30: "7.5rem",
+        //Výška contentu = 100vh - výška navbaru
+        content: "calc(100vh - 5rem)",
       },
+
       keyframes: {
         floatUp: {
           "0%, 100%": { transform: "translatey(0px)" },

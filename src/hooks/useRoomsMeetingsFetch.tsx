@@ -1,6 +1,6 @@
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../config/firebase";
-import { roomData } from "../common/dummyData";
+import { roomData } from "../common/common";
 import {
   BlocksBreakdown,
   CompanyRoom,

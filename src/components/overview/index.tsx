@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import ReservationContext from "../../state/ReservationContext";
-/* import AuthContext from "../../state/AuthContext"; */
+
 import RoomsDom from "./RoomsDom";
-import { useRoomsMeetingsFetch } from "../../hooks/use-roomsMeetingsFetch";
+import { useRoomsMeetingsFetch } from "../../hooks/useRoomsMeetingsFetch";
 import TimeBlocksDom from "./TimeBlocksDom";
-import { CompanyRoom, Room, RoomData } from "../../types/types";
+import { Room, RoomData } from "../../types/types";
+/* import useAuth from "../../hooks/useAuth"; */
 
 import LoadingSpinner from "../ui/LoadingSpinner/LoadingSpinner";
 
@@ -13,7 +14,7 @@ const Overview = () => {
   const { pickedDate, setPickedRoom, roomsData, setRoomsData } =
     useContext(ReservationContext);
 
-  /* const { user, company } = useContext(AuthContext); */
+  /* const { user, company } = useAuth(); */
   const navigate = useNavigate();
 
   const { roomsAndMeetingsFetch, isLoading } = useRoomsMeetingsFetch();

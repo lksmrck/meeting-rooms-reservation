@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react";
-import { NONE } from "../../constants/constants";
+import { NONE } from "../../common/constants";
 import { RoomData } from "../../types/types";
 
 type UpdateMeetingTimeProps = {

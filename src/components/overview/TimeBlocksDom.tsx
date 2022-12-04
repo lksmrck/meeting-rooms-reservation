@@ -1,4 +1,4 @@
-import { timeBlocks } from "../../common/dummyData";
+import { timeBlocks } from "../../common/common";
 import { TimeBlock } from "../../types/types";
 
 const TimeBlocksDom: React.FC = () => {

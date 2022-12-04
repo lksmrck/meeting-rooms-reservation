@@ -9,18 +9,18 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { useState, useContext, Dispatch, SetStateAction } from "react";
-import AuthContext from "../../state/AuthContext";
+import useAuth from "../../hooks/useAuth";
 import ReservationContext from "../../state/ReservationContext";
-import { useRemoveMeeting } from "../../hooks/use-removeMeeting";
+import { useRemoveMeeting } from "../../hooks/useRemoveMeeting";
 import { useNavigate } from "react-router-dom";
 import { Meeting } from "../../types/types";
 import LoadingSpinner from "../ui/LoadingSpinner/LoadingSpinner";
 import DetailDomEditMode from "./DetailDomEditMode";
 import DetailDom from "./DetailDom";
 import { timeToBlocks } from "../../utils/timeToBlocks";
-import { useAddMeeting } from "../../hooks/use-addMeeting";
+import { useAddMeeting } from "../../hooks/useAddMeeting";
 import { updatePickedRoom } from "../../utils/updatePickedRoom";
-import { useMeetingsFetch } from "../../hooks/use-meetingsFetch";
+import { useMeetingsFetch } from "../../hooks/useMeetingsFetch";
 import { BsTrash } from "react-icons/bs";
 import { BsPencil } from "react-icons/bs";
 
@@ -50,7 +50,7 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
   //State na local loading - aby nebyl problém se synchronizací s Firebase (update a nasledny fetch updated)
   const [fbIsLoading, setFbIsLoading] = useState(false);
 
-  const { company, user } = useContext(AuthContext);
+  const { company, user } = useAuth();
   const { pickedDate, pickedRoom, setPickedRoom } =
     useContext(ReservationContext);
 
@@ -174,17 +174,29 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
         )}
 
         <ModalFooter className="[&>button]:m-1 ">
-          {!isEditing && !fbIsLoading && !isLoading && (
-            <Button
-              colorScheme="red"
-              onClick={deleteMeetingHandler}
-              leftIcon={<BsTrash size={20} />}
-            >
-              Delete
-            </Button>
-          )}
-
           {/* Buttons se zobrazují, pokud se zrovna neloaduje (deleting a updating mtg) */}
+          {/* Delete a Edit meeting buttons se zobrazí pouze, pokud daný user meeting vytvořil! */}
+          {clickedMeeting.creator == user!.email &&
+            !isEditing &&
+            !fbIsLoading &&
+            !isLoading && (
+              <div className="flex [&>*]:ml-1">
+                <Button
+                  colorScheme="red"
+                  onClick={deleteMeetingHandler}
+                  leftIcon={<BsTrash size={20} />}
+                >
+                  Delete
+                </Button>
+                <Button
+                  colorScheme="orange"
+                  onClick={editModeToggler}
+                  leftIcon={<BsPencil size={20} />}
+                >
+                  Edit
+                </Button>
+              </div>
+            )}
           {isEditing && !fbIsLoading && !isLoading && (
             <Button
               colorScheme="teal"
@@ -194,19 +206,6 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
               Update meeting
             </Button>
           )}
-          {/* Edit button se zobrazí pouze, pokud user = tvůrce meetingu */}
-          {clickedMeeting.creator == user!.email &&
-            !isEditing &&
-            !fbIsLoading &&
-            !isLoading && (
-              <Button
-                colorScheme="orange"
-                onClick={editModeToggler}
-                leftIcon={<BsPencil size={20} />}
-              >
-                Edit
-              </Button>
-            )}
           {!fbIsLoading && !isLoading && (
             <Button onClick={onCancel}>Back</Button>
           )}

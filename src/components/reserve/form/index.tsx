@@ -1,25 +1,32 @@
-import React, { useState, useContext } from "react";
-import { Button } from "@chakra-ui/react";
+import React, { useState, useContext, Dispatch, SetStateAction } from "react";
+import { Button, IconButton } from "@chakra-ui/react";
 import MeetingType from "./FormSelect";
-import AuthContext from "../../../state/AuthContext";
-import { meetingTypes } from "../../../constants/constants";
+import useAuth from "../../../hooks/useAuth";
+import { meetingTypes } from "../../../common/constants";
 import { Input } from "@chakra-ui/react";
 import GuestsModal from "./GuestsModal";
 import ReservationContext from "../../../state/ReservationContext";
 import { useNavigate } from "react-router-dom";
 import { RoomData } from "../../../types/types";
 import DisplayedGuests from "./DisplayedGuests";
-import { useAddMeeting } from "../../../hooks/use-addMeeting";
-import { CALL } from "../../../constants/constants";
+import { useAddMeeting } from "../../../hooks/useAddMeeting";
+import { CALL } from "../../../common/constants";
 import { AiOutlinePlusCircle } from "react-icons/ai";
+import { BsArrowUp } from "react-icons/bs";
 
 type FormProps = {
   blocksPickError: { error: boolean; message: string };
+  isMaxMdScreen: boolean;
+  setIsFormOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-const Form: React.FC<FormProps> = ({ blocksPickError }) => {
+const Form: React.FC<FormProps> = ({
+  blocksPickError,
+  isMaxMdScreen,
+  setIsFormOpen,
+}) => {
   const navigate = useNavigate();
-  const { company, user } = useContext(AuthContext);
+  const { company, user } = useAuth();
   const { pickedDate, pickedRoom } = useContext(ReservationContext);
   const { addMeeting } = useAddMeeting();
 
@@ -77,8 +84,8 @@ const Form: React.FC<FormProps> = ({ blocksPickError }) => {
   };
 
   return (
-    <section className="flex justify-center ml-6">
-      <div className=" flex flex-col justify-center bg-green-50 h-2/5 rounded-lg ">
+    <section className="flex justify-center md:ml-6 ">
+      <div className=" flex flex-col justify-center bg-green-50 pt-4 h-96 md:h-2/5 rounded-lg  ">
         <h1 className="text-lg font-bold flex justify-center">
           Create a meeting
         </h1>
@@ -146,8 +153,19 @@ const Form: React.FC<FormProps> = ({ blocksPickError }) => {
                 navigate("/overview");
               }}
             >
-              Back
+              {isMaxMdScreen ? "Back to overview" : "Back"}
             </Button>
+            {isMaxMdScreen && (
+              <div className="mt-4 flex justify-center">
+                <IconButton
+                  colorScheme="yellow"
+                  aria-label="arrow-up"
+                  icon={<BsArrowUp />}
+                  className="w-1/4"
+                  onClick={() => setIsFormOpen(false)}
+                />
+              </div>
+            )}
           </div>
           <p className="h-1 text-xs text-red-600">
             {blocksPickError.error && blocksPickError.message}

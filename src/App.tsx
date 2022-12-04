@@ -7,7 +7,6 @@ import Home from "./components/datePick";
 import Auth from "./components/auth";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useContext, useEffect } from "react";
-import AuthContext from "./state/AuthContext";
 import AppContext from "./state/AppContext";
 import { timeCheck } from "./utils/timeCheck";
 import ErrorScreen from "./pages/screens/ErrorScreen";
@@ -15,14 +14,16 @@ import { useNavigate } from "react-router-dom";
 import RoomsList from "./components/admin/rooms";
 import UsersList from "./components/admin/users";
 import Settings from "./components/admin";
+import { ADMIN, USER } from "./common/constants";
+import RequireAuth from "./components/auth/RequireAuth";
+import useAuth from "./hooks/useAuth";
+import Unauthorized from "./pages/screens/Unauthorized";
 
 const App = () => {
   const navigate = useNavigate();
-  const authContext = useContext(AuthContext);
-  const appContext = useContext(AppContext);
 
-  const { user, setUser } = authContext;
-  const { error } = appContext;
+  const { user, setUser } = useAuth();
+  const { error } = useContext(AppContext);
 
   const location = useLocation();
 
@@ -35,75 +36,32 @@ const App = () => {
     if (error.error) navigate("/something-wrong");
   }, [error]);
 
-  //Protect paths - lze navštívit po loginu
-  const RequireAuth = ({ children }: any) => {
-    return user ? children : <Navigate to="/login" />;
-  };
-
   return (
-    <div className="sm:overflow-y-scroll sm:scrollbar-hide w-screen">
-      <Navbar />
-      <Routes>
-        <Route path="/">
-          {error.error && (
-            <Route path="something-wrong" element={<ErrorScreen />} />
-          )}
-          <Route index element={<Landing />} />
-          <Route path="login" element={<Auth />} />
-          <Route
-            path="home"
-            element={
-              <RequireAuth>
-                <Home />
-              </RequireAuth>
-            }
-          />
-          <Route
-            //UPRAVIT - přidat do path room id
-            path="reserve"
-            element={
-              <RequireAuth>
-                <Reserve />
-              </RequireAuth>
-            }
-          />
-          <Route
-            //UPRAVIT - přidat do path room id
-            path="overview"
-            element={
-              <RequireAuth>
-                <DailyOverview />
-              </RequireAuth>
-            }
-          />
-        </Route>
-        <Route
-          path="settings"
-          element={
-            <RequireAuth>
-              <Settings />
-            </RequireAuth>
-          }
-        />
-        <Route
-          path="settings/rooms"
-          element={
-            <RequireAuth>
-              <RoomsList />
-            </RequireAuth>
-          }
-        />
-        <Route
-          path="settings/users"
-          element={
-            <RequireAuth>
-              <UsersList />
-            </RequireAuth>
-          }
-        />
-      </Routes>
-
-      {/*  <Footer /> */}
+    <div className="overflow-y-scroll scrollbar-hide w-screen flex flex-col  ">
+      <div className="">
+        {/* flex-1 */}
+        <Navbar />
+        <Routes>
+          <Route path="/">
+            <Route index element={<Landing />} />
+            <Route path="login" element={<Auth />} />
+            <Route path="unauthorized" element={<Unauthorized />} />
+            {/* //Protected routes - musí být logged in + User nebo Admin */}
+            <Route element={<RequireAuth allowedRights={[ADMIN, USER]} />}>
+              <Route path="datepick" element={<Home />} />
+              <Route path="reserve" element={<Reserve />} />
+              <Route path="overview" element={<DailyOverview />} />
+            </Route>
+            {/* //Protected routes - musí být logged in + Admin */}
+            <Route element={<RequireAuth allowedRights={[ADMIN]} />}>
+              <Route path="settings" element={<Settings />} />
+              <Route path="settings/rooms" element={<RoomsList />} />
+              <Route path="settings/users" element={<UsersList />} />
+            </Route>
+          </Route>
+        </Routes>
+      </div>
+      <Footer />
     </div>
   );
 };

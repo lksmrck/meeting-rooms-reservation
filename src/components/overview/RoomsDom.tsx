@@ -61,14 +61,6 @@ const RoomsDom: React.FC<RoomsDomProps> = ({
             >
               Free
             </Button>
-
-            /*  <div
-              key={roomData.block}
-              onClick={() => clickBlockHandler(room.id, roomData.block)}
-              className={`h-10 rounded-md bg-white hover:bg-slate-100 flex justify-center items-center w-20 text-xs border border-stone-700 cursor-pointer hover:scale-105 shadow-lg shadow-slate-600`}
-            >
-              Free
-            </div> */
           );
         })}
       </div>

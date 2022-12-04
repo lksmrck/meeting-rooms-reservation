@@ -13,5 +13,6 @@ export const ADMIN = "Admin"
 
 export const userRights = [{id: 1, name: USER}, {id: 2, name: ADMIN}]
 
-//
+//NONE
 export const NONE = "NONE"
+

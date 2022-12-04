@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, deleteUser } from "firebase/auth";
 import { auth } from "../config/firebase";
 import {
   setDoc,
@@ -57,18 +57,27 @@ export const useUsersAdminFncs = () => {
     setIsLoading(false);
   };
 
-  const deleteUser = async (
+  const removeUser = async (
     company: string,
     userID: any,
     setUsersArray: any
   ) => {
     setIsLoading(true);
-    await deleteDoc(doc(db, `companies/${company}/users`, String(userID)));
+    /*     const user = auth.currentUser; */
+
+    await deleteDoc(doc(db, `companies/${company}/users`, String(userID)))
+      /* .then(() => {
+        deleteUser()
+      }) */
+      .catch((error: any) => {
+        console.log(error);
+      });
+
     setUsersArray((prevArray: any) =>
       prevArray.filter((user: any) => user.id != userID)
     );
     setIsLoading(false);
   };
 
-  return { fetchUsers, addUser, deleteUser, isLoading };
+  return { fetchUsers, addUser, removeUser, isLoading };
 };

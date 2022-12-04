@@ -8,7 +8,7 @@ import React, {
 } from "react";
 import { Input } from "@chakra-ui/react";
 import MeetingType from "../reserve/form/FormSelect";
-import { meetingTypes } from "../../constants/constants";
+import { meetingTypes } from "../../common/constants";
 import DisplayedGuests from "../reserve/form/DisplayedGuests";
 import GuestsModal from "../reserve/form/GuestsModal";
 import UpdateMeetingTime from "./UpdateMeetingTime";

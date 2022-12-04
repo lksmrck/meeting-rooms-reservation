@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const Footer = () => {
   const navigate = useNavigate();
   return (
-    <footer className=" bg-gray-500 pt-1  w-screen mt-1">
+    <footer className=" bg-gray-500 pt-1  w-screen mt-auto relative h-22">
       <div className="containerx">
         <div className="rowx">
           <div className="colx" onClick={() => navigate("/")}>

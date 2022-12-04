@@ -1,4 +1,4 @@
-import { timeBlocks } from '../common/dummyData';
+import { timeBlocks } from '../common/common';
 import { Meeting, TimeBlock } from '../types/types';
 
 //Time data týkající se meetingu k zobrazení v meeting detailu.

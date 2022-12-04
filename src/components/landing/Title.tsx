@@ -8,7 +8,7 @@ const Title = () => {
 
   return (
     <div
-      className="flex flex-col items-center justify-center bg-cover  bg-center bg-no-repeat   bg-titleWaves h-3/4 relative "
+      className="flex flex-col items-center justify-center bg-cover  bg-center bg-no-repeat   bg-titleWaves h-screen relative "
       /*   style={{ aspectRatio: "960/300" }} */
       /* bg-cover  bg-center bg-no-repeat */
     >
