@@ -13,13 +13,13 @@ import AuthContext from "../state/AuthContext";
 export const useRoomsAdminFncs = () => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const { company } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   const roomsFetch = async (/* company: string, */ setRoomsArray: any) => {
     setIsLoading(true);
     let companyRooms: CompanyRoom[] = [];
     const querySnapshot = await getDocs(
-      collection(db, `companies/${company}/rooms`)
+      collection(db, `companies/${user.company}/rooms`)
     );
     querySnapshot.forEach((doc) => {
       companyRooms.push({ id: doc.data().id, name: doc.data().name });
@@ -37,7 +37,7 @@ export const useRoomsAdminFncs = () => {
     setIsLoading(true);
     const id = roomsArray.length + 1;
     /*   const name = "newName"; */
-    await setDoc(doc(db, `companies/${company}/rooms`, String(id)), {
+    await setDoc(doc(db, `companies/${user.company}/rooms`, String(id)), {
       id,
       name,
       meetings: [],
@@ -52,7 +52,7 @@ export const useRoomsAdminFncs = () => {
     setRoomsArray: any
   ) => {
     setIsLoading(true);
-    await deleteDoc(doc(db, `companies/${company}/rooms`, String(roomID)));
+    await deleteDoc(doc(db, `companies/${user.company}/rooms`, String(roomID)));
     setRoomsArray((prevArray: any) =>
       prevArray.filter((room: any) => room.id != roomID)
     );

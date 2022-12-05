@@ -44,7 +44,7 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
                   </MenuItem>
                 );
               })}
-            <MenuItem className=" bg-red-300" onClick={loginLogoutHandler}>
+            <MenuItem onClick={loginLogoutHandler}>
               {user ? "Logout" : "Sign In"}
             </MenuItem>
           </MenuList>

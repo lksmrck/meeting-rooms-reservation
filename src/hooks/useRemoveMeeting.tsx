@@ -4,21 +4,19 @@ import { useContext, useState } from "react";
 import AppContext from "../state/AppContext";
 import ReservationContext from "../state/ReservationContext";
 import { Meeting, Room } from "../types/types";
+import AuthContext from "../state/AuthContext";
 
 //Detail meetingů v daném vybraném dnu.
 export const useRemoveMeeting = () => {
   const { setError } = useContext(AppContext);
-  const { setRoomsData, roomsData } = useContext(ReservationContext);
+  /*  const { setRoomsData, roomsData } = useContext(ReservationContext); */
+  const { user } = useContext(AuthContext);
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const removeData = async (
-    company: string,
-    clickedMeeting: Meeting,
-    roomNo: number
-  ) => {
+  const removeData = async (clickedMeeting: Meeting, roomNo: any) => {
     setIsLoading(true);
-    const dbRef = doc(db, `companies/${company}/rooms`, String(roomNo));
+    const dbRef = doc(db, `companies/${user.company}/rooms`, String(roomNo));
     const docSnap = await getDoc(dbRef);
 
     let updatedMeetings: Meeting[] = [];

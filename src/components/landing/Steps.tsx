@@ -56,5 +56,3 @@ const Steps = () => {
   );
 };
 export default Steps;
-
-/* bgColor={buttons[button.id - 1].clicked ? "blue" : ""} */

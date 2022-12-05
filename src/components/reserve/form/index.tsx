@@ -6,13 +6,14 @@ import { meetingTypes } from "../../../common/constants";
 import { Input } from "@chakra-ui/react";
 import GuestsModal from "./GuestsModal";
 import ReservationContext from "../../../state/ReservationContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { RoomData } from "../../../types/types";
 import DisplayedGuests from "./DisplayedGuests";
 import { useAddMeeting } from "../../../hooks/useAddMeeting";
 import { CALL } from "../../../common/constants";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { BsArrowUp } from "react-icons/bs";
+import { paramsToDate } from "../../../utils/dateParamsFormat";
 
 type FormProps = {
   blocksPickError: { error: boolean; message: string };
@@ -26,9 +27,13 @@ const Form: React.FC<FormProps> = ({
   setIsFormOpen,
 }) => {
   const navigate = useNavigate();
-  const { company, user } = useAuth();
-  const { pickedDate, pickedRoom } = useContext(ReservationContext);
+  const { user } = useAuth();
+  const { /* pickedDate, */ pickedRoom } = useContext(ReservationContext);
   const { addMeeting } = useAddMeeting();
+
+  //Date + room ID z params
+  const { pickedDate, pickedRoomId } = useParams();
+  const formatedDate = paramsToDate(pickedDate);
 
   //Po submitnutí je button disabled, aby se nedalo kliknout víckrát během jednoho submitu
   const [disabledBtn, setDisabledBtn] = useState(false);
@@ -45,7 +50,7 @@ const Form: React.FC<FormProps> = ({
 
   const [missingFormDataError, setMissingFormDataError] = useState(false);
 
-  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setMissingFormDataError(false);
     setDisabledBtn(false);
@@ -65,10 +70,10 @@ const Form: React.FC<FormProps> = ({
 
     const newMeeting = {
       id: Date.now(),
-      date: pickedDate,
+      date: formatedDate,
       name,
       type,
-      room: pickedRoom.id,
+      room: pickedRoomId,
       blocks,
       creator: user!.email,
       guests,
@@ -76,7 +81,12 @@ const Form: React.FC<FormProps> = ({
 
     //Check, zda je vyplněný název meetingu a vybrané bloky. Zbytek dat je nepovinný, nebo se vezme automaticky.
     if (blocks.length > 0 && name && name.length >= 1) {
-      addMeeting(newMeeting, "/overview", setFormData);
+      addMeeting(
+        newMeeting,
+        pickedRoomId,
+        `/date/${pickedDate}/overview`,
+        setFormData
+      );
       setMissingFormDataError(false);
     } else {
       setMissingFormDataError(true);
@@ -98,7 +108,7 @@ const Form: React.FC<FormProps> = ({
             name="name"
             type="text"
             placeholder="Enter the meeting name"
-            onChange={onChangeInput}
+            onChange={inputChangeHandler}
             value={formData.name}
             style={{ backgroundColor: "white" }}
             focusBorderColor="teal.400"
@@ -134,7 +144,7 @@ const Form: React.FC<FormProps> = ({
             name="type"
             id="type"
             options={meetingTypes}
-            onChange={onChangeInput}
+            onChange={inputChangeHandler}
             label="Select meeting type:"
             additionalStyle="mt-2 mb-2 text-sm"
           />
@@ -150,7 +160,7 @@ const Form: React.FC<FormProps> = ({
               colorScheme="teal"
               variant="outline"
               onClick={() => {
-                navigate("/overview");
+                navigate(`/date/${pickedDate}/overview`);
               }}
             >
               {isMaxMdScreen ? "Back to overview" : "Back"}

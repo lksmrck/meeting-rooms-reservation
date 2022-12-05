@@ -4,7 +4,7 @@ import useAuth from "../../hooks/useAuth";
 const RequireAuth: React.FC<{ allowedRights: string[] }> = ({
   allowedRights,
 }) => {
-  const { user, userRights } = useAuth();
+  const { user } = useAuth();
   const location = useLocation();
 
   //1. Má user rights na to vidět danou route? -> Zobrazí route
@@ -12,7 +12,7 @@ const RequireAuth: React.FC<{ allowedRights: string[] }> = ({
   //3. Zobrazí login page
 
   return /* user?.rights? */ allowedRights.find((right: any) =>
-    right.includes(userRights)
+    right.includes(user?.rights)
   ) ? (
     <Outlet />
   ) : user ? (

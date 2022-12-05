@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Form from "./form";
 import { useMediaQuery } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
-
 import TimeSelect from "./timeSelect";
 
 const Reserve = () => {
@@ -10,9 +9,6 @@ const Reserve = () => {
   const [largeScreen] = useMediaQuery("(min-width: 1024px)"); */
   const [mediumScreenMax] = useMediaQuery("(max-width: 768px)");
   const [openedForm, setOpenedForm] = useState(false);
-  /* console.log(mediumScreenMax); */
-  /*   console.log(openedForm); */
-  /*   console.log(largeScreen); */
 
   useEffect(() => {
     setOpenedForm(!mediumScreenMax);

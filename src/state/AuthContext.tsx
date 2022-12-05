@@ -7,16 +7,10 @@ import {
   SetStateAction,
   useEffect,
 } from "react";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../config/firebase";
-import { User as FirebaseUser } from "firebase/auth";
 
 interface AuthContextInterface {
-  user: FirebaseUser | null;
-  setUser: Dispatch<SetStateAction<FirebaseUser | null>>;
-  company: string;
-  setCompany: Dispatch<SetStateAction<string>>;
-  userRights: string;
+  user: /* FirebaseUser | null; */ any;
+  setUser: /* Dispatch<SetStateAction<FirebaseUser | null>>; */ any;
 }
 
 const AuthContext = createContext({} as AuthContextInterface);
@@ -26,31 +20,9 @@ export const AuthContextProvider: React.FC<{
 }> = ({ children }) => {
   //Stored data for user and company
   const [user, setUser] = useState(getLocalStorage("user") || null);
-  const [company, setCompany] = useState(getLocalStorage("company") || null);
-  const [userRights, setUserRights] = useState(
-    getLocalStorage("rights") || null
-  );
 
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(user));
-
-    //Firebase query -> při změně usera uložení company, pod kterou user pracuje
-    const fetchCompany = async () => {
-      const docRef = doc(db, "users", user.uid);
-
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        setCompany(docSnap.data().company);
-        localStorage.setItem("company", JSON.stringify(docSnap.data().company));
-        setUserRights(docSnap.data().rights);
-        localStorage.setItem("rights", JSON.stringify(docSnap.data().rights));
-      } else {
-        // doc.data() will be undefined in this case
-        console.log("No such document!");
-      }
-    };
-    fetchCompany();
   }, [user]);
 
   return (
@@ -58,9 +30,6 @@ export const AuthContextProvider: React.FC<{
       value={{
         user,
         setUser,
-        company,
-        setCompany,
-        userRights,
       }}
     >
       {children}

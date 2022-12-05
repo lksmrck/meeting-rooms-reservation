@@ -3,6 +3,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import ReservationContext from "../../state/ReservationContext";
 import { useNavigate } from "react-router-dom";
+import { dateToParams } from "../../utils/dateParamsFormat";
 
 const DatePick = () => {
   const [date, setDate] = useState(new Date());
@@ -21,7 +22,8 @@ const DatePick = () => {
     //Date to string bez mezer --> pro porovnání s datem z FIrebase v DailyOverview componentu
     const adjustedDate = date.toLocaleDateString().replace(/\s/g, "");
     setPickedDate(adjustedDate);
-    navigate("/overview");
+    const dateParams = dateToParams(adjustedDate);
+    navigate(`/date/${dateParams}/overview`);
   };
 
   return (

@@ -12,7 +12,7 @@ import { useState, useContext, Dispatch, SetStateAction } from "react";
 import useAuth from "../../hooks/useAuth";
 import ReservationContext from "../../state/ReservationContext";
 import { useRemoveMeeting } from "../../hooks/useRemoveMeeting";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Meeting } from "../../types/types";
 import LoadingSpinner from "../ui/LoadingSpinner/LoadingSpinner";
 import DetailDomEditMode from "./DetailDomEditMode";
@@ -23,6 +23,7 @@ import { updatePickedRoom } from "../../utils/updatePickedRoom";
 import { useMeetingsFetch } from "../../hooks/useMeetingsFetch";
 import { BsTrash } from "react-icons/bs";
 import { BsPencil } from "react-icons/bs";
+import { paramsToDate } from "../../utils/dateParamsFormat";
 
 type MeetingDetailProps = {
   clickedMeeting: Meeting;
@@ -50,9 +51,12 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
   //State na local loading - aby nebyl problém se synchronizací s Firebase (update a nasledny fetch updated)
   const [fbIsLoading, setFbIsLoading] = useState(false);
 
-  const { company, user } = useAuth();
-  const { pickedDate, pickedRoom, setPickedRoom } =
+  const { user } = useAuth();
+  const { /* pickedDate, */ pickedRoom, setPickedRoom } =
     useContext(ReservationContext);
+
+  const { pickedDate, pickedRoomId } = useParams();
+  const formatedDate = paramsToDate(pickedDate);
 
   const { fetchMeetings } = useMeetingsFetch();
   const { addMeeting } = useAddMeeting();
@@ -74,8 +78,8 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
 
   const deleteMeetingHandler = (e: React.SyntheticEvent) => {
     setFbIsLoading(true);
-    removeData("secondCompany", clickedMeeting, pickedRoom.id).then(() => {
-      navigate("/overview");
+    removeData(clickedMeeting, pickedRoomId).then(() => {
+      navigate(`/date/${pickedDate}/overview`);
       setFbIsLoading(false);
       setOpenDetail(false);
     });
@@ -101,7 +105,7 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
       date,
       name,
       type,
-      room: pickedRoom.id,
+      room: pickedRoomId,
       blocks,
       creator: user!.email,
       guests: updatedGuests,
@@ -112,15 +116,10 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
       updatedTime.start != null &&
       updatedTime.end != null
     ) {
-      removeData("secondCompany", clickedMeeting, pickedRoom.id).then(() => {
-        addMeeting(formData)
+      removeData(clickedMeeting, pickedRoomId).then(() => {
+        addMeeting(formData, pickedRoomId)
           .then(() => {
-            fetchMeetings(
-              "secondCompany",
-              pickedDate,
-              setMeetingsDetail,
-              pickedRoom.id
-            );
+            fetchMeetings(formatedDate, setMeetingsDetail, pickedRoomId);
           })
           .then(() => {
             updatePickedRoom(

@@ -10,15 +10,18 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 import { db } from "../config/firebase";
+import useAuth from "./useAuth";
 
 export const useUsersAdminFncs = () => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const fetchUsers = async (company: any, setUsersArray: any) => {
+  const { user } = useAuth();
+
+  const fetchUsers = async (setUsersArray: any) => {
     setIsLoading(true);
     let usersList: any = [];
     const querySnapshot = await getDocs(
-      collection(db, `companies/${company}/users`)
+      collection(db, `companies/${user.company}/users`)
     );
     querySnapshot.forEach((doc) => {
       usersList.push({ ...doc.data(), id: doc.id });

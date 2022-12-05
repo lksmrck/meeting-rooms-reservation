@@ -12,7 +12,7 @@ import HamburgerMenu from "./HamburgerMenu";
 const Navbar = () => {
   const navigate = useNavigate();
 
-  const { user, setUser, company, userRights } = useAuth();
+  const { user, setUser } = useAuth();
   const { setError } = useContext(AppContext);
 
   const loginLogoutHandler = () => {
@@ -42,9 +42,9 @@ const Navbar = () => {
           </li>
         </ul>
         <div className=" flex justify-center ">
-          {user && company && (
+          {user && (
             <>
-              {userRights == ADMIN && (
+              {user.rights == ADMIN && (
                 <div>
                   <IconButton
                     colorScheme="facebook"
@@ -63,7 +63,7 @@ const Navbar = () => {
                 <h2 className="text-xs font-bold mr-3 ml-2 lg:text-base ">
                   {user.email}
                 </h2>
-                <h3 className="text-xs lg:text-sm">{company}</h3>
+                <h3 className="text-xs lg:text-sm">{user.company}</h3>
               </div>
             </>
           )}

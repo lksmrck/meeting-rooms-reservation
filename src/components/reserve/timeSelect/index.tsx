@@ -10,11 +10,12 @@ import ReservationContext from "../../../state/ReservationContext";
 import { useMeetingsFetch } from "../../../hooks/useMeetingsFetch";
 import MeetingDetail from "../../meetingDetail";
 import OneRoomDom from "./OneRoomDom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import TimeBlocksDom from "../../overview/TimeBlocksDom";
 import { Meeting, RoomData } from "../../../types/types";
 import LoadingSpinner from "../../ui/LoadingSpinner/LoadingSpinner";
-import { updatePickedRoom } from "../../../utils/updatePickedRoom";
+import { paramsToDate } from "../../../utils/dateParamsFormat";
+import { updateRoomData } from "./updateRoomData";
 
 type TimeSelectProps = {
   setBlocksPickError: Dispatch<
@@ -25,7 +26,11 @@ type TimeSelectProps = {
 const TimeSelect: React.FC<TimeSelectProps> = ({ setBlocksPickError }) => {
   const navigate = useNavigate();
 
-  const { pickedRoom, setPickedRoom, pickedDate, roomsData } =
+  //Datum + roomID z params
+  const { pickedDate, pickedRoomId } = useParams();
+  const formatedDate = paramsToDate(pickedDate);
+
+  const { pickedRoom, setPickedRoom, roomsData } =
     useContext(ReservationContext);
 
   const [selectedBlocks, setSelectedBlocks] = useState(0);
@@ -70,12 +75,7 @@ const TimeSelect: React.FC<TimeSelectProps> = ({ setBlocksPickError }) => {
   useEffect(() => {
     let isCurrent = true;
     if (!isCurrent) return;
-    fetchMeetings(
-      "secondCompany",
-      pickedDate,
-      setMeetingsDetail,
-      pickedRoom.id
-    );
+    fetchMeetings(formatedDate, setMeetingsDetail, pickedRoomId);
 
     return () => {
       isCurrent = false;
@@ -103,14 +103,7 @@ const TimeSelect: React.FC<TimeSelectProps> = ({ setBlocksPickError }) => {
 
     //1. Pokud ještě není vybrán žádný blok, lze kliknout na kterýkoliv a vybrat.
     if (!clickReservedCheck && pickedRoom && selectedBlocks == 0) {
-      const updatedRoomData = pickedRoom.roomData.map((data: RoomData) => {
-        if (data.block == blockNumber) {
-          return { ...data, selected: !data.selected };
-        }
-        return data;
-      });
-      const updatedRoom = { ...pickedRoom, roomData: updatedRoomData };
-
+      const updatedRoom = updateRoomData(pickedRoom, blockNumber);
       setPickedRoom(updatedRoom);
     }
     //2. Pokud je právě 1 vybraný blok, tak lze vybrat pouze blok+1 nebo blok-1 nebo odvybrat vybraný blok
@@ -125,14 +118,7 @@ const TimeSelect: React.FC<TimeSelectProps> = ({ setBlocksPickError }) => {
         blockNumber == reservedBlock[0].block - 1
       ) {
         removeBlocksError();
-        const updatedRoomData = pickedRoom.roomData.map((data: RoomData) => {
-          if (data.block == blockNumber) {
-            return { ...data, selected: !data.selected };
-          }
-          return data;
-        });
-        const updatedRoom = { ...pickedRoom, roomData: updatedRoomData };
-
+        const updatedRoom = updateRoomData(pickedRoom, blockNumber);
         setPickedRoom(updatedRoom);
       } else {
         setBlocksError();
@@ -164,14 +150,7 @@ const TimeSelect: React.FC<TimeSelectProps> = ({ setBlocksPickError }) => {
         blockNumber == maxBlock
       ) {
         removeBlocksError();
-        const updatedRoomData = pickedRoom.roomData.map((data: RoomData) => {
-          if (data.block == blockNumber) {
-            return { ...data, selected: !data.selected };
-          }
-          return data;
-        });
-        const updatedRoom = { ...pickedRoom, roomData: updatedRoomData };
-
+        const updatedRoom = updateRoomData(pickedRoom, blockNumber);
         setPickedRoom(updatedRoom);
       } else {
         setBlocksError();

@@ -14,6 +14,7 @@ import AuthContext from "../../../state/AuthContext";
 import SelectRights from "../../reserve/form/FormSelect";
 import { userRights, USER } from "../../../common/constants";
 import { useUsersAdminFncs } from "../../../hooks/useUsersAdminFncs";
+import useAuth from "../../../hooks/useAuth";
 
 type AddUserModalProps = {
   isOpen: boolean;
@@ -26,14 +27,14 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
   setIsOpen,
   setUsers,
 }) => {
-  const { company } = useContext(AuthContext);
+  const { user } = useAuth();
 
   const [formData, setFormData] = useState({
     name: "",
     surname: "",
     email: "",
     password: "",
-    company,
+    company: user.company,
     rights: USER,
     creationDate: new Date().toLocaleString(),
   });

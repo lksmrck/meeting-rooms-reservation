@@ -32,9 +32,9 @@ const App = () => {
     if (user) timeCheck(setUser);
   }, [location]);
 
-  useEffect(() => {
+  /*   useEffect(() => {
     if (error.error) navigate("/something-wrong");
-  }, [error]);
+  }, [error]); */
 
   return (
     <div className="overflow-y-scroll scrollbar-hide w-screen flex flex-col  ">
@@ -49,8 +49,15 @@ const App = () => {
             {/* //Protected routes - musí být logged in + User nebo Admin */}
             <Route element={<RequireAuth allowedRights={[ADMIN, USER]} />}>
               <Route path="datepick" element={<Home />} />
-              <Route path="reserve" element={<Reserve />} />
-              <Route path="overview" element={<DailyOverview />} />
+              <Route
+                path="date/:pickedDate/:pickedRoomId/reserve"
+                element={<Reserve />}
+              />
+              <Route
+                path="date/:pickedDate/overview"
+                element={<DailyOverview />}
+              />
+              {/* <Route path="overview" element={<DailyOverview />} /> */}
             </Route>
             {/* //Protected routes - musí být logged in + Admin */}
             <Route element={<RequireAuth allowedRights={[ADMIN]} />}>

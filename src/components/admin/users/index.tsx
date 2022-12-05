@@ -14,7 +14,7 @@ const UsersList = () => {
   const { fetchUsers, isLoading } = useUsersAdminFncs();
 
   useEffect(() => {
-    fetchUsers("secondCompany", setUsers);
+    fetchUsers(setUsers);
   }, []);
 
   const tableColumns = ["Name", "Surname", "Rights", "Creation date", "Delete"];

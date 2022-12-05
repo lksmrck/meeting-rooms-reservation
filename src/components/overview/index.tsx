@@ -1,18 +1,23 @@
 import { useNavigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import ReservationContext from "../../state/ReservationContext";
-
+import { useParams } from "react-router-dom";
 import RoomsDom from "./RoomsDom";
 import { useRoomsMeetingsFetch } from "../../hooks/useRoomsMeetingsFetch";
 import TimeBlocksDom from "./TimeBlocksDom";
 import { Room, RoomData } from "../../types/types";
+import { paramsToDate } from "../../utils/dateParamsFormat";
 /* import useAuth from "../../hooks/useAuth"; */
 
 import LoadingSpinner from "../ui/LoadingSpinner/LoadingSpinner";
 
 const Overview = () => {
-  const { pickedDate, setPickedRoom, roomsData, setRoomsData } =
+  const { /* pickedDate, */ setPickedRoom, roomsData, setRoomsData } =
     useContext(ReservationContext);
+
+  const { pickedDate } = useParams();
+
+  const formatedPickedDate = paramsToDate(pickedDate);
 
   /* const { user, company } = useAuth(); */
   const navigate = useNavigate();
@@ -25,7 +30,7 @@ const Overview = () => {
     if (!isCurrent) return;
     roomsAndMeetingsFetch(
       "secondCompany", //upravit na company
-      pickedDate
+      formatedPickedDate
     );
     return () => {
       isCurrent = false;
@@ -45,7 +50,9 @@ const Overview = () => {
     const adjustedClickedRoom = { ...clickedRoom, roomData: adjustedRoomData };
     //Pošle se vyfiltrovaná room do react contextu. Odtud se pak bere v Reserve componentu
     setPickedRoom(adjustedClickedRoom as Room);
-    navigate("/reserve");
+
+    /* navigate("/reserve"); */
+    navigate(`/date/${pickedDate}/${room}/reserve`);
   };
 
   //Vypočítá šířku celého obsahu podle počtu místnosti - = 5rem) na místnost + 5rem za time blocks.

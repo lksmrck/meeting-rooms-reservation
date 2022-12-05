@@ -10,6 +10,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { Input } from "@chakra-ui/react";
 import LoadingSpinner from "../ui/LoadingSpinner/LoadingSpinner";
 import useAuth from "../../hooks/useAuth";
+import { fetchUserData } from "./fetchUserData";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
@@ -31,16 +32,20 @@ const Auth = () => {
     setIsLoading(true);
     //Firebase docs -  https://firebase.google.com/docs/auth/web/password-auth
     //Firebase Auth
+    let userData: any = {};
     setPersistence(auth, browserSessionPersistence)
       .then(() => {
-        return signInWithEmailAndPassword(auth, email, password).then(
-          (userCredential) => {
-            const user = userCredential.user;
-            setUser(user);
+        return signInWithEmailAndPassword(auth, email, password)
+          .then(async (userCredential) => {
+            /*   const firebaseUser = userCredential.user; */
+            userData = await fetchUserData(userCredential.user);
+          })
+          .then(() => {
+            console.log(userData);
+            setUser(userData);
             navigate(from, { replace: true });
             setIsLoading(false);
-          }
-        );
+          });
       })
 
       .catch((error) => {
