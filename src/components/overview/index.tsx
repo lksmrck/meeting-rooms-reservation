@@ -44,13 +44,16 @@ const Overview = () => {
     });
     //přidána property selected: false ke každému bloku. U reserve se tam bude přidělovat kliknutí a podle toho se barvit.
     const adjustedRoomData = clickedRoom!.roomData.map((data: RoomData) => {
+      if (data.block == block && !data.reserved) {
+        return { ...data, selected: true };
+      }
       return { ...data, selected: false };
     });
+
     const adjustedClickedRoom = { ...clickedRoom, roomData: adjustedRoomData };
     //Pošle se vyfiltrovaná room do react contextu. Odtud se pak bere v Reserve componentu
     setPickedRoom(adjustedClickedRoom as Room);
 
-    /* navigate("/reserve"); */
     navigate(`/date/${pickedDate}/${room}/reserve`);
   };
 
@@ -64,30 +67,38 @@ const Overview = () => {
   //Loading spinner width
 
   return (
-    <div className="flex justify-center bg-gradient-to-r from-violet-300 to-violet-400 overflow-x-scroll">
-      <section
-        className={` ${isLoading ? "flex" : "grid"} gap-5 mt-2`}
-        //Custom in-line style, protože Tailwind neumožňuje dynamic styling - takto udělá grid podle počtu místností (const displayCols) a přidá dynamicky width contentu.
-        style={{
-          gridTemplateColumns: `repeat(${displayCols}, minmax(0, 1fr))`,
-          width: `${displayWidth}rem`,
-        }}
+    <div className="w-screen flex justify-center bg-gradient-to-r from-violet-300 to-violet-400  pb-5 ">
+      <div
+        className="w-28 flex justify-start overflow-x-auto p-4 border rounded-lg shadow-lg bg-purple-600 mt-4"
+        style={{ width: `${displayWidth + 3.5}rem` }}
       >
-        <div className=" -ml-4">
-          <div className="text-xs w-24 h-10 flex justify-center items-center  border border-stone-700 rounded-md bg-emerald-900 text-white font-bold mb-1 cursor-pointer">
-            Time
+        <section
+          className={` ${
+            isLoading ? "flex" : "grid"
+          } gap-5  ml-3   `} /* mt-2 */
+          //Custom in-line style, protože Tailwind neumožňuje dynamic styling - takto udělá grid podle počtu místností (const displayCols) a přidá dynamicky width contentu.
+          style={{
+            gridTemplateColumns: `repeat(${displayCols}, minmax(0, 1fr))`,
+            minWidth: `${displayWidth}rem`,
+            width: `${displayWidth}rem`,
+          }}
+        >
+          <div className=" -ml-4">
+            <div className="text-xs w-24 h-10 flex justify-center items-center  border border-stone-700 rounded-md bg-emerald-900 text-white font-bold mb-1 cursor-pointer">
+              Time
+            </div>
+            <TimeBlocksDom />
           </div>
-          <TimeBlocksDom />
-        </div>
-        {isLoading ? (
-          <LoadingSpinner />
-        ) : (
-          <RoomsDom
-            roomsData={roomsData}
-            clickBlockHandler={clickBlockHandler}
-          />
-        )}
-      </section>
+          {isLoading ? (
+            <LoadingSpinner />
+          ) : (
+            <RoomsDom
+              roomsData={roomsData}
+              clickBlockHandler={clickBlockHandler}
+            />
+          )}
+        </section>
+      </div>
     </div>
   );
 };

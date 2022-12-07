@@ -98,13 +98,9 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
     e.preventDefault();
     setMissingFormData(false);
     setFbIsLoading(true);
-    const { id, date, name, type } = updatedMeeting;
     const blocks = timeToBlocks(updatedTime);
     const formData: any = {
-      id,
-      date,
-      name,
-      type,
+      ...updatedMeeting,
       room: pickedRoomId,
       blocks,
       creator: user!.email,
@@ -112,7 +108,7 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
     };
 
     if (
-      name.length > 0 &&
+      updatedMeeting.name.length > 0 &&
       updatedTime.start != null &&
       updatedTime.end != null
     ) {

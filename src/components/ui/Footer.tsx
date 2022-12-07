@@ -1,10 +1,14 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { IconButton } from "@chakra-ui/react";
+import { FiTwitter } from "react-icons/fi";
+import { FiFacebook } from "react-icons/fi";
+import { FiInstagram } from "react-icons/fi";
 
 const Footer = () => {
   const navigate = useNavigate();
   return (
-    <footer className=" text-white bg-violet-800 pt-28 shadow-sm  w-screen mt-auto relative h-22">
+    <footer className=" text-white bg-violet-800 pt-28 shadow-sm mt-auto w-screen  relative h-22">
       <div className="containerx">
         <div className="rowx">
           <div className="colx" onClick={() => navigate("/")}>
@@ -12,15 +16,24 @@ const Footer = () => {
             <h4>Room Reserver</h4>
           </div>
           <div className="row-iconsx">
-            {/* <IconButton sx={{ color: "#e6fcfc" }}>
+            <IconButton
+              aria-label="twitter"
+              colorScheme="purple" /* sx={{ color: "#e6fcfc" }} */
+            >
               <FiTwitter size={25} />
             </IconButton>
-            <IconButton sx={{ color: "#e6fcfc" }}>
+            <IconButton
+              aria-label="facebook"
+              colorScheme="purple" /* sx={{ color: "#e6fcfc" }} */
+            >
               <FiFacebook size={25} />
             </IconButton>
-            <IconButton sx={{ color: "#e6fcfc" }}>
+            <IconButton
+              aria-label="instagram"
+              colorScheme="purple" /* sx={{ color: "#e6fcfc" }} */
+            >
               <FiInstagram size={25} />
-            </IconButton> */}
+            </IconButton>
           </div>
         </div>
         <hr />

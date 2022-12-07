@@ -163,7 +163,7 @@ const TimeSelect: React.FC<TimeSelectProps> = ({ setBlocksPickError }) => {
   //Konečný return - 2 sloupce 1. s časovými bloky, 2. vybraná místnost
   return (
     <section className="grid grid-cols-2 mx-auto md:mx-0 ">
-      <div>
+      <div className="w-28">
         <TimeBlocksDom />
       </div>
       <div className="ml-1">
@@ -172,7 +172,7 @@ const TimeSelect: React.FC<TimeSelectProps> = ({ setBlocksPickError }) => {
             <LoadingSpinner />
           </div>
         ) : (
-          <div>
+          <div className="w-28">
             <OneRoomDom
               pickedRoom={pickedRoom}
               blockClickHandler={blockClickHandler}

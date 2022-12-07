@@ -8,9 +8,12 @@ import { FiSettings } from "react-icons/fi";
 import AppContext from "../../state/AppContext";
 import { ADMIN } from "../../common/constants";
 import HamburgerMenu from "./HamburgerMenu";
+import { useMediaQuery } from "@chakra-ui/react";
 
 const Navbar = () => {
   const navigate = useNavigate();
+
+  const [smallScreen] = useMediaQuery("(max-width: 640px)");
 
   const { user, setUser } = useAuth();
   const { setError } = useContext(AppContext);
@@ -44,7 +47,7 @@ const Navbar = () => {
         <div className=" flex justify-center ">
           {user && (
             <>
-              {user.rights == ADMIN && (
+              {user.rights == ADMIN && !smallScreen && (
                 <div>
                   <IconButton
                     colorScheme="facebook"

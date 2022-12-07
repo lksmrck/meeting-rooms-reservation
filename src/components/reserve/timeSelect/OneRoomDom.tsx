@@ -51,7 +51,7 @@ const OneRoomDom: React.FC<OneRoomDomProps> = ({
       );
     }
     return (
-      <div className="w-28">
+      <div>
         <Button
           key={roomData.block}
           size="sm"

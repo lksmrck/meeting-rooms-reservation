@@ -19,7 +19,7 @@ const Reserve = () => {
   });
 
   return (
-    <div className="flex flex-col-reverse md:flex-row justify-center h-full bg-gradient-to-r from-violet-300 to-violet-400 [&>*]:mt-2">
+    <div className="flex flex-col-reverse md:flex-row justify-center h-full bg-gradient-to-r from-violet-300 to-violet-400 [&>*]:mt-2 pb-5">
       <TimeSelect setBlocksPickError={setBlocksPickError} />
       {mediumScreenMax && !openedForm && (
         <div className="flex justify-center">

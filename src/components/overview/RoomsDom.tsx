@@ -54,7 +54,7 @@ const RoomsDom: React.FC<RoomsDomProps> = ({
             <Button
               key={roomData.block}
               size="sm"
-              className="hover:scale-105 w-20 border h-10 border-stone-700 shadow-md shadow-slate-600  "
+              className="hover:scale-105 w-20 border h-10 border-stone-700 shadow-md shadow-slate-600 "
               colorScheme="gray"
               style={{ height: `2.5rem` }}
               onClick={() => clickBlockHandler(room.id, roomData.block)}
