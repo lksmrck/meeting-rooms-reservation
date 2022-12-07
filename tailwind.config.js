@@ -36,6 +36,7 @@ module.exports = {
       backgroundImage: {
         stepsWaves: "url('/src/assets/stepsWaves.svg')",
         titleWaves: "url('/src/assets/titleWaves.svg')",
+        carouselWaves: "url('/src/assets/carouselWaves.svg')",
       },
       backgroundColor: {
         features: "#461c70",

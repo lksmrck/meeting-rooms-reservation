@@ -16,6 +16,7 @@ import { Meeting, RoomData } from "../../../types/types";
 import LoadingSpinner from "../../ui/LoadingSpinner/LoadingSpinner";
 import { paramsToDate } from "../../../utils/dateParamsFormat";
 import { updateRoomData } from "./updateRoomData";
+import AppContext from "../../../state/AppContext";
 
 type TimeSelectProps = {
   setBlocksPickError: Dispatch<
@@ -24,7 +25,7 @@ type TimeSelectProps = {
 };
 
 const TimeSelect: React.FC<TimeSelectProps> = ({ setBlocksPickError }) => {
-  const navigate = useNavigate();
+  /* const navigate = useNavigate(); */
 
   //Datum + roomID z params
   const { pickedDate, pickedRoomId } = useParams();
@@ -32,6 +33,7 @@ const TimeSelect: React.FC<TimeSelectProps> = ({ setBlocksPickError }) => {
 
   const { pickedRoom, setPickedRoom, roomsData } =
     useContext(ReservationContext);
+  const { isContextLoading } = useContext(AppContext);
 
   const [selectedBlocks, setSelectedBlocks] = useState(0);
 
@@ -160,20 +162,22 @@ const TimeSelect: React.FC<TimeSelectProps> = ({ setBlocksPickError }) => {
 
   //Konečný return - 2 sloupce 1. s časovými bloky, 2. vybraná místnost
   return (
-    <section className="grid grid-cols-2 mx-auto md:mx-0">
+    <section className="grid grid-cols-2 mx-auto md:mx-0 ">
       <div>
         <TimeBlocksDom />
       </div>
       <div className="ml-1">
-        {isLoading ? (
+        {isLoading || isContextLoading ? (
           <div className="w-28 -ml-2">
             <LoadingSpinner />
           </div>
         ) : (
-          <OneRoomDom
-            pickedRoom={pickedRoom}
-            blockClickHandler={blockClickHandler}
-          />
+          <div>
+            <OneRoomDom
+              pickedRoom={pickedRoom}
+              blockClickHandler={blockClickHandler}
+            />
+          </div>
         )}
       </div>
       {openDetail && (

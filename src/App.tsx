@@ -38,8 +38,7 @@ const App = () => {
 
   return (
     <div className="overflow-y-scroll scrollbar-hide w-screen flex flex-col  ">
-      <div className="">
-        {/* flex-1 */}
+      <div>
         <Navbar />
         <Routes>
           <Route path="/">

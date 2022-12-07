@@ -66,13 +66,12 @@ const Form: React.FC<FormProps> = ({
     pickedRoom.roomData.forEach((data: RoomData) => {
       if (data.selected) blocks.push(data.block);
     });
-    const { name, type } = formData;
+    const { name } = formData;
 
     const newMeeting = {
+      ...formData,
       id: Date.now(),
       date: formatedDate,
-      name,
-      type,
       room: pickedRoomId,
       blocks,
       creator: user!.email,

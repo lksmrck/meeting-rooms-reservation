@@ -10,13 +10,15 @@ import { paramsToDate } from "../../utils/dateParamsFormat";
 /* import useAuth from "../../hooks/useAuth"; */
 
 import LoadingSpinner from "../ui/LoadingSpinner/LoadingSpinner";
+import AuthContext from "../../state/AuthContext";
 
 const Overview = () => {
   const { /* pickedDate, */ setPickedRoom, roomsData, setRoomsData } =
     useContext(ReservationContext);
 
-  const { pickedDate } = useParams();
+  const { user } = useContext(AuthContext);
 
+  const { pickedDate } = useParams();
   const formatedPickedDate = paramsToDate(pickedDate);
 
   /* const { user, company } = useAuth(); */
@@ -28,10 +30,7 @@ const Overview = () => {
   useEffect(() => {
     let isCurrent = true;
     if (!isCurrent) return;
-    roomsAndMeetingsFetch(
-      "secondCompany", //upravit na company
-      formatedPickedDate
-    );
+    roomsAndMeetingsFetch(user.company, formatedPickedDate);
     return () => {
       isCurrent = false;
     };

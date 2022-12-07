@@ -12,7 +12,7 @@ let userData = {}
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
         
-    userData = await {uid, email, company: docSnap.data().company, rights: docSnap.data().rights}
+    userData = {uid, email, company: docSnap.data().company, rights: docSnap.data().rights}
    
     }
 
