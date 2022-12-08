@@ -1,7 +1,7 @@
 import Features from "../components/landing/Features";
 import Title from "../components/landing/Title";
 import Steps from "../components/landing/Steps";
-import Reference from "../components/landing/reference/Reference";
+import Reference from "../components/landing/Reference";
 
 const Landing = () => {
   return (

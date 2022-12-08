@@ -11,6 +11,7 @@ import {
   Input,
   Button,
 } from "@chakra-ui/react";
+import LoadingSpinner from "../../ui/LoadingSpinner/LoadingSpinner";
 
 type AddRoomModalProps = {
   isOpen: boolean;
@@ -27,12 +28,13 @@ const AddRoomModal: React.FC<AddRoomModalProps> = ({
 }) => {
   const [formData, setFormData] = useState("");
 
-  const { addRoom } = useRoomsAdminFncs();
+  const { addRoom, roomsFetch, isLoading } = useRoomsAdminFncs();
 
   const addRoomHandler = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    addRoom(rooms, setRooms, formData);
-    setIsOpen(false);
+    addRoom(rooms, formData)
+      .then(() => roomsFetch(setRooms))
+      .then(() => setIsOpen(false));
   };
 
   const onCancel = () => {
@@ -41,7 +43,6 @@ const AddRoomModal: React.FC<AddRoomModalProps> = ({
 
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(e.target.value);
-    console.log(formData);
   };
 
   return (
@@ -51,19 +52,23 @@ const AddRoomModal: React.FC<AddRoomModalProps> = ({
         <ModalHeader>Add room</ModalHeader>
         <ModalCloseButton />
         <ModalBody pb={6}>
-          <form>
-            <Input
-              size="sm"
-              type="text"
-              placeholder="e.g. Example Room "
-              name="name"
-              id="name"
-              onChange={inputChangeHandler}
-              value={formData}
-              focusBorderColor="teal.400"
-              required
-            />
-          </form>
+          {isLoading ? (
+            <LoadingSpinner />
+          ) : (
+            <form>
+              <Input
+                size="sm"
+                type="text"
+                placeholder="e.g. Example Room "
+                name="name"
+                id="name"
+                onChange={inputChangeHandler}
+                value={formData}
+                focusBorderColor="teal.400"
+                required
+              />
+            </form>
+          )}
         </ModalBody>
         <ModalFooter className="[&>button]:m-1 ">
           <Button colorScheme="teal" onClick={addRoomHandler}>

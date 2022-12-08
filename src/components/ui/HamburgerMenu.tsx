@@ -30,7 +30,8 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
             as={IconButton}
             aria-label="Options"
             icon={<GiHamburgerMenu />}
-            variant="outline"
+            variant="outlined"
+            className="bg-teal-700"
           />
           <MenuList>
             {user &&

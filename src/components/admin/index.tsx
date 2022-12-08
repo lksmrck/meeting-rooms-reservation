@@ -7,8 +7,8 @@ const Settings = () => {
   const navigate = useNavigate();
 
   return (
-    <div className={`w-screen h-content  flex justify-center`}>
-      <div className="mt-4 [&>*]:m-2">
+    <div className={`w-screen h-content flex justify-center`}>
+      <div className="mt-4 [&>*]:m-2 flex flex-col md:flex-row  ">
         <Button
           name="users"
           colorScheme="facebook"

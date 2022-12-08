@@ -9,7 +9,7 @@ import AppContext from "../state/AppContext";
 
 export const useAddMeeting = () => {
   /*   const { pickedRoom } = useContext(ReservationContext); */
-  const { setIsContextLoading } = useContext(AppContext);
+  const { setIsContextLoading, setError } = useContext(AppContext);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 

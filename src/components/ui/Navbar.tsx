@@ -38,7 +38,7 @@ const Navbar = () => {
       <nav className="flex justify-between items-center w-screen">
         <ul className="flex items-center">
           <li
-            className=" lg:ml-5 ml-2 text-white cursor-pointer"
+            className=" lg:ml-5 ml-3 text-white cursor-pointer"
             onClick={() => navigate("/datepick")}
           >
             Room Reserver
@@ -62,7 +62,7 @@ const Navbar = () => {
                 </div>
               )}
 
-              <div className="flex text-white bg-violet-900 h-10 rounded-lg justify-center items-center pr-1 mr-2 lg:mr-4">
+              <div className="flex text-white bg-violet-900 h-10 rounded-lg justify-center items-center pr-1 mr-2 md:mr-4">
                 <h2 className="text-xs font-bold mr-3 ml-2 lg:text-base ">
                   {user.email}
                 </h2>
@@ -70,15 +70,21 @@ const Navbar = () => {
               </div>
             </>
           )}
-          <HamburgerMenu loginLogoutHandler={loginLogoutHandler} />
-          {/* <Button
-            colorScheme={user ? "red" : "teal"}
-            size="md"
-            onClick={loginLogoutHandler}
-            className="mr-2 lg:mr-9"
-          >
-            {user ? "Logout" : "Sign In"}
-          </Button> */}
+          <div className="mr-4">
+            {smallScreen ? (
+              <HamburgerMenu loginLogoutHandler={loginLogoutHandler} />
+            ) : (
+              <Button
+                colorScheme={user ? "red" : "teal"}
+                size="md"
+                onClick={loginLogoutHandler}
+                className="mr-2 lg:mr-9"
+              >
+                {user ? "Logout" : "Sign In"}
+              </Button>
+            )}
+            {/*   <HamburgerMenu loginLogoutHandler={loginLogoutHandler} /> */}
+          </div>
         </div>
       </nav>
     </section>

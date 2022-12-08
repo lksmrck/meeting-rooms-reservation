@@ -31,7 +31,7 @@ export const useRoomsAdminFncs = () => {
   const addRoom = async (
     /* company: string, */
     roomsArray: any,
-    setRoomsArray: any,
+    /* setRoomsArray: any, */
     name: string
   ) => {
     setIsLoading(true);
@@ -42,7 +42,7 @@ export const useRoomsAdminFncs = () => {
       name,
       meetings: [],
     });
-    setRoomsArray((prevArray: any) => [...prevArray, { id, name }]);
+    /*  setRoomsArray((prevArray: any) => [...prevArray, { id, name }]); */
     setIsLoading(false);
   };
 

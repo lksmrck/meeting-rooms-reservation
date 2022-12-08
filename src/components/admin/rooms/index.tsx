@@ -40,7 +40,7 @@ const RoomsList = () => {
               </Thead>
               <Tbody>
                 {rooms.map((room: any) => {
-                  return <Room room={room} setRooms={setRooms} />;
+                  return <Room key={room.id} room={room} setRooms={setRooms} />;
                 })}
               </Tbody>
             </Table>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { createUserWithEmailAndPassword, deleteUser } from "firebase/auth";
 import { auth } from "../config/firebase";
 import {
@@ -11,11 +11,13 @@ import {
 } from "firebase/firestore";
 import { db } from "../config/firebase";
 import useAuth from "./useAuth";
+import AppContext from "../state/AppContext";
 
 export const useUsersAdminFncs = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const { user } = useAuth();
+  const { setError } = useContext(AppContext);
 
   const fetchUsers = async (setUsersArray: any) => {
     setIsLoading(true);
@@ -26,7 +28,7 @@ export const useUsersAdminFncs = () => {
     querySnapshot.forEach((doc) => {
       usersList.push({ ...doc.data(), id: doc.id });
     });
-    console.log(usersList);
+
     setUsersArray(usersList);
     setIsLoading(false);
   };
@@ -34,7 +36,7 @@ export const useUsersAdminFncs = () => {
   const addUser = async (formData: any, setUsersArray: any) => {
     setIsLoading(true);
     const { company, email, password } = formData;
-    console.log(formData);
+
     //1. create user in auth
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredentials: any) => {
@@ -54,6 +56,7 @@ export const useUsersAdminFncs = () => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        console.log(errorMessage);
         // ..
       });
 
@@ -73,7 +76,10 @@ export const useUsersAdminFncs = () => {
         deleteUser()
       }) */
       .catch((error: any) => {
-        console.log(error);
+        setError({
+          error: true,
+          message: "Something went wrong during downloading meetings.",
+        });
       });
 
     setUsersArray((prevArray: any) =>
