@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/conference-room-reservation/static/css/main.0f374f5a.css",
-    "main.js": "/conference-room-reservation/static/js/main.506fff31.js",
+    "main.js": "/conference-room-reservation/static/js/main.be5b528e.js",
     "static/media/CR.jpeg": "/conference-room-reservation/static/media/CR.c2963528284ad088b9be.jpeg",
     "static/media/loginBg.svg": "/conference-room-reservation/static/media/loginBg.dbf981db17490f05cc93.svg",
     "index.html": "/conference-room-reservation/index.html",
@@ -9,10 +9,10 @@
     "static/media/carouselWaves.svg": "/conference-room-reservation/static/media/carouselWaves.84cb469bb9ccb965cf00.svg",
     "static/media/stepsWaves.svg": "/conference-room-reservation/static/media/stepsWaves.d1a8eb24f8f2b5271530.svg",
     "main.0f374f5a.css.map": "/conference-room-reservation/static/css/main.0f374f5a.css.map",
-    "main.506fff31.js.map": "/conference-room-reservation/static/js/main.506fff31.js.map"
+    "main.be5b528e.js.map": "/conference-room-reservation/static/js/main.be5b528e.js.map"
   },
   "entrypoints": [
     "static/css/main.0f374f5a.css",
-    "static/js/main.506fff31.js"
+    "static/js/main.be5b528e.js"
   ]
 }
