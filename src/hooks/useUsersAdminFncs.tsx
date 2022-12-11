@@ -1,10 +1,9 @@
 import { useState, useContext } from "react";
-import { createUserWithEmailAndPassword, deleteUser } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config/firebase";
 import {
   setDoc,
   doc,
-  serverTimestamp,
   getDocs,
   collection,
   deleteDoc,
@@ -12,6 +11,7 @@ import {
 import { db } from "../config/firebase";
 import useAuth from "./useAuth";
 import AppContext from "../state/AppContext";
+import bcrypt from "bcryptjs";
 
 export const useUsersAdminFncs = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -36,7 +36,7 @@ export const useUsersAdminFncs = () => {
   const addUser = async (formData: any, setUsersArray: any) => {
     setIsLoading(true);
     const { company, email, password } = formData;
-
+    const hashedPassword = bcrypt.hashSync(password, 10);
     //1. create user in auth
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredentials: any) => {
@@ -44,20 +44,19 @@ export const useUsersAdminFncs = () => {
         const { user } = userCredentials;
         setDoc(doc(db, `companies/${company}/users`, user.uid), {
           ...formData,
+          password: hashedPassword,
         });
         //3. Create user in overall DB (vytáhne se odtud jen company a uid, aby se pak mohla tahat data.)
         setDoc(doc(db, `users`, user.uid), {
           ...formData,
+          password: hashedPassword,
         });
 
         setUsersArray((prevArray: any) => [...prevArray, formData]);
       })
 
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorMessage);
-        // ..
+        setError({ error: true, message: error.message });
       });
 
     setIsLoading(false);
