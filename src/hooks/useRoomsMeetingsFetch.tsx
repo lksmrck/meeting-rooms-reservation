@@ -50,22 +50,22 @@ export const useRoomsMeetingsFetch = () => {
       }
     });
 
-    //Rezervované bloky -> Najdu v každé room bloky, u kterých bude potřeba upravit property reserved na TRUE.
+    //Rezervované bloky -> Najdu v každé room bloky, u kterých bude potřeba upravit property reserved na TRUE (podle rezervovaných meetingů v daném dnu) a upravím array
     const updatedRooms: Room[] = companyRooms.map((room: CompanyRoom) => {
-      //Vyfiltrované dnešní meetingy podle dané room!
+      //Vyfiltrované dnešní meetingy podle dané room
       const filteredTodaysMeetings = todaysMeetings.filter(
         (meeting: Meeting) => {
           return meeting.room == room.id;
         }
       );
-
+      //Helper proměnná
       const blocks = blocksBreakdown.map((bd: BlocksBreakdown) => {
         if (bd.room == room.id) return bd.block;
       });
 
-      //Úprava roomData array, které půjde ke každé room (obsahuje blocky, časy, reserved a selected statusy)
+      //Úprava roomData array, které půjde ke každé room (obsahuje blocky, časy, reserved a selected booleans)
       const newDataArray = roomData.map((oneRoom: RoomData) => {
-        //Pomocné array
+        //Pomocné array - v případě, že daný block má rezervovaný meeting, tak v této proměnné budou čísla všech bloků, kterých se rezervovaný meeting týká, např. [2,3,4]
         let meetingsBlocksArray: number[] = [];
 
         filteredTodaysMeetings.forEach((meeting: Meeting) => {

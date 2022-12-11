@@ -23,46 +23,56 @@ const App = () => {
   const navigate = useNavigate();
 
   const { user, setUser } = useAuth();
-  const { error } = useContext(AppContext);
+  const { error, setError } = useContext(AppContext);
 
   const location = useLocation();
 
   //Při každé změně route se obnoví session timer pro automatické odhlášení
+  //+ když je error, tak při změně URL dá error state na false
   useEffect(() => {
-    if (user) timeCheck(setUser);
+    if (user) {
+      timeCheck(setUser);
+      if (error.error) setError({ error: false, message: "" });
+    }
   }, [location]);
 
-  /*   useEffect(() => {
+  useEffect(() => {
     if (error.error) navigate("/something-wrong");
-  }, [error]); */
+  }, [error]);
 
   return (
     <div className="overflow-y-scroll scrollbar-hide w-screen flex flex-col  ">
       <div>
         <Navbar />
         <Routes>
-          <Route path="/">
-            <Route index element={<Landing />} />
-            <Route path="login" element={<Auth />} />
-            <Route path="unauthorized" element={<Unauthorized />} />
-            {/* //Protected routes - musí být logged in + User nebo Admin */}
-            <Route element={<RequireAuth allowedRights={[ADMIN, USER]} />}>
-              <Route path="datepick" element={<Home />} />
-              <Route
-                path="date/:pickedDate/:pickedRoomId/reserve"
-                element={<Reserve />}
-              />
-              <Route
-                path="date/:pickedDate/overview"
-                element={<DailyOverview />}
-              />
-              {/* <Route path="overview" element={<DailyOverview />} /> */}
-            </Route>
+          <Route
+            path="/conference-room-reservation"
+            element={<Navigate replace to="/home" />}
+          />
+          <Route path="/something-wrong" element={<ErrorScreen />}></Route>
+          {/* <Route index element={<Landing />} /> */}
+          {/* GH pages */}
+          <Route path="/home" element={<Landing />} />
+          <Route path="/login" element={<Auth />} />
+          <Route path="/unauthorized" element={<Unauthorized />} />
+          {/* //Protected routes - musí být logged in + User nebo Admin */}
+          <Route element={<RequireAuth allowedRights={[ADMIN, USER]} />}>
+            <Route path="/datepick" element={<Home />} />
+            <Route
+              path="/date/:pickedDate/:pickedRoomId/reserve"
+              element={<Reserve />}
+            />
+            <Route
+              path="/date/:pickedDate/overview"
+              element={<DailyOverview />}
+            />
+            {/* <Route path="overview" element={<DailyOverview />} /> */}
+            {/*  </Route> */}
             {/* //Protected routes - musí být logged in + Admin */}
             <Route element={<RequireAuth allowedRights={[ADMIN]} />}>
-              <Route path="settings" element={<Settings />} />
-              <Route path="settings/rooms" element={<RoomsList />} />
-              <Route path="settings/users" element={<UsersList />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="/settings/rooms" element={<RoomsList />} />
+              <Route path="/settings/users" element={<UsersList />} />
             </Route>
           </Route>
         </Routes>

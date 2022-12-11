@@ -69,9 +69,16 @@ const Overview = () => {
   return (
     <div className="w-screen flex justify-center bg-gradient-to-r from-violet-300 to-violet-400  pb-5 ">
       <div
-        className="w-28 flex justify-start overflow-x-auto p-4 border rounded-lg shadow-lg bg-purple-600 mt-4"
+        className="w-28 flex flex-col justify-start overflow-x-auto p-4 border rounded-lg shadow-lg bg-purple-600 mt-4 "
         style={{ width: `${displayWidth + 3.5}rem` }}
       >
+        <p
+          className="border rounded-md  bg-purple-800 cursor-pointer flex justify-center font-bold text-white mb-2"
+          style={{ width: `${displayWidth + 1.5}rem` }}
+          onClick={() => navigate("/datepick")}
+        >
+          {formatedPickedDate}
+        </p>
         <section
           className={` ${
             isLoading ? "flex" : "grid"

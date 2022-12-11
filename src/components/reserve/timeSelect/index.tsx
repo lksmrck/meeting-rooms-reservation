@@ -29,7 +29,7 @@ const TimeSelect: React.FC<TimeSelectProps> = ({ setBlocksPickError }) => {
 
   //Datum + roomID z params
   const { pickedDate, pickedRoomId } = useParams();
-  const formatedDate = paramsToDate(pickedDate);
+  const formatedPickedDate = paramsToDate(pickedDate);
 
   const { pickedRoom, setPickedRoom, roomsData } =
     useContext(ReservationContext);
@@ -77,7 +77,7 @@ const TimeSelect: React.FC<TimeSelectProps> = ({ setBlocksPickError }) => {
   useEffect(() => {
     let isCurrent = true;
     if (!isCurrent) return;
-    fetchMeetings(formatedDate, setMeetingsDetail, pickedRoomId);
+    fetchMeetings(formatedPickedDate, setMeetingsDetail, pickedRoomId);
 
     return () => {
       isCurrent = false;
@@ -162,33 +162,39 @@ const TimeSelect: React.FC<TimeSelectProps> = ({ setBlocksPickError }) => {
 
   //Konečný return - 2 sloupce 1. s časovými bloky, 2. vybraná místnost
   return (
-    <section className="grid grid-cols-2 mx-auto md:mx-0 ">
-      <div className="w-28">
-        <TimeBlocksDom />
-      </div>
-      <div className="ml-1">
-        {isLoading || isContextLoading ? (
-          <div className="w-28 -ml-2">
-            <LoadingSpinner />
-          </div>
-        ) : (
-          <div className="w-28">
-            <OneRoomDom
-              pickedRoom={pickedRoom}
-              blockClickHandler={blockClickHandler}
-            />
-          </div>
+    <div className="flex flex-col">
+      <p className=" border rounded-md mx-auto md:mx-0 w-56 bg-purple-600 flex justify-center font-bold text-white mb-2">
+        {formatedPickedDate}
+      </p>
+
+      <section className="grid grid-cols-2 mx-auto md:mx-0 ">
+        <div className="w-28">
+          <TimeBlocksDom />
+        </div>
+        <div className="ml-1">
+          {isLoading || isContextLoading ? (
+            <div className="w-28 -ml-2">
+              <LoadingSpinner />
+            </div>
+          ) : (
+            <div className="w-28">
+              <OneRoomDom
+                pickedRoom={pickedRoom}
+                blockClickHandler={blockClickHandler}
+              />
+            </div>
+          )}
+        </div>
+        {openDetail && (
+          <MeetingDetail
+            clickedMeeting={clickedMeeting}
+            openDetail={openDetail}
+            setOpenDetail={setOpenDetail}
+            setMeetingsDetail={setMeetingsDetail}
+          />
         )}
-      </div>
-      {openDetail && (
-        <MeetingDetail
-          clickedMeeting={clickedMeeting}
-          openDetail={openDetail}
-          setOpenDetail={setOpenDetail}
-          setMeetingsDetail={setMeetingsDetail}
-        />
-      )}
-    </section>
+      </section>
+    </div>
   );
 };
 
