@@ -35,8 +35,13 @@ const Title = () => {
         ></div>
       </div>
 
-      <h1 className="  text-4xl text-center text-neutral-700 z-10">
-        Comfortly reserve your company conference rooms with few clicks.
+      <h1 className="text-6xl font-bold text-center text-neutral-800 z-10 font-outline">
+        Comfortly reserve your company
+        <span className=" font-solid font-normal text-neutral-900">
+          {" "}
+          conference rooms
+        </span>{" "}
+        with few clicks.
       </h1>
       <div className="flex justify-center mt-5">
         <Button colorScheme={"teal"}>Get Started</Button>

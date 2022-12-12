@@ -1,16 +1,6 @@
-import Features from "../components/landing/Features";
-import Title from "../components/landing/Title";
-import Steps from "../components/landing/Steps";
-import Reference from "../components/landing/Reference";
+import LandingPage from "../components/landing";
 
 const Landing = () => {
-  return (
-    <div className="h-auto ">
-      <Title />
-      <Features />
-      <Steps />
-      <Reference />
-    </div>
-  );
+  return <LandingPage />;
 };
 export default Landing;

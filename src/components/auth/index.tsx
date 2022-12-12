@@ -57,7 +57,7 @@ const Auth = () => {
 
   return (
     <div>
-      <section className="flex justify-center items-center bg-center bg-cover  bg-no-repeat bg-loginBg  h-screen ">
+      <section className="flex justify-center items-center bg-center bg-cover bg-no-repeat bg-loginBg h-content ">
         {/* bg-gradient-to-r from-violet-300 to-violet-400 */}
         <div className=" flex flex-col justify-center mb-10 items-center w-96 bg-white h-96 rounded-lg relative shadow-lg overflow-scroll scrollbar-hide">
           <div

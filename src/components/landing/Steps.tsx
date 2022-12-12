@@ -47,7 +47,7 @@ const Steps = () => {
               >
                 {button.id}
               </Button>
-              <p className=" ml-3">{button.text}</p>
+              <p className=" ml-3 font-solid text-lg">{button.text}</p>
             </div>
           );
         })}

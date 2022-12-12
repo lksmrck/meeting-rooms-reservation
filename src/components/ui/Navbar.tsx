@@ -70,7 +70,7 @@ const Navbar = () => {
               </div>
             </>
           )}
-          <div className="mr-4">
+          <div className="mr-7 lg:mr-9">
             {smallScreen ? (
               <HamburgerMenu loginLogoutHandler={loginLogoutHandler} />
             ) : (
@@ -78,7 +78,6 @@ const Navbar = () => {
                 colorScheme={user ? "red" : "teal"}
                 size="md"
                 onClick={loginLogoutHandler}
-                className="mr-2 lg:mr-9"
               >
                 {user ? "Logout" : "Sign In"}
               </Button>

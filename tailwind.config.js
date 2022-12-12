@@ -4,7 +4,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        fuzzy: "Fuzzy Bubbles ",
+        fuzzy: "Fuzzy Bubbles",
+        outline: "Londrina Shadow",
+        solid: "Londrina Solid",
       },
       margin: {
         0.25: "0.0625rem",
