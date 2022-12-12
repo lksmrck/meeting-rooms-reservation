@@ -26,7 +26,8 @@ const Reserve = () => {
           <Button
             colorScheme="yellow"
             onClick={() => setOpenedForm(true)}
-            className="w-56"
+            className="w-56 font-solid tracking-wider"
+            style={{ fontWeight: "bold", fontSize: "20px" }}
           >
             Create a meeting
           </Button>

@@ -35,7 +35,7 @@ const Title = () => {
         ></div>
       </div>
 
-      <h1 className="text-6xl font-bold text-center text-neutral-800 z-10 font-outline mx-5">
+      <h1 className="text-4xl md:text-6xl font-bold text-center text-neutral-800 z-10 font-outline mx-5">
         Comfortly reserve your company
         <span className=" font-solid font-normal text-neutral-900">
           {" "}

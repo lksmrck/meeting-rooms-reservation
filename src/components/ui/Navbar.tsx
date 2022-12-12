@@ -38,7 +38,7 @@ const Navbar = () => {
       <nav className="flex justify-between items-center w-screen">
         <ul className="flex items-center">
           <li
-            className=" lg:ml-5 ml-3 text-white cursor-pointer font-solid text-2xl"
+            className=" lg:ml-5 ml-3 text-white cursor-pointer font-solid text-lg md:text-2xl"
             onClick={() => navigate("/datepick")}
           >
             Room Reserver

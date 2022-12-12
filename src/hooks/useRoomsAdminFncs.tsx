@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, Dispatch, SetStateAction } from "react";
 import {
   collection,
   getDocs,
@@ -9,13 +9,18 @@ import {
 import { db } from "../config/firebase";
 import { CompanyRoom } from "../types/types";
 import AuthContext from "../state/AuthContext";
+import { Room } from "../types/types";
 
 export const useRoomsAdminFncs = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const { user } = useContext(AuthContext);
 
-  const roomsFetch = async (/* company: string, */ setRoomsArray: any) => {
+  const roomsFetch = async (
+    /* company: string, */ setRoomsArray: Dispatch<
+      SetStateAction<CompanyRoom[]>
+    >
+  ) => {
     setIsLoading(true);
     let companyRooms: CompanyRoom[] = [];
     const querySnapshot = await getDocs(
@@ -30,7 +35,7 @@ export const useRoomsAdminFncs = () => {
 
   const addRoom = async (
     /* company: string, */
-    roomsArray: any,
+    roomsArray: CompanyRoom[],
     /* setRoomsArray: any, */
     name: string
   ) => {
@@ -48,8 +53,8 @@ export const useRoomsAdminFncs = () => {
 
   const deleteRoom = async (
     /* company: string, */
-    roomID: any,
-    setRoomsArray: any
+    roomID: number,
+    setRoomsArray: Dispatch<SetStateAction<CompanyRoom[]>>
   ) => {
     setIsLoading(true);
     await deleteDoc(doc(db, `companies/${user.company}/rooms`, String(roomID)));

@@ -6,9 +6,10 @@ import AddRoomModal from "./AddRoomModal";
 import { Button } from "@chakra-ui/react";
 import { Table, Thead, Tbody, Tr, Th, TableContainer } from "@chakra-ui/react";
 import Room from "./Room";
+import { CompanyRoom } from "../../../types/types";
 
 const RoomsList = () => {
-  const [rooms, setRooms] = useState([]);
+  const [rooms, setRooms] = useState([] as CompanyRoom[]);
   const [addRoomModalOpen, setAddRoomModalOpen] = useState(false);
 
   const { roomsFetch, isLoading } = useRoomsAdminFncs();

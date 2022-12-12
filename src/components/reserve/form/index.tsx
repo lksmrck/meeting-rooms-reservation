@@ -100,7 +100,7 @@ const Form: React.FC<FormProps> = ({
           Pick blocks and add meeting details
         </h3>
         <form
-          className="flex flex-col w-72 p-4 pb-8   [&>input]:mb-4"
+          className="flex flex-col w-72 p-4 pb-10 [&>input]:mb-4"
           onSubmit={submitHandler}
         >
           <Input

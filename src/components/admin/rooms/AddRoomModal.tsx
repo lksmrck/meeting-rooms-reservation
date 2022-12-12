@@ -12,12 +12,13 @@ import {
   Button,
 } from "@chakra-ui/react";
 import LoadingSpinner from "../../ui/LoadingSpinner/LoadingSpinner";
+import { CompanyRoom } from "../../../types/types";
 
 type AddRoomModalProps = {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-  setRooms: Dispatch<SetStateAction<any>>;
-  rooms: any;
+  setRooms: Dispatch<SetStateAction<CompanyRoom[]>>;
+  rooms: CompanyRoom[];
 };
 
 const AddRoomModal: React.FC<AddRoomModalProps> = ({
