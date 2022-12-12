@@ -163,12 +163,19 @@ const TimeSelect: React.FC<TimeSelectProps> = ({ setBlocksPickError }) => {
   //Konečný return - 2 sloupce 1. s časovými bloky, 2. vybraná místnost
   return (
     <div className="flex flex-col">
-      <p className=" border rounded-md mx-auto md:mx-0 w-56 bg-purple-600 flex justify-center font-bold text-white mb-2">
-        {formatedPickedDate}
-      </p>
-
+      <div className="-ml-2">
+        <p className="border rounded-md mx-auto md:mx-2 w-56  bg-purple-600 flex justify-center  text-white  font-solid text-xl">
+          {formatedPickedDate}
+        </p>
+        <p className="border rounded-md mx-auto md:mx-2 w-56  bg-purple-600 flex justify-center  text-white mb-2 font-solid text-xl">
+          {pickedRoom.name}
+        </p>
+      </div>
       <section className="grid grid-cols-2 mx-auto md:mx-0 ">
         <div className="w-28">
+          <div className="flex font-bold justify-center items-center text-xs mb-1 w-24 h-10 border border-stone-700 rounded-md bg-purple-500 text-white shadow-md shadow-slate-600 ">
+            Time
+          </div>
           <TimeBlocksDom />
         </div>
         <div className="ml-1">
@@ -178,6 +185,9 @@ const TimeSelect: React.FC<TimeSelectProps> = ({ setBlocksPickError }) => {
             </div>
           ) : (
             <div className="w-28">
+              <div className="flex  font-bold justify-center items-center text-xs w-28 -ml-2 mb-1 h-10 border border-stone-700 rounded-md bg-purple-500 text-white shadow-md shadow-slate-600 ">
+                Availability
+              </div>
               <OneRoomDom
                 pickedRoom={pickedRoom}
                 blockClickHandler={blockClickHandler}

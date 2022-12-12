@@ -7,21 +7,21 @@ import FeatureBox from "./FeatureBox";
 const featureBoxes = [
   {
     text: "Simple",
-    icon: <Target color="#319795" className="h-2/5 w-2/5 lg:h-1/2 lg:w-1/2 " />,
+    icon: <Target color=/* "#319795" */"orange" className="h-2/5 w-2/5 lg:h-1/2 lg:w-1/2 " />,
   },
   {
     text: "Fast",
-    icon: <Flag color="#319795" className=" h-2/5 w-2/5 lg:h-1/2 lg:w-1/2" />,
+    icon: <Flag color=/* "#319795" */"orange" className=" h-2/5 w-2/5 lg:h-1/2 lg:w-1/2" />,
   },
   {
     text: "Easy to learn",
-    icon: <Point color="#319795" className="h-2/5 w-2/5 lg:h-1/2 lg:w-1/2" />,
+    icon: <Point color=/* "#319795" */"orange" className="h-2/5 w-2/5 lg:h-1/2 lg:w-1/2" />,
   },
 ];
 
 const Features = () => {
   return (
-    <div className="h-3/4">
+    <section className="h-3/4">
       <div className="flex justify-center  bg-features items-center h-full overflow-hidden">
         <ul className="flex flex-col m-10 lg:flex-row ">
           {featureBoxes.map((feature: any, index: number) => {
@@ -32,7 +32,7 @@ const Features = () => {
           })}
         </ul>
       </div>
-    </div>
+    </section>
   );
 };
 export default Features;

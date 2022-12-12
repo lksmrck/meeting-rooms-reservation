@@ -1,8 +1,9 @@
 import React from "react";
 import Title from "./Title";
-import Features from "./Features";
+import Features from "./Features/Features";
 import Steps from "./Steps";
 import Reference from "./Reference";
+import ContactUs from "./ContactUs/ContactUs";
 
 const LandingPage = () => {
   return (
@@ -11,6 +12,7 @@ const LandingPage = () => {
       <Features />
       <Steps />
       <Reference />
+      <ContactUs />
     </div>
   );
 };

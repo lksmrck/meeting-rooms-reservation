@@ -24,7 +24,7 @@ const Navbar = () => {
       localStorage.clear();
       signOut(auth)
         .then(() => {
-          navigate("/");
+          navigate("/home");
         })
         .catch((error) => {
           setError({ error: true, message: error.message });
@@ -38,7 +38,7 @@ const Navbar = () => {
       <nav className="flex justify-between items-center w-screen">
         <ul className="flex items-center">
           <li
-            className=" lg:ml-5 ml-3 text-white cursor-pointer"
+            className=" lg:ml-5 ml-3 text-white cursor-pointer font-solid text-2xl"
             onClick={() => navigate("/datepick")}
           >
             Room Reserver
@@ -82,7 +82,6 @@ const Navbar = () => {
                 {user ? "Logout" : "Sign In"}
               </Button>
             )}
-            {/*   <HamburgerMenu loginLogoutHandler={loginLogoutHandler} /> */}
           </div>
         </div>
       </nav>

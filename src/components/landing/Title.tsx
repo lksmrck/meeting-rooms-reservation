@@ -7,7 +7,7 @@ const Title = () => {
   /*   const [smallScreen] = useMediaQuery("(min-width: 640pxpx)"); */
 
   return (
-    <div
+    <section
       className="flex flex-col items-center justify-center bg-cover  bg-center bg-no-repeat   bg-titleWaves h-screen relative "
       /*   style={{ aspectRatio: "960/300" }} */
       /* bg-cover  bg-center bg-no-repeat */
@@ -35,7 +35,7 @@ const Title = () => {
         ></div>
       </div>
 
-      <h1 className="text-6xl font-bold text-center text-neutral-800 z-10 font-outline">
+      <h1 className="text-6xl font-bold text-center text-neutral-800 z-10 font-outline mx-5">
         Comfortly reserve your company
         <span className=" font-solid font-normal text-neutral-900">
           {" "}
@@ -46,7 +46,7 @@ const Title = () => {
       <div className="flex justify-center mt-5">
         <Button colorScheme={"teal"}>Get Started</Button>
       </div>
-    </div>
+    </section>
   );
 };
 

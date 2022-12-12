@@ -80,6 +80,7 @@ const Auth = () => {
                 type="e-mail"
                 placeholder="Enter your e-mail"
                 onChange={(e) => setEmail(e.target.value)}
+                value={email}
                 focusBorderColor="teal.400"
               />
               <Input
@@ -88,6 +89,7 @@ const Auth = () => {
                 type="password"
                 placeholder="Enter your password"
                 onChange={(e) => setPassword(e.target.value)}
+                value={password}
                 focusBorderColor="teal.400"
               />
 

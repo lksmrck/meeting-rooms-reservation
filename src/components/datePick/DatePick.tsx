@@ -28,7 +28,7 @@ const DatePick = () => {
 
   return (
     <div className="flex flex-col justify-center items-center w-auto mb-32 ">
-      <h1 className="text-md lg:text-xl mb-4">
+      <h1 className="text-xl lg:text-2xl mb-4 font-solid text-center">
         Please pick a date to reserve or browse meetings.
       </h1>
       <div className="w-80 flex items-center justify-center">

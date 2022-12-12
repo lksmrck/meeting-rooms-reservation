@@ -93,13 +93,14 @@ const Form: React.FC<FormProps> = ({
   };
 
   return (
-    <section className="flex justify-center md:ml-6 ">
-      <div className=" flex flex-col justify-center bg-green-50 pt-4 h-96 md:h-2/5 rounded-lg  ">
-        <h1 className="text-lg font-bold flex justify-center">
-          Create a meeting
-        </h1>
+    <section className="flex justify-center md:ml-6  ">
+      <div className=" flex flex-col justify-center bg-green-50 pt-7 md:pt-4 h-3/5  md:h-2/5 rounded-lg  ">
+        <h1 className="text-lg font-bold self-center">Create a meeting</h1>
+        <h3 className="text-sm self-center">
+          Pick blocks and add meeting details
+        </h3>
         <form
-          className="flex flex-col w-72 p-4 [&>input]:mb-4"
+          className="flex flex-col w-72 p-4 pb-8   [&>input]:mb-4"
           onSubmit={submitHandler}
         >
           <Input
@@ -176,13 +177,16 @@ const Form: React.FC<FormProps> = ({
               </div>
             )}
           </div>
-          <p className="h-1 text-xs text-red-600">
-            {blocksPickError.error && blocksPickError.message}
-          </p>
-          <p className="mt-3 h-1 text-xs text-red-600">
-            {missingFormDataError &&
-              "Please fill in meeting name and pick meeting blocks."}
-          </p>
+          {blocksPickError.error && (
+            <p className="h-1 text-xs text-red-600">
+              {blocksPickError.message}
+            </p>
+          )}
+          {missingFormDataError && (
+            <p className="mt-3 h-1 text-xs text-red-600">
+              Please fill in meeting name and pick meeting blocks.
+            </p>
+          )}
         </form>
       </div>
     </section>
