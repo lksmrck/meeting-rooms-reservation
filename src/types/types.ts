@@ -19,12 +19,15 @@ export type BlocksBreakdown = {
     name: string
   }
 
-export type User = {
+/* export type User = {
     id: number,
     companyID: number,
     companyName: number,
     rights: "ADMIN" | "USER" | "POWERUSER"
-}
+} */
+export type UserTypeInLS = {uid: string, email:string, company:string, rights:string}
+
+export type UserType = { id?: string, company:string, creationDate: string, email:string, name:string, surname: string,  password: string, rights: string  }
 
 export type RoomData = {
     block: number,

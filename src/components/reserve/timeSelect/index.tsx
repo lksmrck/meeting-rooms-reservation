@@ -77,7 +77,11 @@ const TimeSelect: React.FC<TimeSelectProps> = ({ setBlocksPickError }) => {
   useEffect(() => {
     let isCurrent = true;
     if (!isCurrent) return;
-    fetchMeetings(formatedPickedDate, setMeetingsDetail, pickedRoomId);
+    fetchMeetings(
+      formatedPickedDate,
+      setMeetingsDetail,
+      pickedRoomId as string
+    );
 
     return () => {
       isCurrent = false;

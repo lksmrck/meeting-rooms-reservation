@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { timeDataCalc } from "../../utils/timeDataCalc";
+import { Meeting } from "../../types/types";
 
 type DetailDomProps = {
-  clickedMeeting: any;
+  clickedMeeting: Meeting;
 };
 
 const DetailDom: React.FC<DetailDomProps> = ({ clickedMeeting }) => {

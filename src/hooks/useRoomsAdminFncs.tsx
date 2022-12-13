@@ -9,7 +9,6 @@ import {
 import { db } from "../config/firebase";
 import { CompanyRoom } from "../types/types";
 import AuthContext from "../state/AuthContext";
-import { Room } from "../types/types";
 
 export const useRoomsAdminFncs = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -24,7 +23,7 @@ export const useRoomsAdminFncs = () => {
     setIsLoading(true);
     let companyRooms: CompanyRoom[] = [];
     const querySnapshot = await getDocs(
-      collection(db, `companies/${user.company}/rooms`)
+      collection(db, `companies/${user?.company}/rooms`)
     );
     querySnapshot.forEach((doc) => {
       companyRooms.push({ id: doc.data().id, name: doc.data().name });
@@ -33,33 +32,28 @@ export const useRoomsAdminFncs = () => {
     setIsLoading(false);
   };
 
-  const addRoom = async (
-    /* company: string, */
-    roomsArray: CompanyRoom[],
-    /* setRoomsArray: any, */
-    name: string
-  ) => {
+  const addRoom = async (roomsArray: CompanyRoom[], name: string) => {
     setIsLoading(true);
     const id = roomsArray.length + 1;
     /*   const name = "newName"; */
-    await setDoc(doc(db, `companies/${user.company}/rooms`, String(id)), {
+    await setDoc(doc(db, `companies/${user?.company}/rooms`, String(id)), {
       id,
       name,
       meetings: [],
     });
-    /*  setRoomsArray((prevArray: any) => [...prevArray, { id, name }]); */
     setIsLoading(false);
   };
 
   const deleteRoom = async (
-    /* company: string, */
     roomID: number,
     setRoomsArray: Dispatch<SetStateAction<CompanyRoom[]>>
   ) => {
     setIsLoading(true);
-    await deleteDoc(doc(db, `companies/${user.company}/rooms`, String(roomID)));
-    setRoomsArray((prevArray: any) =>
-      prevArray.filter((room: any) => room.id != roomID)
+    await deleteDoc(
+      doc(db, `companies/${user?.company}/rooms`, String(roomID))
+    );
+    setRoomsArray((prevArray: CompanyRoom[]) =>
+      prevArray.filter((room: CompanyRoom) => room.id != roomID)
     );
     setIsLoading(false);
   };

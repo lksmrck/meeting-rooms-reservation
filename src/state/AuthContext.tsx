@@ -1,4 +1,5 @@
 import { getLocalStorage } from "../utils/getLocalStorage";
+import { UserTypeInLS } from "../types/types";
 import {
   createContext,
   ReactNode,
@@ -9,8 +10,8 @@ import {
 } from "react";
 
 interface AuthContextInterface {
-  user: /* FirebaseUser | null; */ any;
-  setUser: /* Dispatch<SetStateAction<FirebaseUser | null>>; */ any;
+  user: UserTypeInLS | null;
+  setUser: Dispatch<SetStateAction<UserTypeInLS | null>>;
 }
 
 const AuthContext = createContext({} as AuthContextInterface);

@@ -6,9 +6,10 @@ import { useUsersAdminFncs } from "../../../hooks/useUsersAdminFncs";
 import AddUserModal from "./AddUserModal";
 import { Table, Thead, Tbody, Tr, Th, TableContainer } from "@chakra-ui/react";
 import User from "./User";
+import { UserType } from "../../../types/types";
 
 const UsersList = () => {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([] as UserType[]);
   const [addUserModalOpen, setAddUserModalOpen] = useState(false);
 
   const { fetchUsers, isLoading } = useUsersAdminFncs();
@@ -41,7 +42,7 @@ const UsersList = () => {
                 </Tr>
               </Thead>
               <Tbody>
-                {users.map((user: any) => {
+                {users.map((user: UserType) => {
                   return <User user={user} setUsers={setUsers} />;
                 })}
               </Tbody>

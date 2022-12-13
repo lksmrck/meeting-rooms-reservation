@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { signOut } from "firebase/auth";
@@ -9,14 +9,22 @@ import AppContext from "../../state/AppContext";
 import { ADMIN } from "../../common/constants";
 import HamburgerMenu from "./HamburgerMenu";
 import { useMediaQuery } from "@chakra-ui/react";
+import BlobLogo from "./BlobLogo";
 
 const Navbar = () => {
   const navigate = useNavigate();
 
   const [smallScreen] = useMediaQuery("(max-width: 640px)");
+  const [displayBlob, setDisplayBlob] = useState(false);
 
   const { user, setUser } = useAuth();
   const { setError } = useContext(AppContext);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setDisplayBlob(true);
+    }, 1200);
+  }, []);
 
   const loginLogoutHandler = () => {
     if (user) {
@@ -38,11 +46,12 @@ const Navbar = () => {
       <nav className="flex justify-between items-center w-screen">
         <ul className="flex items-center">
           <li
-            className=" lg:ml-5 ml-3 text-white cursor-pointer font-solid text-lg md:text-2xl"
+            className=" lg:ml-5 mr-2 ml-3 text-white cursor-pointer font-solid text-lg md:text-2xl animate-bounceInRight"
             onClick={() => navigate("/datepick")}
           >
             Room Reserver
           </li>
+          {displayBlob && <BlobLogo />}
         </ul>
         <div className=" flex justify-center ">
           {user && (

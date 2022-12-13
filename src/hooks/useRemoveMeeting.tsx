@@ -14,9 +14,9 @@ export const useRemoveMeeting = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const removeData = async (clickedMeeting: Meeting, roomNo: any) => {
+  const removeData = async (clickedMeeting: Meeting, roomNo: string) => {
     setIsLoading(true);
-    const dbRef = doc(db, `companies/${user.company}/rooms`, String(roomNo));
+    const dbRef = doc(db, `companies/${user!.company}/rooms`, String(roomNo));
     const docSnap = await getDoc(dbRef);
 
     let updatedMeetings: Meeting[] = [];

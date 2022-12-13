@@ -82,7 +82,7 @@ const Form: React.FC<FormProps> = ({
     if (blocks.length > 0 && name && name.length >= 1) {
       addMeeting(
         newMeeting,
-        pickedRoomId,
+        pickedRoomId as string,
         `/date/${pickedDate}/overview`,
         setFormData
       );

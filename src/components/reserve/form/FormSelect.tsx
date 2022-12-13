@@ -4,7 +4,7 @@ import { MeetingCategory } from "../../../types/types";
 type FormSelectProps = {
   name: string;
   id: string;
-  options: MeetingCategory[] | any;
+  options: MeetingCategory[];
   onChange: any;
   small?: boolean;
   additionalStyle?: string;

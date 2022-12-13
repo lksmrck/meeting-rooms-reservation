@@ -30,7 +30,7 @@ const Overview = () => {
   useEffect(() => {
     let isCurrent = true;
     if (!isCurrent) return;
-    roomsAndMeetingsFetch(user.company, formatedPickedDate);
+    roomsAndMeetingsFetch(user!.company, formatedPickedDate);
     return () => {
       isCurrent = false;
     };
@@ -69,16 +69,12 @@ const Overview = () => {
   return (
     <div className="w-screen flex justify-center bg-gradient-to-r from-violet-300 to-violet-400  pb-5 ">
       <div
-        className="w-28 flex flex-col justify-start overflow-x-auto p-4 border rounded-lg shadow-lg bg-purple-600 mt-4  "
-        style={{ width: `${displayWidth + 3.5}rem` }}
+        className="flex flex-col justify-start overflow-x-auto p-4 border rounded-lg shadow-lg bg-purple-600 mt-4  "
+        style={{ minWidth: "13rem", width: `${displayWidth + 3.5}rem` }}
       >
         <p className="self-center text-white text-xl font-solid mb-2 text-center ">
           Pick a room to reserve or browse meetings
         </p>
-        {/*  <div
-          className="border rounded-md  bg-purple-800 mb-2"
-          style={{ width: `${displayWidth + 1.5}rem` }}
-        > */}
         <p
           className="cursor-pointer self-center text-xl text-white border  bg-purple-800 mb-2 rounded-md font-solid text-center "
           onClick={() => navigate("/datepick")}
@@ -87,7 +83,6 @@ const Overview = () => {
           {formatedPickedDate}
         </p>
 
-        {/*   </div> */}
         <section
           className={` ${
             isLoading ? "flex" : "grid"

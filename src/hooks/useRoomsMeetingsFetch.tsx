@@ -17,7 +17,7 @@ export const useRoomsMeetingsFetch = () => {
 
   const roomsAndMeetingsFetch = async (
     company: string,
-    date: /* string | null */ any
+    date: /* string | null */ string
   ) => {
     setIsLoading(true);
     const querySnapshot = await getDocs(

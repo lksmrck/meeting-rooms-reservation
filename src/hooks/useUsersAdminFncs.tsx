@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, Dispatch, SetStateAction } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config/firebase";
 import {
@@ -12,6 +12,7 @@ import { db } from "../config/firebase";
 import useAuth from "./useAuth";
 import AppContext from "../state/AppContext";
 import bcrypt from "bcryptjs";
+import { UserType } from "../types/types";
 
 export const useUsersAdminFncs = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -19,27 +20,34 @@ export const useUsersAdminFncs = () => {
   const { user } = useAuth();
   const { setError } = useContext(AppContext);
 
-  const fetchUsers = async (setUsersArray: any) => {
+  const fetchUsers = async (
+    setUsersArray: Dispatch<SetStateAction<UserType[]>>
+  ) => {
     setIsLoading(true);
-    let usersList: any = [];
+    let usersList: UserType[] = [];
+
     const querySnapshot = await getDocs(
-      collection(db, `companies/${user.company}/users`)
+      collection(db, `companies/${user?.company}/users`)
     );
     querySnapshot.forEach((doc) => {
-      usersList.push({ ...doc.data(), id: doc.id });
+      console.log(doc);
+      usersList.push({ ...doc.data(), id: doc.id } as UserType);
     });
 
     setUsersArray(usersList);
     setIsLoading(false);
   };
 
-  const addUser = async (formData: any, setUsersArray: any) => {
+  const addUser = async (
+    formData: UserType,
+    setUsersArray: Dispatch<SetStateAction<UserType[]>>
+  ) => {
     setIsLoading(true);
     const { company, email, password } = formData;
     const hashedPassword = bcrypt.hashSync(password, 10);
     //1. create user in auth
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredentials: any) => {
+      .then((userCredentials) => {
         //2. Create user in Company DB
         const { user } = userCredentials;
         setDoc(doc(db, `companies/${company}/users`, user.uid), {
@@ -52,7 +60,7 @@ export const useUsersAdminFncs = () => {
           password: hashedPassword,
         });
 
-        setUsersArray((prevArray: any) => [...prevArray, formData]);
+        setUsersArray((prevArray: UserType[]) => [...prevArray, formData]);
       })
 
       .catch((error) => {
@@ -64,8 +72,8 @@ export const useUsersAdminFncs = () => {
 
   const removeUser = async (
     company: string,
-    userID: any,
-    setUsersArray: any
+    userID: string,
+    setUsersArray: Dispatch<SetStateAction<UserType[]>>
   ) => {
     setIsLoading(true);
     /*     const user = auth.currentUser; */
@@ -74,15 +82,15 @@ export const useUsersAdminFncs = () => {
       /* .then(() => {
         deleteUser()
       }) */
-      .catch((error: any) => {
+      .catch((error) => {
         setError({
           error: true,
           message: "Something went wrong during downloading meetings.",
         });
       });
 
-    setUsersArray((prevArray: any) =>
-      prevArray.filter((user: any) => user.id != userID)
+    setUsersArray((prevArray: UserType[]) =>
+      prevArray.filter((user: UserType) => user.id != userID)
     );
     setIsLoading(false);
   };

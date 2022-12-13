@@ -14,15 +14,15 @@ export const useAddMeeting = () => {
   const navigate = useNavigate();
 
   const addMeeting = async (
-    newMeeting: any,
-    pickedRoomId: any,
+    newMeeting: /* Meeting */ any,
+    pickedRoomId: string,
     navigateURL?: string,
     setFormData?: Dispatch<SetStateAction<{ name: string; type: string }>>
   ) => {
     setIsContextLoading(true);
     const dbRef = doc(
       db,
-      `companies/${user.company}/rooms`,
+      `companies/${user!.company}/rooms`,
       String(pickedRoomId)
     );
 

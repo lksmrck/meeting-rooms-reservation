@@ -78,7 +78,7 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
 
   const deleteMeetingHandler = (e: React.SyntheticEvent) => {
     setFbIsLoading(true);
-    removeData(clickedMeeting, pickedRoomId).then(() => {
+    removeData(clickedMeeting, pickedRoomId as string).then(() => {
       navigate(`/date/${pickedDate}/overview`);
       setFbIsLoading(false);
       setOpenDetail(false);
@@ -112,10 +112,14 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
       updatedTime.start != null &&
       updatedTime.end != null
     ) {
-      removeData(clickedMeeting, pickedRoomId).then(() => {
-        addMeeting(formData, pickedRoomId)
+      removeData(clickedMeeting, pickedRoomId as string).then(() => {
+        addMeeting(formData, pickedRoomId as string)
           .then(() => {
-            fetchMeetings(formatedDate, setMeetingsDetail, pickedRoomId);
+            fetchMeetings(
+              formatedDate,
+              setMeetingsDetail,
+              pickedRoomId as string
+            );
           })
           .then(() => {
             updatePickedRoom(

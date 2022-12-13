@@ -35,7 +35,7 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
     surname: "",
     email: "",
     password: "",
-    company: user.company,
+    company: user!.company,
     rights: USER,
     creationDate: new Date().toLocaleString(),
   });

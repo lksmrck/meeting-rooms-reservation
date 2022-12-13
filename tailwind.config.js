@@ -33,10 +33,28 @@ module.exports = {
           "0%, 100%": { transform: "translatey(0px)" },
           "50%": { transform: "translatey(10px)" },
         },
+        colorsSwitch: {
+          "0%": {
+            backgroundColor: "#36eb7e",
+          },
+          "25%": { backgroundColor: "#ba4ecf" },
+          "50%": { backgroundColor: "#51092d" },
+          "75%": { backgroundColor: "#0d004a" },
+          "100%": { backgroundColor: "#dab915" },
+        },
+        bounceInRight: {
+          "0%": { transform: "translatex(-100px)" },
+          "50%": { transform: "translatex(10px)" },
+          "70%": { transform: "translatex(0px)" },
+          "90%": { transform: "translatex(10px)" },
+          "100%": { transform: "translatex(0px)" },
+        },
       },
       animation: {
         floatUp: "floatUp 5s ease-in-out infinite",
         floatDown: "floatDown 5s ease-in-out infinite",
+        colorsSwitch: "colorsSwitch 5s alternate infinite",
+        bounceInRight: "bounceInRight 1s ease 1",
       },
       backgroundImage: {
         stepsWaves: "url('/src/assets/stepsWaves.svg')",

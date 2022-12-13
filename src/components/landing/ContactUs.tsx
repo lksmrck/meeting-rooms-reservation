@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button, Input, Textarea } from "@chakra-ui/react";
+import envelope from "../../assets/envelope.svg";
 
 const ContactUs = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -22,8 +23,8 @@ const ContactUs = () => {
   };
 
   return (
-    <section className=" h-content flex flex-col justify-center items-center bg-cover bg-center bg-no-repeat bg-contactUsWaves ">
-      <h1 className="font-outline font-bold text-4xl md:text-5xl mt-20">
+    <section className=" h-content flex flex-col justify-center items-center bg-cover bg-center bg-no-repeat bg-contactUsWaves animate-bounceInRight">
+      <h1 className="font-outline font-bold text-4xl md:text-5xl mt-5 md:mt-20">
         Get in touch
       </h1>
 
@@ -38,13 +39,14 @@ const ContactUs = () => {
           onSubmit={handleSubmit}
         >
           {submitted ? (
-            <div className="h-full flex justify-center items-center -ml-6">
+            <div className="h-full flex flex-col justify-center items-center -ml-10">
               <p>
                 Thank you for submitting. <br /> We will contact you soon
               </p>
+              <img className="mt-6" src={envelope} width="70px" height="70px" />
             </div>
           ) : (
-            <div className="ml-7 md:ml-10 w-60 md:w-80 [&>*]:mb-1 mt-14 md:mt-28">
+            <div className="ml-6 md:ml-10 w-60 md:w-80 [&>*]:mb-1 mt-14 md:mt-28">
               <Input
                 id="firstName"
                 type="text"
@@ -85,7 +87,6 @@ const ContactUs = () => {
               <Textarea
                 id="message"
                 name="message"
-                /* placeholder="Hi guys, I would like to know more details about this app. Please contact me." */
                 onChange={handleChange}
                 value={formData.message}
                 variant="flushed"
