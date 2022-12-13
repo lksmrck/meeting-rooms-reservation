@@ -3,7 +3,7 @@ import Title from "./Title";
 import Features from "./Features/Features";
 import Steps from "./Steps";
 import Reference from "./Reference";
-import ContactUs from "./ContactUs/ContactUs";
+import ContactUs from "./ContactUs";
 
 const LandingPage = () => {
   return (

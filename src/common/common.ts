@@ -1,4 +1,4 @@
-
+import CR from "../assets/CR.jpeg"
 
 export const timeBlocks = [
     {id: 1, time: "7:00 - 7:30", start: "7:00", end: "7:30"},
@@ -54,4 +54,19 @@ export const roomData= [
     { block: 24, start: "18:30", end: "19:00", reserved: false},
     ]
 
-  
+    export const carouselSlides = [
+        {
+          title: "My life started to be much easier, since I am using this app.",
+          person: "Will Crates",
+          company: "Microhard",
+          image: CR,
+        },
+        {
+          title: "If I could marry this app, I would do it!",
+          person: "Kurt Combain",
+          company: "Fata Morgana",
+          image: CR,
+        },
+        { title: "My husband spends more time home, just to play with this app. Thank you!",person: "Mama Obama", company: "Wife", image: CR },
+        { title: "Fourth title", company: "company 4", image: CR },
+      ];
