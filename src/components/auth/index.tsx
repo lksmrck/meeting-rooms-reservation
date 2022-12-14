@@ -10,7 +10,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { Input } from "@chakra-ui/react";
 import LoadingSpinner from "../ui/LoadingSpinner/LoadingSpinner";
 import useAuth from "../../hooks/useAuth";
-import { fetchUserData } from "./fetchUserData";
+import { fetchUserData } from "../../utils/fetchUserData";
+import { UserTypeInLS } from "../../types/types";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
@@ -18,6 +19,7 @@ const Auth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  //Odkud se user prokliknul
   const from = location.state?.from?.pathname || "/datepick";
 
   const [loginError, setLoginError] = useState({
@@ -32,16 +34,14 @@ const Auth = () => {
     setIsLoading(true);
     //Firebase docs -  https://firebase.google.com/docs/auth/web/password-auth
     //Firebase Auth
-    let userData: any = {};
+    let userData: UserTypeInLS = {} as UserTypeInLS;
     setPersistence(auth, browserSessionPersistence)
       .then(() => {
         return signInWithEmailAndPassword(auth, email, password)
           .then(async (userCredential) => {
-            /*   const firebaseUser = userCredential.user; */
             userData = await fetchUserData(userCredential.user);
           })
           .then(() => {
-            console.log(userData);
             setUser(userData);
             navigate(from, { replace: true });
             setIsLoading(false);
@@ -51,7 +51,6 @@ const Auth = () => {
       .catch((error) => {
         setIsLoading(false);
         setLoginError({ error: true, message: error.message });
-        /*  const errorCode = error.code; */
       });
   };
 

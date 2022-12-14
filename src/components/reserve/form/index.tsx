@@ -28,7 +28,7 @@ const Form: React.FC<FormProps> = ({
 }) => {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { /* pickedDate, */ pickedRoom } = useContext(ReservationContext);
+  const { pickedRoom } = useContext(ReservationContext);
   const { addMeeting } = useAddMeeting();
 
   //Date + room ID z params
@@ -50,13 +50,15 @@ const Form: React.FC<FormProps> = ({
 
   const [missingFormDataError, setMissingFormDataError] = useState(false);
 
-  const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const inputChangeHandler = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ): void => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setMissingFormDataError(false);
     setDisabledBtn(false);
   };
 
-  const submitHandler = async (e: React.SyntheticEvent) => {
+  const submitHandler = async (e: React.SyntheticEvent): Promise<void> => {
     e.preventDefault();
     setDisabledBtn(true);
     setMissingFormDataError(false);

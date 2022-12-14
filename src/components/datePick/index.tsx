@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { useContext } from "react";
 import DatePick from "./DatePick";
 import { IconButton } from "@chakra-ui/react";
 import { AiOutlineArrowDown } from "react-icons/ai";
+import AppContext from "../../state/AppContext";
 
 const Overview = () => {
-  const [showCalendar, setShowCalendar] = useState(false);
+  const { calendarOpen, setCalendarOpen } = useContext(AppContext);
 
   return (
     <div className="flex justify-center items-center h-content bg-gradient-to-r from-violet-100 to-violet-200 ">
-      {showCalendar ? (
+      {calendarOpen ? (
         <DatePick />
       ) : (
         <div className="flex flex-col justify-center items-center mb-32 w-80 lg:w-full">
@@ -22,7 +23,7 @@ const Overview = () => {
             colorScheme="purple"
             aria-label="arrow"
             icon={<AiOutlineArrowDown size={30} style={{ color: "white" }} />}
-            onClick={() => setShowCalendar(true)}
+            onClick={() => setCalendarOpen(true)}
             className="animate-bounce w-52"
             size="lg"
           />

@@ -3,8 +3,8 @@ import { Room, RoomData } from "../../../types/types";
 import { Button } from "@chakra-ui/react";
 
 type OneRoomDomProps = {
-  pickedRoom: any; //Room type háže  chybu
-  blockClickHandler: any;
+  pickedRoom: Room;
+  blockClickHandler: (blockNumber: number) => void | null;
 };
 
 const OneRoomDom: React.FC<OneRoomDomProps> = ({
@@ -16,7 +16,7 @@ const OneRoomDom: React.FC<OneRoomDomProps> = ({
   //Const pro sloupec s timeblocky dané místnosti - zobrazení tak, aby meetingy tvořily jeden velký blok a nerezervované bloky byly samostatně.
   const roomDom = pickedRoom.roomData.map((roomData: RoomData) => {
     const selectedBlock = pickedRoom.roomData?.find(
-      (room: any) => room.block == roomData.block
+      (room: RoomData) => room.block == roomData.block
     );
     let height;
 
@@ -65,7 +65,8 @@ const OneRoomDom: React.FC<OneRoomDomProps> = ({
       </div>
     );
   });
-  return roomDom;
+
+  return <>{roomDom}</>;
 };
 
 export default OneRoomDom;

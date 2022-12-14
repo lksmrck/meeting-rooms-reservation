@@ -1,7 +1,8 @@
 import React from "react";
+import { Feature } from "../../../types/types";
 
 type FeatureBoxProps = {
-  feature: any;
+  feature: Feature;
   up?: boolean;
   down?: boolean;
 };

@@ -1,3 +1,5 @@
+import { ReactNode } from "react"
+
 //roomsMeetingsFetch
 export type BlocksBreakdown = {
     room: number,
@@ -25,7 +27,8 @@ export type BlocksBreakdown = {
     companyName: number,
     rights: "ADMIN" | "USER" | "POWERUSER"
 } */
-export type UserTypeInLS = {uid: string, email:string, company:string, rights:string}
+export type UserTypeInLS = {uid: string, email:string 
+  | null , company:string, rights:string}
 
 export type UserType = { id?: string, company:string, creationDate: string, email:string, name:string, surname: string,  password: string, rights: string  }
 
@@ -60,3 +63,15 @@ export type MeetingCategory = {
   id: number,
   name: string
 }
+
+export type Feature = {
+   text: string; icon: ReactNode 
+}
+
+export type CarouselSlide = {
+title: string,
+person: string,
+company: string,
+image: string
+}
+

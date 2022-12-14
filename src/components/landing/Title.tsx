@@ -7,11 +7,7 @@ const Title = () => {
   /*   const [smallScreen] = useMediaQuery("(min-width: 640pxpx)"); */
 
   return (
-    <section
-      className="flex flex-col items-center justify-center bg-cover  bg-center bg-no-repeat   bg-titleWaves h-screen relative "
-      /*   style={{ aspectRatio: "960/300" }} */
-      /* bg-cover  bg-center bg-no-repeat */
-    >
+    <section className="flex flex-col items-center justify-center bg-cover  bg-center bg-no-repeat   bg-titleWaves h-screen relative ">
       <div
         className="bg-violet-800 w-full h-full absolute top-0 left-0 "
         style={{

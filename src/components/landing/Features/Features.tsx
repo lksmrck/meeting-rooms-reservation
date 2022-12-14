@@ -2,7 +2,7 @@ import { FiTarget as Target } from "react-icons/fi";
 import { MdOutlineSportsScore as Flag } from "react-icons/md";
 import { GiClick as Point } from "react-icons/gi";
 import FeatureBox from "./FeatureBox";
-import { ReactNode } from "react";
+import { Feature } from "../../../types/types";
 
 const featureBoxes = [
   {
@@ -24,14 +24,12 @@ const Features = () => {
     <section className="h-3/4">
       <div className="flex justify-center  bg-features items-center h-full overflow-hidden">
         <ul className="flex flex-col m-10 lg:flex-row ">
-          {featureBoxes.map(
-            (feature: { text: string; icon: ReactNode }, index: number) => {
-              return (
-                //Jen quick inline modifikace, aby se prostřední item animoval jinak, než dva krajní - není scalable.
-                <FeatureBox feature={feature} up={index == 1 ? false : true} />
-              );
-            }
-          )}
+          {featureBoxes.map((feature: Feature, index: number) => {
+            return (
+              //Jen quick inline modifikace, aby se prostřední item animoval jinak, než dva krajní - není scalable.
+              <FeatureBox feature={feature} up={index == 1 ? false : true} />
+            );
+          })}
         </ul>
       </div>
     </section>

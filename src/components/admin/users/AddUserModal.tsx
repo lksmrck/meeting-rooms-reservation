@@ -16,11 +16,12 @@ import { userRights, USER } from "../../../common/constants";
 import { useUsersAdminFncs } from "../../../hooks/useUsersAdminFncs";
 import useAuth from "../../../hooks/useAuth";
 import LoadingSpinner from "../../ui/LoadingSpinner/LoadingSpinner";
+import { UserType } from "../../../types/types";
 
 type AddUserModalProps = {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-  setUsers: Dispatch<SetStateAction<any>>;
+  setUsers: Dispatch<SetStateAction<UserType[]>>;
 };
 
 const AddUserModal: React.FC<AddUserModalProps> = ({
@@ -53,7 +54,9 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
     setIsOpen(false);
   };
 
-  const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const inputChangeHandler = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 

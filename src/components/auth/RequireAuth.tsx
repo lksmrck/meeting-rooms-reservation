@@ -11,8 +11,8 @@ const RequireAuth: React.FC<{ allowedRights: string[] }> = ({
   //2. Je user přihlášený ? -> Zobrazí unauthorized screen
   //3. Zobrazí login page
 
-  return /* user?.rights? */ allowedRights.find((right: any) =>
-    right.includes(user?.rights)
+  return /* user?.rights? */ allowedRights.find((right: string) =>
+    right.includes(user!.rights)
   ) ? (
     <Outlet />
   ) : user ? (

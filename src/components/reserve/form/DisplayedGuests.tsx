@@ -1,10 +1,10 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { IconButton } from "@chakra-ui/react";
 import { FiEdit } from "react-icons/fi";
 
 type DisplayedGuestsProps = {
-  guests: any;
-  setGuestsOpenModal: any;
+  guests: string[];
+  setGuestsOpenModal: Dispatch<SetStateAction<boolean>>;
   form?: boolean;
 };
 

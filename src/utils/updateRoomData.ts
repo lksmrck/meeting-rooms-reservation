@@ -1,6 +1,7 @@
-import { RoomData } from "../../../types/types";
+import { RoomData } from "../types/types";
+import { Room } from "../types/types";
 
-export const updateRoomData = (pickedRoom: any, blockNumber: number) => {
+export const updateRoomData = (pickedRoom: Room, blockNumber: number) => {
 
     const updatedRoomData = pickedRoom.roomData.map((data: RoomData) => {
         if (data.block == blockNumber) {

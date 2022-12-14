@@ -3,7 +3,7 @@ import { Room, RoomData } from "../../types/types";
 import { Button } from "@chakra-ui/react";
 
 type RoomsDomProps = {
-  roomsData: any;
+  roomsData: Room[];
   clickBlockHandler: (room: number, block: number) => void;
 };
 
@@ -66,7 +66,7 @@ const RoomsDom: React.FC<RoomsDomProps> = ({
       </div>
     );
   });
-  return roomsDom;
+  return <>{roomsDom}</>;
 };
 
 export default RoomsDom;

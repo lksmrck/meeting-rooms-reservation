@@ -1,11 +1,12 @@
 import { roomData } from '../common/common';
+import { RoomData } from '../types/types';
 
 //Funkce na převedení start time a end time na array s bloky (např. 7:30 - 8:30 bude return value [2, 3])
-export const timeToBlocks = (time: any) => { //
+export const timeToBlocks = (time: {start: string | null, end: string | null}) => { //
 //Start Time Block
-const startBlock = roomData.findIndex((data: any) => data.start == time.start) + 1
+const startBlock = roomData.findIndex((data: RoomData) => data.start == time.start) + 1
 //EndTimeBlock
-const endBlock = roomData.findIndex((data: any) => data.end == time.end) + 1
+const endBlock = roomData.findIndex((data: RoomData) => data.end == time.end) + 1
 
 let preBlocks = [startBlock, endBlock]
 let i = endBlock - startBlock - 1 

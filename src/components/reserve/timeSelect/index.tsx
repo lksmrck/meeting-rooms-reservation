@@ -15,7 +15,7 @@ import TimeBlocksDom from "../../overview/TimeBlocksDom";
 import { Meeting, RoomData } from "../../../types/types";
 import LoadingSpinner from "../../ui/LoadingSpinner/LoadingSpinner";
 import { paramsToDate } from "../../../utils/dateParamsFormat";
-import { updateRoomData } from "./updateRoomData";
+import { updateRoomData } from "../../../utils/updateRoomData";
 import AppContext from "../../../state/AppContext";
 
 type TimeSelectProps = {
@@ -25,8 +25,7 @@ type TimeSelectProps = {
 };
 
 const TimeSelect: React.FC<TimeSelectProps> = ({ setBlocksPickError }) => {
-  /* const navigate = useNavigate(); */
-
+  const navigate = useNavigate();
   //Datum + roomID z params
   const { pickedDate, pickedRoomId } = useParams();
   const formatedPickedDate = paramsToDate(pickedDate);
@@ -168,10 +167,16 @@ const TimeSelect: React.FC<TimeSelectProps> = ({ setBlocksPickError }) => {
   return (
     <div className="flex flex-col">
       <div className="-ml-2">
-        <p className="border rounded-md mx-auto md:mx-2 w-56  bg-purple-600 flex justify-center  text-white  font-solid text-xl">
+        <p
+          className="border rounded-md mx-auto md:mx-2 w-56  bg-purple-600 hover:bg-purple-700 flex justify-center  text-white  font-solid text-xl cursor-pointer"
+          onClick={() => navigate("/datepick")}
+        >
           {formatedPickedDate}
         </p>
-        <p className="border rounded-md mx-auto md:mx-2 w-56  bg-purple-600 flex justify-center  text-white mb-2 font-solid text-xl">
+        <p
+          className="border rounded-md mx-auto md:mx-2 w-56  bg-purple-600 hover:bg-purple-700 flex justify-center  text-white mb-2 font-solid text-xl cursor-pointer"
+          onClick={() => navigate(`/date/${pickedDate}/overview`)}
+        >
           {pickedRoom.name}
         </p>
       </div>

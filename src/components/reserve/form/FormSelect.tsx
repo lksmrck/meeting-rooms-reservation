@@ -1,11 +1,12 @@
-import React, { SetStateAction } from "react";
 import { MeetingCategory } from "../../../types/types";
 
 type FormSelectProps = {
   name: string;
   id: string;
   options: MeetingCategory[];
-  onChange: any;
+  onChange: (
+    e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
+  ) => void;
   small?: boolean;
   additionalStyle?: string;
   label?: string;

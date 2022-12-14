@@ -18,7 +18,7 @@ const Navbar = () => {
   const [displayBlob, setDisplayBlob] = useState(false);
 
   const { user, setUser } = useAuth();
-  const { setError } = useContext(AppContext);
+  const { setError, setCalendarOpen } = useContext(AppContext);
 
   useEffect(() => {
     setTimeout(() => {
@@ -47,7 +47,10 @@ const Navbar = () => {
         <ul className="flex items-center">
           <li
             className=" lg:ml-5 mr-2 ml-3 text-white cursor-pointer font-solid text-lg md:text-2xl animate-bounceInRight"
-            onClick={() => navigate("/datepick")}
+            onClick={() => {
+              setCalendarOpen(false);
+              navigate("/datepick");
+            }}
           >
             Room Reserver
           </li>

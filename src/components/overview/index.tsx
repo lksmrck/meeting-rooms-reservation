@@ -29,6 +29,7 @@ const Overview = () => {
   //1. Firebase query - stáhne všechny rooms za danou firmu včetně meetingů a zpracované meetingy vč. upravených objektů o meetingy ve vybraném dnu uloží do state. Viz. funkce..
   useEffect(() => {
     let isCurrent = true;
+
     if (!isCurrent) return;
     roomsAndMeetingsFetch(user!.company, formatedPickedDate);
     return () => {
@@ -76,7 +77,7 @@ const Overview = () => {
           Pick a room to reserve or browse meetings
         </p>
         <p
-          className="cursor-pointer self-center text-xl text-white border  bg-purple-800 mb-2 rounded-md font-solid text-center "
+          className="cursor-pointer self-center text-xl text-white border  bg-purple-800 hover:bg-purple-900 mb-2 rounded-md font-solid text-center "
           onClick={() => navigate("/datepick")}
           style={{ paddingLeft: "3rem", paddingRight: "3rem" }}
         >

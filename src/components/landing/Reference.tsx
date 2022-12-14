@@ -1,10 +1,8 @@
-import React from "react";
-
 import { Carousel } from "react-responsive-carousel";
-/* import "react-responsive-carousel/lib/styles/carousel.min.css"; */
 import "react-responsive-carousel/lib/styles/carousel.css";
 import { carouselSlides } from "../../common/common";
 import "react-responsive-carousel/lib/styles/glass.css";
+import { CarouselSlide } from "../../types/types";
 
 const Reference = () => {
   return (
@@ -23,13 +21,13 @@ const Reference = () => {
           infiniteLoop
           showStatus={false}
         >
-          {carouselSlides.map((slide: any) => (
+          {carouselSlides.map((slide: CarouselSlide) => (
             <div className="w-full flex h-40 md:h-64  rounded-lg  ">
               <div className="w-1/2">
                 <img src={slide.image} className="rounded-lg h-full " />
               </div>
               <div className="flex flex-col justify-center items-center  w-1/2 ">
-                <h2 className="font-solid text-xl md:text-2xl">
+                <h2 className="font-solid text-xl md:text-2xl text-black">
                   "{slide.title}"
                 </h2>
                 <h3 className=" text-base md:text-lg">{slide.person}</h3>

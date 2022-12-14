@@ -29,7 +29,7 @@ type MeetingDetailProps = {
   clickedMeeting: Meeting;
   openDetail: boolean;
   setOpenDetail: Dispatch<SetStateAction<boolean>>;
-  setMeetingsDetail: any;
+  setMeetingsDetail: Dispatch<SetStateAction<Meeting[]>>;
 };
 
 const MeetingDetail: React.FC<MeetingDetailProps> = ({
@@ -89,12 +89,14 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
     setIsEditing(true);
   };
 
-  const changeMeetingHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const changeMeetingHandler = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     setUpdatedMeeting({ ...updatedMeeting, [e.target.name]: e.target.value });
     if (missingFormData) setMissingFormData(false);
   };
 
-  const submitUpdatedMeeting = (e: any) => {
+  const submitUpdatedMeeting = (e: React.SyntheticEvent) => {
     e.preventDefault();
     setMissingFormData(false);
     setFbIsLoading(true);

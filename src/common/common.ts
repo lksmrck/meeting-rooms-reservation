@@ -68,5 +68,5 @@ export const roomData= [
           image: CR,
         },
         { title: "My husband spends more time home, just to play with this app. Thank you!",person: "Mama Obama", company: "Wife", image: CR },
-        { title: "Fourth title", company: "company 4", image: CR },
+        { title: "Fourth title", company: "GoodSinga", person: "Adriana Granade", image: CR },
       ];

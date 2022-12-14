@@ -17,14 +17,16 @@ import { Meeting, RoomData } from "../../types/types";
 
 type DetailDomEditModeProps = {
   updatedMeeting: Meeting;
-  onChangeMeeting: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChangeMeeting: (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => void;
   updatedTime: { start: string | null; end: string | null };
   setUpdatedTime: Dispatch<
     SetStateAction<{ start: string | null; end: string | null }>
   >;
   setUpdatedGuests: Dispatch<SetStateAction<string[]>>;
   setMissingFormData: Dispatch<SetStateAction<boolean>>;
-  updatedGuests: any;
+  updatedGuests: string[];
 };
 
 const DetailDomEditMode: React.FC<DetailDomEditModeProps> = ({
