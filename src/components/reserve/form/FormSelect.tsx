@@ -38,7 +38,11 @@ const FormSelect: React.FC<FormSelectProps> = ({
           onChange={onChange}
         >
           {options!.map((option: MeetingCategory) => {
-            return <option value={option.name}>{option.name}</option>;
+            return (
+              <option key={option.name} value={option.name}>
+                {option.name}
+              </option>
+            );
           })}
         </select>
       </div>

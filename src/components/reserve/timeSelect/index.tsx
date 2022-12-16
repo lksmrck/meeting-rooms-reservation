@@ -182,7 +182,7 @@ const TimeSelect: React.FC<TimeSelectProps> = ({ setBlocksPickError }) => {
       </div>
       <section className="grid grid-cols-2 mx-auto md:mx-0 ">
         <div className="w-28">
-          <div className="flex font-bold justify-center items-center text-xs mb-1 w-24 h-10 border border-stone-700 rounded-md bg-purple-500 text-white shadow-md shadow-slate-600 ">
+          <div className="flex font-bold justify-center items-center text-sm mb-1 w-24 h-10 border border-stone-700 rounded-md bg-purple-500 text-white shadow-md shadow-slate-600 ">
             Time
           </div>
           <TimeBlocksDom />
@@ -194,7 +194,7 @@ const TimeSelect: React.FC<TimeSelectProps> = ({ setBlocksPickError }) => {
             </div>
           ) : (
             <div className="w-28">
-              <div className="flex  font-bold justify-center items-center text-xs w-28 -ml-2 mb-1 h-10 border border-stone-700 rounded-md bg-purple-500 text-white shadow-md shadow-slate-600 ">
+              <div className="flex  font-bold justify-center items-center text-sm w-28 -ml-2 mb-1 h-10 border border-stone-700 rounded-md bg-purple-500 text-white shadow-md shadow-slate-600 ">
                 Availability
               </div>
               <OneRoomDom

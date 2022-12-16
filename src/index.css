@@ -1,6 +1,7 @@
-/* #root {
-  font-family: "Fuzzy Bubbles", cursive;
-} */
+#root {
+  /* font-family: "Fuzzy Bubbles", cursive; */
+  font-family: "Poppins", sans-serif;
+}
 
 body {
   margin: 0;

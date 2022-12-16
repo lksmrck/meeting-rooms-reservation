@@ -6,7 +6,7 @@ const TimeBlocksDom: React.FC = () => {
     return (
       <div
         key={block.id}
-        className="flex font-bold justify-center items-center text-xs w-24 h-10 border border-stone-700 rounded-md bg-gray-200 shadow-lg shadow-slate-600 "
+        className="flex font-bold justify-center items-center text-sm w-24 h-10 border border-stone-700 rounded-md bg-gray-200 shadow-lg shadow-slate-600 "
       >
         {block.time}
       </div>
