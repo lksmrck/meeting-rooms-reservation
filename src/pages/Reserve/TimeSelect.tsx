@@ -6,17 +6,17 @@ import React, {
   SetStateAction,
 } from "react";
 /* import AppContext from "../../state/AppContext"; */
-import ReservationContext from "../../../state/ReservationContext";
-import { useMeetingsFetch } from "../../../hooks/useMeetingsFetch";
-import MeetingDetail from "../../meetingDetail";
+import ReservationContext from "../../state/ReservationContext";
+import { useMeetingsFetch } from "../../hooks/useMeetingsFetch";
+import MeetingDetail from "../../components/meetingDetail";
 import OneRoomDom from "./OneRoomDom";
 import { useNavigate, useParams } from "react-router-dom";
-import TimeBlocksDom from "../../overview/TimeBlocksDom";
-import { Meeting, RoomData } from "../../../types/types";
-import LoadingSpinner from "../../ui/LoadingSpinner/LoadingSpinner";
-import { paramsToDate } from "../../../utils/dateParamsFormat";
-import { updateRoomData } from "../../../utils/updateRoomData";
-import AppContext from "../../../state/AppContext";
+import TimeBlocksDom from "../../components/overview/TimeBlocksDom";
+import { Meeting, RoomData } from "../../types/types";
+import LoadingSpinner from "../../components/ui/LoadingSpinner/LoadingSpinner";
+import { paramsToDate } from "../../utils/dateParamsFormat";
+import { updateRoomData } from "../../utils/updateRoomData";
+import AppContext from "../../state/AppContext";
 
 type TimeSelectProps = {
   setBlocksPickError: Dispatch<

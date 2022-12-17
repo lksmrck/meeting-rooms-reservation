@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Button } from "@chakra-ui/react";
 import {
   setPersistence,
   signInWithEmailAndPassword,
@@ -7,11 +6,11 @@ import {
 } from "firebase/auth";
 import { auth } from "../../config/firebase";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Input } from "@chakra-ui/react";
-import LoadingSpinner from "../ui/LoadingSpinner/LoadingSpinner";
+import LoadingSpinner from "../../components/ui/LoadingSpinner/LoadingSpinner";
 import useAuth from "../../hooks/useAuth";
 import { fetchUserData } from "../../utils/fetchUserData";
 import { UserTypeInLS } from "../../types/types";
+import LoginForm from "../../components/login/LoginForm";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
@@ -57,7 +56,6 @@ const Auth = () => {
   return (
     <div>
       <section className="flex justify-center items-center bg-center bg-cover bg-no-repeat bg-loginBg h-content ">
-        {/* bg-gradient-to-r from-violet-300 to-violet-400 */}
         <div className=" flex flex-col justify-center mb-10 items-center w-96 bg-white h-96 rounded-lg relative shadow-lg overflow-scroll scrollbar-hide">
           <div
             style={{ borderRadius: "8px 8px 50% 50%" }}
@@ -69,41 +67,14 @@ const Auth = () => {
           {isLoading ? (
             <LoadingSpinner />
           ) : (
-            <form
-              className="w-80 mt-12  [&>input]:mt-2 "
+            <LoginForm
               onSubmit={loginHandler}
-            >
-              <Input
-                id="email"
-                name="email"
-                type="e-mail"
-                placeholder="Enter your e-mail"
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-                focusBorderColor="teal.400"
-              />
-              <Input
-                id="password"
-                name="password"
-                type="password"
-                placeholder="Enter your password"
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-                focusBorderColor="teal.400"
-              />
-
-              <div className="flex justify-center flex-col [&>button]:mt-1 mt-8">
-                <Button colorScheme="teal" type="submit">
-                  Submit
-                </Button>
-                <Button colorScheme="teal" variant="outline">
-                  Back
-                </Button>
-              </div>
-              <p className=" text-red-600 text-sm h-1">
-                {loginError.error && loginError.message}
-              </p>
-            </form>
+              email={email}
+              password={password}
+              setEmail={setEmail}
+              setPassword={setPassword}
+              loginError={loginError}
+            />
           )}
         </div>
       </section>

@@ -19,7 +19,7 @@ const Footer = ({ landingRefs }: any) => {
 
   return (
     <footer className="flex flex-col justify-start  text-white bg-violet-800  shadow-sm mt-auto w-screen  relative ">
-      <div className=" border h-full flex flex-col justify-between ">
+      <div className="  h-full flex flex-col justify-between ">
         <div className="flex justify-center [&>div]:mx-8 [&>div]:my-8  [&>div]:md:mx-20">
           <div className="mx-24" onClick={() => navigate("/home")}>
             {/*  <img alt="logo" src={logoDogFooter} height="60px" width="60px" /> */}

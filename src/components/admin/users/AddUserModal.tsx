@@ -11,8 +11,8 @@ import {
   Button,
 } from "@chakra-ui/react";
 import AuthContext from "../../../state/AuthContext";
-import SelectRights from "../../reserve/form/FormSelect";
-import { userRights, USER } from "../../../common/constants";
+import SelectRights from "../../reserve/FormSelect";
+import { userRights, USER } from "../../../data/constants";
 import { useUsersAdminFncs } from "../../../hooks/useUsersAdminFncs";
 import useAuth from "../../../hooks/useAuth";
 import LoadingSpinner from "../../ui/LoadingSpinner/LoadingSpinner";

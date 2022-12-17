@@ -16,20 +16,6 @@ const Title = () => {
             : "circle(250px at right -130px)",
         }}
       ></div>
-      <div className="flex justify-start lg:mr-0  h-30 w-40 ">
-        <div
-          className="bg-violet-800 w-14 h-11 "
-          style={{ clipPath: "circle(20px at center)" }}
-        ></div>
-        <div
-          className="bg-violet-800 w-28 h-20  "
-          style={{ clipPath: "circle(40px at center)" }}
-        ></div>
-        <div
-          className="bg-violet-800 w-14 h-11 "
-          style={{ clipPath: "circle(20px at center)" }}
-        ></div>
-      </div>
 
       <h1 className="text-4xl md:text-6xl font-bold text-center text-neutral-800 z-10 font-outline mx-5">
         Comfortly reserve your company

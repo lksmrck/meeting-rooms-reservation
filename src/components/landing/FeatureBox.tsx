@@ -1,5 +1,5 @@
 import React from "react";
-import { Feature } from "../../../types/types";
+import { Feature } from "../../types/types";
 
 type FeatureBoxProps = {
   feature: Feature;

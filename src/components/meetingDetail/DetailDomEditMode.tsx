@@ -6,14 +6,9 @@ import React, {
   SetStateAction,
   ChangeEvent,
 } from "react";
-import { Input } from "@chakra-ui/react";
-import MeetingType from "../reserve/form/FormSelect";
-import { meetingTypes } from "../../common/constants";
-import DisplayedGuests from "../reserve/form/DisplayedGuests";
-import GuestsModal from "../reserve/form/GuestsModal";
-import UpdateMeetingTime from "./UpdateMeetingTime";
 import ReservationContext from "../../state/ReservationContext";
 import { Meeting, RoomData } from "../../types/types";
+import EditFromDetailForm from "./EditFromDetailForm";
 
 type DetailDomEditModeProps = {
   updatedMeeting: Meeting;
@@ -84,65 +79,20 @@ const DetailDomEditMode: React.FC<DetailDomEditModeProps> = ({
   }, [updatedTime]);
 
   return (
-    <form className="grid grid-cols-2">
-      <div className="[&>*]:font-bold [&>*]:h-8 [&>*]:flex [&>*]:items-center ">
-        <h3>Meeting name: </h3>
-        <h4>Meeting type: </h4>
-        <h5>Created by: </h5>
-        <h5>Guests:</h5>
-        <h5 className="mt-0.5">Start time: </h5>
-        {updatedTime.start != null && <h5 className="mt-0.5">End time: </h5>}
-      </div>
-      <div>
-        <Input
-          name="name"
-          value={name}
-          size="sm"
-          onChange={onChangeMeeting}
-          focusBorderColor="teal.400"
-        />
-
-        <MeetingType
-          id="type"
-          name="type"
-          options={meetingTypes}
-          onChange={onChangeMeeting}
-          small
-        />
-        <Input value={creator} size="sm" disabled />
-        <DisplayedGuests
-          guests={updatedGuests}
-          setGuestsOpenModal={setIsGuestModalOpen}
-        />
-
-        {isGuestModalOpen && (
-          <GuestsModal
-            isOpen={isGuestModalOpen}
-            setIsOpen={setIsGuestModalOpen}
-            onAddGuests={setUpdatedGuests}
-            addedGuests={updatedGuests}
-          />
-        )}
-        <div className="flex flex-col mt-0.5 ">
-          <UpdateMeetingTime
-            options={startTimeOptions}
-            start
-            setUpdatedTime={setUpdatedTime}
-            updatedTime={updatedTime}
-            setMissingFormData={setMissingFormData}
-          />
-          {updatedTime.start != null && (
-            <UpdateMeetingTime
-              options={endTimeOptions}
-              end
-              setUpdatedTime={setUpdatedTime}
-              updatedTime={updatedTime}
-              setMissingFormData={setMissingFormData}
-            />
-          )}
-        </div>
-      </div>
-    </form>
+    <EditFromDetailForm
+      updatedTime={updatedTime}
+      setUpdatedTime={setUpdatedTime}
+      updatedGuests={updatedGuests}
+      setUpdatedGuests={setUpdatedGuests}
+      onChange={onChangeMeeting}
+      meetingName={name}
+      creator={creator}
+      isGuestModalOpen={isGuestModalOpen}
+      setIsGuestModalOpen={setIsGuestModalOpen}
+      startTimeOptions={startTimeOptions}
+      endTimeOptions={endTimeOptions}
+      setMissingFormData={setMissingFormData}
+    />
   );
 };
 

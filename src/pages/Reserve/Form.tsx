@@ -1,19 +1,22 @@
 import React, { useState, useContext, Dispatch, SetStateAction } from "react";
 import { Button, IconButton } from "@chakra-ui/react";
-import MeetingType from "./FormSelect";
-import useAuth from "../../../hooks/useAuth";
-import { meetingTypes } from "../../../common/constants";
+import useAuth from "../../hooks/useAuth";
+import { meetingTypes } from "../../data/constants";
 import { Input } from "@chakra-ui/react";
 import GuestsModal from "./GuestsModal";
-import ReservationContext from "../../../state/ReservationContext";
+import ReservationContext from "../../state/ReservationContext";
 import { useNavigate, useParams } from "react-router-dom";
-import { RoomData } from "../../../types/types";
-import DisplayedGuests from "./DisplayedGuests";
-import { useAddMeeting } from "../../../hooks/useAddMeeting";
-import { CALL } from "../../../common/constants";
+import { RoomData } from "../../types/types";
+import DisplayedGuests from "../../components/reserve/DisplayedGuests";
+import { useAddMeeting } from "../../hooks/useAddMeeting";
+
+import { CALL } from "../../data/constants";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { BsArrowUp } from "react-icons/bs";
-import { paramsToDate } from "../../../utils/dateParamsFormat";
+
+import { paramsToDate } from "../../utils/dateParamsFormat";
+
+import MeetingType from "../../components/reserve/FormSelect";
 
 type FormProps = {
   blocksPickError: { error: boolean; message: string };

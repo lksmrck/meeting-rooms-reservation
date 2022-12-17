@@ -1,6 +1,8 @@
 import React from "react";
 import { Room, RoomData } from "../../types/types";
 import { Button } from "@chakra-ui/react";
+import ReservedBlock from "../blocks/ReservedBlock";
+import FreeBlock from "../blocks/FreeBlock";
 
 type RoomsDomProps = {
   roomsData: Room[];
@@ -44,29 +46,18 @@ const RoomsDom: React.FC<RoomsDomProps> = ({
             });
 
             return (
-              <Button
+              <ReservedBlock
                 key={roomData.block}
-                size="sm"
-                className="hover:translate-x-1 w-20 border border-stone-700 shadow-md shadow-slate-600 text-xs "
-                colorScheme="telegram"
-                style={{ height: `${height}rem` }}
+                height={height}
                 onClick={() => clickBlockHandler(room.id, roomData.block)}
-              >
-                Reserved
-              </Button>
+              />
             );
           }
           return (
-            <Button
+            <FreeBlock
               key={roomData.block}
-              size="sm"
-              className="hover:scale-105 w-20 border h-10 border-stone-700 shadow-md shadow-slate-600 "
-              colorScheme="gray"
-              style={{ height: `2.5rem` }}
               onClick={() => clickBlockHandler(room.id, roomData.block)}
-            >
-              Free
-            </Button>
+            />
           );
         })}
       </div>

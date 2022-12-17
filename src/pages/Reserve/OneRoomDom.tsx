@@ -1,5 +1,5 @@
 import React from "react";
-import { Room, RoomData } from "../../../types/types";
+import { Room, RoomData } from "../../types/types";
 import { Button } from "@chakra-ui/react";
 
 type OneRoomDomProps = {

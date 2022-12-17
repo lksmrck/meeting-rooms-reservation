@@ -1,5 +1,6 @@
 import CR from "../assets/CR.jpeg"
 
+
 export const timeBlocks = [
     {id: 1, time: "7:00 - 7:30", start: "7:00", end: "7:30"},
     {id: 2, time: "7:30 - 8:00", start: "7:30", end: "8:00" },
@@ -69,4 +70,11 @@ export const roomData= [
         },
         { title: "My husband spends more time home, just to play with this app. Thank you!",person: "Mama Obama", company: "Wife", image: CR },
         { title: "Fourth title", company: "GoodSinga", person: "Adriana Granade", image: CR },
+      ];
+
+    export const stepsButtons = [
+        { id: 1, clicked: true, text: "Log In" },
+        { id: 2, clicked: false, text: "See all company rooms" },
+        { id: 3, clicked: false, text: "Pick a room" },
+        { id: 4, clicked: false, text: "Pick a time and book it" },
       ];

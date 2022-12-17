@@ -6,7 +6,7 @@ import { auth } from "../../config/firebase";
 import { Button, IconButton } from "@chakra-ui/react";
 import { FiSettings } from "react-icons/fi";
 import AppContext from "../../state/AppContext";
-import { ADMIN } from "../../common/constants";
+import { ADMIN } from "../../data/constants";
 import HamburgerMenu from "./HamburgerMenu";
 import { useMediaQuery } from "@chakra-ui/react";
 import BlobLogo from "./BlobLogo";
@@ -44,9 +44,9 @@ const Navbar = () => {
   return (
     <section className="h-20 bg-violet-800 flex shadow-lg shadow-slate-300">
       <nav className="flex justify-between items-center w-screen">
-        <ul className="flex items-center">
+        <ul className="flex items-center ">
           <li
-            className=" lg:ml-5 mr-2 ml-3 text-white cursor-pointer font-solid text-lg md:text-2xl animate-bounceInRight"
+            className="  mr-2 ml-5 text-white cursor-pointer font-solid text-lg md:text-2xl animate-bounceInRight"
             onClick={() => {
               setCalendarOpen(false);
               navigate("/datepick");
@@ -75,10 +75,12 @@ const Navbar = () => {
               )}
 
               <div className="flex flex-col md:flex-row text-white bg-violet-900 h-10 rounded-lg justify-center items-center pr-1 mr-2 md:mr-4">
-                <h2 className="text-xs font-bold mr-3 mb-0.5 md:mb-0 ml-2 lg:text-base ">
+                <h2 className="text-xs font-bold mr-3 mb-0.5 md:mb-0 ml-2 lg:text-base self-center ">
                   {user.email}
                 </h2>
-                <h3 className="text-xs lg:text-sm">{user.company}</h3>
+                <h3 className="text-xs lg:text-sm self-center ">
+                  {user.company}
+                </h3>
               </div>
             </>
           )}

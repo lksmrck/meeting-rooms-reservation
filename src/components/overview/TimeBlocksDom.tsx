@@ -1,16 +1,10 @@
-import { timeBlocks } from "../../common/common";
+import { timeBlocks } from "../../data/data";
 import { TimeBlock } from "../../types/types";
+import BlockWithTime from "../blocks/BlockWithTime";
 
 const TimeBlocksDom: React.FC = () => {
   const timeBlocksDom = timeBlocks.map((block: TimeBlock) => {
-    return (
-      <div
-        key={block.id}
-        className="flex font-bold justify-center items-center text-sm w-24 h-10 border border-stone-700 rounded-md bg-gray-200 shadow-lg shadow-slate-600 "
-      >
-        {block.time}
-      </div>
-    );
+    return <BlockWithTime key={block.id}>{block.time}</BlockWithTime>;
   });
   return <>{timeBlocksDom}</>;
 };

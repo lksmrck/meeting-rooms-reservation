@@ -1,11 +1,10 @@
 import Navbar from "./components/ui/Navbar";
-/* import Landing from "./pages/Landing"; */
-import LandingPage from "./components/landing";
+import Landing from "./pages/Landing";
 import Footer from "./components/ui/Footer";
 import DailyOverview from "./components/overview";
-import Reserve from "./components/reserve";
-import Home from "./components/datePick";
-import Auth from "./components/auth";
+import Reserve from "./pages/Reserve";
+import Home from "./pages/Datepick";
+import Auth from "./pages/Login";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useContext, useEffect, useRef, useState } from "react";
 import AppContext from "./state/AppContext";
@@ -15,8 +14,8 @@ import { useNavigate } from "react-router-dom";
 import RoomsList from "./components/admin/rooms";
 import UsersList from "./components/admin/users";
 import Settings from "./components/admin";
-import { ADMIN, USER } from "./common/constants";
-import RequireAuth from "./components/auth/RequireAuth";
+import { ADMIN, USER } from "./data/constants";
+import RequireAuth from "./components/login/RequireAuth";
 import useAuth from "./hooks/useAuth";
 import Unauthorized from "./pages/screens/Unauthorized";
 
@@ -62,7 +61,7 @@ const App = () => {
           {/* GH pages */}
           <Route
             path="/home"
-            element={<LandingPage gatherLandingRefs={gatherLandingRefs} />}
+            element={<Landing gatherLandingRefs={gatherLandingRefs} />}
           />
           <Route path="/login" element={<Auth />} />
           <Route path="/unauthorized" element={<Unauthorized />} />

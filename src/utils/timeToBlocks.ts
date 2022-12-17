@@ -1,4 +1,4 @@
-import { roomData } from '../common/common';
+import { roomData } from '../data/data';
 import { RoomData } from '../types/types';
 
 //Funkce na převedení start time a end time na array s bloky (např. 7:30 - 8:30 bude return value [2, 3])

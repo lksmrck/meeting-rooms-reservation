@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Form from "./form";
+import Form from "./Form";
 import { useMediaQuery } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
-import TimeSelect from "./timeSelect";
+import TimeSelect from "./TimeSelect";
 
 const Reserve = () => {
   //Velikost displeje. Při sm displeji je form skrytý a zobrazeno open form button

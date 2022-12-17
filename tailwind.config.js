@@ -36,11 +36,13 @@ module.exports = {
       keyframes: {
         floatUp: {
           "0%, 100%": { transform: "translatey(0px)" },
-          "50%": { transform: "translatey(-10px)" },
+          "25%": { transform: "translatey(-10px)" },
+          "75%": { transform: "translatey(10px)" },
         },
         floatDown: {
           "0%, 100%": { transform: "translatey(0px)" },
-          "50%": { transform: "translatey(10px)" },
+          "25%": { transform: "translatey(10px)" },
+          "75%": { transform: "translatey(-10px)" },
         },
         colorsSwitch: {
           "0%": {

@@ -1,12 +1,12 @@
 import React, { HTMLFactory, useRef, forwardRef, useEffect } from "react";
 import Title from "./Title";
-import Features from "./Features/Features";
+import Features from "./Features";
 import Steps from "./Steps";
 import Reference from "./Reference";
 import ContactUs from "./ContactUs";
 import { useLocation } from "react-router-dom";
 
-const LandingPage = ({ gatherLandingRefs }: any) => {
+const Landing = ({ gatherLandingRefs }: any) => {
   const location = useLocation();
 
   const landingRefs = {
@@ -22,12 +22,6 @@ const LandingPage = ({ gatherLandingRefs }: any) => {
     console.log(landingRefs);
   }, []);
 
-  //TEST
-
-  /* useEffect(() => {
-    gatherLandingRefs(landingRefs);
-  }, [location]); */
-
   return (
     <div className="h-auto ">
       <Title />
@@ -37,6 +31,6 @@ const LandingPage = ({ gatherLandingRefs }: any) => {
       <ContactUs ref={landingRefs.contactRef} />
     </div>
   );
-}; /* ) */
+};
 
-export default LandingPage;
+export default Landing;

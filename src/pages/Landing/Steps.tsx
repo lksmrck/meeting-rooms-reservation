@@ -1,16 +1,10 @@
 import { useState, forwardRef } from "react";
 import { Button } from "@chakra-ui/react";
 import CR from "../../assets/CR.jpeg";
-
-const buttonsArray = [
-  { id: 1, clicked: true, text: "Log In" },
-  { id: 2, clicked: false, text: "See all company rooms" },
-  { id: 3, clicked: false, text: "Pick a room" },
-  { id: 4, clicked: false, text: "Pick a time and book it" },
-];
+import { stepsButtons } from "../../data/data";
 
 const Steps = forwardRef<HTMLDivElement>((props, ref) => {
-  const [buttons, setButtons] = useState(buttonsArray);
+  const [buttons, setButtons] = useState(stepsButtons);
 
   const onClickButton = (id: number): void => {
     const newButtons = buttons.map((button) =>

@@ -1,10 +1,8 @@
 import { useState, useContext, useEffect } from "react";
-import Calendar from "react-calendar";
-/* import "react-calendar/dist/Calendar.css"; */
-import "./Calendar.css";
 import ReservationContext from "../../state/ReservationContext";
 import { useNavigate } from "react-router-dom";
 import { dateToParams } from "../../utils/dateParamsFormat";
+import Calendar from "../../components/datePick/Calendar";
 
 const DatePick = () => {
   const [date, setDate] = useState(new Date());
@@ -32,9 +30,7 @@ const DatePick = () => {
       <h1 className="text-xl lg:text-2xl mb-4 font-solid text-center">
         Please pick a date to reserve or browse meetings.
       </h1>
-      <div className="w-80">
-        <Calendar onChange={pickDateHandler} value={date} />
-      </div>
+      <Calendar onChange={pickDateHandler} value={date} />
     </div>
   );
 };

@@ -4,7 +4,7 @@ import { IconButton } from "@chakra-ui/react";
 import { AiOutlineArrowDown } from "react-icons/ai";
 import AppContext from "../../state/AppContext";
 
-const Overview = () => {
+const Home = () => {
   const { calendarOpen, setCalendarOpen } = useContext(AppContext);
 
   return (
@@ -33,4 +33,4 @@ const Overview = () => {
   );
 };
 
-export default Overview;
+export default Home;

@@ -1,4 +1,4 @@
-import { MeetingCategory } from "../../../types/types";
+import { MeetingCategory } from "../../types/types";
 
 type FormSelectProps = {
   name: string;
