@@ -4,8 +4,11 @@ import Features from "./Features/Features";
 import Steps from "./Steps";
 import Reference from "./Reference";
 import ContactUs from "./ContactUs";
+import { useLocation } from "react-router-dom";
 
 const LandingPage = ({ gatherLandingRefs }: any) => {
+  const location = useLocation();
+
   const landingRefs = {
     featuresRef: useRef(null),
     stepsRef: useRef(null),
@@ -15,7 +18,15 @@ const LandingPage = ({ gatherLandingRefs }: any) => {
 
   useEffect(() => {
     gatherLandingRefs(landingRefs);
+    console.log("render landing");
+    console.log(landingRefs);
   }, []);
+
+  //TEST
+
+  /* useEffect(() => {
+    gatherLandingRefs(landingRefs);
+  }, [location]); */
 
   return (
     <div className="h-auto ">

@@ -16,6 +16,7 @@ const Reference = forwardRef<HTMLDivElement>((props, ref) => {
       <div className="absolute w-28 h-28 top-64 md:top-32 left-1/4 md:left-1/3 bg-white rounded-full"></div>
       <div className="w-2/3 md:w-1/2 max-w-xs md:max-w-2xl h-80 md:h-64 mt-48 glass">
         <Carousel
+          showThumbs={false}
           showArrows={
             true
           } /* onChange={onChange} onClickItem={onClickItem} onClickThumb={onClickThumb} */

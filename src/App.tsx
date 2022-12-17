@@ -28,6 +28,13 @@ const App = () => {
 
   const location = useLocation();
 
+  //Refs pro elementy v Landing page -> přes linky ve footeru je možné scrollovat na jednotlivé komponenty.
+  const [landingRefs, setLandingRefs] = useState({} as any);
+
+  const gatherLandingRefs = (refs: any) => {
+    setLandingRefs(refs);
+  };
+
   //Při každé změně route se obnoví session timer pro automatické odhlášení
   //+ když je error, tak při změně URL dá error state na false
   useEffect(() => {
@@ -40,19 +47,6 @@ const App = () => {
   useEffect(() => {
     if (error.error) navigate("/something-wrong");
   }, [error]);
-  const [landingRefs, setLandingRefs] = useState({} as any);
-
-  //Refs pro elementy v Landing page -> přes linky ve footeru je možné scrollovat na jednotlivé komponenty.
-  /*   const featuresRef = useRef(null);
-  const stepsRef = useRef(null);
-  const referencesRef = useRef(null);
-  const contactRef = useRef(null); */
-  /*   let landingRefs: any = {}; */
-
-  const gatherLandingRefs = (refs: any) => {
-    /* console.log(jedna); */
-    setLandingRefs(refs);
-  };
 
   return (
     <div className="overflow-y-scroll scrollbar-hide w-screen flex flex-col  ">

@@ -74,8 +74,8 @@ const Navbar = () => {
                 </div>
               )}
 
-              <div className="flex text-white bg-violet-900 h-10 rounded-lg justify-center items-center pr-1 mr-2 md:mr-4">
-                <h2 className="text-xs font-bold mr-3 ml-2 lg:text-base ">
+              <div className="flex flex-col md:flex-row text-white bg-violet-900 h-10 rounded-lg justify-center items-center pr-1 mr-2 md:mr-4">
+                <h2 className="text-xs font-bold mr-3 mb-0.5 md:mb-0 ml-2 lg:text-base ">
                   {user.email}
                 </h2>
                 <h3 className="text-xs lg:text-sm">{user.company}</h3>

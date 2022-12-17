@@ -7,13 +7,17 @@ const RequireAuth: React.FC<{ allowedRights: string[] }> = ({
   const { user } = useAuth();
   const location = useLocation();
 
-  //1. Má user rights na to vidět danou route? -> Zobrazí route
-  //2. Je user přihlášený ? -> Zobrazí unauthorized screen
-  //3. Zobrazí login page
+  //Pages dostupné po loginu
+  //1. Je user přihlášený? Ano - přesměruje na stránku, Ne - přesměruje na login
 
-  return /* user?.rights? */ allowedRights.find((right: string) =>
-    right.includes(user!.rights)
-  ) ? (
+  //Restricted pages pouze pro admina
+  //2. Má user rights na to vidět stránku? Pokud ne, tak:
+  //3. Je user přihlášený? Ano - přesměruje na Unauthorized page, Ne - přesměruje na login
+
+  if (user?.rights == null)
+    return <Navigate to="/login" state={{ from: location }} replace />;
+
+  return allowedRights.find((right: string) => right.includes(user!.rights)) ? (
     <Outlet />
   ) : user ? (
     <Navigate to="/unauthorized" state={{ from: location }} replace />
