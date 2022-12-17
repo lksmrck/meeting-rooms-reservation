@@ -3,6 +3,7 @@ import { MdOutlineSportsScore as Flag } from "react-icons/md";
 import { GiClick as Point } from "react-icons/gi";
 import FeatureBox from "./FeatureBox";
 import { Feature } from "../../../types/types";
+import { forwardRef } from "react";
 
 const featureBoxes = [
   {
@@ -19,9 +20,9 @@ const featureBoxes = [
   },
 ];
 
-const Features = () => {
+const Features = forwardRef<HTMLDivElement>((props, ref) => {
   return (
-    <section className="h-3/4">
+    <div className="h-3/4" ref={ref}>
       <div className="flex justify-center  bg-features items-center h-full overflow-hidden">
         <ul className="flex flex-col m-10 lg:flex-row ">
           {featureBoxes.map((feature: Feature, index: number) => {
@@ -32,7 +33,7 @@ const Features = () => {
           })}
         </ul>
       </div>
-    </section>
+    </div>
   );
-};
+});
 export default Features;

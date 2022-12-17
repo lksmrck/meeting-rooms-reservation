@@ -1,12 +1,13 @@
 import Navbar from "./components/ui/Navbar";
-import Landing from "./pages/Landing";
+/* import Landing from "./pages/Landing"; */
+import LandingPage from "./components/landing";
 import Footer from "./components/ui/Footer";
 import DailyOverview from "./components/overview";
 import Reserve from "./components/reserve";
 import Home from "./components/datePick";
 import Auth from "./components/auth";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import AppContext from "./state/AppContext";
 import { timeCheck } from "./utils/timeCheck";
 import ErrorScreen from "./pages/screens/ErrorScreen";
@@ -39,6 +40,19 @@ const App = () => {
   useEffect(() => {
     if (error.error) navigate("/something-wrong");
   }, [error]);
+  const [landingRefs, setLandingRefs] = useState({} as any);
+
+  //Refs pro elementy v Landing page -> přes linky ve footeru je možné scrollovat na jednotlivé komponenty.
+  /*   const featuresRef = useRef(null);
+  const stepsRef = useRef(null);
+  const referencesRef = useRef(null);
+  const contactRef = useRef(null); */
+  /*   let landingRefs: any = {}; */
+
+  const gatherLandingRefs = (refs: any) => {
+    /* console.log(jedna); */
+    setLandingRefs(refs);
+  };
 
   return (
     <div className="overflow-y-scroll scrollbar-hide w-screen flex flex-col  ">
@@ -52,7 +66,10 @@ const App = () => {
           <Route path="/something-wrong" element={<ErrorScreen />}></Route>
           {/* <Route index element={<Landing />} /> */}
           {/* GH pages */}
-          <Route path="/home" element={<Landing />} />
+          <Route
+            path="/home"
+            element={<LandingPage gatherLandingRefs={gatherLandingRefs} />}
+          />
           <Route path="/login" element={<Auth />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
           {/* //Protected routes - musí být logged in + User nebo Admin */}
@@ -66,8 +83,7 @@ const App = () => {
               path="/date/:pickedDate/overview"
               element={<DailyOverview />}
             />
-            {/* <Route path="overview" element={<DailyOverview />} /> */}
-            {/*  </Route> */}
+
             {/* //Protected routes - musí být logged in + Admin */}
             <Route element={<RequireAuth allowedRights={[ADMIN]} />}>
               <Route path="/settings" element={<Settings />} />
@@ -77,7 +93,7 @@ const App = () => {
           </Route>
         </Routes>
       </div>
-      <Footer />
+      <Footer landingRefs={landingRefs} />
     </div>
   );
 };

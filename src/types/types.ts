@@ -21,12 +21,6 @@ export type BlocksBreakdown = {
     name: string
   }
 
-/* export type User = {
-    id: number,
-    companyID: number,
-    companyName: number,
-    rights: "ADMIN" | "USER" | "POWERUSER"
-} */
 export type UserTypeInLS = {uid: string, email:string 
   | null , company:string, rights:string}
 

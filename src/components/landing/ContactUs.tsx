@@ -1,8 +1,13 @@
-import { useState, useEffect } from "react";
+import {
+  useState,
+  useEffect,
+  forwardRef /* useRef */,
+  HTMLFactory,
+} from "react";
 import { Button, Input, Textarea } from "@chakra-ui/react";
 import envelope from "../../assets/envelope.svg";
 
-const ContactUs = () => {
+const ContactUs = forwardRef<HTMLDivElement>((props, ref) => {
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
@@ -23,8 +28,11 @@ const ContactUs = () => {
   };
 
   return (
-    <section className=" h-content flex flex-col justify-center items-center bg-cover bg-center bg-no-repeat bg-contactUsWaves animate-bounceInRight">
-      <h1 className="font-outline font-bold text-4xl md:text-5xl mt-5 md:mt-20">
+    <div
+      className=" h-screen flex flex-col justify-center items-center bg-cover bg-center bg-no-repeat bg-contactUsWaves "
+      ref={ref}
+    >
+      <h1 className="font-outline font-bold text-4xl md:text-5xl mt-14 md:mt-20">
         Get in touch
       </h1>
 
@@ -41,7 +49,7 @@ const ContactUs = () => {
           {submitted ? (
             <div className="h-full flex flex-col justify-center items-center -ml-10">
               <p>
-                Thank you for submitting. <br /> We will contact you soon
+                Thank you for your message. <br /> We will contact you soon
               </p>
               <img className="mt-6" src={envelope} width="70px" height="70px" />
             </div>
@@ -97,15 +105,15 @@ const ContactUs = () => {
               />
               <div className="flex justify-center ml-10 md:ml-0  mt-5">
                 <Button type="submit" size="sm" colorScheme="teal">
-                  Submit
+                  Send
                 </Button>
               </div>
             </div>
           )}
         </form>
       </div>
-    </section>
+    </div>
   );
-};
+});
 
 export default ContactUs;

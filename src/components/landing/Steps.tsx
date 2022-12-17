@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, forwardRef } from "react";
 import { Button } from "@chakra-ui/react";
 import CR from "../../assets/CR.jpeg";
 
@@ -9,7 +9,7 @@ const buttonsArray = [
   { id: 4, clicked: false, text: "Pick a time and book it" },
 ];
 
-const Steps = () => {
+const Steps = forwardRef<HTMLDivElement>((props, ref) => {
   const [buttons, setButtons] = useState(buttonsArray);
 
   const onClickButton = (id: number): void => {
@@ -22,7 +22,10 @@ const Steps = () => {
   };
 
   return (
-    <section className="h-3/4 flex justify-center bg-cover bg-center bg-no-repeat bg-stepsWaves items-center ">
+    <div
+      className="h-3/4 flex justify-center bg-cover bg-center bg-no-repeat bg-stepsWaves items-center "
+      ref={ref}
+    >
       <div className="flex mt-24 mx-2">
         <div className="h-96 flex items-center">
           <img
@@ -56,7 +59,7 @@ const Steps = () => {
           })}
         </div>
       </div>
-    </section>
+    </div>
   );
-};
+});
 export default Steps;

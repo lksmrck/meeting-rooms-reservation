@@ -8,20 +8,29 @@ module.exports = {
         outline: "Londrina Shadow",
         solid: "Londrina Solid",
       },
-      margin: {
+      /*   margin: {
         0.25: "0.0625rem",
-      },
+      }, */
       gridTemplateColumns: {
         //24 columns grid (pro časová pásma)
         24: "repeat(24, minmax(0, 1fr))",
       },
       height: {
-        30: "7.5rem",
+        /*     30: "7.5rem", */
         //Výška contentu = 100vh - výška navbaru
         content: "calc(100vh - 5rem)",
       },
-      width: {
+      /* width: {
         105: "26.25rem",
+      }, */
+      spacing: {
+        0.25: "0.0625rem",
+        30: "7.5rem",
+        105: "26.25rem",
+        110: "27.5rem",
+      },
+      fontSize: {
+        xxs: "10px",
       },
 
       keyframes: {
