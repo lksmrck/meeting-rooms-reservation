@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { Button } from "@chakra-ui/react";
 import { AiOutlinePlusCircle } from "react-icons/ai";
-import LoadingSpinner from "../../ui/LoadingSpinner/LoadingSpinner";
+import LoadingSpinner from "../../../components/ui/LoadingSpinner/LoadingSpinner";
 import { useUsersAdminFncs } from "../../../hooks/useUsersAdminFncs";
 import AddUserModal from "./AddUserModal";
 import { Table, Thead, Tbody, Tr, Th, TableContainer } from "@chakra-ui/react";
-import User from "./User";
+import User from "../../../components/admin/users/User";
 import { UserType } from "../../../types/types";
 
 const UsersList = () => {

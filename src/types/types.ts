@@ -1,14 +1,15 @@
-import { ReactNode } from "react"
+import { ReactNode, ForwardedRef } from "react"
+
 
 //roomsMeetingsFetch
 export type BlocksBreakdown = {
-    room: number,
+    room: number | string ,
     block: number
   }
   export type Meeting = {
     id: number,
     name: string,
-    room: number,
+    room: number | string,
     type: string,
   creator: string,
   date: string,
@@ -22,7 +23,7 @@ export type BlocksBreakdown = {
   }
 
 export type UserTypeInLS = {uid: string, email:string 
-  | null , company:string, rights:string}
+  , company:string, rights:string}
 
 export type UserType = { id?: string, company:string, creationDate: string, email:string, name:string, surname: string,  password: string, rights: string  }
 
@@ -57,6 +58,10 @@ export type MeetingCategory = {
   id: number,
   name: string
 }
+export type UserRights = {
+  id: number,
+  name: string
+}
 
 export type Feature = {
    text: string; icon: ReactNode 
@@ -75,5 +80,13 @@ lastName: string,
 email: string,
 message: string
 
+}
+
+export type LandingRefsObject = {
+featuresRef: ForwardedRef<HTMLDivElement>
+stepsRef: ForwardedRef<HTMLDivElement>
+referencesRef: ForwardedRef<HTMLDivElement>
+contactRef: ForwardedRef<HTMLDivElement>
+  
 }
 

@@ -8,10 +8,10 @@ import React, {
 /* import AppContext from "../../state/AppContext"; */
 import ReservationContext from "../../state/ReservationContext";
 import { useMeetingsFetch } from "../../hooks/useMeetingsFetch";
-import MeetingDetail from "../../components/meetingDetail";
+import MeetingDetail from "./MeetingDetail";
 import OneRoomDom from "./OneRoomDom";
 import { useNavigate, useParams } from "react-router-dom";
-import TimeBlocksDom from "../../components/overview/TimeBlocksDom";
+import TimeBlocksDom from "../../components/timeBlocks/TimeBlocksDom";
 import { Meeting, RoomData } from "../../types/types";
 import LoadingSpinner from "../../components/ui/LoadingSpinner/LoadingSpinner";
 import { paramsToDate } from "../../utils/dateParamsFormat";

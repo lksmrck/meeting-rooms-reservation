@@ -6,9 +6,9 @@ import React, {
   SetStateAction,
   ChangeEvent,
 } from "react";
-import ReservationContext from "../../state/ReservationContext";
-import { Meeting, RoomData } from "../../types/types";
-import EditFromDetailForm from "./EditFromDetailForm";
+import EditModeForm from "../../../components/meetingDetail/EditModeForm";
+import { Meeting, RoomData } from "../../../types/types";
+import ReservationContext from "../../../state/ReservationContext";
 
 type DetailDomEditModeProps = {
   updatedMeeting: Meeting;
@@ -79,7 +79,7 @@ const DetailDomEditMode: React.FC<DetailDomEditModeProps> = ({
   }, [updatedTime]);
 
   return (
-    <EditFromDetailForm
+    <EditModeForm
       updatedTime={updatedTime}
       setUpdatedTime={setUpdatedTime}
       updatedGuests={updatedGuests}

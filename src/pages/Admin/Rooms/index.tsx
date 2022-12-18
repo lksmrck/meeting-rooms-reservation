@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { useRoomsAdminFncs } from "../../../hooks/useRoomsAdminFncs";
 import { AiOutlinePlusCircle } from "react-icons/ai";
-import LoadingSpinner from "../../ui/LoadingSpinner/LoadingSpinner";
+import { useRoomsAdminFncs } from "../../../hooks/useRoomsAdminFncs";
+import LoadingSpinner from "../../../components/ui/LoadingSpinner/LoadingSpinner";
 import AddRoomModal from "./AddRoomModal";
 import { Button } from "@chakra-ui/react";
 import { Table, Thead, Tbody, Tr, Th, TableContainer } from "@chakra-ui/react";
-import Room from "./Room";
+import Room from "../../../components/admin/rooms/Room";
 import { CompanyRoom } from "../../../types/types";
 
 const RoomsList = () => {

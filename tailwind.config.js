@@ -60,12 +60,18 @@ module.exports = {
           "90%": { transform: "translatex(10px)" },
           "100%": { transform: "translatex(0px)" },
         },
+        buttonGlowing: {
+          "20%, 100%": { backgroundColor: "#319795" },
+          "40% 80%": { backgroundColor: "#2d8a88", scale: "1.02" },
+          "60%": { backgroundColor: "#297d7c", scale: "1.04" },
+        },
       },
       animation: {
         floatUp: "floatUp 5s ease-in-out infinite",
         floatDown: "floatDown 5s ease-in-out infinite",
         colorsSwitch: "colorsSwitch 5s alternate infinite",
         bounceInRight: "bounceInRight 1s ease 1",
+        buttonGlowing: "buttonGlowing 3s ease-in-out infinite",
       },
       backgroundImage: {
         stepsWaves: "url('/src/assets/stepsWaves.svg')",

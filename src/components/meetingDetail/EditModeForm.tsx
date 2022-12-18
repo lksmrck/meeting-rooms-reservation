@@ -7,7 +7,7 @@ import UpdateMeetingTime from "./UpdateMeetingTime";
 import GuestsModal from "../../pages/Reserve/GuestsModal";
 import { RoomData } from "../../types/types";
 
-type EditFromDetailForm = {
+type EditModeFormProps = {
   updatedTime: { start: string | null; end: string | null };
   setUpdatedTime: Dispatch<
     SetStateAction<{ start: string | null; end: string | null }>
@@ -25,7 +25,7 @@ type EditFromDetailForm = {
   setMissingFormData: Dispatch<SetStateAction<boolean>>;
 };
 
-const EditFromDetailForm: React.FC<EditFromDetailForm> = ({
+const EditModeForm: React.FC<EditModeFormProps> = ({
   updatedTime,
   setUpdatedTime,
   updatedGuests,
@@ -102,4 +102,4 @@ const EditFromDetailForm: React.FC<EditFromDetailForm> = ({
   );
 };
 
-export default EditFromDetailForm;
+export default EditModeForm;

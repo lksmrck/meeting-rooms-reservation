@@ -21,7 +21,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
   return (
     <form onSubmit={onSubmit}>
       {submitted ? (
-        <div className="h-full flex flex-col justify-center items-center -ml-10">
+        <div className="h-full flex text-sm md:text-base flex-col justify-center items-center -ml-10 md:-ml-16 mt-24 md:mt-32">
           <p>
             Thank you for your message. <br /> We will contact you soon
           </p>

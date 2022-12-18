@@ -1,4 +1,5 @@
-import React, { useState, useContext, Dispatch, SetStateAction } from "react";
+import { UserType, UserRights } from "../../../types/types";
+import LoadingSpinner from "../../ui/LoadingSpinner/LoadingSpinner";
 import {
   Modal,
   ModalOverlay,
@@ -10,58 +11,33 @@ import {
   Input,
   Button,
 } from "@chakra-ui/react";
-import AuthContext from "../../../state/AuthContext";
 import SelectRights from "../../reserve/FormSelect";
-import { userRights, USER } from "../../../data/constants";
-import { useUsersAdminFncs } from "../../../hooks/useUsersAdminFncs";
-import useAuth from "../../../hooks/useAuth";
-import LoadingSpinner from "../../ui/LoadingSpinner/LoadingSpinner";
-import { UserType } from "../../../types/types";
 
-type AddUserModalProps = {
+type AddUserFormProps = {
   isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
-  setUsers: Dispatch<SetStateAction<UserType[]>>;
+  onClose: () => void;
+  isLoading: boolean;
+  onChange: (
+    e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
+  ) => void;
+  formData: UserType;
+  options: UserRights[];
+  addUserHandler: (e: React.SyntheticEvent) => void;
+  onCancel: () => void;
 };
 
-const AddUserModal: React.FC<AddUserModalProps> = ({
+const AddUserForm: React.FC<AddUserFormProps> = ({
   isOpen,
-  setIsOpen,
-  setUsers,
+  onClose,
+  isLoading,
+  onChange,
+  formData,
+  options,
+  addUserHandler,
+  onCancel,
 }) => {
-  const { user } = useAuth();
-
-  const [formData, setFormData] = useState({
-    name: "",
-    surname: "",
-    email: "",
-    password: "",
-    company: user!.company,
-    rights: USER,
-    creationDate: new Date().toLocaleString(),
-  });
-
-  const { addUser, fetchUsers, isLoading } = useUsersAdminFncs();
-
-  const addUserHandler = (e: React.SyntheticEvent) => {
-    e.preventDefault();
-    addUser(formData, setUsers)
-      .then(() => fetchUsers(setUsers))
-      .then(() => setIsOpen(false));
-  };
-
-  const onCancel = () => {
-    setIsOpen(false);
-  };
-
-  const inputChangeHandler = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
   return (
-    <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+    <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Add user</ModalHeader>
@@ -78,7 +54,7 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
                   placeholder="John"
                   name="name"
                   id="name"
-                  onChange={inputChangeHandler}
+                  onChange={onChange}
                   value={formData.name}
                   focusBorderColor="teal.400"
                   required
@@ -88,7 +64,7 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
                   placeholder="Doe"
                   name="surname"
                   id="surname"
-                  onChange={inputChangeHandler}
+                  onChange={onChange}
                   value={formData.surname}
                   className="ml-0.5"
                   focusBorderColor="teal.400"
@@ -101,7 +77,7 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
                 placeholder="john@doe.com"
                 name="email"
                 id="email"
-                onChange={inputChangeHandler}
+                onChange={onChange}
                 value={formData.email}
                 className="m-0.5"
                 focusBorderColor="teal.400"
@@ -113,7 +89,7 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
                 placeholder="Password"
                 name="password"
                 id="password"
-                onChange={inputChangeHandler}
+                onChange={onChange}
                 value={formData.password}
                 className="m-0.5"
                 focusBorderColor="teal.400"
@@ -124,7 +100,7 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
                 type="text"
                 name="company"
                 id="company"
-                onChange={inputChangeHandler}
+                onChange={onChange}
                 value={formData.company}
                 disabled
                 className="m-0.5"
@@ -133,8 +109,8 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
               <SelectRights
                 id="rights"
                 name="rights"
-                options={userRights}
-                onChange={inputChangeHandler}
+                options={options}
+                onChange={onChange}
                 additionalStyle="m-0.5 rounded-none bg-white text-sm mt-2"
                 label="Select user rights:"
                 small
@@ -153,4 +129,4 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
   );
 };
 
-export default AddUserModal;
+export default AddUserForm;

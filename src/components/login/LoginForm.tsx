@@ -20,7 +20,10 @@ const LoginForm: React.FC<LoginFormProps> = ({
   loginError,
 }) => {
   return (
-    <form className="w-80 mt-12  [&>input]:mt-2 " onSubmit={onSubmit}>
+    <form
+      className=" w-3/4 mt-16 md:mt-12  [&>input]:mt-2 "
+      onSubmit={onSubmit}
+    >
       <Input
         id="email"
         name="email"

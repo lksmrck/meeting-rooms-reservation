@@ -4,27 +4,28 @@ import Features from "./Features";
 import Steps from "./Steps";
 import Reference from "./Reference";
 import ContactUs from "./ContactUs";
-import { useLocation } from "react-router-dom";
+import { LandingRefsObject } from "../../types/types";
 
-const Landing = ({ gatherLandingRefs }: any) => {
-  const location = useLocation();
+type LandingProps = {
+  gatherLandingRefs: (refs: LandingRefsObject) => void;
+};
 
+const Landing: React.FC<LandingProps> = ({ gatherLandingRefs }) => {
   const landingRefs = {
-    featuresRef: useRef(null),
-    stepsRef: useRef(null),
-    referencesRef: useRef(null),
-    contactRef: useRef(null),
+    featuresRef: useRef<HTMLDivElement>(null),
+    stepsRef: useRef<HTMLDivElement>(null),
+    referencesRef: useRef<HTMLDivElement>(null),
+    contactRef: useRef<HTMLDivElement>(null),
   };
 
+  //Pošle refs na jednotlivé oddíly do state v App kvůli scrollu po kliknutí na footer
   useEffect(() => {
     gatherLandingRefs(landingRefs);
-    console.log("render landing");
-    console.log(landingRefs);
   }, []);
 
   return (
     <div className="h-auto ">
-      <Title />
+      <Title contactRef={landingRefs.contactRef} />
       <Features ref={landingRefs.featuresRef} />
       <Steps ref={landingRefs.stepsRef} />
       <Reference ref={landingRefs.referencesRef} />

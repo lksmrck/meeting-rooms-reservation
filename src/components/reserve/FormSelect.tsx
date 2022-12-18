@@ -1,9 +1,9 @@
-import { MeetingCategory } from "../../types/types";
+import { MeetingCategory, UserRights } from "../../types/types";
 
 type FormSelectProps = {
   name: string;
   id: string;
-  options: MeetingCategory[];
+  options: MeetingCategory[] | UserRights[];
   onChange: (
     e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
   ) => void;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ForwardedRef } from "react";
 import { useNavigate, useLocation, Navigate } from "react-router-dom";
 import { IconButton } from "@chakra-ui/react";
 import { FiTwitter } from "react-icons/fi";
@@ -6,13 +6,17 @@ import { FiFacebook } from "react-icons/fi";
 import { FiInstagram } from "react-icons/fi";
 import useAuth from "../../hooks/useAuth";
 
+type FooterProps = {
+  landingRefs: ForwardedRef<HTMLDivElement>;
+};
+
 const Footer = ({ landingRefs }: any) => {
   const navigate = useNavigate();
-  const location = useLocation();
+  const { pathname } = useLocation();
 
   const { user } = useAuth();
 
-  const onClickHandler = async (refName: any) => {
+  const clickLinkHandler = (refName: any) => {
     const element = refName.current;
     element.scrollIntoView({ behavior: "smooth" });
   };
@@ -21,28 +25,34 @@ const Footer = ({ landingRefs }: any) => {
     <footer className="flex flex-col justify-start  text-white bg-violet-800  shadow-sm mt-auto w-screen  relative ">
       <div className="  h-full flex flex-col justify-between ">
         <div className="flex justify-center [&>div]:mx-8 [&>div]:my-8  [&>div]:md:mx-20">
-          <div className="mx-24" onClick={() => navigate("/home")}>
+          <div
+            className="mx-24 cursor-pointer"
+            onClick={() => navigate("/home")}
+          >
             {/*  <img alt="logo" src={logoDogFooter} height="60px" width="60px" /> */}
             <h1>logo</h1>
             <h4>Room Reserver</h4>
           </div>
-          {user ? (
+
+          {pathname != "/home" ? (
             <div className="[&>a]:text-xs [&>a]:mt-1 text-gray-300 flex flex-col [&>a]:cursor-pointer  min-w-fit">
               <h1 className="mb-1 font-bold">Links</h1>
               <a onClick={() => navigate("/home")}>Home</a>
-              <a onClick={() => navigate("/datepick")}>Pick date</a>
+              {user && <a onClick={() => navigate("/datepick")}>Pick date</a>}
             </div>
           ) : (
             <div className="[&>a]:text-xs [&>a]:mt-1 text-gray-300 flex flex-col [&>a]:cursor-pointer">
               <h1 className="mb-1 font-bold">About</h1>
-              <a onClick={() => onClickHandler(landingRefs.featuresRef)}>
+              <a onClick={() => clickLinkHandler(landingRefs.featuresRef)}>
                 Features
               </a>
-              <a onClick={() => onClickHandler(landingRefs.stepsRef)}>Steps</a>
-              <a onClick={() => onClickHandler(landingRefs.referencesRef)}>
+              <a onClick={() => clickLinkHandler(landingRefs.stepsRef)}>
+                Steps
+              </a>
+              <a onClick={() => clickLinkHandler(landingRefs.referencesRef)}>
                 References
               </a>
-              <a onClick={() => onClickHandler(landingRefs.contactRef)}>
+              <a onClick={() => clickLinkHandler(landingRefs.contactRef)}>
                 Get started
               </a>
             </div>

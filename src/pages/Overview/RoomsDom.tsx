@@ -1,8 +1,8 @@
 import React from "react";
 import { Room, RoomData } from "../../types/types";
 import { Button } from "@chakra-ui/react";
-import ReservedBlock from "../blocks/ReservedBlock";
-import FreeBlock from "../blocks/FreeBlock";
+import FreeBlock from "../../components/timeBlocks/FreeBlock";
+import ReservedBlock from "../../components/timeBlocks/ReservedBlock";
 
 type RoomsDomProps = {
   roomsData: Room[];

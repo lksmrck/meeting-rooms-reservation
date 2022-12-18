@@ -1,23 +1,24 @@
 import Navbar from "./components/ui/Navbar";
 import Landing from "./pages/Landing";
 import Footer from "./components/ui/Footer";
-import DailyOverview from "./components/overview";
+import DailyOverview from "./pages/Overview";
 import Reserve from "./pages/Reserve";
 import Home from "./pages/Datepick";
 import Auth from "./pages/Login";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AppContext from "./state/AppContext";
 import { timeCheck } from "./utils/timeCheck";
 import ErrorScreen from "./pages/screens/ErrorScreen";
 import { useNavigate } from "react-router-dom";
-import RoomsList from "./components/admin/rooms";
-import UsersList from "./components/admin/users";
-import Settings from "./components/admin";
+import RoomsList from "./pages/Admin/Rooms";
+import UsersList from "./pages/Admin/Users";
+import Settings from "./pages/Admin";
 import { ADMIN, USER } from "./data/constants";
 import RequireAuth from "./components/login/RequireAuth";
 import useAuth from "./hooks/useAuth";
 import Unauthorized from "./pages/screens/Unauthorized";
+import { LandingRefsObject } from "./types/types";
 
 const App = () => {
   const navigate = useNavigate();
@@ -28,9 +29,9 @@ const App = () => {
   const location = useLocation();
 
   //Refs pro elementy v Landing page -> přes linky ve footeru je možné scrollovat na jednotlivé komponenty.
-  const [landingRefs, setLandingRefs] = useState({} as any);
+  const [landingRefs, setLandingRefs] = useState({} as LandingRefsObject);
 
-  const gatherLandingRefs = (refs: any) => {
+  const gatherLandingRefs = (refs: LandingRefsObject) => {
     setLandingRefs(refs);
   };
 
@@ -56,9 +57,10 @@ const App = () => {
             path="/conference-room-reservation"
             element={<Navigate replace to="/home" />}
           />
-          <Route path="/something-wrong" element={<ErrorScreen />}></Route>
-          {/* <Route index element={<Landing />} /> */}
-          {/* GH pages */}
+          {/* Na error route se dá dostat pouze, když je error state, jinak neexistuje. */}
+          {error.error && (
+            <Route path="/something-wrong" element={<ErrorScreen />}></Route>
+          )}
           <Route
             path="/home"
             element={<Landing gatherLandingRefs={gatherLandingRefs} />}

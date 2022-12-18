@@ -1,10 +1,18 @@
-import React from "react";
+import React, { RefObject } from "react";
 import { Button } from "@chakra-ui/react";
 import { useMediaQuery } from "@chakra-ui/react";
 
-const Title = () => {
+type TitleProps = {
+  contactRef: RefObject<HTMLDivElement>;
+};
+
+const Title: React.FC<TitleProps> = ({ contactRef }) => {
   const [largeScreen] = useMediaQuery("(min-width: 1024px)");
   /*   const [smallScreen] = useMediaQuery("(min-width: 640pxpx)"); */
+
+  const buttonClickHandler = () => {
+    contactRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <section className="flex flex-col items-center justify-center bg-cover  bg-center bg-no-repeat   bg-titleWaves h-screen relative ">
@@ -26,7 +34,13 @@ const Title = () => {
         with few clicks.
       </h1>
       <div className="flex justify-center mt-5">
-        <Button colorScheme={"teal"}>Get Started</Button>
+        <Button
+          colorScheme={"teal"}
+          onClick={buttonClickHandler}
+          className="animate-buttonGlowing"
+        >
+          Get Started
+        </Button>
       </div>
     </section>
   );

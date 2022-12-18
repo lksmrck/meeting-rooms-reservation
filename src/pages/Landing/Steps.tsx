@@ -20,7 +20,7 @@ const Steps = forwardRef<HTMLDivElement>((props, ref) => {
       className="h-3/4 flex justify-center bg-cover bg-center bg-no-repeat bg-stepsWaves items-center "
       ref={ref}
     >
-      <div className="flex mt-24 mx-2">
+      <div className="flex mt-24 mx-4">
         <div className="h-96 flex items-center">
           <img
             src={CR}
@@ -47,7 +47,9 @@ const Steps = forwardRef<HTMLDivElement>((props, ref) => {
                 >
                   {button.id}
                 </Button>
-                <p className=" ml-3 font-solid text-lg">{button.text}</p>
+                <p className=" ml-3 font-solid text-base md:text-lg">
+                  {button.text}
+                </p>
               </div>
             );
           })}

@@ -1,4 +1,7 @@
-import CR from "../assets/CR.jpeg"
+
+import refOne from "../assets/refOne.jpeg"
+import refTwo from "../assets/refTwo.jpeg"
+import refThree from "../assets/refThree.jpeg"
 
 
 export const timeBlocks = [
@@ -60,16 +63,15 @@ export const roomData= [
           title: "My life started to be much easier, since I am using this app.",
           person: "Will Crates",
           company: "Microhard",
-          image: CR,
+          image: refThree,
         },
         {
           title: "If I could marry this app, I would do it!",
-          person: "Kurt Combain",
-          company: "Fata Morgana",
-          image: CR,
+          person: "Albert Zweistein",
+          company: "Masaryk University",
+          image: refTwo,
         },
-        { title: "My husband spends more time home, just to play with this app. Thank you!",person: "Mama Obama", company: "Wife", image: CR },
-        { title: "Fourth title", company: "GoodSinga", person: "Adriana Granade", image: CR },
+        { title: "My husband spends more time home, just to play with this app. Thank you!",person: "Mama Obama", company: "Wife", image: refOne },
       ];
 
     export const stepsButtons = [
@@ -77,4 +79,6 @@ export const roomData= [
         { id: 2, clicked: false, text: "See all company rooms" },
         { id: 3, clicked: false, text: "Pick a room" },
         { id: 4, clicked: false, text: "Pick a time and book it" },
+        { id: 5, clicked: false, text: "Edit or delete meeting if needed" },
+        { id: 6, clicked: false, text: "Add room or user if you are admin" },
       ];

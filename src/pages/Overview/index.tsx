@@ -4,12 +4,12 @@ import ReservationContext from "../../state/ReservationContext";
 import { useParams } from "react-router-dom";
 import RoomsDom from "./RoomsDom";
 import { useRoomsMeetingsFetch } from "../../hooks/useRoomsMeetingsFetch";
-import TimeBlocksDom from "./TimeBlocksDom";
+import TimeBlocksDom from "../../components/timeBlocks/TimeBlocksDom";
 import { Room, RoomData } from "../../types/types";
 import { paramsToDate } from "../../utils/dateParamsFormat";
 /* import useAuth from "../../hooks/useAuth"; */
 
-import LoadingSpinner from "../ui/LoadingSpinner/LoadingSpinner";
+import LoadingSpinner from "../../components/ui/LoadingSpinner/LoadingSpinner";
 import AuthContext from "../../state/AuthContext";
 
 const Overview = () => {

@@ -9,21 +9,21 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { useState, useContext, Dispatch, SetStateAction } from "react";
-import useAuth from "../../hooks/useAuth";
-import ReservationContext from "../../state/ReservationContext";
-import { useRemoveMeeting } from "../../hooks/useRemoveMeeting";
+import useAuth from "../../../hooks/useAuth";
+import ReservationContext from "../../../state/ReservationContext";
+import { useRemoveMeeting } from "../../../hooks/useRemoveMeeting";
 import { useNavigate, useParams } from "react-router-dom";
-import { Meeting } from "../../types/types";
-import LoadingSpinner from "../ui/LoadingSpinner/LoadingSpinner";
+import { Meeting } from "../../../types/types";
+import LoadingSpinner from "../../../components/ui/LoadingSpinner/LoadingSpinner";
 import DetailDomEditMode from "./DetailDomEditMode";
-import DetailDom from "./DetailDom";
-import { timeToBlocks } from "../../utils/timeToBlocks";
-import { useAddMeeting } from "../../hooks/useAddMeeting";
-import { updatePickedRoom } from "../../utils/updatePickedRoom";
-import { useMeetingsFetch } from "../../hooks/useMeetingsFetch";
+import DetailDom from "../../../components/meetingDetail/DetailDom";
+import { timeToBlocks } from "../../../utils/timeToBlocks";
+import { useAddMeeting } from "../../../hooks/useAddMeeting";
+import { updatePickedRoom } from "../../../utils/updatePickedRoom";
+import { useMeetingsFetch } from "../../../hooks/useMeetingsFetch";
 import { BsTrash } from "react-icons/bs";
 import { BsPencil } from "react-icons/bs";
-import { paramsToDate } from "../../utils/dateParamsFormat";
+import { paramsToDate } from "../../../utils/dateParamsFormat";
 
 type MeetingDetailProps = {
   clickedMeeting: Meeting;
@@ -52,8 +52,7 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
   const [fbIsLoading, setFbIsLoading] = useState(false);
 
   const { user } = useAuth();
-  const { /* pickedDate, */ pickedRoom, setPickedRoom } =
-    useContext(ReservationContext);
+  const { pickedRoom, setPickedRoom } = useContext(ReservationContext);
 
   const { pickedDate, pickedRoomId } = useParams();
   const formatedDate = paramsToDate(pickedDate);
@@ -101,7 +100,8 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
     setMissingFormData(false);
     setFbIsLoading(true);
     const blocks = timeToBlocks(updatedTime);
-    const formData: any = {
+    if (!pickedRoomId) return;
+    const formData: Meeting = {
       ...updatedMeeting,
       room: pickedRoomId,
       blocks,

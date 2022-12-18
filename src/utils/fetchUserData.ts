@@ -12,6 +12,7 @@ let userData = {} as UserTypeInLS
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
         
+    if (!email) return 
     userData = {uid, email, company: docSnap.data().company, rights: docSnap.data().rights}
     }
 
