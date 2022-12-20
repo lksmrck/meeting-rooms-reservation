@@ -1,5 +1,6 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import LoadingSpinner from "../../ui/LoadingSpinner/LoadingSpinner";
+
 import {
   Modal,
   ModalOverlay,
@@ -16,9 +17,7 @@ type AddRoomFormProps = {
   isOpen: boolean;
   onClose: Dispatch<SetStateAction<boolean>>;
   isLoading: boolean;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  formData: string;
-  addRoomHandler: (e: React.SyntheticEvent) => void;
+  addRoomHandler: (formData: string) => void;
   onCancel: () => void;
 };
 
@@ -26,11 +25,21 @@ const AddRoomForm: React.FC<AddRoomFormProps> = ({
   isOpen,
   onClose,
   isLoading,
-  onChange,
-  formData,
+
   addRoomHandler,
   onCancel,
 }) => {
+  const [formData, setFormData] = useState("");
+
+  const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData(e.target.value);
+  };
+
+  const formSubmitHandler = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    addRoomHandler(formData);
+  };
+
   return (
     <Modal isOpen={isOpen} onClose={() => onClose(false)}>
       <ModalOverlay />
@@ -48,7 +57,7 @@ const AddRoomForm: React.FC<AddRoomFormProps> = ({
                 placeholder="e.g. Example Room "
                 name="name"
                 id="name"
-                onChange={onChange}
+                onChange={inputChangeHandler}
                 value={formData}
                 focusBorderColor="teal.400"
                 required
@@ -57,7 +66,7 @@ const AddRoomForm: React.FC<AddRoomFormProps> = ({
           )}
         </ModalBody>
         <ModalFooter className="[&>button]:m-1 ">
-          <Button colorScheme="teal" onClick={addRoomHandler}>
+          <Button colorScheme="teal" onClick={formSubmitHandler}>
             Submit
           </Button>
           <Button onClick={onCancel}>Cancel</Button>

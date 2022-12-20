@@ -30,8 +30,7 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
 
   const { addUser, fetchUsers, isLoading } = useUsersAdminFncs();
 
-  const addUserHandler = (e: React.SyntheticEvent) => {
-    e.preventDefault();
+  const addUserHandler = (formData: UserType) => {
     addUser(formData, setUsers)
       .then(() => fetchUsers(setUsers))
       .then(() => setIsOpen(false));
@@ -41,20 +40,11 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
     setIsOpen(false);
   };
 
-  const inputChangeHandler = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
   return (
     <AddUserForm
       isOpen={isOpen}
       isLoading={isLoading}
       onClose={() => setIsOpen(false)}
-      onChange={inputChangeHandler}
-      formData={formData}
-      options={userRights}
       addUserHandler={addUserHandler}
       onCancel={onCancel}
     />

@@ -1,4 +1,4 @@
-import { UserType, UserRights } from "../../../types/types";
+import { UserType } from "../../../types/types";
 import LoadingSpinner from "../../ui/LoadingSpinner/LoadingSpinner";
 import {
   Modal,
@@ -12,17 +12,15 @@ import {
   Button,
 } from "@chakra-ui/react";
 import SelectRights from "../../reserve/FormSelect";
+import { useState } from "react";
+import useAuth from "../../../hooks/useAuth";
+import { USER, userRights } from "../../../data/constants";
 
 type AddUserFormProps = {
   isOpen: boolean;
   onClose: () => void;
   isLoading: boolean;
-  onChange: (
-    e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
-  ) => void;
-  formData: UserType;
-  options: UserRights[];
-  addUserHandler: (e: React.SyntheticEvent) => void;
+  addUserHandler: (formData: UserType) => void;
   onCancel: () => void;
 };
 
@@ -30,12 +28,33 @@ const AddUserForm: React.FC<AddUserFormProps> = ({
   isOpen,
   onClose,
   isLoading,
-  onChange,
-  formData,
-  options,
   addUserHandler,
   onCancel,
 }) => {
+  const { user } = useAuth();
+
+  const [formData, setFormData] = useState({
+    name: "",
+    surname: "",
+    email: "",
+    password: "",
+    company: user!.company,
+    rights: USER,
+    creationDate: new Date().toLocaleString(),
+  });
+
+  const inputChangeHandler = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const formSubmitHandler = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+
+    addUserHandler(formData);
+  };
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -54,7 +73,7 @@ const AddUserForm: React.FC<AddUserFormProps> = ({
                   placeholder="John"
                   name="name"
                   id="name"
-                  onChange={onChange}
+                  onChange={inputChangeHandler}
                   value={formData.name}
                   focusBorderColor="teal.400"
                   required
@@ -64,7 +83,7 @@ const AddUserForm: React.FC<AddUserFormProps> = ({
                   placeholder="Doe"
                   name="surname"
                   id="surname"
-                  onChange={onChange}
+                  onChange={inputChangeHandler}
                   value={formData.surname}
                   className="ml-0.5"
                   focusBorderColor="teal.400"
@@ -77,7 +96,7 @@ const AddUserForm: React.FC<AddUserFormProps> = ({
                 placeholder="john@doe.com"
                 name="email"
                 id="email"
-                onChange={onChange}
+                onChange={inputChangeHandler}
                 value={formData.email}
                 className="m-0.5"
                 focusBorderColor="teal.400"
@@ -89,7 +108,7 @@ const AddUserForm: React.FC<AddUserFormProps> = ({
                 placeholder="Password"
                 name="password"
                 id="password"
-                onChange={onChange}
+                onChange={inputChangeHandler}
                 value={formData.password}
                 className="m-0.5"
                 focusBorderColor="teal.400"
@@ -100,7 +119,7 @@ const AddUserForm: React.FC<AddUserFormProps> = ({
                 type="text"
                 name="company"
                 id="company"
-                onChange={onChange}
+                onChange={inputChangeHandler}
                 value={formData.company}
                 disabled
                 className="m-0.5"
@@ -109,8 +128,8 @@ const AddUserForm: React.FC<AddUserFormProps> = ({
               <SelectRights
                 id="rights"
                 name="rights"
-                options={options}
-                onChange={onChange}
+                options={userRights}
+                onChange={inputChangeHandler}
                 additionalStyle="m-0.5 rounded-none bg-white text-sm mt-2"
                 label="Select user rights:"
                 small
@@ -119,7 +138,7 @@ const AddUserForm: React.FC<AddUserFormProps> = ({
           )}
         </ModalBody>
         <ModalFooter className="[&>button]:m-1 ">
-          <Button colorScheme="teal" onClick={addUserHandler}>
+          <Button colorScheme="teal" onClick={formSubmitHandler}>
             Submit
           </Button>
           <Button onClick={onCancel}>Cancel</Button>

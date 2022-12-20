@@ -1,4 +1,4 @@
-import React, { useState, Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { useRoomsAdminFncs } from "../../../hooks/useRoomsAdminFncs";
 import { CompanyRoom } from "../../../types/types";
 import AddRoomForm from "../../../components/admin/rooms/AddRoomForm";
@@ -16,12 +16,9 @@ const AddRoomModal: React.FC<AddRoomModalProps> = ({
   setRooms,
   rooms,
 }) => {
-  const [formData, setFormData] = useState("");
-
   const { addRoom, roomsFetch, isLoading } = useRoomsAdminFncs();
 
-  const addRoomHandler = (e: React.SyntheticEvent) => {
-    e.preventDefault();
+  const addRoomHandler = (formData: any) => {
     addRoom(rooms, formData)
       .then(() => roomsFetch(setRooms))
       .then(() => setIsOpen(false));
@@ -31,17 +28,11 @@ const AddRoomModal: React.FC<AddRoomModalProps> = ({
     setIsOpen(false);
   };
 
-  const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData(e.target.value);
-  };
-
   return (
     <AddRoomForm
       isOpen={isOpen}
       onClose={() => setIsOpen(false)}
       isLoading={isLoading}
-      onChange={inputChangeHandler}
-      formData={formData}
       addRoomHandler={addRoomHandler}
       onCancel={onCancel}
     />

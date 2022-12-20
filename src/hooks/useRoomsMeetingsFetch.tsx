@@ -34,20 +34,21 @@ export const useRoomsMeetingsFetch = () => {
     querySnapshot.forEach((doc) => {
       companyRooms.push({ id: doc.data().id, name: doc.data().name });
 
-      if (!doc.data().meetings) return null;
+      if (!doc.data().meetings) return /* null */;
+
       const filteredMeetings = doc
         .data()
         .meetings.filter((meeting: Meeting) => {
           return meeting.date == date;
         });
-      if (filteredMeetings) {
-        filteredMeetings.forEach((meeting: Meeting) => {
-          todaysMeetings.push(meeting);
-          meeting.blocks.forEach((block: number) => {
-            blocksBreakdown.push({ room: meeting.room, block });
-          });
+      if (!filteredMeetings) return;
+
+      filteredMeetings.forEach((meeting: Meeting) => {
+        todaysMeetings.push(meeting);
+        meeting.blocks.forEach((block: number) => {
+          blocksBreakdown.push({ room: meeting.room, block });
         });
-      }
+      });
     });
 
     //Rezervované bloky -> Najdu v každé room bloky, u kterých bude potřeba upravit property reserved na TRUE (podle rezervovaných meetingů v daném dnu) a upravím array

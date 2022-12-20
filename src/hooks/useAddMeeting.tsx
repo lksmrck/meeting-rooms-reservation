@@ -9,12 +9,12 @@ import AppContext from "../state/AppContext";
 
 export const useAddMeeting = () => {
   /*   const { pickedRoom } = useContext(ReservationContext); */
-  const { setIsContextLoading, setError } = useContext(AppContext);
+  const { setIsContextLoading /* setError */ } = useContext(AppContext);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const addMeeting = async (
-    newMeeting: /* Meeting */ any,
+    newMeeting: Meeting,
     pickedRoomId: string,
     navigateURL?: string,
     setFormData?: Dispatch<SetStateAction<{ name: string; type: string }>>

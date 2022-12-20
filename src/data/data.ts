@@ -1,7 +1,7 @@
 
-import refOne from "../assets/refOne.jpeg"
-import refTwo from "../assets/refTwo.jpeg"
-import refThree from "../assets/refThree.jpeg"
+import refOne from "../assets/refOne.png"
+import refTwo from "../assets/refTwo.png"
+import refThree from "../assets/refThree.png"
 
 
 export const timeBlocks = [

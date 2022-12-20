@@ -1,28 +1,9 @@
-import { useState, forwardRef } from "react";
+import { forwardRef } from "react";
 
 import BlobShapeContainer from "../../components/landing/BlobShapeContainer";
 import ContactForm from "../../components/landing/ContactForm";
 
 const ContactUs = forwardRef<HTMLDivElement>((props, ref) => {
-  const [submitted, setSubmitted] = useState(false);
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    message:
-      "Hi guys, I would like to know more about this app. Please contact me on my e-mail.",
-  });
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ): void => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-  const handleSubmit = (e: React.SyntheticEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
-
   return (
     <div
       className=" h-screen flex flex-col justify-center items-center bg-cover bg-center bg-no-repeat bg-contactUsWaves "
@@ -37,12 +18,7 @@ const ContactUs = forwardRef<HTMLDivElement>((props, ref) => {
           Leave us a message and we will contact you.
         </h1>
         <BlobShapeContainer>
-          <ContactForm
-            onSubmit={handleSubmit}
-            onChange={handleChange}
-            formData={formData}
-            submitted={submitted}
-          />
+          <ContactForm />
         </BlobShapeContainer>
       </div>
     </div>

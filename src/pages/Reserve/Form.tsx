@@ -73,6 +73,7 @@ const Form: React.FC<FormProps> = ({
     });
     const { name } = formData;
 
+    if (!pickedRoomId) return;
     const newMeeting = {
       ...formData,
       id: Date.now(),
