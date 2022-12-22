@@ -45,13 +45,12 @@ const AddUserForm: React.FC<AddUserFormProps> = ({
 
   const inputChangeHandler = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
+  ): void => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const formSubmitHandler = (e: React.SyntheticEvent) => {
+  const formSubmitHandler = (e: React.SyntheticEvent): void => {
     e.preventDefault();
-
     addUserHandler(formData);
   };
 

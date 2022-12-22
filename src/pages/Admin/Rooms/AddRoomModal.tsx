@@ -18,13 +18,13 @@ const AddRoomModal: React.FC<AddRoomModalProps> = ({
 }) => {
   const { addRoom, roomsFetch, isLoading } = useRoomsAdminFncs();
 
-  const addRoomHandler = (formData: any) => {
+  const addRoomHandler = (formData: string): void => {
     addRoom(rooms, formData)
       .then(() => roomsFetch(setRooms))
       .then(() => setIsOpen(false));
   };
 
-  const onCancel = () => {
+  const onCancel = (): void => {
     setIsOpen(false);
   };
 

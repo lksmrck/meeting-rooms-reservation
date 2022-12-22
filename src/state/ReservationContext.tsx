@@ -14,8 +14,6 @@ interface ReservationContextInterface {
   setRoomsData: Dispatch<SetStateAction<Room[]>>;
   pickedRoom: Room;
   setPickedRoom: Dispatch<SetStateAction<Room>>;
-  pickedDate: string | null;
-  setPickedDate: Dispatch<SetStateAction<string | null>>;
 }
 
 const ReservationContext = createContext({} as ReservationContextInterface);
@@ -23,11 +21,6 @@ const ReservationContext = createContext({} as ReservationContextInterface);
 export const ReservationContextProvider: React.FC<{
   children: ReactNode;
 }> = ({ children }) => {
-  //Home (Calendar)
-  const [pickedDate, setPickedDate] = useState<string | null>(
-    getLocalStorage("date") || null
-  );
-
   //Rooms data
   const [roomsData, setRoomsData] = useState([] as Room[]);
 
@@ -35,10 +28,6 @@ export const ReservationContextProvider: React.FC<{
   const [pickedRoom, setPickedRoom] = useState(
     getLocalStorage("pickedRoom") || ({} as Room)
   );
-
-  useEffect(() => {
-    localStorage.setItem("date", JSON.stringify(pickedDate));
-  }, [pickedDate]);
 
   useEffect(() => {
     localStorage.setItem("pickedRoom", JSON.stringify(pickedRoom));
@@ -49,8 +38,6 @@ export const ReservationContextProvider: React.FC<{
       value={{
         roomsData,
         setRoomsData,
-        pickedDate,
-        setPickedDate,
         pickedRoom,
         setPickedRoom,
       }}

@@ -63,7 +63,7 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
 
   const navigate = useNavigate();
 
-  const onCancel = () => {
+  const onCancel = (): void => {
     if (isEditing) {
       setIsEditing(false);
       setUpdatedTime({ start: null, end: null });
@@ -75,7 +75,7 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
     }
   };
 
-  const deleteMeetingHandler = (e: React.SyntheticEvent) => {
+  const deleteMeetingHandler = (e: React.SyntheticEvent): void => {
     setFbIsLoading(true);
     removeData(clickedMeeting, pickedRoomId as string).then(() => {
       navigate(`/date/${pickedDate}/overview`);
@@ -84,18 +84,18 @@ const MeetingDetail: React.FC<MeetingDetailProps> = ({
     });
   };
 
-  const editModeToggler = () => {
+  const editModeToggler = (): void => {
     setIsEditing(true);
   };
 
   const changeMeetingHandler = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
+  ): void => {
     setUpdatedMeeting({ ...updatedMeeting, [e.target.name]: e.target.value });
     if (missingFormData) setMissingFormData(false);
   };
 
-  const submitUpdatedMeeting = (e: React.SyntheticEvent) => {
+  const submitUpdatedMeeting = (e: React.SyntheticEvent): void => {
     e.preventDefault();
     setMissingFormData(false);
     setFbIsLoading(true);

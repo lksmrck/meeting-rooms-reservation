@@ -25,17 +25,16 @@ const AddRoomForm: React.FC<AddRoomFormProps> = ({
   isOpen,
   onClose,
   isLoading,
-
   addRoomHandler,
   onCancel,
 }) => {
   const [formData, setFormData] = useState("");
 
-  const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setFormData(e.target.value);
   };
 
-  const formSubmitHandler = (e: React.SyntheticEvent) => {
+  const formSubmitHandler = (e: React.SyntheticEvent): void => {
     e.preventDefault();
     addRoomHandler(formData);
   };

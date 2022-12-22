@@ -16,27 +16,15 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
   setIsOpen,
   setUsers,
 }) => {
-  const { user } = useAuth();
-
-  const [formData, setFormData] = useState({
-    name: "",
-    surname: "",
-    email: "",
-    password: "",
-    company: user!.company,
-    rights: USER,
-    creationDate: new Date().toLocaleString(),
-  });
-
   const { addUser, fetchUsers, isLoading } = useUsersAdminFncs();
 
-  const addUserHandler = (formData: UserType) => {
+  const addUserHandler = (formData: UserType): void => {
     addUser(formData, setUsers)
-      .then(() => fetchUsers(setUsers))
-      .then(() => setIsOpen(false));
+      .then(() => setIsOpen(false))
+      .then(() => fetchUsers(setUsers));
   };
 
-  const onCancel = () => {
+  const onCancel = (): void => {
     setIsOpen(false);
   };
 

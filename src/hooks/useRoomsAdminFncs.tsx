@@ -16,10 +16,8 @@ export const useRoomsAdminFncs = () => {
   const { user } = useContext(AuthContext);
 
   const roomsFetch = async (
-    /* company: string, */ setRoomsArray: Dispatch<
-      SetStateAction<CompanyRoom[]>
-    >
-  ) => {
+    setRoomsArray: Dispatch<SetStateAction<CompanyRoom[]>>
+  ): Promise<void> => {
     setIsLoading(true);
     let companyRooms: CompanyRoom[] = [];
     const querySnapshot = await getDocs(
@@ -32,10 +30,13 @@ export const useRoomsAdminFncs = () => {
     setIsLoading(false);
   };
 
-  const addRoom = async (roomsArray: CompanyRoom[], name: string) => {
+  const addRoom = async (
+    roomsArray: CompanyRoom[],
+    name: string
+  ): Promise<void> => {
     setIsLoading(true);
     const id = roomsArray.length + 1;
-    /*   const name = "newName"; */
+
     await setDoc(doc(db, `companies/${user?.company}/rooms`, String(id)), {
       id,
       name,
@@ -47,7 +48,7 @@ export const useRoomsAdminFncs = () => {
   const deleteRoom = async (
     roomID: number,
     setRoomsArray: Dispatch<SetStateAction<CompanyRoom[]>>
-  ) => {
+  ): Promise<void> => {
     setIsLoading(true);
     await deleteDoc(
       doc(db, `companies/${user?.company}/rooms`, String(roomID))

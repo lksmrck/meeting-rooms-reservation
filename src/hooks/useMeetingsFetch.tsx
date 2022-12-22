@@ -15,7 +15,7 @@ export const useMeetingsFetch = () => {
     date: string | null,
     setState: Dispatch<SetStateAction<Meeting[]>>,
     roomId: string
-  ) => {
+  ): Promise<void> => {
     setIsLoading(true);
     const docRef = doc(db, `companies/${user!.company}/rooms`, String(roomId));
     const docSnap = await getDoc(docRef);

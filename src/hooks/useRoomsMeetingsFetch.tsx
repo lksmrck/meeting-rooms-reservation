@@ -17,8 +17,8 @@ export const useRoomsMeetingsFetch = () => {
 
   const roomsAndMeetingsFetch = async (
     company: string,
-    date: /* string | null */ string
-  ) => {
+    date: string
+  ): Promise<void> => {
     setIsLoading(true);
     const querySnapshot = await getDocs(
       collection(db, `companies/${company}/rooms`)

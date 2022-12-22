@@ -17,10 +17,9 @@ const ContactForm: React.FC = ({}) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.SyntheticEvent) => {
+  const handleSubmit = (e: React.SyntheticEvent): void => {
     e.preventDefault();
     setSubmitted(true);
-    console.log(formData);
   };
 
   return (

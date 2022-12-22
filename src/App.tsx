@@ -57,10 +57,9 @@ const App = () => {
             path="/conference-room-reservation"
             element={<Navigate replace to="/home" />}
           />
-          {/* Na error route se dá dostat pouze, když je error state, jinak neexistuje. */}
-          {error.error && (
-            <Route path="/something-wrong" element={<ErrorScreen />}></Route>
-          )}
+
+          <Route path="/something-wrong" element={<ErrorScreen />}></Route>
+
           <Route
             path="/home"
             element={<Landing gatherLandingRefs={gatherLandingRefs} />}

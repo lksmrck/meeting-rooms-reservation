@@ -22,7 +22,7 @@ export const useUsersAdminFncs = () => {
 
   const fetchUsers = async (
     setUsersArray: Dispatch<SetStateAction<UserType[]>>
-  ) => {
+  ): Promise<void> => {
     setIsLoading(true);
     let usersList: UserType[] = [];
 
@@ -30,7 +30,6 @@ export const useUsersAdminFncs = () => {
       collection(db, `companies/${user?.company}/users`)
     );
     querySnapshot.forEach((doc) => {
-      console.log(doc);
       usersList.push({ ...doc.data(), id: doc.id } as UserType);
     });
 
@@ -41,7 +40,7 @@ export const useUsersAdminFncs = () => {
   const addUser = async (
     formData: UserType,
     setUsersArray: Dispatch<SetStateAction<UserType[]>>
-  ) => {
+  ): Promise<void> => {
     setIsLoading(true);
     const { company, email, password } = formData;
     const hashedPassword = bcrypt.hashSync(password, 10);
@@ -74,7 +73,7 @@ export const useUsersAdminFncs = () => {
     company: string,
     userID: string,
     setUsersArray: Dispatch<SetStateAction<UserType[]>>
-  ) => {
+  ): Promise<void> => {
     setIsLoading(true);
     /*     const user = auth.currentUser; */
 

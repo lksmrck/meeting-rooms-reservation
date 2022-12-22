@@ -18,7 +18,7 @@ export const useAddMeeting = () => {
     pickedRoomId: string,
     navigateURL?: string,
     setFormData?: Dispatch<SetStateAction<{ name: string; type: string }>>
-  ) => {
+  ): Promise<void> => {
     setIsContextLoading(true);
     const dbRef = doc(
       db,
