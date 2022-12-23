@@ -6,7 +6,7 @@ import Reserve from "./pages/Reserve";
 import Home from "./pages/Datepick";
 import Auth from "./pages/Login";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, ForwardedRef, useRef } from "react";
 import AppContext from "./state/AppContext";
 import { timeCheck } from "./utils/timeCheck";
 import ErrorScreen from "./pages/screens/ErrorScreen";
@@ -19,6 +19,7 @@ import RequireAuth from "./components/login/RequireAuth";
 import useAuth from "./hooks/useAuth";
 import Unauthorized from "./pages/screens/Unauthorized";
 import { LandingRefsObject } from "./types/types";
+import FloatingScrollButton from "./components/ui/FloatingScrollingButton";
 
 const App = () => {
   const navigate = useNavigate();
@@ -51,6 +52,7 @@ const App = () => {
   return (
     <div className="overflow-y-scroll scrollbar-hide w-screen flex flex-col  ">
       <div>
+        <FloatingScrollButton />
         <Navbar />
         <Routes>
           {/* 1. Public routes */}

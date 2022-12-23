@@ -5,12 +5,13 @@ import { FiTwitter } from "react-icons/fi";
 import { FiFacebook } from "react-icons/fi";
 import { FiInstagram } from "react-icons/fi";
 import useAuth from "../../hooks/useAuth";
+import { LandingRefsObject } from "../../types/types";
 
 type FooterProps = {
-  landingRefs: ForwardedRef<HTMLDivElement>;
+  landingRefs: LandingRefsObject;
 };
 
-const Footer = ({ landingRefs }: any) => {
+const Footer: React.FC<FooterProps> = ({ landingRefs }) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 

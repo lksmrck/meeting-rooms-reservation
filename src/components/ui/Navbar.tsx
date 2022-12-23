@@ -42,11 +42,11 @@ const Navbar = () => {
   };
 
   return (
-    <section className="h-20 bg-violet-800 flex shadow-lg shadow-slate-300">
+    <div className="h-20 bg-violet-800 flex shadow-lg shadow-slate-300">
       <nav className="flex justify-between items-center w-screen">
         <ul className="flex items-center ">
           <li
-            className="  mr-2 ml-5 text-white cursor-pointer font-solid text-lg md:text-2xl animate-bounceInRight"
+            className=" ml-5 text-white cursor-pointer font-solid text-lg md:text-2xl animate-bounceInRight"
             onClick={() => {
               setCalendarOpen(false);
               navigate("/datepick");
@@ -54,7 +54,8 @@ const Navbar = () => {
           >
             Room Reserver
           </li>
-          {displayBlob && <BlobLogo />}
+
+          <li className="h-10 pt-1">{displayBlob && <BlobLogo />}</li>
         </ul>
         <div className=" flex justify-center ">
           {user && (
@@ -99,7 +100,7 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-    </section>
+    </div>
   );
 };
 

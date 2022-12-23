@@ -8,7 +8,7 @@ type CarouselProps = {
 
 const Carousel: React.FC<CarouselProps> = ({ slides }) => {
   return (
-    <div className="w-2/3 md:w-1/2 max-w-xs md:max-w-2xl h-110 md:h-64 mt-48 glass">
+    <div className="w-2/3 md:w-1/2 max-w-xs md:max-w-2xl h-110 md:h-64 mt-48 md:min-w-min glass">
       <ReactCarousel
         showThumbs={false}
         showArrows={true}
@@ -21,7 +21,10 @@ const Carousel: React.FC<CarouselProps> = ({ slides }) => {
         {slides.map((slide: CarouselSlide) => (
           <div className="w-full flex flex-col md:flex-row h-110  md:h-64 rounded-lg  ">
             <div className="h-1/2 md:h-full md:w-1/2 ">
-              <img src={slide.image} className="rounded-l-lg h-full w-full " />
+              <img
+                src={slide.image}
+                className=" rounded-t-lg md:rounded-l-lg md:rounded-tr-none h-full w-full "
+              />
             </div>
             <div className=" flex flex-col justify-center items-center h-1/2 md:h-full  md:w-1/2 [&>*]:mx-3  ">
               <h2 className="font-solid text-xl md:text-2xl text-black">

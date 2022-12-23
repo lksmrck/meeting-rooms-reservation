@@ -44,7 +44,7 @@ module.exports = {
           "25%": { transform: "translatey(10px)" },
           "75%": { transform: "translatey(-10px)" },
         },
-        colorsSwitch: {
+        /*   colorsSwitch: {
           "0%": {
             backgroundColor: "#36eb7e",
           },
@@ -52,7 +52,7 @@ module.exports = {
           "50%": { backgroundColor: "#51092d" },
           "75%": { backgroundColor: "#0d004a" },
           "100%": { backgroundColor: "#dab915" },
-        },
+        }, */
         bounceInRight: {
           "0%": { transform: "translatex(-100px)" },
           "50%": { transform: "translatex(10px)" },
@@ -65,13 +65,41 @@ module.exports = {
           "40% 80%": { backgroundColor: "#2d8a88", scale: "1.02" },
           "60%": { backgroundColor: "#297d7c", scale: "1.04" },
         },
+        rocketBounce: {
+          "20%, 60%": { transform: "rotate(5deg)" },
+          "40%, 80%": { transform: "rotate(-5deg)" },
+        },
+        logoColors: {
+          "0%, 100%": {
+            filter:
+              "invert(0%) sepia(76%) saturate(7491%) hue-rotate(306deg) brightness(106%) contrast(101%)",
+          },
+          "20%": {
+            filter:
+              "invert(62%) sepia(45%) saturate(6354%) hue-rotate(250deg) brightness(81%) contrast(100%)",
+          },
+          "40%": {
+            filter:
+              "invert(11%) sepia(42%) saturate(3427%) hue-rotate(305deg) brightness(89%) contrast(105%)",
+          },
+          "60%": {
+            filter:
+              "invert(4%) sepia(94%) saturate(6288%) hue-rotate(258deg) brightness(92%) contrast(116%)",
+          },
+          "80%": {
+            filter:
+              "invert(69%) sepia(83%) saturate(463%) hue-rotate(4deg) brightness(93%) contrast(94%)",
+          },
+        },
       },
       animation: {
         floatUp: "floatUp 5s ease-in-out infinite",
         floatDown: "floatDown 5s ease-in-out infinite",
-        colorsSwitch: "colorsSwitch 5s alternate infinite",
+        /* colorsSwitch: "colorsSwitch 5s alternate infinite", */
         bounceInRight: "bounceInRight 1s ease 1",
         buttonGlowing: "buttonGlowing 3s ease-in-out infinite",
+        rocketBounce: "rocketBounce 0.5s ease-in-out infinite",
+        logoColors: "logoColors 5s linear infinite",
       },
       backgroundImage: {
         stepsWaves: "url('/src/assets/stepsWaves.svg')",
