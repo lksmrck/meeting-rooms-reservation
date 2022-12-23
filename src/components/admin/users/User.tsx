@@ -8,6 +8,7 @@ const User = ({ user, setUsers }: any) => {
 
   const deleteUserHandler = (userId: any) => {
     removeUser("secondCompany", userId, setUsers);
+    console.log("userID: " + userId);
   };
 
   return (

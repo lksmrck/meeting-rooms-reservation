@@ -22,6 +22,7 @@ type AddUserFormProps = {
   isLoading: boolean;
   addUserHandler: (formData: UserType) => void;
   onCancel: () => void;
+  isError: { error: boolean; message: string };
 };
 
 const AddUserForm: React.FC<AddUserFormProps> = ({
@@ -30,6 +31,7 @@ const AddUserForm: React.FC<AddUserFormProps> = ({
   isLoading,
   addUserHandler,
   onCancel,
+  isError,
 }) => {
   const { user } = useAuth();
 
@@ -63,6 +65,8 @@ const AddUserForm: React.FC<AddUserFormProps> = ({
         <ModalBody pb={6}>
           {isLoading ? (
             <LoadingSpinner />
+          ) : isError.error ? (
+            <div>{isError.message}</div>
           ) : (
             <form>
               <div className="flex w-full m-0.5 ">

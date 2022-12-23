@@ -1,4 +1,4 @@
-import { useState, useContext, Dispatch, SetStateAction } from "react";
+import { useState, Dispatch, SetStateAction } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config/firebase";
 import {
@@ -10,15 +10,14 @@ import {
 } from "firebase/firestore";
 import { db } from "../config/firebase";
 import useAuth from "./useAuth";
-import AppContext from "../state/AppContext";
 import bcrypt from "bcryptjs";
 import { UserType } from "../types/types";
 
 export const useUsersAdminFncs = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState({ error: false, message: "" });
 
   const { user } = useAuth();
-  const { setError } = useContext(AppContext);
 
   const fetchUsers = async (
     setUsersArray: Dispatch<SetStateAction<UserType[]>>
@@ -75,12 +74,11 @@ export const useUsersAdminFncs = () => {
     setUsersArray: Dispatch<SetStateAction<UserType[]>>
   ): Promise<void> => {
     setIsLoading(true);
-    /*     const user = auth.currentUser; */
 
     await deleteDoc(doc(db, `companies/${company}/users`, String(userID)))
-      /* .then(() => {
-        deleteUser()
-      }) */
+      .then(() => {
+        deleteDoc(doc(db, `users`, String(userID)));
+      })
       .catch((error) => {
         setError({
           error: true,
@@ -94,5 +92,5 @@ export const useUsersAdminFncs = () => {
     setIsLoading(false);
   };
 
-  return { fetchUsers, addUser, removeUser, isLoading };
+  return { fetchUsers, addUser, removeUser, isLoading, error };
 };

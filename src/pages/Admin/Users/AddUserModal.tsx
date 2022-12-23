@@ -16,12 +16,22 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
   setIsOpen,
   setUsers,
 }) => {
-  const { addUser, fetchUsers, isLoading } = useUsersAdminFncs();
+  const { addUser, fetchUsers, isLoading, error } = useUsersAdminFncs();
 
-  const addUserHandler = (formData: UserType): void => {
+  const addUserHandler = async (formData: UserType): Promise<void> => {
     addUser(formData, setUsers)
-      .then(() => setIsOpen(false))
-      .then(() => fetchUsers(setUsers));
+      .then(() => {
+        fetchUsers(setUsers);
+      })
+      .then(() => {
+        /*     setTimeout(() => { */
+        setIsOpen(false);
+        /*      }, 100); */
+      });
+    /*   .then(() => {
+        console.log("delam neco po zavreni modalu");
+        fetchUsers(setUsers);
+      }); */
   };
 
   const onCancel = (): void => {
@@ -35,6 +45,7 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
       onClose={() => setIsOpen(false)}
       addUserHandler={addUserHandler}
       onCancel={onCancel}
+      isError={error}
     />
   );
 };

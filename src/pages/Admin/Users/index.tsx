@@ -15,6 +15,7 @@ const UsersList = () => {
   const { fetchUsers, isLoading } = useUsersAdminFncs();
 
   useEffect(() => {
+    console.log("use effect fetch");
     fetchUsers(setUsers);
   }, []);
 

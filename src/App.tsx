@@ -53,6 +53,7 @@ const App = () => {
       <div>
         <Navbar />
         <Routes>
+          {/* 1. Public routes */}
           <Route
             path="/conference-room-reservation"
             element={<Navigate replace to="/home" />}
@@ -66,7 +67,7 @@ const App = () => {
           />
           <Route path="/login" element={<Auth />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
-          {/* //Protected routes - musí být logged in + User nebo Admin */}
+          {/* 2. Protected routes - musí být logged in + práva User nebo Admin */}
           <Route element={<RequireAuth allowedRights={[ADMIN, USER]} />}>
             <Route path="/datepick" element={<Home />} />
             <Route
@@ -78,7 +79,7 @@ const App = () => {
               element={<DailyOverview />}
             />
 
-            {/* //Protected routes - musí být logged in + Admin */}
+            {/* 3. Protected routes - musí být logged in + práva Admin */}
             <Route element={<RequireAuth allowedRights={[ADMIN]} />}>
               <Route path="/settings" element={<Settings />} />
               <Route path="/settings/rooms" element={<RoomsList />} />

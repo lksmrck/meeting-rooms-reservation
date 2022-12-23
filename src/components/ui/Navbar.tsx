@@ -84,7 +84,7 @@ const Navbar = () => {
               </div>
             </>
           )}
-          <div className="mr-4 lg:mr-9">
+          <div className="mr-6 lg:mr-9">
             {smallScreen ? (
               <HamburgerMenu loginLogoutHandler={loginLogoutHandler} />
             ) : (
