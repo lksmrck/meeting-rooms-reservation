@@ -17,13 +17,13 @@ const Steps = forwardRef<HTMLDivElement>((props, ref) => {
 
   return (
     <div
-      className="h-3/4 flex justify-center bg-cover bg-center bg-no-repeat bg-stepsWaves items-center "
+      className="h-3/4 flex justify-center bg-cover bg-center bg-no-repeat bg-stepsWaves items-center  "
       ref={ref}
     >
-      <div className="flex mt-24 mx-4">
-        <div className="h-96 flex items-center">
+      <div className="flex mt-24 mx-4 w-full justify-center   ">
+        {/*    <div className="h-96 flex items-center">
           <img
-            src={CR}
+            src={buttons[1].image}
             width="190px"
             height="350px"
             className="rounded-lg mr-5"
@@ -31,11 +31,19 @@ const Steps = forwardRef<HTMLDivElement>((props, ref) => {
           <p>{buttons[0].clicked ? "kliknuto 1" : ""}</p>
           <p>{buttons[1].clicked ? "kliknuto 2" : ""}</p>
           <p>{buttons[2].clicked ? "kliknuto 3" : ""}</p>
-        </div>
-        <div className="h-96 flex flex-col justify-center">
+        </div> */}
+        <div className="h-96 flex flex-col justify-center w-80 relative border">
           {buttons.map((button) => {
             return (
-              <div className="flex justify-start items-center m-1">
+              <div className="flex justify-start items-center m-1 ">
+                {button.clicked && (
+                  <img
+                    src={button.image}
+                    width="190px"
+                    height="350px"
+                    className="rounded-lg mr-5 absolute left-2 top-36"
+                  />
+                )}
                 <Button
                   colorScheme="teal"
                   onClick={() => onClickButton(button.id)}

@@ -3,7 +3,7 @@ import { useContext, useEffect } from "react";
 import ReservationContext from "../../state/ReservationContext";
 import { useParams } from "react-router-dom";
 import RoomsDom from "./RoomsDom";
-import { useRoomsMeetingsFetch } from "../../hooks/useRoomsMeetingsFetch";
+import { useRoomsOverviewFetch } from "../../hooks/useRoomsOverviewFetch";
 import TimeBlocksDom from "../../components/timeBlocks/TimeBlocksDom";
 import { Room, RoomData } from "../../types/types";
 import { paramsToDate } from "../../utils/dateParamsFormat";
@@ -24,14 +24,14 @@ const Overview = () => {
   /* const { user, company } = useAuth(); */
   const navigate = useNavigate();
 
-  const { roomsAndMeetingsFetch, isLoading } = useRoomsMeetingsFetch();
+  const { roomsOverviewFetch, isLoading } = useRoomsOverviewFetch();
 
   //1. Firebase query - stáhne všechny rooms za danou firmu včetně meetingů a zpracované meetingy vč. upravených objektů o meetingy ve vybraném dnu uloží do state. Viz. funkce..
   useEffect(() => {
     let isCurrent = true;
 
     if (!isCurrent) return;
-    roomsAndMeetingsFetch(user!.company, formatedPickedDate);
+    roomsOverviewFetch(user!.company, formatedPickedDate);
     return () => {
       isCurrent = false;
     };

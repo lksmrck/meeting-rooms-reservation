@@ -11,11 +11,11 @@ import {
 import { useState, useContext } from "react";
 import ReservationContext from "../state/ReservationContext";
 
-export const useRoomsMeetingsFetch = () => {
+export const useRoomsOverviewFetch = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { setRoomsData } = useContext(ReservationContext);
 
-  const roomsAndMeetingsFetch = async (
+  const roomsOverviewFetch = async (
     company: string,
     date: string
   ): Promise<void> => {
@@ -25,7 +25,7 @@ export const useRoomsMeetingsFetch = () => {
     );
     //Stáhnou se data z Firebase, projedou se meetingy, a pokud jsou nějaké plánované meetingy ve vybraném dnu, tak se uloží do proměnné níže - za všechny místnosti.
     let todaysMeetings: Meeting[] = [];
-    //Rozpad bloků + id místnosti
+    //Pomocná proměnná - Rozpad bloků + id místnosti
     let blocksBreakdown: BlocksBreakdown[] = [];
     //Rooms dané firmy (id a jméno. Pak posláno do state v mother componentu)
     let companyRooms: CompanyRoom[] = [];
@@ -93,6 +93,6 @@ export const useRoomsMeetingsFetch = () => {
 
   return {
     isLoading,
-    roomsAndMeetingsFetch,
+    roomsOverviewFetch,
   };
 };

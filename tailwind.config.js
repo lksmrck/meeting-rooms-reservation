@@ -8,21 +8,13 @@ module.exports = {
         outline: "Londrina Shadow",
         solid: "Londrina Solid",
       },
-      /*   margin: {
-        0.25: "0.0625rem",
-      }, */
       gridTemplateColumns: {
-        //24 columns grid (pro časová pásma)
         24: "repeat(24, minmax(0, 1fr))",
       },
       height: {
-        /*     30: "7.5rem", */
         //Výška contentu = 100vh - výška navbaru
         content: "calc(100vh - 5rem)",
       },
-      /* width: {
-        105: "26.25rem",
-      }, */
       spacing: {
         0.25: "0.0625rem",
         30: "7.5rem",
@@ -102,11 +94,11 @@ module.exports = {
         logoColors: "logoColors 5s linear infinite",
       },
       backgroundImage: {
-        stepsWaves: "url('/src/assets/stepsWaves.svg')",
-        titleWaves: "url('/src/assets/titleWaves.svg')",
-        carouselWaves: "url('/src/assets/carouselWaves.svg')",
-        contactUsWaves: "url('/src/assets/contactUsWaves.svg')",
-        loginBg: "url('/src/assets/loginBg.svg')",
+        stepsWaves: "url('/src/assets/bgs/stepsWaves.svg')",
+        titleWaves: "url('/src/assets/bgs/titleWaves.svg')",
+        carouselWaves: "url('/src/assets/bgs/carouselWaves.svg')",
+        contactUsWaves: "url('/src/assets/bgs/contactUsWaves.svg')",
+        loginBg: "url('/src/assets/bgs/loginBg.svg')",
       },
       backgroundColor: {
         features: "#461c70",

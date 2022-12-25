@@ -1,7 +1,13 @@
 
-import refOne from "../assets/refOne.png"
-import refTwo from "../assets/refTwo.png"
-import refThree from "../assets/refThree.png"
+import refOne from "../assets/carouselPics/refOne.png"
+import refTwo from "../assets/carouselPics/refTwo.png"
+import refThree from "../assets/carouselPics/refThree.png"
+import createMeeting from "../assets/landingPics/createMeeting.png"
+import editMeeting from "../assets/landingPics/editMeeting.png"
+import pickDate from "../assets/landingPics/pickDate.png"
+import pickRoom from "../assets/landingPics/pickRoom.png"
+import userAdmin from "../assets/landingPics/userAdmin.png"
+import viewMeeting from "../assets/landingPics/viewMeeting.png"
 
 
 export const timeBlocks = [
@@ -71,14 +77,15 @@ export const roomData= [
           company: "Masaryk University",
           image: refTwo,
         },
-        { title: "My husband spends more time home, just to play with this app. Thank you!",person: "Mama Obama", company: "Wife", image: refOne },
+        { title: "My husband spends more time home, just to play with this app. Thank you!",person: "Mary the Lunchlady", company: "Wife", image: refOne },
       ];
 
     export const stepsButtons = [
-        { id: 1, clicked: true, text: "Log In" },
-        { id: 2, clicked: false, text: "See all company rooms" },
-        { id: 3, clicked: false, text: "Pick a room" },
-        { id: 4, clicked: false, text: "Pick a time and book it" },
-        { id: 5, clicked: false, text: "Edit or delete meeting if needed" },
-        { id: 6, clicked: false, text: "Add room or user if you are admin" },
+        { id: 1, clicked: true, text: "Pick a date", image: pickDate },
+        /* { id: 2, clicked: false, text: "See all company rooms", image: pickRoom }, */
+        { id: 2, clicked: false, text: "Pick a room", image: pickRoom },
+        { id: 3, clicked: false, text: "Pick a time and book it", image: createMeeting },
+        { id: 4, clicked: false, text: "View created meetings", image: viewMeeting },
+        { id: 5, clicked: false, text: "Edit or delete meeting if needed", image: editMeeting },
+        { id: 6, clicked: false, text: "Add room or user if you are admin", image: userAdmin },
       ];

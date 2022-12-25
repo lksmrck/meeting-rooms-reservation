@@ -29,6 +29,7 @@ export const useMeetingsFetch = () => {
       setIsLoading(false);
     } else {
       setIsLoading(false);
+      /* console.log(roomId); */
       setError({
         error: true,
         message: "Something went wrong during downloading meetings.",

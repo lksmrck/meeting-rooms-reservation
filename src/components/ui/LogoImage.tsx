@@ -1,6 +1,6 @@
 import RRlogo from "../../assets/RRlogo.svg";
 
-const BlobLogo = () => {
+const LogoImage = () => {
   return (
     /*   <div
       className="h-6 md:h-6 w-5 md:w-5   rounded-lg  shadow-lg animate-colorsSwitch "
@@ -11,4 +11,4 @@ const BlobLogo = () => {
   );
 };
 
-export default BlobLogo;
+export default LogoImage;

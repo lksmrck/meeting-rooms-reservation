@@ -31,6 +31,7 @@ const useLogin = () => {
         return signInWithEmailAndPassword(auth, email, password)
           .then(async (userCredential) => {
             userData = await fetchUserData(userCredential.user);
+            console.log(userData);
           })
           .then(() => {
             if (!userData) return;

@@ -16,7 +16,7 @@ const ErrorScreen: React.FC = () => {
           colorScheme="teal"
           onClick={() => {
             /* setError({ error: false, message: "" }); */
-            navigate(-1);
+            navigate(-2);
           }}
         >
           Back

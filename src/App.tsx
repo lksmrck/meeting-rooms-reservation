@@ -56,6 +56,7 @@ const App = () => {
         <Navbar />
         <Routes>
           {/* 1. Public routes */}
+          <Route path="/" element={<Navigate replace to="/home" />} />
           <Route
             path="/conference-room-reservation"
             element={<Navigate replace to="/home" />}
