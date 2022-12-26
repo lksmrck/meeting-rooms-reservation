@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import { useState, FC, ChangeEvent, SyntheticEvent } from "react";
 import envelope from "../../assets/envelope.svg";
 import { Input, Textarea, Button } from "@chakra-ui/react";
 import { ContactFormData } from "../../types/types";
 
-const ContactForm: React.FC = ({}) => {
+const ContactForm: FC = ({}) => {
   const [submitted, setSubmitted] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -12,12 +12,12 @@ const ContactForm: React.FC = ({}) => {
   } as ContactFormData);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ): void => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.SyntheticEvent): void => {
+  const handleSubmit = (e: SyntheticEvent): void => {
     e.preventDefault();
     setSubmitted(true);
   };

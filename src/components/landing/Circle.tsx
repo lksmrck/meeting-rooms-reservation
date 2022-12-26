@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 
 type CircleProps = {
   top: string;
@@ -8,7 +8,7 @@ type CircleProps = {
 };
 
 /*DODELAT */
-const Circle: React.FC<CircleProps> = ({ top, /* smLeft, mdLeft  */ left }) => {
+const Circle: FC<CircleProps> = ({ top, /* smLeft, mdLeft  */ left }) => {
   return (
     <div
       className={`absolute w-28 h-28 top-${top} left-${left} md:left-${left} bg-white rounded-full`}

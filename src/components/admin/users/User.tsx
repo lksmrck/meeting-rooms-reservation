@@ -2,8 +2,16 @@ import { Tr, Th } from "@chakra-ui/react";
 import { IconButton } from "@chakra-ui/react";
 import { AiOutlineMinusCircle } from "react-icons/ai";
 import { useUsersAdminFncs } from "../../../hooks/useUsersAdminFncs";
+import { UserType } from "../../../types/types";
 
-const User = ({ user, setUsers }: any) => {
+import { FC, Dispatch, SetStateAction } from "react";
+
+type UserProps = {
+  user: UserType;
+  setUsers: Dispatch<SetStateAction<UserType[]>>;
+};
+
+const User: FC<UserProps> = ({ user, setUsers }) => {
   const { removeUser } = useUsersAdminFncs();
 
   const deleteUserHandler = (userId: any) => {

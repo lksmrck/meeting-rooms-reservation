@@ -1,4 +1,11 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useState,
+  FC,
+  ChangeEvent,
+  SyntheticEvent,
+} from "react";
 import LoadingSpinner from "../../ui/LoadingSpinner/LoadingSpinner";
 
 import {
@@ -21,7 +28,7 @@ type AddRoomFormProps = {
   onCancel: () => void;
 };
 
-const AddRoomForm: React.FC<AddRoomFormProps> = ({
+const AddRoomForm: FC<AddRoomFormProps> = ({
   isOpen,
   onClose,
   isLoading,
@@ -30,11 +37,11 @@ const AddRoomForm: React.FC<AddRoomFormProps> = ({
 }) => {
   const [formData, setFormData] = useState("");
 
-  const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>): void => {
     setFormData(e.target.value);
   };
 
-  const formSubmitHandler = (e: React.SyntheticEvent): void => {
+  const formSubmitHandler = (e: SyntheticEvent): void => {
     e.preventDefault();
     addRoomHandler(formData);
   };

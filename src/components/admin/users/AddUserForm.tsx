@@ -12,7 +12,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import SelectRights from "../../reserve/FormSelect";
-import { useState } from "react";
+import { useState, FC, ChangeEvent, SyntheticEvent } from "react";
 import useAuth from "../../../hooks/useAuth";
 import { USER, userRights } from "../../../data/constants";
 
@@ -25,7 +25,7 @@ type AddUserFormProps = {
   isError: { error: boolean; message: string };
 };
 
-const AddUserForm: React.FC<AddUserFormProps> = ({
+const AddUserForm: FC<AddUserFormProps> = ({
   isOpen,
   onClose,
   isLoading,
@@ -46,12 +46,12 @@ const AddUserForm: React.FC<AddUserFormProps> = ({
   });
 
   const inputChangeHandler = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ): void => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const formSubmitHandler = (e: React.SyntheticEvent): void => {
+  const formSubmitHandler = (e: SyntheticEvent): void => {
     e.preventDefault();
     addUserHandler(formData);
   };

@@ -1,13 +1,13 @@
-import React from "react";
+import { FC, ChangeEvent } from "react";
 import { Calendar as ReactCalendar } from "react-calendar";
 import "./Calendar.css";
 
 type CalendarProps = {
-  onChange: any;
+  onChange: (date: Date) => void;
   value: Date;
 };
 
-const Calendar: React.FC<CalendarProps> = ({ onChange, value }) => {
+const Calendar: FC<CalendarProps> = ({ onChange, value }) => {
   return (
     <div className="w-80">
       <ReactCalendar onChange={onChange} value={value} />

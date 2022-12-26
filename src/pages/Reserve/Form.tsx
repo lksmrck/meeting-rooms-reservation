@@ -183,16 +183,15 @@ const Form: React.FC<FormProps> = ({
               </div>
             )}
           </div>
-          {blocksPickError.error && (
-            <p className="h-1 text-xs text-red-600">
-              {blocksPickError.message}
-            </p>
-          )}
-          {missingFormDataError && (
-            <p className="mt-3 h-1 text-xs text-red-600">
-              Please fill in meeting name and pick meeting blocks.
-            </p>
-          )}
+
+          <p className="h-1 text-xs text-red-600">
+            {blocksPickError.error && blocksPickError.message}
+          </p>
+
+          <p className="mt-3 h-1 text-xs text-red-600">
+            {missingFormDataError &&
+              "Please fill in meeting name and pick meeting blocks."}
+          </p>
         </form>
       </div>
     </section>

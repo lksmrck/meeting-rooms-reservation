@@ -2,8 +2,15 @@ import { Tr, Th } from "@chakra-ui/react";
 import { IconButton } from "@chakra-ui/react";
 import { AiOutlineMinusCircle } from "react-icons/ai";
 import { useRoomsAdminFncs } from "../../../hooks/useRoomsAdminFncs";
+import { FC, Dispatch, SetStateAction } from "react";
+import { CompanyRoom } from "../../../types/types";
 
-const Room = ({ room, setRooms }: any) => {
+type RoomProps = {
+  room: CompanyRoom;
+  setRooms: Dispatch<SetStateAction<CompanyRoom[]>>;
+};
+
+const Room: FC<RoomProps> = ({ room, setRooms }) => {
   const { deleteRoom } = useRoomsAdminFncs();
 
   const deleteRoomHandler = (roomId: any) => {
