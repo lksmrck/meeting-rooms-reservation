@@ -2,8 +2,9 @@ import { Button } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { FaUserFriends } from "react-icons/fa";
 import { MdOutlineMeetingRoom } from "react-icons/md";
+import { FC } from "react";
 
-const Settings = () => {
+const Settings: FC = () => {
   const navigate = useNavigate();
 
   return (

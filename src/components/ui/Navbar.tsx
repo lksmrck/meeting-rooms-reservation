@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, FC } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { signOut } from "firebase/auth";
@@ -11,7 +11,7 @@ import HamburgerMenu from "./HamburgerMenu";
 import { useMediaQuery } from "@chakra-ui/react";
 import LogoImage from "./LogoImage";
 
-const Navbar = () => {
+const Navbar: FC = () => {
   const navigate = useNavigate();
 
   const [smallScreen] = useMediaQuery("(max-width: 640px)");

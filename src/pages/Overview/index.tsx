@@ -7,12 +7,12 @@ import { useRoomsOverviewFetch } from "../../hooks/useRoomsOverviewFetch";
 import TimeBlocksDom from "../../components/timeBlocks/TimeBlocksDom";
 import { Room, RoomData } from "../../types/types";
 import { paramsToDate } from "../../utils/dateParamsFormat";
-/* import useAuth from "../../hooks/useAuth"; */
+import { FC } from "react";
 
 import LoadingSpinner from "../../components/ui/LoadingSpinner/LoadingSpinner";
 import AuthContext from "../../state/AuthContext";
 
-const Overview = () => {
+const Overview: FC = () => {
   const { /* pickedDate, */ setPickedRoom, roomsData, setRoomsData } =
     useContext(ReservationContext);
 

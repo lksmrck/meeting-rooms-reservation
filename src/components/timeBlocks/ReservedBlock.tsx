@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import { Button } from "@chakra-ui/react";
 
 type ReservedBlockProps = {
@@ -7,11 +7,7 @@ type ReservedBlockProps = {
   onClick: () => void;
 };
 
-const ReservedBlock: React.FC<ReservedBlockProps> = ({
-  key,
-  height,
-  onClick,
-}) => {
+const ReservedBlock: FC<ReservedBlockProps> = ({ key, height, onClick }) => {
   return (
     <Button
       key={key}

@@ -1,6 +1,7 @@
 import LoginForm from "../../components/login/LoginForm";
+import { FC } from "react";
 
-const Auth = () => {
+const Auth: FC = () => {
   return (
     <div>
       <section className="flex justify-center items-center bg-center bg-cover bg-no-repeat bg-loginBg h-content ">

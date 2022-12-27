@@ -1,5 +1,5 @@
-import React, { ForwardedRef } from "react";
-import { useNavigate, useLocation, Navigate } from "react-router-dom";
+import { FC, RefObject } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { IconButton } from "@chakra-ui/react";
 import { FiTwitter } from "react-icons/fi";
 import { FiFacebook } from "react-icons/fi";
@@ -11,15 +11,21 @@ type FooterProps = {
   landingRefs: LandingRefsObject;
 };
 
-const Footer: React.FC<FooterProps> = ({ landingRefs }) => {
+const socials = [
+  { name: "Twitter", icon: <FiTwitter /> },
+  { name: "Facebook", icon: <FiFacebook /> },
+  { name: "Instagram", icon: <FiInstagram /> },
+];
+
+const Footer: FC<FooterProps> = ({ landingRefs }) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
   const { user } = useAuth();
 
-  const clickLinkHandler = (refName: any) => {
-    const element = refName.current;
-    element.scrollIntoView({ behavior: "smooth" });
+  const clickLinkHandler = (refName: RefObject<HTMLDivElement>) => {
+    const element = refName?.current;
+    element?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -61,43 +67,22 @@ const Footer: React.FC<FooterProps> = ({ landingRefs }) => {
 
           <div className="flex flex-col [&>div]:m-0.5 [&>div]:flex [&>div]:items-center text-gray-300 ">
             <h1 className="mb-1 font-bold">Social</h1>
-            <div>
-              <IconButton
-                aria-label="twitter"
-                colorScheme="purple" /* sx={{ color: "#e6fcfc" }} */
-                size="xs"
-                sx={{ color: "#d1d5db" /* width: "13px" */ }}
-                isRound={true}
-              >
-                <FiTwitter size={10} />
-              </IconButton>
-              <h2 className="text-xs ml-1 cursor-pointer">Twitter</h2>
-            </div>
-            <div>
-              <IconButton
-                aria-label="facebook"
-                colorScheme="purple" /* sx={{ color: "#e6fcfc" }} */
-                size="xs"
-                sx={{ color: "#d1d5db" /* width: "13px" */ }}
-                isRound={true}
-              >
-                <FiFacebook size={10} />
-              </IconButton>
-              <h2 className="text-xs ml-1 cursor-pointer ">Facebook</h2>
-            </div>
-            <div>
-              <IconButton
-                aria-label="instagram"
-                colorScheme="purple" /* sx={{ color: "#e6fcfc" }} */
-                size="xs"
-                sx={{ color: "#d1d5db" }}
-                variant="solid"
-                isRound={true}
-              >
-                <FiInstagram size={10} />
-              </IconButton>
-              <h2 className="text-xs ml-1 cursor-pointer">Instagram</h2>
-            </div>
+            {socials.map((social: any) => {
+              return (
+                <div>
+                  <IconButton
+                    aria-label="twitter"
+                    colorScheme="purple" /* sx={{ color: "#e6fcfc" }} */
+                    size="xs"
+                    sx={{ color: "#d1d5db" /* width: "13px" */ }}
+                    isRound={true}
+                  >
+                    {social.icon}
+                  </IconButton>
+                  <h2 className="text-xs ml-1 cursor-pointer">{social.name}</h2>
+                </div>
+              );
+            })}
           </div>
         </div>
         <hr />

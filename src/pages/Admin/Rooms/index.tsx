@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, FC } from "react";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useRoomsAdminFncs } from "../../../hooks/useRoomsAdminFncs";
 import LoadingSpinner from "../../../components/ui/LoadingSpinner/LoadingSpinner";
@@ -8,7 +8,7 @@ import { Table, Thead, Tbody, Tr, Th, TableContainer } from "@chakra-ui/react";
 import Room from "../../../components/admin/rooms/Room";
 import { CompanyRoom } from "../../../types/types";
 
-const RoomsList = () => {
+const RoomsList: FC = () => {
   const [rooms, setRooms] = useState([] as CompanyRoom[]);
   const [addRoomModalOpen, setAddRoomModalOpen] = useState(false);
 

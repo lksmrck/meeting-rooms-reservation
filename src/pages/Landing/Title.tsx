@@ -1,4 +1,4 @@
-import React, { RefObject } from "react";
+import { RefObject, FC } from "react";
 import { Button } from "@chakra-ui/react";
 import { useMediaQuery } from "@chakra-ui/react";
 
@@ -6,7 +6,7 @@ type TitleProps = {
   contactRef: RefObject<HTMLDivElement>;
 };
 
-const Title: React.FC<TitleProps> = ({ contactRef }) => {
+const Title: FC<TitleProps> = ({ contactRef }) => {
   const [largeScreen] = useMediaQuery("(min-width: 1024px)");
   /*   const [smallScreen] = useMediaQuery("(min-width: 640pxpx)"); */
 

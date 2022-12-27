@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, FC } from "react";
 import { Button } from "@chakra-ui/react";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import LoadingSpinner from "../../../components/ui/LoadingSpinner/LoadingSpinner";
@@ -8,7 +8,7 @@ import { Table, Thead, Tbody, Tr, Th, TableContainer } from "@chakra-ui/react";
 import User from "../../../components/admin/users/User";
 import { UserType } from "../../../types/types";
 
-const UsersList = () => {
+const UsersList: FC = () => {
   const [users, setUsers] = useState([] as UserType[]);
   const [addUserModalOpen, setAddUserModalOpen] = useState(false);
 

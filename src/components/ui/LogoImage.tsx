@@ -1,6 +1,7 @@
 import RRlogo from "../../assets/RRlogo.svg";
+import { FC } from "react";
 
-const LogoImage = () => {
+const LogoImage: FC = () => {
   return (
     /*   <div
       className="h-6 md:h-6 w-5 md:w-5   rounded-lg  shadow-lg animate-colorsSwitch "

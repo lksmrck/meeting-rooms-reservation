@@ -10,19 +10,25 @@ import {
   Button,
   IconButton,
 } from "@chakra-ui/react";
-import React, { useState, SyntheticEvent, ChangeEvent } from "react";
-
+import {
+  useState,
+  SyntheticEvent,
+  ChangeEvent,
+  SetStateAction,
+  Dispatch,
+  FC,
+} from "react";
 import { GoPlus } from "react-icons/go";
 import { AiOutlineMinus } from "react-icons/ai";
 
 type GuestsModalProps = {
   isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
   onAddGuests: (guests: string[]) => void;
   addedGuests: string[];
 };
 
-const GuestsModal: React.FC<GuestsModalProps> = ({
+const GuestsModal: FC<GuestsModalProps> = ({
   isOpen,
   setIsOpen,
   onAddGuests,

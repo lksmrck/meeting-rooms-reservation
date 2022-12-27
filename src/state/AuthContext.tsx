@@ -7,6 +7,7 @@ import {
   Dispatch,
   SetStateAction,
   useEffect,
+  FC,
 } from "react";
 
 interface AuthContextInterface {
@@ -16,7 +17,7 @@ interface AuthContextInterface {
 
 const AuthContext = createContext({} as AuthContextInterface);
 
-export const AuthContextProvider: React.FC<{
+export const AuthContextProvider: FC<{
   children: ReactNode;
 }> = ({ children }) => {
   //Stored data for user and company

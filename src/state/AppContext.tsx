@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useState, FC } from "react";
 import { Dispatch } from "react";
 import { SetStateAction } from "react";
 import { Error } from "../types/types";
@@ -14,7 +14,7 @@ interface AppContextInterface {
 
 const AppContext = createContext({} as AppContextInterface);
 
-export const AppContextProvider: React.FC<{
+export const AppContextProvider: FC<{
   children: ReactNode;
 }> = ({ children }) => {
   //Zohlednit toto v custom hooks nebo odebrat upplne!

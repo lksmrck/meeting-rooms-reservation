@@ -1,6 +1,5 @@
-import React from "react";
+import { FC } from "react";
 import { Room, RoomData } from "../../types/types";
-import { Button } from "@chakra-ui/react";
 import FreeBlock from "../../components/timeBlocks/FreeBlock";
 import ReservedBlock from "../../components/timeBlocks/ReservedBlock";
 
@@ -9,10 +8,7 @@ type RoomsDomProps = {
   clickBlockHandler: (room: number, block: number) => void;
 };
 
-const RoomsDom: React.FC<RoomsDomProps> = ({
-  roomsData,
-  clickBlockHandler,
-}) => {
+const RoomsDom: FC<RoomsDomProps> = ({ roomsData, clickBlockHandler }) => {
   //V případě, že název room je dlouhý (delší než 7 znaků), tak se zobrazí prvních 7 znaků a pak 3 tečky.
   const displayedRoomName = (name: string) => {
     if (name.length < 8) return name;

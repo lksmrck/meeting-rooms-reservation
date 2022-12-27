@@ -1,5 +1,4 @@
-import * as React from "react";
-
+import { FC } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IconButton } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +10,7 @@ interface HamburgerMenuProps {
   loginLogoutHandler: () => void;
 }
 
-const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
+const HamburgerMenu: FC<HamburgerMenuProps> = ({
   loginLogoutHandler,
 }: HamburgerMenuProps) => {
   const { user } = useAuth();

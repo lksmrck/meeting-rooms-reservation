@@ -1,10 +1,9 @@
-import { useState } from "react";
-
+import { useState, FC } from "react";
 import { useNavigate } from "react-router-dom";
 import { dateToParams } from "../../utils/dateParamsFormat";
 import Calendar from "../../components/datePick/Calendar";
 
-const DatePick = () => {
+const DatePick: FC = () => {
   const [date, setDate] = useState(new Date());
   const navigate = useNavigate();
 

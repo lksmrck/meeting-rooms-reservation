@@ -1,10 +1,10 @@
-import { useContext } from "react";
+import { useContext, FC } from "react";
 import DatePick from "./DatePick";
 import { IconButton } from "@chakra-ui/react";
 import { AiOutlineArrowDown } from "react-icons/ai";
 import AppContext from "../../state/AppContext";
 
-const Home = () => {
+const Home: FC = () => {
   const { calendarOpen, setCalendarOpen } = useContext(AppContext);
 
   return (

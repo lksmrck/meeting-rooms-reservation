@@ -1,4 +1,4 @@
-import React, { HTMLFactory, useRef, forwardRef, useEffect } from "react";
+import { useRef, FC, useEffect } from "react";
 import Title from "./Title";
 import Features from "./Features";
 import Steps from "./Steps";
@@ -10,7 +10,7 @@ type LandingProps = {
   gatherLandingRefs: (refs: LandingRefsObject) => void;
 };
 
-const Landing: React.FC<LandingProps> = ({ gatherLandingRefs }) => {
+const Landing: FC<LandingProps> = ({ gatherLandingRefs }) => {
   const landingRefs = {
     featuresRef: useRef<HTMLDivElement>(null),
     stepsRef: useRef<HTMLDivElement>(null),

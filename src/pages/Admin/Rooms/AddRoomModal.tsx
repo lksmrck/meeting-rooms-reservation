@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, FC } from "react";
 import { useRoomsAdminFncs } from "../../../hooks/useRoomsAdminFncs";
 import { CompanyRoom } from "../../../types/types";
 import AddRoomForm from "../../../components/admin/rooms/AddRoomForm";
@@ -10,7 +10,7 @@ type AddRoomModalProps = {
   rooms: CompanyRoom[];
 };
 
-const AddRoomModal: React.FC<AddRoomModalProps> = ({
+const AddRoomModal: FC<AddRoomModalProps> = ({
   isOpen,
   setIsOpen,
   setRooms,

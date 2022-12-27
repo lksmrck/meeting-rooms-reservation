@@ -7,6 +7,7 @@ import {
   Dispatch,
   SetStateAction,
   useEffect,
+  FC,
 } from "react";
 
 interface ReservationContextInterface {
@@ -18,7 +19,7 @@ interface ReservationContextInterface {
 
 const ReservationContext = createContext({} as ReservationContextInterface);
 
-export const ReservationContextProvider: React.FC<{
+export const ReservationContextProvider: FC<{
   children: ReactNode;
 }> = ({ children }) => {
   //Rooms data

@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
-
+import { useState, useEffect, FC } from "react";
 import rocketFire from "../../assets/rocketWithFire.png";
 import rocketNoFire from "../../assets/rocketWithoutFire.png";
 
-const FloatingScrollButton: React.FC = () => {
+const FloatingScrollButton: FC = () => {
   const [showButton, setShowButton] = useState(false);
   const [goingUp, setGoingUp] = useState(false);
 

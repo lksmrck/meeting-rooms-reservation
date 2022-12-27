@@ -1,4 +1,5 @@
 import { MeetingCategory, UserRights } from "../../types/types";
+import { FC } from "react";
 
 type FormSelectProps = {
   name: string;
@@ -12,7 +13,7 @@ type FormSelectProps = {
   label?: string;
 };
 
-const FormSelect: React.FC<FormSelectProps> = ({
+const FormSelect: FC<FormSelectProps> = ({
   name,
   id,
   options,

@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "@chakra-ui/react";
+import { FC } from "react";
 
-const Unauthorized = () => {
+const Unauthorized: FC = () => {
   const navigate = useNavigate();
   return (
     <section className="h-content flex flex-col justify-start items-center">

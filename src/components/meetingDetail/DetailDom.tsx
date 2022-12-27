@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, FC } from "react";
 import { timeDataCalc } from "../../utils/timeDataCalc";
 import { Meeting } from "../../types/types";
 
@@ -6,7 +6,7 @@ type DetailDomProps = {
   clickedMeeting: Meeting;
 };
 
-const DetailDom: React.FC<DetailDomProps> = ({ clickedMeeting }) => {
+const DetailDom: FC<DetailDomProps> = ({ clickedMeeting }) => {
   const [timeDetail, setTimeDetail] = useState(timeDataCalc(clickedMeeting));
 
   const { name, type, creator, guests } = clickedMeeting;

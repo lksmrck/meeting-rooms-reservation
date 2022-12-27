@@ -1,11 +1,11 @@
-import React from "react";
+import { FC } from "react";
 
 type BlockWithTimeProps = {
   key: string | number;
-  children: any;
+  children: string;
 };
 
-const BlockWithTime: React.FC<BlockWithTimeProps> = ({ key, children }) => {
+const BlockWithTime: FC<BlockWithTimeProps> = ({ key, children }) => {
   return (
     <div
       key={key}

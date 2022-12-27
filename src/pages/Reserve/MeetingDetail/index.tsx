@@ -8,7 +8,7 @@ import {
   ModalBody,
   Button,
 } from "@chakra-ui/react";
-import { useState, useContext, Dispatch, SetStateAction } from "react";
+import { useState, useContext, Dispatch, SetStateAction, FC } from "react";
 import useAuth from "../../../hooks/useAuth";
 import ReservationContext from "../../../state/ReservationContext";
 import { useRemoveMeeting } from "../../../hooks/useRemoveMeeting";
@@ -32,7 +32,7 @@ type MeetingDetailProps = {
   setMeetingsDetail: Dispatch<SetStateAction<Meeting[]>>;
 };
 
-const MeetingDetail: React.FC<MeetingDetailProps> = ({
+const MeetingDetail: FC<MeetingDetailProps> = ({
   clickedMeeting,
   openDetail,
   setOpenDetail,

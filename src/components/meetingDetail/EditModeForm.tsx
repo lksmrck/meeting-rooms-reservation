@@ -1,4 +1,4 @@
-import React, { ChangeEvent, Dispatch, SetStateAction } from "react";
+import React, { ChangeEvent, Dispatch, SetStateAction, FC } from "react";
 import { Input } from "@chakra-ui/react";
 import MeetingType from "../reserve/FormSelect";
 import { meetingTypes } from "../../data/constants";
@@ -25,7 +25,7 @@ type EditModeFormProps = {
   setMissingFormData: Dispatch<SetStateAction<boolean>>;
 };
 
-const EditModeForm: React.FC<EditModeFormProps> = ({
+const EditModeForm: FC<EditModeFormProps> = ({
   updatedTime,
   setUpdatedTime,
   updatedGuests,

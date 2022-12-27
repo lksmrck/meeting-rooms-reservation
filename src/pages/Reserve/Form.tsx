@@ -1,4 +1,10 @@
-import React, { useState, useContext, Dispatch, SetStateAction } from "react";
+import React, {
+  useState,
+  useContext,
+  Dispatch,
+  SetStateAction,
+  FC,
+} from "react";
 import { Button, IconButton } from "@chakra-ui/react";
 import useAuth from "../../hooks/useAuth";
 import { meetingTypes } from "../../data/constants";
@@ -9,7 +15,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { RoomData } from "../../types/types";
 import DisplayedGuests from "../../components/reserve/DisplayedGuests";
 import { useAddMeeting } from "../../hooks/useAddMeeting";
-
 import { CALL } from "../../data/constants";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { BsArrowUp } from "react-icons/bs";
@@ -24,7 +29,7 @@ type FormProps = {
   setIsFormOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-const Form: React.FC<FormProps> = ({
+const Form: FC<FormProps> = ({
   blocksPickError,
   isMaxMdScreen,
   setIsFormOpen,

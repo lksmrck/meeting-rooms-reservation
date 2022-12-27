@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import { Feature } from "../../types/types";
 
 type FeatureBoxProps = {
@@ -7,7 +7,7 @@ type FeatureBoxProps = {
   down?: boolean;
 };
 
-const FeatureBox: React.FC<FeatureBoxProps> = ({ feature, up, down }) => {
+const FeatureBox: FC<FeatureBoxProps> = ({ feature, up, down }) => {
   return (
     <li
       className={`${

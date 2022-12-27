@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import { Room, RoomData } from "../../types/types";
 import { Button } from "@chakra-ui/react";
 
@@ -7,10 +7,7 @@ type OneRoomDomProps = {
   blockClickHandler: (blockNumber: number) => void | null;
 };
 
-const OneRoomDom: React.FC<OneRoomDomProps> = ({
-  pickedRoom,
-  blockClickHandler,
-}) => {
+const OneRoomDom: FC<OneRoomDomProps> = ({ pickedRoom, blockClickHandler }) => {
   // DOM PRO ROOM - Const ve které je DOM, už roztříděný podle meetingů, kde divy mají alkované rozměry, podle toho, jaké meetingy v daném dnu jsou.
   let meetingsHelper: number[] = [];
   //Const pro sloupec s timeblocky dané místnosti - zobrazení tak, aby meetingy tvořily jeden velký blok a nerezervované bloky byly samostatně.

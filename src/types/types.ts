@@ -1,4 +1,4 @@
-import { ReactNode, ForwardedRef } from "react"
+import { ReactNode, ForwardedRef, Ref, RefObject } from "react"
 
 
 //roomsMeetingsFetch
@@ -83,10 +83,10 @@ message: string
 }
 
 export type LandingRefsObject = {
-featuresRef: ForwardedRef<HTMLDivElement>
-stepsRef: ForwardedRef<HTMLDivElement>
-referencesRef: ForwardedRef<HTMLDivElement>
-contactRef: ForwardedRef<HTMLDivElement>
+featuresRef: RefObject<HTMLDivElement>
+stepsRef: RefObject<HTMLDivElement>
+referencesRef: RefObject<HTMLDivElement>
+contactRef: RefObject<HTMLDivElement>
   
 }
 

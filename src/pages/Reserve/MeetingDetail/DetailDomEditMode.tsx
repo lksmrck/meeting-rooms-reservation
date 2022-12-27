@@ -1,10 +1,11 @@
-import React, {
+import {
   useState,
   useEffect,
   useContext,
   Dispatch,
   SetStateAction,
   ChangeEvent,
+  FC,
 } from "react";
 import EditModeForm from "../../../components/meetingDetail/EditModeForm";
 import { Meeting, RoomData } from "../../../types/types";
@@ -24,7 +25,7 @@ type DetailDomEditModeProps = {
   updatedGuests: string[];
 };
 
-const DetailDomEditMode: React.FC<DetailDomEditModeProps> = ({
+const DetailDomEditMode: FC<DetailDomEditModeProps> = ({
   updatedMeeting,
   onChangeMeeting,
   updatedTime,
@@ -35,7 +36,7 @@ const DetailDomEditMode: React.FC<DetailDomEditModeProps> = ({
 }) => {
   const { pickedRoom } = useContext(ReservationContext);
   const [isGuestModalOpen, setIsGuestModalOpen] = useState(false);
-  const { blocks, creator, name, guests } = updatedMeeting;
+  const { blocks, creator, name } = updatedMeeting;
 
   const adjustedRoomData = pickedRoom.roomData.map((data: RoomData) => {
     if (blocks.includes(data.block)) return { ...data, reserved: false };

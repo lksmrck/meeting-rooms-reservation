@@ -1,5 +1,5 @@
-import React, { useState, useContext, Dispatch, SetStateAction } from "react";
-import { userRights, USER } from "../../../data/constants";
+import { FC, Dispatch, SetStateAction } from "react";
+
 import { useUsersAdminFncs } from "../../../hooks/useUsersAdminFncs";
 import useAuth from "../../../hooks/useAuth";
 import { UserType } from "../../../types/types";
@@ -11,7 +11,7 @@ type AddUserModalProps = {
   setUsers: Dispatch<SetStateAction<UserType[]>>;
 };
 
-const AddUserModal: React.FC<AddUserModalProps> = ({
+const AddUserModal: FC<AddUserModalProps> = ({
   isOpen,
   setIsOpen,
   setUsers,

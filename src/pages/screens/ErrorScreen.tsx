@@ -1,9 +1,9 @@
 import { Button } from "@chakra-ui/react";
-import { useContext } from "react";
+import { useContext, FC } from "react";
 import { useNavigate } from "react-router-dom";
 import AppContext from "../../state/AppContext";
 
-const ErrorScreen: React.FC = () => {
+const ErrorScreen: FC = () => {
   const navigate = useNavigate();
   const appContext = useContext(AppContext);
   const { setError } = appContext;

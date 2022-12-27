@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, FC } from "react";
 import { IconButton } from "@chakra-ui/react";
 import { FiEdit } from "react-icons/fi";
 
@@ -8,7 +8,7 @@ type DisplayedGuestsProps = {
   form?: boolean;
 };
 
-const DisplayedGuests: React.FC<DisplayedGuestsProps> = ({
+const DisplayedGuests: FC<DisplayedGuestsProps> = ({
   guests,
   setGuestsOpenModal,
   form,

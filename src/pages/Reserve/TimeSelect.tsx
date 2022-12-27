@@ -1,11 +1,11 @@
-import React, {
+import {
   useContext,
   useEffect,
   useState,
   Dispatch,
   SetStateAction,
+  FC,
 } from "react";
-/* import AppContext from "../../state/AppContext"; */
 import ReservationContext from "../../state/ReservationContext";
 import { useMeetingsFetch } from "../../hooks/useMeetingsFetch";
 import MeetingDetail from "./MeetingDetail";
@@ -24,7 +24,7 @@ type TimeSelectProps = {
   >;
 };
 
-const TimeSelect: React.FC<TimeSelectProps> = ({ setBlocksPickError }) => {
+const TimeSelect: FC<TimeSelectProps> = ({ setBlocksPickError }) => {
   const navigate = useNavigate();
   //Datum + roomID z params
   const { pickedDate, pickedRoomId } = useParams();

@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, FC, ChangeEvent } from "react";
 import { NONE } from "../../data/constants";
 import { RoomData } from "../../types/types";
 
@@ -12,10 +12,10 @@ type UpdateMeetingTimeProps = {
   setUpdatedTime: Dispatch<
     SetStateAction<{ start: string | null; end: string | null }>
   >;
-  setMissingFormData: React.Dispatch<React.SetStateAction<boolean>>;
+  setMissingFormData: Dispatch<SetStateAction<boolean>>;
 };
 
-const UpdateMeetingTime: React.FC<UpdateMeetingTimeProps> = ({
+const UpdateMeetingTime: FC<UpdateMeetingTimeProps> = ({
   updatedTime,
   setUpdatedTime,
   options,
@@ -23,7 +23,7 @@ const UpdateMeetingTime: React.FC<UpdateMeetingTimeProps> = ({
   end,
   setMissingFormData,
 }) => {
-  const onChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>): void => {
+  const onChangeSelect = (e: ChangeEvent<HTMLSelectElement>): void => {
     setUpdatedTime({ ...updatedTime, [e.target.name]: e.target.value });
     setMissingFormData(false);
   };

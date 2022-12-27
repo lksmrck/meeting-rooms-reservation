@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import { useState, FC, SyntheticEvent } from "react";
 import { Input, Button } from "@chakra-ui/react";
 import useLogin from "../../hooks/useLogin";
 import LoadingSpinner from "../ui/LoadingSpinner/LoadingSpinner";
 
-const LoginForm: React.FC = () => {
+const LoginForm: FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const { loginUser, isLoading, loginError } = useLogin();
 
-  const submitHandler = (e: React.SyntheticEvent): void => {
+  const submitHandler = (e: SyntheticEvent): void => {
     e.preventDefault();
     loginUser(email, password);
   };
