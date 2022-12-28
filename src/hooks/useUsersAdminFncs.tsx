@@ -1,4 +1,4 @@
-import { useState, Dispatch, SetStateAction } from "react";
+import { useState, Dispatch, SetStateAction, useContext } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config/firebase";
 import {
@@ -38,34 +38,36 @@ export const useUsersAdminFncs = () => {
 
   const addUser = async (
     formData: UserType,
-    setUsersArray: Dispatch<SetStateAction<UserType[]>>
+    setUsersArray: Dispatch<SetStateAction<UserType[]>>,
+    setIsOpen: Dispatch<SetStateAction<boolean>>
   ): Promise<void> => {
     setIsLoading(true);
     const { company, email, password } = formData;
     const hashedPassword = bcrypt.hashSync(password, 10);
-    //1. create user in auth
+
+    //1. create user in Firebase auth
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
-        //2. Create user in Company DB
+        //2. Create user in Firebase Company DB
         const { user } = userCredentials;
         setDoc(doc(db, `companies/${company}/users`, user.uid), {
           ...formData,
           password: hashedPassword,
         });
-        //3. Create user in overall DB (vytáhne se odtud jen company a uid, aby se pak mohla tahat data.)
+        //3. Create user in Firebase overall DB (vytáhne se odtud jen company a uid, aby se pak mohla tahat data.)
         setDoc(doc(db, `users`, user.uid), {
           ...formData,
           password: hashedPassword,
         });
 
         setUsersArray((prevArray: UserType[]) => [...prevArray, formData]);
+        setIsLoading(false);
+        setIsOpen(false);
       })
-
       .catch((error) => {
+        setIsLoading(false);
         setError({ error: true, message: error.message });
       });
-
-    setIsLoading(false);
   };
 
   const removeUser = async (

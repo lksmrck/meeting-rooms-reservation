@@ -62,7 +62,11 @@ const GuestsModal: FC<GuestsModalProps> = ({
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+    <Modal
+      isOpen={isOpen}
+      onClose={() => setIsOpen(false)}
+      motionPreset="slideInBottom"
+    >
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Add guests</ModalHeader>

@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction, FC } from "react";
 import { useRoomsAdminFncs } from "../../../hooks/useRoomsAdminFncs";
 import { CompanyRoom } from "../../../types/types";
 import AddRoomForm from "../../../components/admin/rooms/AddRoomForm";
+import { Modal, ModalOverlay, ModalContent } from "@chakra-ui/react";
 
 type AddRoomModalProps = {
   isOpen: boolean;
@@ -29,13 +30,16 @@ const AddRoomModal: FC<AddRoomModalProps> = ({
   };
 
   return (
-    <AddRoomForm
-      isOpen={isOpen}
-      onClose={() => setIsOpen(false)}
-      isLoading={isLoading}
-      addRoomHandler={addRoomHandler}
-      onCancel={onCancel}
-    />
+    <Modal isOpen={isOpen} onClose={onCancel} motionPreset="slideInBottom">
+      <ModalOverlay />
+      <ModalContent>
+        <AddRoomForm
+          isLoading={isLoading}
+          addRoomHandler={addRoomHandler}
+          onCancel={onCancel}
+        />
+      </ModalContent>
+    </Modal>
   );
 };
 

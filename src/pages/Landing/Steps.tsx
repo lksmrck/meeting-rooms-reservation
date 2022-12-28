@@ -35,18 +35,10 @@ const Steps = forwardRef<HTMLDivElement>((props, ref) => {
             className="rounded-lg mr-5"
           />
         </div>
-        <div className="h-96 flex flex-col justify-center w-80 relative border">
+        <div className="h-96 flex flex-col justify-center w-80 relative ">
           {buttons.map((button) => {
             return (
               <div className="flex justify-start items-center m-1 ">
-                {/*  {button.clicked && (
-                  <img
-                    src={button.image}
-                    width="190px"
-                    height="350px"
-                    className="rounded-lg mr-5 absolute left-2 top-36"
-                  />
-                )} */}
                 <Button
                   colorScheme="teal"
                   onClick={() => onClickButton(button.id)}

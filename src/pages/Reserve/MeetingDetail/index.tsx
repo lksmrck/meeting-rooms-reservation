@@ -144,7 +144,11 @@ const MeetingDetail: FC<MeetingDetailProps> = ({
   };
 
   return (
-    <Modal isOpen={openDetail} onClose={() => setOpenDetail(false)}>
+    <Modal
+      isOpen={openDetail}
+      onClose={() => setOpenDetail(false)}
+      motionPreset="slideInBottom"
+    >
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Meeting detail</ModalHeader>

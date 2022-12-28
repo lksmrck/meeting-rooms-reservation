@@ -1,9 +1,8 @@
 import { FC, Dispatch, SetStateAction } from "react";
-
 import { useUsersAdminFncs } from "../../../hooks/useUsersAdminFncs";
-import useAuth from "../../../hooks/useAuth";
 import { UserType } from "../../../types/types";
 import AddUserForm from "../../../components/admin/users/AddUserForm";
+import { Modal, ModalOverlay, ModalContent } from "@chakra-ui/react";
 
 type AddUserModalProps = {
   isOpen: boolean;
@@ -19,9 +18,7 @@ const AddUserModal: FC<AddUserModalProps> = ({
   const { addUser, isLoading, error } = useUsersAdminFncs();
 
   const addUserHandler = async (formData: UserType): Promise<void> => {
-    addUser(formData, setUsers).then(() => {
-      setIsOpen(false);
-    });
+    addUser(formData, setUsers, setIsOpen);
   };
 
   const onCancel = (): void => {
@@ -29,14 +26,17 @@ const AddUserModal: FC<AddUserModalProps> = ({
   };
 
   return (
-    <AddUserForm
-      isOpen={isOpen}
-      isLoading={isLoading}
-      onClose={() => setIsOpen(false)}
-      addUserHandler={addUserHandler}
-      onCancel={onCancel}
-      isError={error}
-    />
+    <Modal isOpen={isOpen} onClose={onCancel} motionPreset="slideInBottom">
+      <ModalOverlay />
+      <ModalContent>
+        <AddUserForm
+          isLoading={isLoading}
+          addUserHandler={addUserHandler}
+          onCancel={onCancel}
+          isError={error}
+        />
+      </ModalContent>
+    </Modal>
   );
 };
 
