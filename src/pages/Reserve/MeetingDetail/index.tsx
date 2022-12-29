@@ -38,7 +38,7 @@ const MeetingDetail: FC<MeetingDetailProps> = ({
   setOpenDetail,
   setMeetingsDetail,
 }) => {
-  //Editing state
+  //**** STATE ***
   const [isEditing, setIsEditing] = useState(false);
   const [updatedMeeting, setUpdatedMeeting] = useState(clickedMeeting);
   const [updatedTime, setUpdatedTime] = useState<{
@@ -52,17 +52,20 @@ const MeetingDetail: FC<MeetingDetailProps> = ({
   const [fbIsLoading, setFbIsLoading] = useState(false);
 
   const { user } = useAuth();
+
+  //**** CONTEXT ****
   const { pickedRoom, setPickedRoom } = useContext(ReservationContext);
 
   const { pickedDate, pickedRoomId } = useParams();
   const formatedDate = paramsToDate(pickedDate);
+  const navigate = useNavigate();
 
+  //**** CUSTOM HOOKS ****
   const { fetchMeetings } = useMeetingsFetch();
   const { addMeeting } = useAddMeeting();
   const { removeData, isLoading } = useRemoveMeeting();
 
-  const navigate = useNavigate();
-
+  //**** FUNCTIONS and HANDLERS ****
   const onCancel = (): void => {
     if (isEditing) {
       setIsEditing(false);

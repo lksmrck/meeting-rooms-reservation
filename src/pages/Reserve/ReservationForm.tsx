@@ -23,13 +23,13 @@ import { paramsToDate } from "../../utils/dateParamsFormat";
 
 import MeetingType from "../../components/reserve/FormSelect";
 
-type FormProps = {
+type ReservationFormProps = {
   blocksPickError: { error: boolean; message: string };
   isMaxMdScreen: boolean;
   setIsFormOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-const Form: FC<FormProps> = ({
+const ReservationForm: FC<ReservationFormProps> = ({
   blocksPickError,
   isMaxMdScreen,
   setIsFormOpen,
@@ -203,4 +203,4 @@ const Form: FC<FormProps> = ({
   );
 };
 
-export default Form;
+export default ReservationForm;

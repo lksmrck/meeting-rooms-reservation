@@ -65,7 +65,7 @@ const Overview: FC = () => {
   const displayCols = roomsNumber + 1;
 
   return (
-    <div className="w-screen h-content flex justify-center bg-gradient-to-r from-violet-300 to-violet-400  pb-5 ">
+    <div className="w-screen min-h-screen flex justify-center bg-gradient-to-r from-violet-300 to-violet-400  pb-5 ">
       <div
         className="flex flex-col justify-start overflow-x-auto p-4 border rounded-lg shadow-lg bg-purple-600 mt-4 scrollbar-hide  "
         style={{ minWidth: "13rem", width: `${displayWidth + 3.5}rem` }}

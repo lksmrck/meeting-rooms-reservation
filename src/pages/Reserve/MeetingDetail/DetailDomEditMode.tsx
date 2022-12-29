@@ -34,9 +34,10 @@ const DetailDomEditMode: FC<DetailDomEditModeProps> = ({
   setMissingFormData,
   updatedGuests,
 }) => {
-  const { pickedRoom } = useContext(ReservationContext);
   const [isGuestModalOpen, setIsGuestModalOpen] = useState(false);
   const { blocks, creator, name } = updatedMeeting;
+
+  const { pickedRoom } = useContext(ReservationContext);
 
   const adjustedRoomData = pickedRoom.roomData.map((data: RoomData) => {
     if (blocks.includes(data.block)) return { ...data, reserved: false };

@@ -90,4 +90,8 @@ contactRef: RefObject<HTMLDivElement>
   
 }
 
+export type FooterLinkObject = {
+  name: string, ref: RefObject<HTMLDivElement>
+}
+
 

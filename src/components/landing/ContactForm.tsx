@@ -3,9 +3,8 @@ import envelope from "../../assets/envelope.svg";
 import { Input, Textarea, Button } from "@chakra-ui/react";
 import { ContactFormData } from "../../types/types";
 
-const ContactForm: FC = ({}) => {
+const ContactForm: FC = () => {
   const [submitted, setSubmitted] = useState(false);
-
   const [formData, setFormData] = useState({
     message:
       "Hi guys, I would like to know more about this app. Please contact me on my e-mail.",

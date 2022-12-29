@@ -25,6 +25,8 @@ type EditModeFormProps = {
   setMissingFormData: Dispatch<SetStateAction<boolean>>;
 };
 
+//Přetahuje se odtud až do MeetingDetail componentu (přes DetailDomEditMode komponent) - handlery a formData jsou až v meeting detail.
+
 const EditModeForm: FC<EditModeFormProps> = ({
   updatedTime,
   setUpdatedTime,

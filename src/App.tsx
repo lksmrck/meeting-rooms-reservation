@@ -6,7 +6,7 @@ import Reserve from "./pages/Reserve";
 import Home from "./pages/Datepick";
 import Auth from "./pages/Login";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-import { useContext, useEffect, useState, ForwardedRef, useRef } from "react";
+import { useContext, useEffect, useState } from "react";
 import AppContext from "./state/AppContext";
 import { timeCheck } from "./utils/timeCheck";
 import ErrorScreen from "./pages/screens/ErrorScreen";

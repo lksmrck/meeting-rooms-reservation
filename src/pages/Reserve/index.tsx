@@ -1,5 +1,5 @@
 import { useState, useEffect, FC } from "react";
-import Form from "./Form";
+import ReservationForm from "./ReservationForm";
 import { useMediaQuery } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
 import TimeSelect from "./TimeSelect";
@@ -34,7 +34,7 @@ const Reserve: FC = () => {
         </div>
       )}
       {openedForm && (
-        <Form
+        <ReservationForm
           blocksPickError={blocksPickError}
           isMaxMdScreen={mediumScreenMax}
           setIsFormOpen={setOpenedForm}
