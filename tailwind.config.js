@@ -20,6 +20,8 @@ module.exports = {
         30: "7.5rem",
         105: "26.25rem",
         110: "27.5rem",
+        120: "30rem",
+        155: "38.75rem",
       },
       fontSize: {
         xxs: "10px",
@@ -36,15 +38,7 @@ module.exports = {
           "25%": { transform: "translatey(10px)" },
           "75%": { transform: "translatey(-10px)" },
         },
-        /*   colorsSwitch: {
-          "0%": {
-            backgroundColor: "#36eb7e",
-          },
-          "25%": { backgroundColor: "#ba4ecf" },
-          "50%": { backgroundColor: "#51092d" },
-          "75%": { backgroundColor: "#0d004a" },
-          "100%": { backgroundColor: "#dab915" },
-        }, */
+
         bounceInRight: {
           "0%": { transform: "translatex(-100px)" },
           "50%": { transform: "translatex(10px)" },
@@ -55,7 +49,7 @@ module.exports = {
         buttonGlowing: {
           "20%, 100%": { backgroundColor: "#319795" },
           "40% 80%": { backgroundColor: "#2d8a88", scale: "1.02" },
-          "60%": { backgroundColor: "#297d7c", scale: "1.04" },
+          "60%": { backgroundColor: "#5b21b6", scale: "1.04" },
         },
         rocketBounce: {
           "20%, 60%": { transform: "rotate(5deg)" },
@@ -87,7 +81,6 @@ module.exports = {
       animation: {
         floatUp: "floatUp 5s ease-in-out infinite",
         floatDown: "floatDown 5s ease-in-out infinite",
-        /* colorsSwitch: "colorsSwitch 5s alternate infinite", */
         bounceInRight: "bounceInRight 1s ease 1",
         buttonGlowing: "buttonGlowing 3s ease-in-out infinite",
         rocketBounce: "rocketBounce 0.5s ease-in-out infinite",

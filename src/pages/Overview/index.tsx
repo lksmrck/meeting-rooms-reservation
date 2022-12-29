@@ -11,17 +11,16 @@ import { FC } from "react";
 
 import LoadingSpinner from "../../components/ui/LoadingSpinner/LoadingSpinner";
 import AuthContext from "../../state/AuthContext";
+import NoRoomYetAdded from "../../components/timeBlocks/NoRoomYetAdded";
 
 const Overview: FC = () => {
-  const { /* pickedDate, */ setPickedRoom, roomsData, setRoomsData } =
-    useContext(ReservationContext);
+  const { setPickedRoom, roomsData } = useContext(ReservationContext);
 
   const { user } = useContext(AuthContext);
 
   const { pickedDate } = useParams();
   const formatedPickedDate = paramsToDate(pickedDate);
 
-  /* const { user, company } = useAuth(); */
   const navigate = useNavigate();
 
   const { roomsOverviewFetch, isLoading } = useRoomsOverviewFetch();
@@ -65,12 +64,10 @@ const Overview: FC = () => {
   //Počet sloupců pro GRID
   const displayCols = roomsNumber + 1;
 
-  //Loading spinner width
-
   return (
-    <div className="w-screen flex justify-center bg-gradient-to-r from-violet-300 to-violet-400  pb-5 ">
+    <div className="w-screen h-content flex justify-center bg-gradient-to-r from-violet-300 to-violet-400  pb-5 ">
       <div
-        className="flex flex-col justify-start overflow-x-auto p-4 border rounded-lg shadow-lg bg-purple-600 mt-4  "
+        className="flex flex-col justify-start overflow-x-auto p-4 border rounded-lg shadow-lg bg-purple-600 mt-4 scrollbar-hide  "
         style={{ minWidth: "13rem", width: `${displayWidth + 3.5}rem` }}
       >
         <p className="self-center text-white text-xl font-solid mb-2 text-center ">
@@ -84,32 +81,36 @@ const Overview: FC = () => {
           {formatedPickedDate}
         </p>
 
-        <section
-          className={` ${
-            isLoading ? "flex" : "grid"
-          } gap-5  ml-3   `} /* mt-2 */
-          //Custom in-line style, protože Tailwind neumožňuje dynamic styling - takto udělá grid podle počtu místností (const displayCols) a přidá dynamicky width contentu.
-          style={{
-            gridTemplateColumns: `repeat(${displayCols}, minmax(0, 1fr))`,
-            minWidth: `${displayWidth}rem`,
-            width: `${displayWidth}rem`,
-          }}
-        >
-          <div className="-ml-4">
-            <div className="text-sm w-24 h-10 flex justify-center items-center  border border-stone-700 rounded-md bg-emerald-900 text-white font-bold mb-1 cursor-pointer">
-              Time
+        {roomsData.length > 0 ? (
+          <section
+            className={` ${
+              isLoading ? "flex" : "grid"
+            } gap-5  ml-3   `} /* mt-2 */
+            //Custom in-line style, protože Tailwind neumožňuje dynamic styling - takto udělá grid podle počtu místností (const displayCols) a přidá dynamicky width contentu.
+            style={{
+              gridTemplateColumns: `repeat(${displayCols}, minmax(0, 1fr))`,
+              minWidth: `${displayWidth}rem`,
+              width: `${displayWidth}rem`,
+            }}
+          >
+            <div className="-ml-4">
+              <div className="text-sm w-24 h-10 flex justify-center items-center  border border-stone-700 rounded-md bg-emerald-900 text-white font-bold mb-1 cursor-pointer">
+                Time
+              </div>
+              <TimeBlocksDom />
             </div>
-            <TimeBlocksDom />
-          </div>
-          {isLoading ? (
-            <LoadingSpinner />
-          ) : (
-            <RoomsDom
-              roomsData={roomsData}
-              clickBlockHandler={clickBlockHandler}
-            />
-          )}
-        </section>
+            {isLoading ? (
+              <LoadingSpinner />
+            ) : (
+              <RoomsDom
+                roomsData={roomsData}
+                clickBlockHandler={clickBlockHandler}
+              />
+            )}
+          </section>
+        ) : (
+          <NoRoomYetAdded />
+        )}
       </div>
     </div>
   );
