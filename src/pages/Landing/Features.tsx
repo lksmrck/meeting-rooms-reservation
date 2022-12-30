@@ -8,15 +8,15 @@ import { forwardRef } from "react";
 const featureBoxes = [
   {
     text: "Simple",
-    icon: <Target color="orange" className="h-2/5 w-2/5 lg:h-1/2 lg:w-1/2 " />,
+    icon: <Target color="white" className="h-2/5 w-2/5 lg:h-1/2 lg:w-1/2 " />,
   },
   {
     text: "Fast",
-    icon: <Flag color="orange" className=" h-2/5 w-2/5 lg:h-1/2 lg:w-1/2" />,
+    icon: <Flag color="white" className=" h-2/5 w-2/5 lg:h-1/2 lg:w-1/2" />,
   },
   {
-    text: "Easy to learn",
-    icon: <Point color="orange" className="h-2/5 w-2/5 lg:h-1/2 lg:w-1/2" />,
+    text: "Easy to use",
+    icon: <Point color="white" className="h-2/5 w-2/5 lg:h-1/2 lg:w-1/2" />,
   },
 ];
 

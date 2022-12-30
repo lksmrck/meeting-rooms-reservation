@@ -12,8 +12,8 @@ const Reference = forwardRef<HTMLDivElement>((props, ref) => {
       ref={ref}
     >
       <Circle additionalTWStyles="top-44 left-2/3 md:left-1/2" />
-      <Circle additionalTWStyles="top-32 left-1/4 md:top-32 md:left-1/3" />
-      <Circle additionalTWStyles="top-155 left-1/4 md:top-110 md:left-1/3" />
+      <Circle additionalTWStyles="top-48 left-1/4 md:top-32 md:left-1/3" />
+      <Circle additionalTWStyles="top-130 left-1/4 md:top-110 md:left-1/3" />
       <Circle additionalTWStyles="top-120 left-3/4 md:top-80" />
       <Carousel slides={carouselSlides} />
     </div>

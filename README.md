@@ -1,4 +1,4 @@
-# Meeting Room Reservation System
+# 👔 Meeting Room Reservation System
 
 ## 🔸 Key Features
 
@@ -13,7 +13,7 @@ Personal project of meeting room reservation system for companies.
    2. View reserved meetings
    3. Edit reserved meetings in case, that the User is also Creator of that meeting
    4. Delete meeting in case, that the User is also Creator of that meeting
-4. If the user has also Admin rights, he is able to manage (add and delete) **meeting** **rooms** and **users**
+4. If the user has also Admin rights, he is able to manage (add and delete) **meeting** **rooms** and **users** for his company
 
 **Steps**
 
@@ -21,8 +21,6 @@ Personal project of meeting room reservation system for companies.
 2. That Admin user is then able to:
    1. Manage his company's meeting rooms (adding, deleting)
    2. Manage users (adding, deleting) and assigning the roles (Admin or User)
-
--
 
 ## 🔸 Demo
 
@@ -34,7 +32,7 @@ In order to run this project locally, simply fork and clone the repository or do
 
 - Open the project in your prefered code editor.
 
-Create .env file in the root of your client directory. Add:
+Create .env file in the root of your directory. Add:
 
 ```
 REACT_APP_FIREBASE_API_KEY = *your Firebase API key*
@@ -54,7 +52,7 @@ $ npm install (to install dependencies)
 
 ## 🔸 Known issues
 
-- Firebase security rules optimalization - work in progress
+- Firebase backend security rules optimalization - work in progress
 
 ## 🔸 Future
 

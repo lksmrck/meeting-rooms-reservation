@@ -21,6 +21,7 @@ module.exports = {
         105: "26.25rem",
         110: "27.5rem",
         120: "30rem",
+        130: "32.5rem",
         155: "38.75rem",
       },
       fontSize: {
@@ -77,6 +78,12 @@ module.exports = {
               "invert(69%) sepia(83%) saturate(463%) hue-rotate(4deg) brightness(93%) contrast(94%)",
           },
         },
+        arrowColors: {
+          "50%": {
+            filter:
+              "invert(0%) sepia(4%) saturate(19%) hue-rotate(217deg) brightness(94%) contrast(95%)",
+          },
+        },
       },
       animation: {
         floatUp: "floatUp 5s ease-in-out infinite",
@@ -85,6 +92,7 @@ module.exports = {
         buttonGlowing: "buttonGlowing 3s ease-in-out infinite",
         rocketBounce: "rocketBounce 0.5s ease-in-out infinite",
         logoColors: "logoColors 5s linear infinite",
+        arrowCollors: "arrowColors 5s ease-in-out infinite",
       },
       backgroundImage: {
         stepsWaves: "url('/src/assets/bgs/stepsWaves.svg')",
