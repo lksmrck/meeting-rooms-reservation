@@ -1,11 +1,4 @@
-import {
-  Dispatch,
-  SetStateAction,
-  useState,
-  FC,
-  ChangeEvent,
-  SyntheticEvent,
-} from "react";
+import { useState, FC, ChangeEvent, SyntheticEvent } from "react";
 
 import {
   ModalHeader,
@@ -14,6 +7,7 @@ import {
   ModalBody,
   Input,
   Button,
+  Text,
 } from "@chakra-ui/react";
 
 type AddRoomFormProps = {
@@ -44,6 +38,7 @@ const AddRoomForm: FC<AddRoomFormProps> = ({
       <ModalCloseButton />
       <ModalBody pb={6}>
         <form>
+          <Text fontSize="sm">Room name:</Text>
           <Input
             size="sm"
             type="text"

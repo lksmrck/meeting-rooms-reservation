@@ -39,7 +39,7 @@
 }
 .react-calendar__navigation {
   display: flex;
-  height: 44px;
+  height: 70px;
   margin-bottom: 1em;
   background-color: #5b21b6;
   color: white;
@@ -92,6 +92,7 @@
   text-align: center;
   line-height: 16px;
   border-radius: 10px;
+  font-size: 0.85em;
 }
 .react-calendar__tile:disabled {
   background-color: #f0f0f0;

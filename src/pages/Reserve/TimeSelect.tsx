@@ -17,6 +17,7 @@ import LoadingSpinner from "../../components/ui/LoadingSpinner/LoadingSpinner";
 import { paramsToDate } from "../../utils/dateParamsFormat";
 import { updateRoomData } from "../../utils/updateRoomData";
 import AppContext from "../../state/AppContext";
+import { displayedRoomName } from "../../utils/displayedRoomName";
 
 type TimeSelectProps = {
   setBlocksPickError: Dispatch<
@@ -174,10 +175,10 @@ const TimeSelect: FC<TimeSelectProps> = ({ setBlocksPickError }) => {
           {formatedPickedDate}
         </p>
         <p
-          className="border rounded-md mx-auto md:mx-2 w-56  bg-purple-600 hover:bg-purple-700 flex justify-center  text-white mb-2 font-solid text-xl cursor-pointer"
+          className="border rounded-md mx-auto md:mx-2 w-56  bg-purple-600 hover:bg-purple-700 flex justify-center  text-white mb-2 font-solid text-xl cursor-pointer overflow-auto scrollbar-hide"
           onClick={() => navigate(`/date/${pickedDate}/overview`)}
         >
-          {pickedRoom.name}
+          {displayedRoomName(pickedRoom.name, 23)}
         </p>
       </div>
       <section className="grid grid-cols-2 mx-auto md:mx-0 ">
