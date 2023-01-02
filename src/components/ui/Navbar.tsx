@@ -15,14 +15,14 @@ const Navbar: FC = () => {
   const navigate = useNavigate();
 
   const [smallScreen] = useMediaQuery("(max-width: 640px)");
-  const [displayBlob, setDisplayBlob] = useState(false);
+  const [displayLogo, setDisplayLogo] = useState(false);
 
   const { user, setUser } = useAuth();
   const { setError, setCalendarOpen } = useContext(AppContext);
 
   useEffect(() => {
     setTimeout(() => {
-      setDisplayBlob(true);
+      setDisplayLogo(true);
     }, 1200);
   }, []);
 
@@ -44,20 +44,20 @@ const Navbar: FC = () => {
   return (
     <div className="h-20 bg-violet-800 flex shadow-lg shadow-slate-300">
       <nav className="flex justify-between items-center w-screen">
-        <ul className="flex items-center ">
-          <li
-            className=" ml-5 text-white cursor-pointer font-solid text-lg md:text-2xl animate-bounceInRight"
-            onClick={() => {
-              setCalendarOpen(false);
-              navigate("/datepick");
-            }}
-          >
+        <ul
+          className="flex items-center cursor-pointer"
+          onClick={() => {
+            setCalendarOpen(false);
+            navigate("/datepick");
+          }}
+        >
+          <li className=" ml-8 text-white font-solid text-lg md:text-2xl animate-bounceInRight">
             Room Reserver
           </li>
 
-          <li className="h-10 pt-0.5 -ml-1">{displayBlob && <LogoImage />}</li>
+          <li className="h-14 ml-2 md:ml-4">{displayLogo && <LogoImage />}</li>
         </ul>
-        <div className=" flex justify-center ">
+        <div className="flex justify-center ">
           {user && (
             <>
               {user.rights == ADMIN && !smallScreen && (

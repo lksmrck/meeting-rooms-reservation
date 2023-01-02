@@ -24,7 +24,7 @@ const Landing: FC<LandingProps> = ({ gatherLandingRefs }) => {
   }, []);
 
   return (
-    <div className="h-auto ">
+    <div className="h-auto w-full overflow-x-hidden  ">
       <Title contactRef={landingRefs.contactRef} />
       <Features ref={landingRefs.featuresRef} />
       <Steps ref={landingRefs.stepsRef} />

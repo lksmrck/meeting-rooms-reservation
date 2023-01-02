@@ -17,15 +17,16 @@ const Steps = forwardRef<HTMLDivElement>((props, ref) => {
 
   return (
     <div
-      className="h-3/4 flex justify-center bg-cover bg-center bg-no-repeat bg-stepsWaves items-center  "
+      className="h-3/4 flex justify-center bg-cover bg-center bg-no-repeat bg-stepsWaves items-center w-screen  "
       ref={ref}
     >
       <div className="flex mt-30 mx-4 w-full justify-center">
-        <div className="h-96 flex flex-col justify-center items-center w-screen  ">
+        <div className="h-96 flex flex-col justify-center items-center w-full mr-10 ">
           <ClickMeArrow />
+
           {buttons.map((button) => {
             return (
-              <div className="flex justify-center items-center m-1 w-155   ">
+              <div className="flex justify-center items-center m-1 md:w-155 w-80  ">
                 <div className="text-end w-1/3 mr-10 font-outline text-4xl font-bold ">
                   {button.clicked && <p>{button.followingText}</p>}
                 </div>
@@ -39,7 +40,7 @@ const Steps = forwardRef<HTMLDivElement>((props, ref) => {
                   >
                     {button.id}
                   </Button>
-                  <p className=" ml-3 font-solid text-base md:text-lg">
+                  <p className=" ml-3 font-solid text-base md:text-lg self-center">
                     {button.text}
                   </p>
                 </div>

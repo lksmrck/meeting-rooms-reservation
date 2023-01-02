@@ -26,8 +26,8 @@ const Footer: FC<FooterProps> = ({ landingRefs }) => {
             onClick={() => navigate("/home")}
           >
             {/*  <img alt="logo" src={logoDogFooter} height="60px" width="60px" /> */}
-            <h1>logo</h1>
-            <h4>Room Reserver</h4>
+            {/*   <h1>logo</h1> */}
+            <h4 className="font-solid text-xl mt-5">Room Reserver</h4>
           </div>
 
           <FooterLinks

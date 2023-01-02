@@ -33,7 +33,7 @@ const Title: FC<TitleProps> = ({ contactRef }) => {
         </span>{" "}
         with few clicks.
       </h1>
-      <div className="flex justify-center mt-20">
+      <div className="flex justify-center mt-10">
         <Button
           colorScheme={"teal"}
           onClick={buttonClickHandler}

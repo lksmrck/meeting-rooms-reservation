@@ -1,14 +1,16 @@
-import RRlogo from "../../assets/RRlogo.svg";
 import { FC } from "react";
+import logoBoyInSuit from "../../assets/logoBoyInSuit.png";
+import { useMediaQuery } from "@chakra-ui/react";
 
 const LogoImage: FC = () => {
-  return (
-    /*   <div
-      className="h-6 md:h-6 w-5 md:w-5   rounded-lg  shadow-lg animate-colorsSwitch "
-      style={{ borderRadius: "20% 60% 15% 60%" }}
-    ></div> */
+  const [mediumScreenMin] = useMediaQuery("(min-width: 768px)");
 
-    <img src={RRlogo} alt="" className="animate-logoColors h-10 w-10" />
+  return (
+    <img
+      src={logoBoyInSuit}
+      alt="logo_boy_in_suit"
+      width={mediumScreenMin ? "55px" : "40px"}
+    />
   );
 };
 

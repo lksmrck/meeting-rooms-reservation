@@ -8,6 +8,7 @@ module.exports = {
         outline: "Londrina Shadow",
         solid: "Londrina Solid",
       },
+      //Grid pro 24 půlhodinových bloků
       gridTemplateColumns: {
         24: "repeat(24, minmax(0, 1fr))",
       },
@@ -56,28 +57,7 @@ module.exports = {
           "20%, 60%": { transform: "rotate(5deg)" },
           "40%, 80%": { transform: "rotate(-5deg)" },
         },
-        logoColors: {
-          "0%, 100%": {
-            filter:
-              "invert(0%) sepia(76%) saturate(7491%) hue-rotate(306deg) brightness(106%) contrast(101%)",
-          },
-          "20%": {
-            filter:
-              "invert(62%) sepia(45%) saturate(6354%) hue-rotate(250deg) brightness(81%) contrast(100%)",
-          },
-          "40%": {
-            filter:
-              "invert(11%) sepia(42%) saturate(3427%) hue-rotate(305deg) brightness(89%) contrast(105%)",
-          },
-          "60%": {
-            filter:
-              "invert(4%) sepia(94%) saturate(6288%) hue-rotate(258deg) brightness(92%) contrast(116%)",
-          },
-          "80%": {
-            filter:
-              "invert(69%) sepia(83%) saturate(463%) hue-rotate(4deg) brightness(93%) contrast(94%)",
-          },
-        },
+
         arrowColors: {
           "50%": {
             filter:
@@ -91,8 +71,7 @@ module.exports = {
         bounceInRight: "bounceInRight 1s ease 1",
         buttonGlowing: "buttonGlowing 3s ease-in-out infinite",
         rocketBounce: "rocketBounce 0.5s ease-in-out infinite",
-        logoColors: "logoColors 5s linear infinite",
-        arrowCollors: "arrowColors 5s ease-in-out infinite",
+        arrowCollors: "arrowColors 1s infinite",
       },
       backgroundImage: {
         stepsWaves: "url('/src/assets/bgs/stepsWaves.svg')",
