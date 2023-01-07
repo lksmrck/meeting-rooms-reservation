@@ -14,7 +14,10 @@ const DatePick: FC = () => {
     const adjustedDate = dateFormatter(date);
 
     const dateParams = dateToParams(adjustedDate);
-    navigate(`/date/${dateParams}/overview`);
+
+    /* navigate(`/date/${dateParams}/overview`); */
+    /*  navigate(`/overview?date=${dateParams}`); */
+    navigate({ pathname: `/overview`, search: `?date=${dateParams}` });
   };
 
   return (

@@ -73,14 +73,8 @@ const App = () => {
           {/* 2. Protected routes - musí být logged in + práva User nebo Admin */}
           <Route element={<RequireAuth allowedRights={[ADMIN, USER]} />}>
             <Route path="/datepick" element={<Home />} />
-            <Route
-              path="/date/:pickedDate/:pickedRoomId/reserve"
-              element={<Reserve />}
-            />
-            <Route
-              path="/date/:pickedDate/overview"
-              element={<DailyOverview />}
-            />
+            <Route path="/reserve" element={<Reserve />} />
+            <Route path="/overview" element={<DailyOverview />} />
 
             {/* 3. Protected routes - musí být logged in + práva Admin */}
             <Route element={<RequireAuth allowedRights={[ADMIN]} />}>

@@ -16,7 +16,7 @@ export const useAddMeeting = () => {
   const addMeeting = async (
     newMeeting: Meeting,
     pickedRoomId: string,
-    navigateURL?: string,
+    navigateURL?: { pathname: string; search: string },
     setFormData?: Dispatch<SetStateAction<{ name: string; type: string }>>
   ): Promise<void> => {
     setIsContextLoading(true);

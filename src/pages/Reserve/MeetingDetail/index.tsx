@@ -8,7 +8,15 @@ import {
   ModalBody,
   Button,
 } from "@chakra-ui/react";
-import { useState, useContext, Dispatch, SetStateAction, FC } from "react";
+import {
+  useState,
+  useContext,
+  Dispatch,
+  SetStateAction,
+  FC,
+  ChangeEvent,
+  SyntheticEvent,
+} from "react";
 import useAuth from "../../../hooks/useAuth";
 import ReservationContext from "../../../state/ReservationContext";
 import { useRemoveMeeting } from "../../../hooks/useRemoveMeeting";
@@ -78,7 +86,7 @@ const MeetingDetail: FC<MeetingDetailProps> = ({
     }
   };
 
-  const deleteMeetingHandler = (e: React.SyntheticEvent): void => {
+  const deleteMeetingHandler = (e: SyntheticEvent): void => {
     setFbIsLoading(true);
     removeData(clickedMeeting, pickedRoomId as string).then(() => {
       navigate(`/date/${pickedDate}/overview`);
@@ -92,13 +100,13 @@ const MeetingDetail: FC<MeetingDetailProps> = ({
   };
 
   const changeMeetingHandler = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ): void => {
     setUpdatedMeeting({ ...updatedMeeting, [e.target.name]: e.target.value });
     if (missingFormData) setMissingFormData(false);
   };
 
-  const submitUpdatedMeeting = (e: React.SyntheticEvent): void => {
+  const submitUpdatedMeeting = (e: SyntheticEvent): void => {
     e.preventDefault();
     setMissingFormData(false);
     setFbIsLoading(true);

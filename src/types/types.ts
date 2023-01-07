@@ -1,4 +1,4 @@
-import { ReactNode, ForwardedRef, Ref, RefObject } from "react"
+import { ReactNode,  RefObject } from "react"
 
 
 //roomsMeetingsFetch
@@ -54,14 +54,6 @@ export type TimeBlock = {
   end: string
 }
 
-/* export type MeetingCategory = {
-  id: number,
-  name: string
-}
-export type UserRights = {
-  id: number,
-  name: string
-} */
 
 export type Feature = {
    text: string; icon: ReactNode 

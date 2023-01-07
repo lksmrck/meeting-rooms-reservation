@@ -1,24 +1,24 @@
 import { useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import ReservationContext from "../../state/ReservationContext";
-import { useParams } from "react-router-dom";
 import RoomsDom from "./RoomsDom";
 import { useRoomsOverviewFetch } from "../../hooks/useRoomsOverviewFetch";
 import TimeBlocksDom from "../../components/timeBlocks/TimeBlocksDom";
 import { Room, RoomData } from "../../types/types";
 import { paramsToDate } from "../../utils/dateParamsFormat";
 import { FC } from "react";
-
 import LoadingSpinner from "../../components/ui/LoadingSpinner/LoadingSpinner";
 import AuthContext from "../../state/AuthContext";
 import NoRoomYetAdded from "../../components/timeBlocks/NoRoomYetAdded";
+import { useSearchParams } from "react-router-dom";
 
 const Overview: FC = () => {
   const { setPickedRoom, roomsData } = useContext(ReservationContext);
 
   const { user } = useContext(AuthContext);
 
-  const { pickedDate } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const pickedDate = searchParams.get("date");
 
   const formatedPickedDate = paramsToDate(pickedDate!);
 
@@ -55,7 +55,13 @@ const Overview: FC = () => {
     //Pošle se vyfiltrovaná room do react contextu. Odtud se pak bere v Reserve componentu
     setPickedRoom(adjustedClickedRoom as Room);
 
-    navigate(`/date/${pickedDate}/${room}/reserve`);
+    /* navigate(`/date/${pickedDate}/${room}/reserve`); */
+    /*  navigate(`/reserve?room=${room}&date=${pickedDate}`); */
+
+    navigate({
+      pathname: `/reserve`,
+      search: `?room=${room}&date=${pickedDate}`,
+    });
   };
 
   //Vypočítá šířku celého obsahu podle počtu místnosti - = 5rem) na místnost + 5rem za time blocks.

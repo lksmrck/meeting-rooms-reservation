@@ -11,7 +11,7 @@ import { meetingTypes } from "../../data/constants";
 import { Input } from "@chakra-ui/react";
 import GuestsModal from "./GuestsModal";
 import ReservationContext from "../../state/ReservationContext";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { RoomData } from "../../types/types";
 import DisplayedGuests from "../../components/reserve/DisplayedGuests";
 import { useAddMeeting } from "../../hooks/useAddMeeting";
@@ -40,7 +40,11 @@ const ReservationForm: FC<ReservationFormProps> = ({
   const { addMeeting } = useAddMeeting();
 
   //Date + room ID z params
-  const { pickedDate, pickedRoomId } = useParams();
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const pickedRoomId = searchParams.get("room");
+  const pickedDate = searchParams.get("date");
+
   const formatedDate = paramsToDate(pickedDate!);
 
   //Po submitnutí je button disabled, aby se nedalo kliknout víckrát během jednoho submitu
@@ -94,7 +98,7 @@ const ReservationForm: FC<ReservationFormProps> = ({
       addMeeting(
         newMeeting,
         pickedRoomId as string,
-        `/date/${pickedDate}/overview`,
+        { pathname: `/overview`, search: `?date=${pickedDate}` },
         setFormData
       );
       setMissingFormDataError(false);
@@ -171,7 +175,10 @@ const ReservationForm: FC<ReservationFormProps> = ({
               colorScheme="teal"
               variant="outline"
               onClick={() => {
-                navigate(`/date/${pickedDate}/overview`);
+                navigate({
+                  pathname: `/overview`,
+                  search: `?date=${pickedDate}`,
+                });
               }}
             >
               {isMaxMdScreen ? "Back to overview" : "Back"}

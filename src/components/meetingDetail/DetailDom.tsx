@@ -14,7 +14,7 @@ const DetailDom: FC<DetailDomProps> = ({ clickedMeeting }) => {
 
   return (
     <section className="grid grid-cols-2">
-      <div className="[&>*] font-bold">
+      <div className=" [&>*] font-bold">
         <h3>Meeting name: </h3>
         <h4>Meeting type: </h4>
         <h5>Created by: </h5>
@@ -23,8 +23,8 @@ const DetailDom: FC<DetailDomProps> = ({ clickedMeeting }) => {
         <h5 className="mt-0.5">End time: </h5>
         <h5 className="mt-0.5"> Hours duration: </h5>
       </div>
-      <div>
-        <h3>{name}</h3>
+      <div className="  w-48 overflow-scroll scrollbar-hide">
+        <h3 className=" whitespace-nowrap">{name}</h3>
         <h3>{type}</h3>
         <h3>{creator}</h3>
         <h3>

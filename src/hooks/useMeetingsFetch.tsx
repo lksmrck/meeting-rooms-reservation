@@ -15,7 +15,7 @@ export const useMeetingsFetch = () => {
     date: string | null,
     setState: Dispatch<SetStateAction<Meeting[]>>,
     roomId: string
-  ): Promise<void> => {
+  ): Promise<Meeting[]> => {
     setIsLoading(true);
     const docRef = doc(db, `companies/${user!.company}/rooms`, String(roomId));
     const docSnap = await getDoc(docRef);
@@ -29,12 +29,13 @@ export const useMeetingsFetch = () => {
       setIsLoading(false);
     } else {
       setIsLoading(false);
-      /* console.log(roomId); */
+
       setError({
         error: true,
         message: "Something went wrong during downloading meetings.",
       });
     }
+    return todaysMeetings;
   };
   return { fetchMeetings, isLoading };
 };

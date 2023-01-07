@@ -10,7 +10,7 @@ import ReservationContext from "../../state/ReservationContext";
 import { useMeetingsFetch } from "../../hooks/useMeetingsFetch";
 import MeetingDetail from "./MeetingDetail";
 import OneRoomDom from "./OneRoomDom";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import TimeBlocksDom from "../../components/timeBlocks/TimeBlocksDom";
 import { Meeting, RoomData } from "../../types/types";
 import LoadingSpinner from "../../components/ui/LoadingSpinner/LoadingSpinner";
@@ -28,7 +28,11 @@ type TimeSelectProps = {
 const TimeSelect: FC<TimeSelectProps> = ({ setBlocksPickError }) => {
   const navigate = useNavigate();
   //Datum + roomID z params
-  const { pickedDate, pickedRoomId } = useParams();
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const pickedRoomId = searchParams.get("room");
+  const pickedDate = searchParams.get("date");
+
   const formatedPickedDate = paramsToDate(pickedDate!);
 
   const { pickedRoom, setPickedRoom, roomsData } =
@@ -176,7 +180,9 @@ const TimeSelect: FC<TimeSelectProps> = ({ setBlocksPickError }) => {
         </p>
         <p
           className="border rounded-md mx-auto md:mx-2 w-56  bg-purple-600 hover:bg-purple-700 flex justify-center  text-white mb-2 font-solid text-xl cursor-pointer overflow-auto scrollbar-hide"
-          onClick={() => navigate(`/date/${pickedDate}/overview`)}
+          onClick={() =>
+            navigate({ pathname: `/overview`, search: `?date=${pickedDate}` })
+          }
         >
           {displayedRoomName(pickedRoom.name, 23)}
         </p>
