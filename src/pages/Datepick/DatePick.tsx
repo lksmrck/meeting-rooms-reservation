@@ -1,6 +1,6 @@
 import { useState, FC } from "react";
 import { useNavigate } from "react-router-dom";
-import { dateToParams } from "../../utils/dateParamsFormat";
+import { dateToParams, dateFormatter } from "../../utils/dateParamsFormat";
 import Calendar from "../../components/datePick/Calendar";
 
 const DatePick: FC = () => {
@@ -11,7 +11,8 @@ const DatePick: FC = () => {
     //State ke controllingu component value
     setDate(date);
     //Date to string bez mezer --> pro porovnání s datem z FIrebase v DailyOverview componentu
-    const adjustedDate = date.toLocaleDateString().replace(/\s/g, "");
+    const adjustedDate = dateFormatter(date);
+
     const dateParams = dateToParams(adjustedDate);
     navigate(`/date/${dateParams}/overview`);
   };

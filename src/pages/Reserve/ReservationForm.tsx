@@ -41,7 +41,7 @@ const ReservationForm: FC<ReservationFormProps> = ({
 
   //Date + room ID z params
   const { pickedDate, pickedRoomId } = useParams();
-  const formatedDate = paramsToDate(pickedDate);
+  const formatedDate = paramsToDate(pickedDate!);
 
   //Po submitnutí je button disabled, aby se nedalo kliknout víckrát během jednoho submitu
   const [disabledBtn, setDisabledBtn] = useState(false);

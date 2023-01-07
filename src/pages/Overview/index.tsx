@@ -19,7 +19,8 @@ const Overview: FC = () => {
   const { user } = useContext(AuthContext);
 
   const { pickedDate } = useParams();
-  const formatedPickedDate = paramsToDate(pickedDate);
+
+  const formatedPickedDate = paramsToDate(pickedDate!);
 
   const navigate = useNavigate();
 

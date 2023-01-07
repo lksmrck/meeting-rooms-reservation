@@ -57,7 +57,7 @@ const MeetingDetail: FC<MeetingDetailProps> = ({
   const { pickedRoom, setPickedRoom } = useContext(ReservationContext);
 
   const { pickedDate, pickedRoomId } = useParams();
-  const formatedDate = paramsToDate(pickedDate);
+  const formatedDate = paramsToDate(pickedDate!);
   const navigate = useNavigate();
 
   //**** CUSTOM HOOKS ****

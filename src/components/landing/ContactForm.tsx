@@ -56,7 +56,6 @@ const ContactForm: FC = () => {
             focusBorderColor="teal.400"
             required
           />
-
           <Input
             id="email"
             type="email"

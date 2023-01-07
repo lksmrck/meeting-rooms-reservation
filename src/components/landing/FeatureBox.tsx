@@ -7,7 +7,7 @@ type FeatureBoxProps = {
   down?: boolean;
 };
 
-const FeatureBox: FC<FeatureBoxProps> = ({ feature, up, down }) => {
+const FeatureBox: FC<FeatureBoxProps> = ({ feature, up }) => {
   return (
     <li
       className={`${

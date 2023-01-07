@@ -29,7 +29,7 @@ const TimeSelect: FC<TimeSelectProps> = ({ setBlocksPickError }) => {
   const navigate = useNavigate();
   //Datum + roomID z params
   const { pickedDate, pickedRoomId } = useParams();
-  const formatedPickedDate = paramsToDate(pickedDate);
+  const formatedPickedDate = paramsToDate(pickedDate!);
 
   const { pickedRoom, setPickedRoom, roomsData } =
     useContext(ReservationContext);

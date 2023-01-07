@@ -3,7 +3,6 @@ import { IconButton } from "@chakra-ui/react";
 import { AiOutlineMinusCircle } from "react-icons/ai";
 import { useUsersAdminFncs } from "../../../hooks/useUsersAdminFncs";
 import { UserType } from "../../../types/types";
-
 import { FC, Dispatch, SetStateAction } from "react";
 
 type UserProps = {
@@ -13,18 +12,19 @@ type UserProps = {
 
 const User: FC<UserProps> = ({ user, setUsers }) => {
   const { removeUser } = useUsersAdminFncs();
+  const { id, name, surname, rights, creationDate } = user;
 
-  const deleteUserHandler = (userId: any) => {
+  const deleteUserHandler = (userId: string) => {
     removeUser("secondCompany", userId, setUsers);
     console.log("userID: " + userId);
   };
 
   return (
     <Tr>
-      <Th>{user.name}</Th>
-      <Th>{user.surname}</Th>
-      <Th>{user.rights}</Th>
-      <Th>{user.creationDate}</Th>
+      <Th>{name}</Th>
+      <Th>{surname}</Th>
+      <Th>{rights}</Th>
+      <Th>{creationDate}</Th>
       <Th isNumeric>
         <div className=" flex justify-end ">
           <IconButton
@@ -34,7 +34,7 @@ const User: FC<UserProps> = ({ user, setUsers }) => {
               <AiOutlineMinusCircle size={15} style={{ color: "#f0fdf4" }} />
             }
             onClick={() => {
-              deleteUserHandler(user.id);
+              deleteUserHandler(id!);
             }}
             className=" w-5 mr-2"
             size="xs"
