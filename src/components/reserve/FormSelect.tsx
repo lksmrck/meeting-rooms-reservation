@@ -1,19 +1,21 @@
-import { MeetingCategory, UserRights } from "../../types/types";
-import { FC } from "react";
+import { ChangeEvent } from "react";
 
-type FormSelectProps = {
+type OptionsBase = {
+  id: number;
+  name: string;
+};
+
+type FormSelectProps<TValue> = {
   name: string;
   id: string;
-  options: MeetingCategory[] | UserRights[];
-  onChange: (
-    e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
-  ) => void;
+  options: TValue[];
+  onChange: (e: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => void;
   small?: boolean;
   additionalStyle?: string;
   label?: string;
 };
 
-const FormSelect: FC<FormSelectProps> = ({
+const FormSelect = <TValue extends OptionsBase>({
   name,
   id,
   options,
@@ -21,7 +23,7 @@ const FormSelect: FC<FormSelectProps> = ({
   small,
   additionalStyle,
   label,
-}) => {
+}: FormSelectProps<TValue>) => {
   {
     return (
       <div className={`${additionalStyle}`}>
@@ -38,7 +40,7 @@ const FormSelect: FC<FormSelectProps> = ({
           }  h-8  `}
           onChange={onChange}
         >
-          {options!.map((option: MeetingCategory) => {
+          {options!.map((option: OptionsBase) => {
             return (
               <option key={option.name} value={option.name}>
                 {option.name}

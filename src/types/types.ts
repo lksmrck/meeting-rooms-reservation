@@ -54,14 +54,14 @@ export type TimeBlock = {
   end: string
 }
 
-export type MeetingCategory = {
+/* export type MeetingCategory = {
   id: number,
   name: string
 }
 export type UserRights = {
   id: number,
   name: string
-}
+} */
 
 export type Feature = {
    text: string; icon: ReactNode 
