@@ -2,8 +2,7 @@ import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { useContext, useState } from "react";
 import AppContext from "../state/AppContext";
-import ReservationContext from "../state/ReservationContext";
-import { Meeting, Room } from "../types/types";
+import { Meeting } from "../types/types";
 import AuthContext from "../state/AuthContext";
 
 //Detail meetingů v daném vybraném dnu.

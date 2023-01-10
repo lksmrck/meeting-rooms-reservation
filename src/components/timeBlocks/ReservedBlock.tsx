@@ -2,15 +2,13 @@ import { FC } from "react";
 import { Button } from "@chakra-ui/react";
 
 type ReservedBlockProps = {
-  key: string | number;
   height: number;
   onClick: () => void;
 };
 
-const ReservedBlock: FC<ReservedBlockProps> = ({ key, height, onClick }) => {
+const ReservedBlock: FC<ReservedBlockProps> = ({ height, onClick }) => {
   return (
     <Button
-      key={key}
       size="sm"
       className="hover:translate-x-1 w-20 border border-stone-700 shadow-md shadow-slate-600 text-xs"
       colorScheme="telegram"

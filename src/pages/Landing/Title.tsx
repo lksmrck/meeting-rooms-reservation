@@ -31,7 +31,7 @@ const Title: FC<TitleProps> = ({ contactRef }) => {
           {" "}
           conference rooms
         </span>{" "}
-        with few clicks.
+        in a few clicks.
       </h1>
       <div className="flex justify-center mt-10">
         <Button

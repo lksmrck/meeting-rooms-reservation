@@ -38,6 +38,7 @@ const FloatingScrollButton: FC = () => {
       {showButton && (
         <img
           src={goingUp ? rocketFire : rocketNoFire}
+          alt="rocket"
           className={`fixed bottom-10 right-0 md:right-5 w-20 h-20 z-10 ${
             goingUp ? "animate-rocketBounce" : ""
           }`}

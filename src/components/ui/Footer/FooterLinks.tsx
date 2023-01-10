@@ -25,7 +25,7 @@ const FooterLinks: FC<FooterLinksProps> = ({
 
   return (
     <>
-      {pathname != "/home" ? (
+      {pathname !== "/home" ? (
         <div className="[&>a]:text-xs [&>a]:mt-1 text-gray-300 flex flex-col [&>a]:cursor-pointer  min-w-fit ">
           <h1 className="mb-1 font-bold">Links</h1>
           <a onClick={() => navigate("/home")} className="hover:text-gray-400">
@@ -46,6 +46,7 @@ const FooterLinks: FC<FooterLinksProps> = ({
           {landingLinks.map((link: FooterLinkObject) => {
             return (
               <a
+                key={link.name}
                 onClick={() => clickLinkHandler(link.ref)}
                 className="hover:text-gray-400"
               >

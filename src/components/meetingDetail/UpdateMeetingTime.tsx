@@ -28,30 +28,29 @@ const UpdateMeetingTime: FC<UpdateMeetingTimeProps> = ({
     setMissingFormData(false);
   };
 
-  {
-    return (
-      <select
-        name={start ? "start" : "end"}
-        id={start ? "start" : "end"}
-        className=" h-8 rounded-sm mb-0.5 border bg-slate-50 text-sm pl-2 focus:outline-teal-600"
-        onChange={onChangeSelect}
-      >
-        <option value={NONE} selected disabled hidden>
-          Select an Option
-        </option>
-        {options!.map((option: any) => {
-          return (
-            <option
-              key={start ? option?.start : option?.end}
-              value={start ? option?.start : option?.end}
-            >
-              {start ? option?.start : option?.end}
-            </option>
-          );
-        })}
-      </select>
-    );
-  }
+  return (
+    <select
+      name={start ? "start" : "end"}
+      id={start ? "start" : "end"}
+      className=" h-8 rounded-sm mb-0.5 border bg-slate-50 text-sm pl-2 focus:outline-teal-600"
+      onChange={onChangeSelect}
+      defaultValue={NONE}
+    >
+      <option value={NONE} disabled hidden>
+        Select an Option
+      </option>
+      {options!.map((option: RoomData) => {
+        return (
+          <option
+            key={option?.block}
+            value={start ? option?.start : option?.end}
+          >
+            {start ? option?.start : option?.end}
+          </option>
+        );
+      })}
+    </select>
+  );
 };
 
 export default UpdateMeetingTime;

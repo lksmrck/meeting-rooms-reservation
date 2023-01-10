@@ -5,8 +5,7 @@ import AppContext from "../../state/AppContext";
 
 const ErrorScreen: FC = () => {
   const navigate = useNavigate();
-  const appContext = useContext(AppContext);
-  const { setError } = appContext;
+  const { setError } = useContext(AppContext);
 
   return (
     <div className="h-screen w-screen bg-indigo-700 text-white flex flex-col justify-center items-center ">
@@ -15,7 +14,7 @@ const ErrorScreen: FC = () => {
         <Button
           colorScheme="teal"
           onClick={() => {
-            /* setError({ error: false, message: "" }); */
+            setError({ error: false, message: "" });
             navigate(-2);
           }}
         >

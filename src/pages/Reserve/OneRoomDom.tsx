@@ -13,7 +13,7 @@ const OneRoomDom: FC<OneRoomDomProps> = ({ pickedRoom, blockClickHandler }) => {
   //Const pro sloupec s timeblocky dané místnosti - zobrazení tak, aby meetingy tvořily jeden velký blok a nerezervované bloky byly samostatně.
   const roomDom = pickedRoom.roomData.map((roomData: RoomData) => {
     const selectedBlock = pickedRoom.roomData?.find(
-      (room: RoomData) => room.block == roomData.block
+      (room: RoomData) => room.block === roomData.block
     );
     let height;
 
@@ -23,10 +23,11 @@ const OneRoomDom: FC<OneRoomDomProps> = ({ pickedRoom, blockClickHandler }) => {
     );
 
     if (includedInHelper) {
-      return;
+      return null;
     }
 
     if (roomData.reserved && !includedInHelper) {
+      //Vypočítaná výška
       height = roomData.meetingBlocks!.length * 2.5;
 
       //Přičte block do meetingHelper, aby se vědělo, že pro tento meeting byl již DOM vytvořen
@@ -38,7 +39,7 @@ const OneRoomDom: FC<OneRoomDomProps> = ({ pickedRoom, blockClickHandler }) => {
         <Button
           key={roomData.block}
           size="sm"
-          className="hover:translate-x-1 w-28 -ml-2 border border-stone-700 shadow-md shadow-slate-600  "
+          className="hover:translate-x-1 w-28 -ml-2 border border-stone-700 shadow-md shadow-slate-600 "
           colorScheme="telegram"
           style={{ height: `${height}rem` }}
           onClick={() => blockClickHandler(roomData.block)}

@@ -55,9 +55,6 @@ const Overview: FC = () => {
     //Pošle se vyfiltrovaná room do react contextu. Odtud se pak bere v Reserve componentu
     setPickedRoom(adjustedClickedRoom as Room);
 
-    /* navigate(`/date/${pickedDate}/${room}/reserve`); */
-    /*  navigate(`/reserve?room=${room}&date=${pickedDate}`); */
-
     navigate({
       pathname: `/reserve`,
       search: `?room=${room}&date=${pickedDate}`,

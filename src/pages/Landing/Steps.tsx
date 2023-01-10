@@ -26,7 +26,10 @@ const Steps = forwardRef<HTMLDivElement>((props, ref) => {
 
           {buttons.map((button) => {
             return (
-              <div className="flex justify-center items-center m-1 md:w-155 w-80  ">
+              <div
+                key={button.id}
+                className="flex justify-center items-center m-1 md:w-155 w-80  "
+              >
                 <div className="text-end w-1/3 mr-10 font-outline text-4xl font-bold ">
                   {button.clicked && <p>{button.followingText}</p>}
                 </div>

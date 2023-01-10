@@ -28,7 +28,7 @@ const ContactForm: FC = () => {
           <p>
             Thank you for your message. <br /> We will contact you soon
           </p>
-          <img className="mt-6" src={envelope} width="70px" height="70px" />
+          <img className="mt-6" src={envelope} alt="envelope" width="70px" height="70px" />
         </div>
       ) : (
         <div className="ml-6 md:ml-10 w-60 md:w-80 [&>*]:mb-1 mt-14 md:mt-28">

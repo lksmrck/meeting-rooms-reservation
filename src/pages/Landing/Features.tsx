@@ -28,7 +28,11 @@ const Features = forwardRef<HTMLDivElement>((props, ref) => {
           {featureBoxes.map((feature: Feature, index: number) => {
             return (
               //Jen quick inline modifikace, aby se prostřední item animoval jinak, než dva krajní - není scalable.
-              <FeatureBox feature={feature} up={index == 1 ? false : true} />
+              <FeatureBox
+                key={feature.text}
+                feature={feature}
+                up={index == 1 ? false : true}
+              />
             );
           })}
         </ul>

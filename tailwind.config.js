@@ -31,12 +31,12 @@ module.exports = {
 
       keyframes: {
         floatUp: {
-          "0%, 100%": { transform: "translatey(0px)" },
+          "0%": { transform: "translatey(0px)" },
           "25%": { transform: "translatey(-10px)" },
           "75%": { transform: "translatey(10px)" },
         },
         floatDown: {
-          "0%, 100%": { transform: "translatey(0px)" },
+          "0%": { transform: "translatey(0px)" },
           "25%": { transform: "translatey(10px)" },
           "75%": { transform: "translatey(-10px)" },
         },
@@ -66,8 +66,8 @@ module.exports = {
         },
       },
       animation: {
-        floatUp: "floatUp 5s ease-in-out infinite",
-        floatDown: "floatDown 5s ease-in-out infinite",
+        floatUp: "floatUp linear 5s infinite ",
+        floatDown: "floatDown linear 5s infinite ",
         bounceInRight: "bounceInRight 1s ease 1",
         buttonGlowing: "buttonGlowing 3s ease-in-out infinite",
         rocketBounce: "rocketBounce 0.5s ease-in-out infinite",

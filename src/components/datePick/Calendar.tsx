@@ -1,4 +1,4 @@
-import { FC, ChangeEvent } from "react";
+import { FC } from "react";
 import { Calendar as ReactCalendar } from "react-calendar";
 import "./Calendar.css";
 

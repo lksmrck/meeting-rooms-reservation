@@ -28,7 +28,7 @@ const DisplayedGuests: FC<DisplayedGuestsProps> = ({
                 <span className=" ml-1">
                   {guest}
                   {/* Za každým, kromě posledního guesta bude čárka */}
-                  {i + 1 == guests.length ? "" : ","}
+                  {i + 1 === guests.length ? "" : ","}
                 </span>
               );
             })

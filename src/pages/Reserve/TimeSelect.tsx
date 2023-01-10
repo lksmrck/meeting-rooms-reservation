@@ -35,8 +35,7 @@ const TimeSelect: FC<TimeSelectProps> = ({ setBlocksPickError }) => {
 
   const formatedPickedDate = paramsToDate(pickedDate!);
 
-  const { pickedRoom, setPickedRoom, roomsData } =
-    useContext(ReservationContext);
+  const { pickedRoom, setPickedRoom } = useContext(ReservationContext);
   const { isContextLoading } = useContext(AppContext);
 
   const [selectedBlocks, setSelectedBlocks] = useState(0);
@@ -99,7 +98,7 @@ const TimeSelect: FC<TimeSelectProps> = ({ setBlocksPickError }) => {
     //Podminky
     //0.Pokud se klikne na rezerovavný block, tak zbytek funkce nepokračuje a místo toho zobrazí meeting
     const clickReservedCheck = pickedRoom.roomData.find((room: RoomData) => {
-      return room.block == blockNumber && room.reserved;
+      return room.block === blockNumber && room.reserved;
     });
 
     if (clickReservedCheck) {
@@ -112,20 +111,20 @@ const TimeSelect: FC<TimeSelectProps> = ({ setBlocksPickError }) => {
     }
 
     //1. Pokud ještě není vybrán žádný blok, lze kliknout na kterýkoliv a vybrat.
-    if (!clickReservedCheck && pickedRoom && selectedBlocks == 0) {
+    if (!clickReservedCheck && pickedRoom && selectedBlocks === 0) {
       const updatedRoom = updateRoomData(pickedRoom, blockNumber);
       setPickedRoom(updatedRoom);
     }
     //2. Pokud je právě 1 vybraný blok, tak lze vybrat pouze blok+1 nebo blok-1 nebo odvybrat vybraný blok
-    if (!clickReservedCheck && pickedRoom && selectedBlocks == 1) {
+    if (!clickReservedCheck && pickedRoom && selectedBlocks === 1) {
       const reservedBlock = pickedRoom.roomData.filter((data: RoomData) => {
         return data.selected;
       }); //uložen rezervovaný object
 
       if (
-        blockNumber == reservedBlock[0].block ||
-        blockNumber == reservedBlock[0].block + 1 ||
-        blockNumber == reservedBlock[0].block - 1
+        blockNumber === reservedBlock[0].block ||
+        blockNumber === reservedBlock[0].block + 1 ||
+        blockNumber === reservedBlock[0].block - 1
       ) {
         removeBlocksError();
         const updatedRoom = updateRoomData(pickedRoom, blockNumber);
@@ -154,10 +153,10 @@ const TimeSelect: FC<TimeSelectProps> = ({ setBlocksPickError }) => {
       );
 
       if (
-        blockNumber == minBlock - 1 ||
-        blockNumber == maxBlock + 1 ||
-        blockNumber == minBlock ||
-        blockNumber == maxBlock
+        blockNumber === minBlock - 1 ||
+        blockNumber === maxBlock + 1 ||
+        blockNumber === minBlock ||
+        blockNumber === maxBlock
       ) {
         removeBlocksError();
         const updatedRoom = updateRoomData(pickedRoom, blockNumber);

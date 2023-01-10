@@ -1,16 +1,12 @@
 import { FC } from "react";
 
 type BlockWithTimeProps = {
-  key: string | number;
   children: string;
 };
 
-const BlockWithTime: FC<BlockWithTimeProps> = ({ key, children }) => {
+const BlockWithTime: FC<BlockWithTimeProps> = ({ children }) => {
   return (
-    <div
-      key={key}
-      className="flex font-bold justify-center items-center text-sm w-24 h-10 border border-stone-700 rounded-md bg-gray-200 shadow-lg shadow-slate-600 "
-    >
+    <div className="flex font-bold justify-center items-center text-sm w-24 h-10 border border-stone-700 rounded-md bg-gray-200 shadow-lg shadow-slate-600 ">
       {children}
     </div>
   );

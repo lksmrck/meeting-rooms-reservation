@@ -9,6 +9,7 @@ const ClickMeArrow = () => {
       <div className="w-2/3">
         <img
           src={clickMeArrow}
+          alt="arrow"
           width={mediumScreenMin ? "350px" : "250px"}
           className=" -mb-24 md:-mb-30 ml-6 md:ml-4 "
         />

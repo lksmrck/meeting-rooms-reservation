@@ -45,10 +45,7 @@ const DetailDomEditMode: FC<DetailDomEditModeProps> = ({
   });
 
   //Upravená pickedRoom tak, že u blocků ,které jsou v meetingu, který jde do editu se nastaví reserved = false
-  const [localPickedRoom, setLocalPickedRoom] = useState({
-    ...pickedRoom,
-    roomData: adjustedRoomData,
-  });
+  const localPickedRoom = { ...pickedRoom, roomData: adjustedRoomData };
 
   //State pro edit time => vyfiltrované bloky, které mají reserved = false {block: 1, start: 7:00, end: 7:00, reserved: false, selected: false}
   const possibleStartTime = localPickedRoom.roomData.filter(

@@ -19,10 +19,14 @@ const Carousel: FC<CarouselProps> = ({ slides }) => {
         showStatus={false}
       >
         {slides.map((slide: CarouselSlide) => (
-          <div className="w-full flex flex-col md:flex-row h-110  md:h-64 rounded-lg  ">
+          <div
+            key={slide.person}
+            className="w-full flex flex-col md:flex-row h-110  md:h-64 rounded-lg  "
+          >
             <div className="h-1/2 md:h-full md:w-1/2 ">
               <img
                 src={slide.image}
+                alt="reference"
                 className=" rounded-t-lg md:rounded-l-lg md:rounded-tr-none h-full w-full "
               />
             </div>

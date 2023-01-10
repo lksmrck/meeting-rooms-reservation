@@ -17,7 +17,7 @@ const NoRoomYetAdded: FC = () => {
     <div className="flex flex-col justify-center items-center text-sm text-white font-bold text-center">
       <p className="my-2 mt-8 mb-4">No room was yet added.</p>
 
-      {user?.rights == ADMIN ? (
+      {user?.rights === ADMIN ? (
         <Button size="sm" colorScheme="teal" onClick={clickButtonHandler}>
           Add room
         </Button>

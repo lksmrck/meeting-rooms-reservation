@@ -20,7 +20,7 @@ import {
 import useAuth from "../../../hooks/useAuth";
 import ReservationContext from "../../../state/ReservationContext";
 import { useRemoveMeeting } from "../../../hooks/useRemoveMeeting";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Meeting } from "../../../types/types";
 import LoadingSpinner from "../../../components/ui/LoadingSpinner/LoadingSpinner";
 import DetailDomEditMode from "./DetailDomEditMode";
@@ -64,7 +64,10 @@ const MeetingDetail: FC<MeetingDetailProps> = ({
   //**** CONTEXT ****
   const { pickedRoom, setPickedRoom } = useContext(ReservationContext);
 
-  const { pickedDate, pickedRoomId } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const pickedRoomId = searchParams.get("room");
+  const pickedDate = searchParams.get("date");
+
   const formatedDate = paramsToDate(pickedDate!);
   const navigate = useNavigate();
 
@@ -89,7 +92,7 @@ const MeetingDetail: FC<MeetingDetailProps> = ({
   const deleteMeetingHandler = (e: SyntheticEvent): void => {
     setFbIsLoading(true);
     removeData(clickedMeeting, pickedRoomId as string).then(() => {
-      navigate(`/date/${pickedDate}/overview`);
+      navigate(`/overview?date=${pickedDate}`);
       setFbIsLoading(false);
       setOpenDetail(false);
     });
@@ -192,7 +195,7 @@ const MeetingDetail: FC<MeetingDetailProps> = ({
         <ModalFooter className="[&>button]:m-1 ">
           {/* Buttons se zobrazují, pokud se zrovna neloaduje (deleting a updating mtg) */}
           {/* Delete a Edit meeting buttons se zobrazí pouze, pokud daný user meeting vytvořil! */}
-          {clickedMeeting.creator == user!.email &&
+          {clickedMeeting.creator === user!.email &&
             !isEditing &&
             !fbIsLoading &&
             !isLoading && (
