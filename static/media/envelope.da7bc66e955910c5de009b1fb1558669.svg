@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1648.116 1595.772" enable-background="new 0 0 1648.116 1595.772" xml:space="preserve">
+<g>
+	<path d="M34.504,483.16L111,1563.106l1502.925-353.982l-29.999-626.969c-293.119-241.986-581.38-478.673-718.464-550.472
+		C707.7,20.417,398.345,214.827,34.504,483.16z"/>
+	<path fill="#E2CDBA" stroke="#000000" stroke-width="14" stroke-miterlimit="10" d="M43.504,498.159l601.47,461.977
+		c0,0-529.474,590.97-527.974,583.471S43.504,498.159,43.504,498.159z"/>
+	<polygon fill="#E2CDBA" stroke="#000000" stroke-width="14" stroke-miterlimit="10" points="650.973,972.136 989.956,969.136 
+		1588.426,1207.624 131.999,1552.607 	"/>
+	<polygon fill="#E2CDBA" stroke="#000000" stroke-width="14" stroke-linejoin="round" stroke-miterlimit="10" points="
+		1003.456,960.136 1576.875,581.722 1608.875,1204.389 	"/>
+	<path fill="#E2CDBA" stroke="#000000" stroke-width="14" stroke-miterlimit="10" d="M244.875,640.056l28-533l1136,192
+		c-10.505,24.992-15.136,58.687-18,95l-27,307l-377,256l-327-1L244.875,640.056z"/>
+	<path fill="none" stroke="#000000" stroke-width="14" stroke-miterlimit="10" d="M963.875,672.056c0,0,121-101,216,13"/>
+	<path fill="none" stroke="#000000" stroke-width="14" stroke-miterlimit="10" d="M469.875,665.056c0,0,85-117,219,21"/>
+	<ellipse fill="#D099C5" cx="509.375" cy="749.556" rx="76.5" ry="39.5"/>
+	<ellipse fill="#D099C5" cx="1140.375" cy="749.556" rx="76.5" ry="39.5"/>
+	<path fill="#FFFFFF" stroke="#000000" stroke-width="13" stroke-miterlimit="10" d="M672.875,808.056l305-12c0,0-4,92-127,104
+		S682.875,850.056,672.875,808.056z"/>
+	<polygon fill="#E2CDBA" stroke="#000000" stroke-width="14" stroke-miterlimit="10" points="1396.208,452.389 1388.208,559.056 
+		1536.208,569.056 	"/>
+	<polygon fill="#E2CDBA" stroke="#000000" stroke-width="14" stroke-miterlimit="10" points="52.875,476.389 240.208,487.056 
+		248.208,340.389 	"/>
+	<path fill="#E2CDBA" stroke="#000000" stroke-width="14" stroke-miterlimit="10" d="M568.73,149.653l572,98
+		c0,0-186-171.333-276-200C767.303,16.62,568.73,149.653,568.73,149.653z"/>
+</g>
+</svg>
