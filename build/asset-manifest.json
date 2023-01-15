@@ -1,18 +1,26 @@
 {
   "files": {
-    "main.css": "/conference-room-reservation/static/css/main.0f374f5a.css",
-    "main.js": "/conference-room-reservation/static/js/main.05dea7cd.js",
-    "static/media/CR.jpeg": "/conference-room-reservation/static/media/CR.c2963528284ad088b9be.jpeg",
-    "static/media/loginBg.svg": "/conference-room-reservation/static/media/loginBg.dbf981db17490f05cc93.svg",
+    "main.css": "/conference-room-reservation/static/css/main.c98f1fc5.css",
+    "main.js": "/conference-room-reservation/static/js/main.8bc29d2d.js",
+    "static/media/refThree.png": "/conference-room-reservation/static/media/refThree.6ef09091ecae52cf1b97.png",
+    "static/media/refTwo.png": "/conference-room-reservation/static/media/refTwo.f06c3c8b3fa49f1ed798.png",
+    "static/media/refOne.png": "/conference-room-reservation/static/media/refOne.c9dd5fbbb32894219fe8.png",
+    "static/media/rocketWithFire.png": "/conference-room-reservation/static/media/rocketWithFire.046fe97a274dbc853565.png",
+    "static/media/clickMeArrow.svg": "/conference-room-reservation/static/media/clickMeArrow.3cc9cdc7389ad96c718bef3370e65312.svg",
+    "static/media/rocketWithoutFire.png": "/conference-room-reservation/static/media/rocketWithoutFire.758f01df0ffbee4815b7.png",
+    "static/media/logoBoyInSuit.png": "/conference-room-reservation/static/media/logoBoyInSuit.74723bd9450ae73eddb9.png",
+    "static/media/envelope.svg": "/conference-room-reservation/static/media/envelope.da7bc66e955910c5de009b1fb1558669.svg",
     "index.html": "/conference-room-reservation/index.html",
-    "static/media/titleWaves.svg": "/conference-room-reservation/static/media/titleWaves.c2a28080ea8f0f6563cf.svg",
-    "static/media/carouselWaves.svg": "/conference-room-reservation/static/media/carouselWaves.84cb469bb9ccb965cf00.svg",
+    "static/media/titleWaves.svg": "/conference-room-reservation/static/media/titleWaves.ff9f4d1004112d57494e.svg",
+    "static/media/carouselWaves.svg": "/conference-room-reservation/static/media/carouselWaves.45e8b4ed6b86f31ccdf7.svg",
+    "static/media/contactUsWaves.svg": "/conference-room-reservation/static/media/contactUsWaves.30667a99b9a26e468a38.svg",
     "static/media/stepsWaves.svg": "/conference-room-reservation/static/media/stepsWaves.d1a8eb24f8f2b5271530.svg",
-    "main.0f374f5a.css.map": "/conference-room-reservation/static/css/main.0f374f5a.css.map",
-    "main.05dea7cd.js.map": "/conference-room-reservation/static/js/main.05dea7cd.js.map"
+    "static/media/loginBg.svg": "/conference-room-reservation/static/media/loginBg.e3314e72ad96c13cdcb7.svg",
+    "main.c98f1fc5.css.map": "/conference-room-reservation/static/css/main.c98f1fc5.css.map",
+    "main.8bc29d2d.js.map": "/conference-room-reservation/static/js/main.8bc29d2d.js.map"
   },
   "entrypoints": [
-    "static/css/main.0f374f5a.css",
-    "static/js/main.05dea7cd.js"
+    "static/css/main.c98f1fc5.css",
+    "static/js/main.8bc29d2d.js"
   ]
 }
