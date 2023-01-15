@@ -66,7 +66,10 @@ export const useUsersAdminFncs = () => {
       })
       .catch((error) => {
         setIsLoading(false);
-        setError({ error: true, message: error.message });
+        setError({
+          error: true,
+          message: "Something went wrong during the user creation.",
+        });
       });
   };
 
@@ -84,7 +87,7 @@ export const useUsersAdminFncs = () => {
       .catch((error) => {
         setError({
           error: true,
-          message: "Something went wrong during downloading meetings.",
+          message: "Something went wrong during removing user.",
         });
       });
 

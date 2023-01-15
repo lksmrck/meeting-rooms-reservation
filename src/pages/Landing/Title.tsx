@@ -8,7 +8,6 @@ type TitleProps = {
 
 const Title: FC<TitleProps> = ({ contactRef }) => {
   const [largeScreen] = useMediaQuery("(min-width: 1024px)");
-  /*   const [smallScreen] = useMediaQuery("(min-width: 640pxpx)"); */
 
   const buttonClickHandler = () => {
     contactRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -24,12 +23,11 @@ const Title: FC<TitleProps> = ({ contactRef }) => {
             : "circle(250px at right -130px)",
         }}
       ></div>
-
       <h1 className="text-4xl md:text-6xl font-bold text-center text-neutral-800 z-10 font-outline mx-5">
         Comfortly reserve your company
         <span className=" font-solid font-normal text-neutral-900">
           {" "}
-          conference rooms
+          meeting rooms
         </span>{" "}
         in a few clicks.
       </h1>

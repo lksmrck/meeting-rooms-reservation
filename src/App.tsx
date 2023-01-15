@@ -20,6 +20,7 @@ import useAuth from "./hooks/useAuth";
 import Unauthorized from "./pages/screens/Unauthorized";
 import { LandingRefsObject } from "./types/types";
 import FloatingScrollButton from "./components/ui/FloatingScrollingButton";
+import NotFound from "./pages/screens/NotFound";
 
 const App = () => {
   const navigate = useNavigate();
@@ -54,7 +55,9 @@ const App = () => {
       <div>
         <FloatingScrollButton />
         <Navbar />
+
         <Routes>
+          <Route path="*" element={<NotFound />} />
           {/* 1. Public routes */}
           <Route path="/" element={<Navigate replace to="/home" />} />
           <Route

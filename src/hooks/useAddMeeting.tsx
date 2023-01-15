@@ -1,6 +1,5 @@
 import { db } from "../config/firebase";
 import { doc, arrayUnion, updateDoc } from "firebase/firestore";
-import ReservationContext from "../state/ReservationContext";
 import { useContext, Dispatch, SetStateAction } from "react";
 import { Meeting } from "../types/types";
 import { useNavigate } from "react-router-dom";
@@ -8,8 +7,7 @@ import AuthContext from "../state/AuthContext";
 import AppContext from "../state/AppContext";
 
 export const useAddMeeting = () => {
-  /*   const { pickedRoom } = useContext(ReservationContext); */
-  const { setIsContextLoading /* setError */ } = useContext(AppContext);
+  const { setIsContextLoading, setError } = useContext(AppContext);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -26,10 +24,14 @@ export const useAddMeeting = () => {
       String(pickedRoomId)
     );
 
-    await updateDoc(dbRef, { meetings: arrayUnion(newMeeting) });
-    if (setFormData) setFormData({ name: "", type: "" });
-    setIsContextLoading(false);
-    navigateURL && navigate(navigateURL);
+    try {
+      await updateDoc(dbRef, { meetings: arrayUnion(newMeeting) });
+      if (setFormData) setFormData({ name: "", type: "" });
+      setIsContextLoading(false);
+      navigateURL && navigate(navigateURL);
+    } catch (error: any) {
+      setError({ error: true, message: error?.message });
+    }
   };
 
   return { addMeeting };

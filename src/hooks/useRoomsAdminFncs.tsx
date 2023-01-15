@@ -9,11 +9,13 @@ import {
 import { db } from "../config/firebase";
 import { CompanyRoom } from "../types/types";
 import AuthContext from "../state/AuthContext";
+import AppContext from "../state/AppContext";
 
 export const useRoomsAdminFncs = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const { user } = useContext(AuthContext);
+  const { setError } = useContext(AppContext);
 
   const roomsFetch = async (
     setRoomsArray: Dispatch<SetStateAction<CompanyRoom[]>>
@@ -37,11 +39,19 @@ export const useRoomsAdminFncs = () => {
     setIsLoading(true);
     const id = roomsArray.length + 1;
 
-    await setDoc(doc(db, `companies/${user?.company}/rooms`, String(id)), {
-      id,
-      name,
-      meetings: [],
-    });
+    try {
+      await setDoc(doc(db, `companies/${user?.company}/rooms`, String(id)), {
+        id,
+        name,
+        meetings: [],
+      });
+    } catch (error) {
+      setError({
+        error: true,
+        message: "Something went wrong during adding the room.",
+      });
+    }
+
     setIsLoading(false);
   };
 
@@ -50,12 +60,20 @@ export const useRoomsAdminFncs = () => {
     setRoomsArray: Dispatch<SetStateAction<CompanyRoom[]>>
   ): Promise<void> => {
     setIsLoading(true);
-    await deleteDoc(
-      doc(db, `companies/${user?.company}/rooms`, String(roomID))
-    );
-    setRoomsArray((prevArray: CompanyRoom[]) =>
-      prevArray.filter((room: CompanyRoom) => room.id != roomID)
-    );
+    try {
+      await deleteDoc(
+        doc(db, `companies/${user?.company}/rooms`, String(roomID))
+      );
+      setRoomsArray((prevArray: CompanyRoom[]) =>
+        prevArray.filter((room: CompanyRoom) => room.id != roomID)
+      );
+    } catch (error) {
+      setError({
+        error: true,
+        message: "Something went wrong during deleting the room.",
+      });
+    }
+
     setIsLoading(false);
   };
 

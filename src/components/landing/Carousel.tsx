@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { Carousel as ReactCarousel } from "react-responsive-carousel";
 import { CarouselSlide } from "../../types/types";
+import "./glass.css";
 
 type CarouselProps = {
   slides: CarouselSlide[];

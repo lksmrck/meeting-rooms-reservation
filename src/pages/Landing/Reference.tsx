@@ -2,7 +2,6 @@ import { forwardRef } from "react";
 import Carousel from "../../components/landing/Carousel";
 import "react-responsive-carousel/lib/styles/carousel.css";
 import { carouselSlides } from "../../data/data";
-import "react-responsive-carousel/lib/styles/glass.css";
 import Circle from "../../components/landing/Circle";
 
 const Reference = forwardRef<HTMLDivElement>((props, ref) => {

@@ -18,6 +18,7 @@ export const useMeetingsFetch = () => {
   ): Promise<Meeting[]> => {
     setIsLoading(true);
     const docRef = doc(db, `companies/${user!.company}/rooms`, String(roomId));
+
     const docSnap = await getDoc(docRef);
 
     let todaysMeetings: Meeting[] = [];
@@ -29,10 +30,9 @@ export const useMeetingsFetch = () => {
       setIsLoading(false);
     } else {
       setIsLoading(false);
-
       setError({
         error: true,
-        message: "Something went wrong during downloading meetings.",
+        message: "Something went wrong during the meetings fetching.",
       });
     }
     return todaysMeetings;

@@ -20,9 +20,11 @@ export const useRoomsOverviewFetch = () => {
     date: string
   ): Promise<void> => {
     setIsLoading(true);
+
     const querySnapshot = await getDocs(
       collection(db, `companies/${company}/rooms`)
     );
+
     //Stáhnou se data z Firebase, projedou se meetingy, a pokud jsou nějaké plánované meetingy ve vybraném dnu, tak se uloží do proměnné níže - za všechny místnosti.
     let todaysMeetings: Meeting[] = [];
     //Pomocná proměnná - Rozpad bloků + id místnosti
@@ -88,6 +90,7 @@ export const useRoomsOverviewFetch = () => {
       };
     });
     setRoomsData(updatedRooms);
+
     setIsLoading(false);
   };
 
