@@ -29,8 +29,9 @@ export const useAddMeeting = () => {
       if (setFormData) setFormData({ name: "", type: "" });
       setIsContextLoading(false);
       navigateURL && navigate(navigateURL);
-    } catch (error: any) {
-      setError({ error: true, message: error?.message });
+    } catch (error: unknown) {
+      if (error instanceof Error)
+        setError({ error: true, message: error?.message });
     }
   };
 

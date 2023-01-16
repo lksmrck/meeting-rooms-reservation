@@ -1,6 +1,5 @@
 import { useState, useContext } from "react";
 import AuthContext from "../state/AuthContext";
-
 import { useNavigate, useLocation } from "react-router-dom";
 import { UserTypeInLS } from "../types/types";
 import {
@@ -31,7 +30,6 @@ const useLogin = () => {
         return signInWithEmailAndPassword(auth, email, password)
           .then(async (userCredential) => {
             userData = await fetchUserData(userCredential.user);
-            console.log(userData);
           })
           .then(() => {
             if (!userData) return;
@@ -41,9 +39,10 @@ const useLogin = () => {
           });
       })
 
-      .catch((error) => {
+      .catch((error: unknown) => {
         setIsLoading(false);
-        setLoginError({ error: true, message: error.message });
+        if (error instanceof Error)
+          setLoginError({ error: true, message: error.message });
       });
   };
 

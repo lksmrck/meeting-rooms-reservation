@@ -1,4 +1,4 @@
-import { useState, Dispatch, SetStateAction, useContext } from "react";
+import { useState, Dispatch, SetStateAction } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config/firebase";
 import {
@@ -64,7 +64,7 @@ export const useUsersAdminFncs = () => {
         setIsLoading(false);
         setIsOpen(false);
       })
-      .catch((error) => {
+      .catch((error: unknown) => {
         setIsLoading(false);
         setError({
           error: true,
@@ -84,7 +84,7 @@ export const useUsersAdminFncs = () => {
       .then(() => {
         deleteDoc(doc(db, `users`, String(userID)));
       })
-      .catch((error) => {
+      .catch((error: unknown) => {
         setError({
           error: true,
           message: "Something went wrong during removing user.",

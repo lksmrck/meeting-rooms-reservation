@@ -1,9 +1,6 @@
-
 import refOne from "../assets/carouselPics/refOne.png"
 import refTwo from "../assets/carouselPics/refTwo.png"
 import refThree from "../assets/carouselPics/refThree.png"
-
-
 
 export const timeBlocks = [
     {id: 1, time: "7:00 - 7:30", start: "7:00", end: "7:30"},
@@ -72,7 +69,12 @@ export const roomData= [
           company: "Masaryk University",
           image: refTwo,
         },
-        { title: "My husband spends more time home, just to play with this app. Thank you!",person: "Mary the Lunchlady", company: "Wife", image: refOne },
+        { 
+          title: "My husband spends more time home, just to play with this app. Thank you!", 
+          person: "Mary the Lunchlady", 
+          company: "Wife", 
+          image: refOne 
+        },
       ];
 
     export const stepsButtons = [

@@ -45,7 +45,7 @@ export const useRoomsAdminFncs = () => {
         name,
         meetings: [],
       });
-    } catch (error) {
+    } catch (error: unknown) {
       setError({
         error: true,
         message: "Something went wrong during adding the room.",
@@ -67,7 +67,7 @@ export const useRoomsAdminFncs = () => {
       setRoomsArray((prevArray: CompanyRoom[]) =>
         prevArray.filter((room: CompanyRoom) => room.id != roomID)
       );
-    } catch (error) {
+    } catch (error: unknown) {
       setError({
         error: true,
         message: "Something went wrong during deleting the room.",

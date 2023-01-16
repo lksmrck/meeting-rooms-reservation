@@ -8,9 +8,7 @@ import AuthContext from "../state/AuthContext";
 //Detail meetingů v daném vybraném dnu.
 export const useRemoveMeeting = () => {
   const { setError } = useContext(AppContext);
-  /*  const { setRoomsData, roomsData } = useContext(ReservationContext); */
   const { user } = useContext(AuthContext);
-
   const [isLoading, setIsLoading] = useState(false);
 
   const removeData = async (
@@ -26,7 +24,6 @@ export const useRemoveMeeting = () => {
       await docSnap.data().meetings.forEach((meeting: Meeting) => {
         if (meeting.id !== clickedMeeting.id) updatedMeetings.push(meeting);
       });
-
       await updateDoc(dbRef, {
         meetings: updatedMeetings,
       });

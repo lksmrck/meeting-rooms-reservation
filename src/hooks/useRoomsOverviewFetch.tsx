@@ -29,15 +29,15 @@ export const useRoomsOverviewFetch = () => {
     let todaysMeetings: Meeting[] = [];
     //Pomocná proměnná - Rozpad bloků + id místnosti
     let blocksBreakdown: BlocksBreakdown[] = [];
-    //Rooms dané firmy (id a jméno. Pak posláno do state v mother componentu)
+    //Rooms dané firmy (id a jméno)
     let companyRooms: CompanyRoom[] = [];
 
     //Vytvořím proměnné s meetingy v daném dnu + jejich breakdown pro lepší pracování s daty.
     querySnapshot.forEach((doc) => {
       companyRooms.push({ id: doc.data().id, name: doc.data().name });
 
-      if (!doc.data().meetings) return /* null */;
-
+      if (!doc.data().meetings) return;
+      //Vyfiltrované pouze meetingy, které jsou v kliknutém dnu
       const filteredMeetings = doc
         .data()
         .meetings.filter((meeting: Meeting) => {
@@ -45,6 +45,7 @@ export const useRoomsOverviewFetch = () => {
         });
       if (!filteredMeetings) return;
 
+      //Vyfiltrované meetingy daného dne se přidají do todaysMeetings a property blocks se přidá do blocksBreakdown např. jako {room: 1, block: 3}
       filteredMeetings.forEach((meeting: Meeting) => {
         todaysMeetings.push(meeting);
         meeting.blocks.forEach((block: number) => {
@@ -53,7 +54,7 @@ export const useRoomsOverviewFetch = () => {
       });
     });
 
-    //Rezervované bloky -> Najdu v každé room bloky, u kterých bude potřeba upravit property reserved na TRUE (podle rezervovaných meetingů v daném dnu) a upravím array
+    //updatedRooms => vezmou se stáhnuté rooms z firebase a ke každé se přidá roomData property, ve které se upraví jednotlivé bloky na reserved: true, pokud jsou v daném dnu zarezervované
     const updatedRooms: Room[] = companyRooms.map((room: CompanyRoom) => {
       //Vyfiltrované dnešní meetingy podle dané room
       const filteredTodaysMeetings = todaysMeetings.filter(
@@ -90,7 +91,6 @@ export const useRoomsOverviewFetch = () => {
       };
     });
     setRoomsData(updatedRooms);
-
     setIsLoading(false);
   };
 
