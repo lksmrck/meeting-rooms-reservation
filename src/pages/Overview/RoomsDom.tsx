@@ -28,7 +28,7 @@ const RoomsDom: FC<RoomsDomProps> = ({ roomsData, clickBlockHandler }) => {
             roomData.meetingBlocks?.includes(blockNo)
           );
           if (includedInHelper) {
-            return;
+            return null;
           }
           if (roomData.reserved && !includedInHelper) {
             height = roomData.meetingBlocks!.length * 2.5;

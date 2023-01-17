@@ -55,7 +55,9 @@ const Navbar: FC = () => {
             Room Reserver
           </li>
 
-          <li className="h-14 ml-2 md:ml-4">{displayLogo && <LogoImage />}</li>
+          <li className="h-14 ml-2 mt-3 md:mt-0 md:ml-4">
+            {displayLogo && <LogoImage />}
+          </li>
         </ul>
         <div className="flex justify-center ">
           {user && (
@@ -75,11 +77,11 @@ const Navbar: FC = () => {
                 </div>
               )}
 
-              <div className="flex flex-col md:flex-row text-white bg-violet-900 h-10 rounded-lg justify-center items-center pr-1 mr-2 md:mr-4">
-                <h2 className="text-xs font-bold mr-3 mb-0.5 md:mb-0 ml-2 lg:text-base self-center ">
+              <div className="flex flex-col md:flex-row text-white bg-violet-900 h-10 rounded-lg justify-center items-center p-2 md:p-3 mr-2 md:mr-4 md:max-w-80 max-w-48">
+                <h2 className="text-xs font-bold lg:text-base self-center ">
                   {user.email}
                 </h2>
-                <h3 className="text-xs lg:text-sm self-center ">
+                <h3 className="text-xs lg:text-sm self-center md:ml-2">
                   {user.company}
                 </h3>
               </div>

@@ -50,10 +50,9 @@ const DetailDomEditMode: FC<DetailDomEditModeProps> = ({
   //State pro edit time => vyfiltrované bloky, které mají reserved = false {block: 1, start: 7:00, end: 7:00, reserved: false, selected: false}
   const possibleStartTime = localPickedRoom.roomData.filter(
     (data: RoomData) => {
-      return data.reserved == false;
+      return data.reserved === false;
     }
   );
-  const [startTimeOptions, setStartTimeOptions] = useState(possibleStartTime);
 
   const [endTimeOptions, setEndTimeOptions] = useState<RoomData[]>([]);
   useEffect(() => {
@@ -62,10 +61,10 @@ const DetailDomEditMode: FC<DetailDomEditModeProps> = ({
     //Loop začne od i => vybrané počáteční datum meetingu
 
     let i = localPickedRoom.roomData.findIndex(
-      (x) => x.start == updatedTime.start
+      (x) => x.start === updatedTime.start
     );
     for (i; i < 24; i++) {
-      if (i == 23) {
+      if (i === 23) {
         possibleEndTime.push(localPickedRoom.roomData[i]);
         setEndTimeOptions(possibleEndTime);
       } else if (!localPickedRoom?.roomData[i]?.reserved) {
@@ -88,7 +87,7 @@ const DetailDomEditMode: FC<DetailDomEditModeProps> = ({
       creator={creator}
       isGuestModalOpen={isGuestModalOpen}
       setIsGuestModalOpen={setIsGuestModalOpen}
-      startTimeOptions={startTimeOptions}
+      startTimeOptions={possibleStartTime}
       endTimeOptions={endTimeOptions}
       setMissingFormData={setMissingFormData}
     />

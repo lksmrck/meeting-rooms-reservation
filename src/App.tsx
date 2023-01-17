@@ -3,7 +3,7 @@ import Footer from "./components/ui/Footer";
 import { useState } from "react";
 import { LandingRefsObject } from "./types/types";
 import FloatingScrollButton from "./components/ui/FloatingScrollingButton";
-import Routes from "./Routes";
+import Routes from "./routes/Routes";
 
 const App = () => {
   //Refs pro elementy v Landing page -> přes linky ve footeru je možné scrollovat na jednotlivé komponenty.

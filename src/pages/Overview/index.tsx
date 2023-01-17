@@ -41,11 +41,11 @@ const Overview: FC = () => {
     //Uloží do Contextu room a block, na které user clicknul, aby se dalo pak použít v detailní rezervaci jako přednastaveno
 
     const clickedRoom = roomsData.find((roomData: Room) => {
-      return roomData.id == room;
+      return roomData.id === room;
     });
     //přidána property selected: false ke každému bloku. U reserve se tam bude přidělovat kliknutí a podle toho se barvit.
     const adjustedRoomData = clickedRoom!.roomData.map((data: RoomData) => {
-      if (data.block == block && !data.reserved) {
+      if (data.block === block && !data.reserved) {
         return { ...data, selected: true };
       }
       return { ...data, selected: false };

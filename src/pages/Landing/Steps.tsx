@@ -21,7 +21,7 @@ const Steps = forwardRef<HTMLDivElement>((props, ref) => {
       ref={ref}
     >
       <div className="flex mt-30 mx-4 w-full justify-center">
-        <div className="h-96 flex flex-col justify-center items-center w-full mr-10 ">
+        <div className="h-96 flex md:mb-6 flex-col justify-center items-center w-full mr-10 ">
           <ClickMeArrow />
 
           {buttons.map((button) => {
