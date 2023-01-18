@@ -70,19 +70,19 @@ export const useRoomsOverviewFetch = () => {
       //Úprava roomData array, které půjde ke každé room (obsahuje blocky, časy, reserved a selected booleans)
       const newDataArray = roomData.map((oneRoom: RoomData) => {
         //Pomocné array - v případě, že daný block má rezervovaný meeting, tak v této proměnné budou čísla všech bloků, kterých se rezervovaný meeting týká, např. [2,3,4]
-        let meetingsBlocksArray: number[] = [];
+        let meetingBlocks: number[] = [];
 
         filteredTodaysMeetings.forEach((meeting: Meeting) => {
           if (meeting.blocks.includes(oneRoom.block)) {
             meeting.blocks.forEach((block: number) =>
-              meetingsBlocksArray.push(block)
+              meetingBlocks.push(block)
             );
           }
         });
         return {
           ...oneRoom,
           reserved: blocks.includes(oneRoom.block),
-          meetingBlocks: meetingsBlocksArray,
+          meetingBlocks,
         };
       });
       return {

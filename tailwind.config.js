@@ -57,6 +57,10 @@ module.exports = {
           "20%, 60%": { transform: "rotate(5deg)" },
           "40%, 80%": { transform: "rotate(-5deg)" },
         },
+        featuresBounce: {
+          "20%, 60%": { transform: "rotate(3deg)" },
+          "40%, 80%": { transform: "rotate(-3deg)" },
+        },
 
         arrowColors: {
           "50%": {
@@ -71,6 +75,7 @@ module.exports = {
         bounceInRight: "bounceInRight 1s ease 1",
         buttonGlowing: "buttonGlowing 3s ease-in-out infinite",
         rocketBounce: "rocketBounce 0.5s ease-in-out infinite",
+        featuresBounce: "featuresBounce 0.5s ease-in-out 1",
         arrowCollors: "arrowColors 1s infinite",
       },
       backgroundImage: {

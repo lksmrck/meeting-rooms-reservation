@@ -1,6 +1,11 @@
 import refOne from "../assets/carouselPics/refOne.png"
 import refTwo from "../assets/carouselPics/refTwo.png"
 import refThree from "../assets/carouselPics/refThree.png"
+import love from "../assets/love.svg"
+import simple from "../assets/featuresPics/simple.svg"
+import fast from "../assets/featuresPics/fast.svg"
+import easy from "../assets/featuresPics/easy.svg"
+
 
 export const timeBlocks = [
     {id: 1, time: "7:00 - 7:30", start: "7:00", end: "7:30"},
@@ -77,11 +82,34 @@ export const roomData= [
         },
       ];
 
+
+      export const featureBoxes = [
+        {
+          name: "Simple",
+          text: '"Simplicity is the ultimate sophistication."',
+          textAuthor: "Leonardo da Vinci",
+          icon: simple,
+        },
+        {
+          name: "Fast",
+          text: '"I feel the need... the need for speed."',
+          textAuthor: "Tom Cruise",
+          icon: fast,
+        },
+        {
+          name: "Easy to use",
+          text: '"Everything is hard before it is easy."',
+          textAuthor: "Wolfgang Goethe",
+          icon: easy,
+        },
+      ];
+
+
     export const stepsButtons = [
         { id: 1, clicked: true, text: "Pick a date",  followingText: "Try" },
         { id: 2, clicked: false, text: "Pick a room",  followingText: "It" },
         { id: 3, clicked: false, text: "Pick a time and book it",  followingText: "On" },
         { id: 4, clicked: false, text: "View created meetings",  followingText: "Your"},
         { id: 5, clicked: false, text: "Edit or delete meeting if needed",  followingText: "Own" },
-        { id: 6, clicked: false, text: "Add room or user if you are admin", followingText: "👀" },
+        { id: 6, clicked: false, text: "Add room or user if you are admin", followingText: love },
       ];

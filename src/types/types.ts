@@ -56,7 +56,7 @@ export type TimeBlock = {
 
 
 export type Feature = {
-   text: string; icon: ReactNode 
+  name:string; text: string; textAuthor:string, icon: string 
 }
 
 export type CarouselSlide = {

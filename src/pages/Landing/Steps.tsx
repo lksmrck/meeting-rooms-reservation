@@ -30,10 +30,20 @@ const Steps = forwardRef<HTMLDivElement>((props, ref) => {
                 key={button.id}
                 className="flex justify-center items-center m-1 md:w-155 w-80  "
               >
-                <div className="text-end w-1/3 mr-10 font-outline text-4xl font-bold ">
-                  {button.clicked && <p>{button.followingText}</p>}
+                <div className="flex justify-end w-1/3 mr-10 font-outline text-4xl font-bold relative  h-10 ">
+                  {button.clicked && button.id < 6 ? (
+                    <p>{button.followingText}</p>
+                  ) : (
+                    button.clicked && (
+                      <img
+                        src={button.followingText}
+                        width="80px"
+                        className="absolute top-0 right-0"
+                      />
+                    )
+                  )}
                 </div>
-                <div className="flex justify-start w-2/3">
+                <div className="flex justify-start w-2/3 h-10">
                   <Button
                     colorScheme="teal"
                     onClick={() => onClickButton(button.id)}
