@@ -1,6 +1,3 @@
-import { FiTarget as Target } from "react-icons/fi";
-import { MdOutlineSportsScore as Flag } from "react-icons/md";
-import { GiClick as Point } from "react-icons/gi";
 import FeatureBox from "../../components/landing/FeatureBox";
 import { Feature } from "../../types/types";
 import { forwardRef } from "react";

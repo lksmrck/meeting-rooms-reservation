@@ -24,7 +24,7 @@ Personal project of meeting room reservation system for companies.
 
 ## 🔸 Demo
 
-You can try the demo [HERE](TBD)
+You can try the demo [HERE](https://lukasthevicious.github.io/meeting-rooms-reservation/)
 
 ## 🔸 Configuration and setup
 
@@ -45,8 +45,10 @@ $ npm install (to install dependencies)
 
 ## 🔸 Main technologies used
 
-[React](https://reactjs.org/), [Typescript](https://www.typescriptlang.org/), [Firebase](https://firebase.google.com/), [Chakra UI](https://chakra-ui.com/), [Tailwind CSS](https://tailwindcss.com/)
-
+- <b>Frontend:</b>
+  [React](https://reactjs.org/), [Typescript](https://www.typescriptlang.org/), [Chakra UI](https://chakra-ui.com/), [Tailwind CSS](https://tailwindcss.com/)
+- <b>Backend:</b>
+  [Firebase](https://firebase.google.com/)
 - <b>Hosting:</b>
   [GH pages](https://pages.github.com/)
 
@@ -56,5 +58,4 @@ $ npm install (to install dependencies)
 
 ## 🔸 Future
 
-- Implementation of the system, that sends emails to users, whose email addresses are included in created meeting
 - User is not able to create meeting in the past dates
