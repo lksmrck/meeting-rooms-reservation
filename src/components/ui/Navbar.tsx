@@ -55,9 +55,9 @@ const Navbar: FC = () => {
             Room Reserver
           </li>
 
-          <li className="h-14 ml-2 mt-3 md:mt-0 md:ml-4">
+          {/*    <li className="h-14 ml-2 mt-3 md:mt-0 md:ml-4">
             {displayLogo && <LogoImage />}
-          </li>
+          </li> */}
         </ul>
         <div className="flex justify-center ">
           {user && (

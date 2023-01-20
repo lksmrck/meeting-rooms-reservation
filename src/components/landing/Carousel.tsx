@@ -9,13 +9,13 @@ type CarouselProps = {
 
 const Carousel: FC<CarouselProps> = ({ slides }) => {
   return (
-    <div className="w-2/3 md:w-1/2 max-w-xs md:max-w-2xl h-110 md:h-64 mt-48 md:min-w-min glass">
+    <div className="w-2/3 md:w-1/2 max-w-xs md:max-w-2xl h-110 md:h-64 mt-48 md:min-w-min glass overflow-hidden">
       <ReactCarousel
         showThumbs={false}
         showArrows={true}
         className="h-80 md:h-64 "
         autoPlay
-        interval={3000}
+        interval={5000}
         infiniteLoop
         showStatus={false}
       >
