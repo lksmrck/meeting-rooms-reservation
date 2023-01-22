@@ -6,6 +6,7 @@ import DisplayedGuests from "../reserve/DisplayedGuests";
 import UpdateMeetingTime from "./UpdateMeetingTime";
 import GuestsModal from "../../pages/Reserve/GuestsModal";
 import { RoomData } from "../../types/types";
+import GuestsPopover from "../reserve/GuestsPopover";
 
 type EditModeFormProps = {
   updatedTime: { start: string | null; end: string | null };
@@ -68,9 +69,14 @@ const EditModeForm: FC<EditModeFormProps> = ({
           small
         />
         <Input value={creator} size="sm" disabled />
-        <DisplayedGuests
+        {/* <DisplayedGuests
           guests={updatedGuests}
           setGuestsOpenModal={setIsGuestModalOpen}
+        /> */}
+        <GuestsPopover
+          guests={updatedGuests}
+          setGuestsOpenModal={setIsGuestModalOpen}
+          sm
         />
 
         {isGuestModalOpen && (

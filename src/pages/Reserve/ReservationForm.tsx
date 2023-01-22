@@ -18,6 +18,7 @@ import { useAddMeeting } from "../../hooks/useAddMeeting";
 import { CALL } from "../../data/constants";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { BsArrowUp } from "react-icons/bs";
+import GuestsPopover from "../../components/reserve/GuestsPopover";
 
 import { paramsToDate } from "../../utils/dateParamsFormat";
 
@@ -130,10 +131,14 @@ const ReservationForm: FC<ReservationFormProps> = ({
           />
 
           {guests.length > 0 ? (
-            <DisplayedGuests
+            /*   <DisplayedGuests
               guests={guests}
               setGuestsOpenModal={setIsGuestModalOpen}
               form
+            /> */
+            <GuestsPopover
+              guests={guests}
+              setGuestsOpenModal={setIsGuestModalOpen}
             />
           ) : (
             <Button

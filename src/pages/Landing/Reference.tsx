@@ -7,7 +7,7 @@ import Circle from "../../components/landing/Circle";
 const Reference = forwardRef<HTMLDivElement>((props, ref) => {
   return (
     <div
-      className="w-full h-content md:h-full flex justify-center items-center bg-cover  bg-center bg-no-repeat bg-carouselWaves relative pb-10 "
+      className="w-full h-content md:h-full flex justify-center items-center bg-cover  bg-center bg-no-repeat bg-carouselWaves relative pb-28 "
       ref={ref}
     >
       <Circle additionalTWStyles="top-44 left-2/3 md:left-1/2" />

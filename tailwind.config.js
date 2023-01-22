@@ -18,6 +18,7 @@ module.exports = {
       },
       spacing: {
         0.25: "0.0625rem",
+        22: "5.5rem",
         30: "7.5rem",
         105: "26.25rem",
         110: "27.5rem",
@@ -82,11 +83,12 @@ module.exports = {
         stepsWaves: "url('/src/assets/bgs/stepsWaves.svg')",
         titleWaves: "url('/src/assets/bgs/titleWaves.svg')",
         carouselWaves: "url('/src/assets/bgs/carouselWaves.svg')",
-        contactUsWaves: "url('/src/assets/bgs/contactUsWaves.svg')",
+        companiesWaves: "url('/src/assets/bgs/companiesWaves.svg')",
         loginBg: "url('/src/assets/bgs/loginBg.svg')",
       },
       backgroundColor: {
         features: "#461c70",
+        contactUs: "#efe5e5",
       },
     },
   },

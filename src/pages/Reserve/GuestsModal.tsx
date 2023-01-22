@@ -49,6 +49,7 @@ const GuestsModal: FC<GuestsModalProps> = ({
     let newArr: string[] = [...guests];
     newArr[Number(e.target.name) - 1] = e.target.value;
     setGuests(newArr);
+    console.log(guests);
   };
 
   const onCancel = (): void => {

@@ -4,6 +4,7 @@ import Features from "./Features";
 import Steps from "./Steps";
 import Reference from "./Reference";
 import ContactUs from "./ContactUs";
+import Companies from "./Companies";
 import { LandingRefsObject } from "../../types/types";
 
 type LandingProps = {
@@ -29,6 +30,7 @@ const Landing: FC<LandingProps> = ({ gatherLandingRefs }) => {
       <Features ref={landingRefs.featuresRef} />
       <Steps ref={landingRefs.stepsRef} />
       <Reference ref={landingRefs.referencesRef} />
+      <Companies />
       <ContactUs ref={landingRefs.contactRef} />
     </div>
   );
