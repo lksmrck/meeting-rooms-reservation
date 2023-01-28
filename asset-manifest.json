@@ -1,26 +1,44 @@
 {
   "files": {
-    "main.css": "/meeting-rooms-reservation/static/css/main.7cbf7648.css",
-    "main.js": "/meeting-rooms-reservation/static/js/main.30b1e89e.js",
+    "main.css": "/meeting-rooms-reservation/static/css/main.46f80c21.css",
+    "main.js": "/meeting-rooms-reservation/static/js/main.b0d0e80a.js",
     "static/media/refThree.png": "/meeting-rooms-reservation/static/media/refThree.6ef09091ecae52cf1b97.png",
     "static/media/refTwo.png": "/meeting-rooms-reservation/static/media/refTwo.f06c3c8b3fa49f1ed798.png",
     "static/media/refOne.png": "/meeting-rooms-reservation/static/media/refOne.c9dd5fbbb32894219fe8.png",
     "static/media/rocketWithFire.png": "/meeting-rooms-reservation/static/media/rocketWithFire.046fe97a274dbc853565.png",
     "static/media/clickMeArrow.svg": "/meeting-rooms-reservation/static/media/clickMeArrow.3cc9cdc7389ad96c718bef3370e65312.svg",
     "static/media/rocketWithoutFire.png": "/meeting-rooms-reservation/static/media/rocketWithoutFire.758f01df0ffbee4815b7.png",
-    "static/media/logoBoyInSuit.png": "/meeting-rooms-reservation/static/media/logoBoyInSuit.74723bd9450ae73eddb9.png",
+    "static/media/company11.png": "/meeting-rooms-reservation/static/media/company11.8cb0eef2e2e749139134.png",
+    "static/media/company9.png": "/meeting-rooms-reservation/static/media/company9.86910fc55b5ac8bd2aa1.png",
+    "static/media/company12.png": "/meeting-rooms-reservation/static/media/company12.2f792aa232e7e1907567.png",
+    "static/media/company7.png": "/meeting-rooms-reservation/static/media/company7.1ce75cc827b4b9c8ec0a.png",
+    "static/media/company16.png": "/meeting-rooms-reservation/static/media/company16.74683e5dd0ae6c2a47f6.png",
+    "static/media/company13.png": "/meeting-rooms-reservation/static/media/company13.19928ad387bdc5dfc7be.png",
+    "static/media/company6.png": "/meeting-rooms-reservation/static/media/company6.807befb0282d839bd234.png",
+    "static/media/company14.png": "/meeting-rooms-reservation/static/media/company14.eb6bf9e7516453a12ad0.png",
+    "static/media/company1.png": "/meeting-rooms-reservation/static/media/company1.349ed5ee42d16cc727b5.png",
+    "static/media/company10.png": "/meeting-rooms-reservation/static/media/company10.2b9caa0353a3a06a0dfe.png",
+    "static/media/company15.png": "/meeting-rooms-reservation/static/media/company15.d593a1d67b2f3100dc7f.png",
+    "static/media/company8.png": "/meeting-rooms-reservation/static/media/company8.1ac9757b28e6371cab16.png",
+    "static/media/easy.svg": "/meeting-rooms-reservation/static/media/easy.ac9aab4262b2a66cbbb643da96866553.svg",
+    "static/media/company3.png": "/meeting-rooms-reservation/static/media/company3.bb56cb1e2dee32b5089d.png",
+    "static/media/company4.png": "/meeting-rooms-reservation/static/media/company4.ab2725d904656fb40ab3.png",
+    "static/media/company2.png": "/meeting-rooms-reservation/static/media/company2.03f6365c5a778010ae29.png",
+    "static/media/booking.svg": "/meeting-rooms-reservation/static/media/booking.65be75025df8455753383f765ee7187f.svg",
+    "static/media/simple.svg": "/meeting-rooms-reservation/static/media/simple.30ae7384eb1f78c199e6a40003d9282c.svg",
+    "static/media/fast.svg": "/meeting-rooms-reservation/static/media/fast.d0a1b88844aafc56896689ec32f27b3d.svg",
+    "static/media/love.svg": "/meeting-rooms-reservation/static/media/love.156aa0b84734915577c0c9ba1e54e7fa.svg",
     "static/media/envelope.svg": "/meeting-rooms-reservation/static/media/envelope.da7bc66e955910c5de009b1fb1558669.svg",
     "index.html": "/meeting-rooms-reservation/index.html",
     "static/media/titleWaves.svg": "/meeting-rooms-reservation/static/media/titleWaves.ff9f4d1004112d57494e.svg",
     "static/media/carouselWaves.svg": "/meeting-rooms-reservation/static/media/carouselWaves.45e8b4ed6b86f31ccdf7.svg",
-    "static/media/contactUsWaves.svg": "/meeting-rooms-reservation/static/media/contactUsWaves.30667a99b9a26e468a38.svg",
     "static/media/stepsWaves.svg": "/meeting-rooms-reservation/static/media/stepsWaves.d1a8eb24f8f2b5271530.svg",
     "static/media/loginBg.svg": "/meeting-rooms-reservation/static/media/loginBg.e3314e72ad96c13cdcb7.svg",
-    "main.7cbf7648.css.map": "/meeting-rooms-reservation/static/css/main.7cbf7648.css.map",
-    "main.30b1e89e.js.map": "/meeting-rooms-reservation/static/js/main.30b1e89e.js.map"
+    "main.46f80c21.css.map": "/meeting-rooms-reservation/static/css/main.46f80c21.css.map",
+    "main.b0d0e80a.js.map": "/meeting-rooms-reservation/static/js/main.b0d0e80a.js.map"
   },
   "entrypoints": [
-    "static/css/main.7cbf7648.css",
-    "static/js/main.30b1e89e.js"
+    "static/css/main.46f80c21.css",
+    "static/js/main.b0d0e80a.js"
   ]
 }
