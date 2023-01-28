@@ -1,12 +1,12 @@
-import React, { ChangeEvent, Dispatch, SetStateAction, FC } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, FC } from "react";
 import { Input } from "@chakra-ui/react";
 import MeetingType from "../reserve/FormSelect";
 import { meetingTypes } from "../../data/constants";
-import DisplayedGuests from "../reserve/DisplayedGuests";
 import UpdateMeetingTime from "./UpdateMeetingTime";
 import GuestsModal from "../../pages/Reserve/GuestsModal";
 import { RoomData } from "../../types/types";
 import GuestsPopover from "../reserve/GuestsPopover";
+import NoGuests from "./NoGuests";
 
 type EditModeFormProps = {
   updatedTime: { start: string | null; end: string | null };
@@ -48,7 +48,7 @@ const EditModeForm: FC<EditModeFormProps> = ({
         <h3>Meeting name: </h3>
         <h4>Meeting type: </h4>
         <h5>Created by: </h5>
-        <h5>Guests:</h5>
+        <h5 className="mt-0.5">Guests:</h5>
         <h5 className="mt-0.5">Start time: </h5>
         {updatedTime.start != null && <h5 className="mt-0.5">End time: </h5>}
       </div>
@@ -69,15 +69,17 @@ const EditModeForm: FC<EditModeFormProps> = ({
           small
         />
         <Input value={creator} size="sm" disabled />
-        {/* <DisplayedGuests
-          guests={updatedGuests}
-          setGuestsOpenModal={setIsGuestModalOpen}
-        /> */}
-        <GuestsPopover
-          guests={updatedGuests}
-          setGuestsOpenModal={setIsGuestModalOpen}
-          sm
-        />
+
+        {updatedGuests.length < 1 ? (
+          <NoGuests setGuestsOpenModal={setIsGuestModalOpen} />
+        ) : (
+          <GuestsPopover
+            guests={updatedGuests}
+            setGuestsOpenModal={setIsGuestModalOpen}
+            sm
+            triggerButtonStyling="w-full mt-0.5"
+          />
+        )}
 
         {isGuestModalOpen && (
           <GuestsModal

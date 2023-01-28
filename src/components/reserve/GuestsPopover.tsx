@@ -4,10 +4,8 @@ import {
   PopoverContent,
   PopoverHeader,
   PopoverBody,
-  PopoverFooter,
   PopoverArrow,
   PopoverCloseButton,
-  PopoverAnchor,
   Button,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -17,12 +15,14 @@ type GuestsPopoverProps = {
   guests: string[];
   setGuestsOpenModal: Dispatch<SetStateAction<boolean>>;
   sm?: boolean;
+  triggerButtonStyling?: string;
 };
 
 const GuestsPopover: FC<GuestsPopoverProps> = ({
   guests,
   setGuestsOpenModal,
   sm,
+  triggerButtonStyling,
 }) => {
   const { onOpen, onClose, isOpen } = useDisclosure();
 
@@ -39,7 +39,11 @@ const GuestsPopover: FC<GuestsPopoverProps> = ({
       onClose={onClose}
     >
       <PopoverTrigger>
-        <Button size={sm ? "sm" : "md"} colorScheme="purple">
+        <Button
+          size={sm ? "sm" : "md"}
+          colorScheme="purple"
+          className={`${triggerButtonStyling}`}
+        >
           See guests
         </Button>
       </PopoverTrigger>

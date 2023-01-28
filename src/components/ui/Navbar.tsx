@@ -48,7 +48,7 @@ const Navbar: FC = () => {
           className="flex items-center cursor-pointer"
           onClick={() => {
             setCalendarOpen(false);
-            navigate("/datepick");
+            navigate(user ? "/datepick" : "/home");
           }}
         >
           <li className=" ml-8 text-white font-solid text-lg md:text-2xl animate-bounceInRight">

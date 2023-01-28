@@ -26,20 +26,16 @@ const User: FC<UserProps> = ({ user, setUsers }) => {
       <Th>{rights}</Th>
       <Th>{creationDate}</Th>
       <Th isNumeric>
-        <div className=" flex justify-end ">
-          <IconButton
-            aria-label="minus"
-            colorScheme="red"
-            icon={
-              <AiOutlineMinusCircle size={15} style={{ color: "#f0fdf4" }} />
-            }
-            onClick={() => {
-              deleteUserHandler(id!);
-            }}
-            className=" w-5 mr-2"
-            size="xs"
-          />
-        </div>
+        <IconButton
+          aria-label="minus"
+          colorScheme="red"
+          icon={<AiOutlineMinusCircle size={15} style={{ color: "#f0fdf4" }} />}
+          onClick={() => {
+            deleteUserHandler(id!);
+          }}
+          className=" w-5 mr-2"
+          size="xs"
+        />
       </Th>
     </Tr>
   );

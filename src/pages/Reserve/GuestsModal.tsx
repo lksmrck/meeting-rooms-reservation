@@ -46,10 +46,9 @@ const GuestsModal: FC<GuestsModalProps> = ({
 
   //Přidá každého guesta do array a removuje při odebrání inputu.
   const onChangeGuests = (e: ChangeEvent<HTMLInputElement>): void => {
-    let newArr: string[] = [...guests];
-    newArr[Number(e.target.name) - 1] = e.target.value;
-    setGuests(newArr);
-    console.log(guests);
+    let modifiedGuestsArray: string[] = [...guests];
+    modifiedGuestsArray[Number(e.target.name) - 1] = e.target.value;
+    setGuests(modifiedGuestsArray);
   };
 
   const onCancel = (): void => {
@@ -57,8 +56,19 @@ const GuestsModal: FC<GuestsModalProps> = ({
     setInputsNumber([1]);
   };
 
-  const onSubmitGuests = (e: SyntheticEvent): void => {
-    onAddGuests(guests);
+  const submitGuestsHandler = (e: SyntheticEvent): void => {
+    let cleanedGuestsArray: string[] = [];
+    //Validace pro případ, že user nechá nevyplněné pole pro guesty
+    guests.forEach((guest: string) => {
+      if (!guest) return;
+      if (guest.length < 1) return;
+      cleanedGuestsArray.push(guest);
+    });
+    onAddGuests(cleanedGuestsArray);
+    setIsOpen(false);
+  };
+  const removeGuestsHandler = () => {
+    onAddGuests([]);
     setIsOpen(false);
   };
 
@@ -103,7 +113,6 @@ const GuestsModal: FC<GuestsModalProps> = ({
                   }}
                 ></IconButton>
               )}
-
               <IconButton
                 size="sm"
                 icon={<GoPlus />}
@@ -119,7 +128,12 @@ const GuestsModal: FC<GuestsModalProps> = ({
           </form>
         </ModalBody>
         <ModalFooter className="[&>button]:m-1 ">
-          <Button colorScheme="teal" onClick={onSubmitGuests}>
+          {guests.length > 0 && (
+            <Button colorScheme="red" onClick={removeGuestsHandler}>
+              Remove all guests
+            </Button>
+          )}
+          <Button colorScheme="teal" onClick={submitGuestsHandler}>
             Save
           </Button>
           <Button onClick={onCancel}>Cancel</Button>

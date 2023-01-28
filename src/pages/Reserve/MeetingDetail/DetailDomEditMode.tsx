@@ -59,9 +59,8 @@ const DetailDomEditMode: FC<DetailDomEditModeProps> = ({
     //Loop, na přiřazení možného končícího času meetingu (updatuje se vždy po zadání počátečního času)
     let possibleEndTime: RoomData[] = [];
     //Loop začne od i => vybrané počáteční datum meetingu
-
     let i = localPickedRoom.roomData.findIndex(
-      (x) => x.start === updatedTime.start
+      (block) => block.start === updatedTime.start
     );
     for (i; i < 24; i++) {
       if (i === 23) {

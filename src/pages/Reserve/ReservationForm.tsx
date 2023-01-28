@@ -13,15 +13,12 @@ import GuestsModal from "./GuestsModal";
 import ReservationContext from "../../state/ReservationContext";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { RoomData } from "../../types/types";
-import DisplayedGuests from "../../components/reserve/DisplayedGuests";
 import { useAddMeeting } from "../../hooks/useAddMeeting";
 import { CALL } from "../../data/constants";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { BsArrowUp } from "react-icons/bs";
 import GuestsPopover from "../../components/reserve/GuestsPopover";
-
 import { paramsToDate } from "../../utils/dateParamsFormat";
-
 import MeetingType from "../../components/reserve/FormSelect";
 
 type ReservationFormProps = {
@@ -131,11 +128,6 @@ const ReservationForm: FC<ReservationFormProps> = ({
           />
 
           {guests.length > 0 ? (
-            /*   <DisplayedGuests
-              guests={guests}
-              setGuestsOpenModal={setIsGuestModalOpen}
-              form
-            /> */
             <GuestsPopover
               guests={guests}
               setGuestsOpenModal={setIsGuestModalOpen}
