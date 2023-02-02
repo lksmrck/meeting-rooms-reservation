@@ -1,5 +1,11 @@
 # 👔 Meeting Room Reservation System
 
+## 🔸 Demo
+
+You can try the demo [HERE](https://lukasthevicious.github.io/meeting-rooms-reservation/)
+
+<img src="./readme/screenshots.JPG" />
+
 ## 🔸 Key Features
 
 Personal project of meeting room reservation system for companies.
@@ -21,10 +27,6 @@ Personal project of meeting room reservation system for companies.
 2. That Admin user is then able to:
    1. Manage his company's meeting rooms (adding, deleting)
    2. Manage users (adding, deleting) and assigning the roles (Admin or User)
-
-## 🔸 Demo
-
-You can try the demo [HERE](https://lukasthevicious.github.io/meeting-rooms-reservation/)
 
 ## 🔸 Configuration and setup
 
