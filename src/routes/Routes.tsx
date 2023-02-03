@@ -14,7 +14,7 @@ import useAuth from "../hooks/useAuth";
 import { useContext } from "react";
 import AppContext from "../state/AppContext";
 import NotFound from "../pages/screens/NotFound";
-import RequireAuth from "../components/login/RequireAuth";
+import ProtectedRoutes from "../components/login/ProtectedRoutes";
 import Unauthorized from "../pages/screens/Unauthorized";
 import { ADMIN, USER } from "../data/constants";
 import UsersList from "../pages/Admin/Users";
@@ -65,12 +65,12 @@ const Routes: FC<RoutesProps> = ({ gatherLandingRefs }) => {
       <Route path="/login" element={<Auth />} />
       <Route path="/unauthorized" element={<Unauthorized />} />
       {/* 2. Protected routes - musí být logged in + práva User nebo Admin */}
-      <Route element={<RequireAuth allowedRights={[ADMIN, USER]} />}>
+      <Route element={<ProtectedRoutes allowedRights={[ADMIN, USER]} />}>
         <Route path="/datepick" element={<Home />} />
         <Route path="/reserve" element={<Reserve />} />
         <Route path="/overview" element={<DailyOverview />} />
         {/* 3. Protected routes - musí být logged in + práva Admin */}
-        <Route element={<RequireAuth allowedRights={[ADMIN]} />}>
+        <Route element={<ProtectedRoutes allowedRights={[ADMIN]} />}>
           <Route path="/settings" element={<Settings />} />
           <Route path="/settings/rooms" element={<RoomsList />} />
           <Route path="/settings/users" element={<UsersList />} />

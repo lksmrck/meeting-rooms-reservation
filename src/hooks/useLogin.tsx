@@ -19,7 +19,7 @@ const useLogin = () => {
   const location = useLocation();
 
   //Odkud se user prokliknul
-  const from = location.state?.from?.pathname || "/datepick";
+  const redirectTo = /* location.state?.from?.pathname ||  */ "/datepick";
 
   const loginUser = async (email: string, password: string): Promise<void> => {
     setIsLoading(true);
@@ -34,7 +34,7 @@ const useLogin = () => {
           .then(() => {
             if (!userData) return;
             setUser(userData);
-            navigate(from, { replace: true });
+            navigate(redirectTo, { replace: true });
             setIsLoading(false);
           });
       })
