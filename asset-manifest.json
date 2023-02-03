@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/meeting-rooms-reservation/static/css/main.46f80c21.css",
-    "main.js": "/meeting-rooms-reservation/static/js/main.b0d0e80a.js",
+    "main.js": "/meeting-rooms-reservation/static/js/main.027bc3d9.js",
     "static/media/refThree.png": "/meeting-rooms-reservation/static/media/refThree.6ef09091ecae52cf1b97.png",
     "static/media/refTwo.png": "/meeting-rooms-reservation/static/media/refTwo.f06c3c8b3fa49f1ed798.png",
     "static/media/refOne.png": "/meeting-rooms-reservation/static/media/refOne.c9dd5fbbb32894219fe8.png",
@@ -35,10 +35,10 @@
     "static/media/stepsWaves.svg": "/meeting-rooms-reservation/static/media/stepsWaves.d1a8eb24f8f2b5271530.svg",
     "static/media/loginBg.svg": "/meeting-rooms-reservation/static/media/loginBg.e3314e72ad96c13cdcb7.svg",
     "main.46f80c21.css.map": "/meeting-rooms-reservation/static/css/main.46f80c21.css.map",
-    "main.b0d0e80a.js.map": "/meeting-rooms-reservation/static/js/main.b0d0e80a.js.map"
+    "main.027bc3d9.js.map": "/meeting-rooms-reservation/static/js/main.027bc3d9.js.map"
   },
   "entrypoints": [
     "static/css/main.46f80c21.css",
-    "static/js/main.b0d0e80a.js"
+    "static/js/main.027bc3d9.js"
   ]
 }
