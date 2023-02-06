@@ -17,7 +17,7 @@ const Steps = forwardRef<HTMLDivElement>((props, ref) => {
 
   return (
     <div
-      className=" flex justify-center bg-cover bg-center bg-no-repeat bg-stepsWaves items-center w-screen py-10 "
+      className=" flex justify-center bg-cover bg-center bg-no-repeat bg-stepsWaves items-center w-screen md:py-10  "
       ref={ref}
     >
       <div className="flex mt-30 mx-4 w-full justify-center">

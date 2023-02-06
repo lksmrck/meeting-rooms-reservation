@@ -3,8 +3,8 @@ import "./style.css";
 
 const Companies = () => {
   return (
-    <div className="flex flex-col md:flex-row justify-center items-center mt-20   companies">
-      <div className="w-96  lg:w-110 md:mr-28 md:mb-14 ml-8 ">
+    <div className="flex flex-col md:flex-row justify-center items-center mt-20 companies ">
+      <div className="lg:w-110 md:mr-28 md:mb-14 md:ml-8 mx-2 ">
         <h1 className="font-bold mb-2 text-center md:text-left text-xl">
           Join our community
         </h1>
@@ -16,7 +16,8 @@ const Companies = () => {
           The world of exciting features is waiting for you.
         </p>
       </div>
-      <div className="grid grid-cols-4 gap-1 rounded-lg mt-10 md:mt-0 mr-8 hover:cursor-pointer ">
+
+      <div className="grid grid-cols-4 gap-1 rounded-lg mt-10 md:mt-0 mr-2 ml-2 md:mr-8 hover:cursor-pointer  ">
         {companiesLogos.map((logo: string) => {
           return <img src={logo} className=" w-24 h-22 rounded-lg  -z-10" />;
         })}
