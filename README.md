@@ -15,7 +15,7 @@ You can try the demo [HERE](https://lksmrck.github.io/meeting-rooms-reservation/
 
 Personal project of meeting room reservation system for companies.
 
-**Features**
+**📌 Features**
 
 1. User uses this app when he needs to book a meeting room for upcoming meeting or see/edit meeting details (time, meeting type, guests, meeting creators)
 2. User is able to pick a day, see **all company meeting rooms together** (divided into 30 minutes time blocks from 7AM to 7PM).
@@ -26,7 +26,7 @@ Personal project of meeting room reservation system for companies.
    4. Delete meeting in case, that the User is also Creator of that meeting
 4. If the user has also Admin rights, he is able to manage (add and delete) **meeting** **rooms** and **users** for his company
 
-**Steps**
+**📌 Steps**
 
 1. **The company** and one **Admin user** is created and assigned externally (…after contacting the app provider through the contact form and agreeing on terms)
 2. That Admin user is then able to:
