@@ -2,7 +2,12 @@
 
 ## 🔸 Demo
 
-You can try the demo [HERE](https://lukasthevicious.github.io/meeting-rooms-reservation/)
+You can try the demo [HERE](https://lukasthevicious.github.io/meeting-rooms-reservation/) based on following data:
+
+```diff
++ login: novak@novak.com
++ password: 123123
+```
 
 <img src="./readme/screenshots.JPG" />
 
