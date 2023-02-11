@@ -34,7 +34,7 @@ const useLogin = () => {
           .then(() => {
             if (!userData) return;
             setUser(userData);
-            navigate(redirectTo, { replace: true });
+            navigate(redirectTo);
             setIsLoading(false);
           });
       })
