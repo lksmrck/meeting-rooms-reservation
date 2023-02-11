@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/meeting-rooms-reservation/static/css/main.7f762f3a.css",
-    "main.js": "/meeting-rooms-reservation/static/js/main.1e3b1731.js",
+    "main.css": "/meeting-rooms-reservation/static/css/main.f3d54897.css",
+    "main.js": "/meeting-rooms-reservation/static/js/main.003672fd.js",
     "static/media/refThree.png": "/meeting-rooms-reservation/static/media/refThree.6ef09091ecae52cf1b97.png",
     "static/media/refTwo.png": "/meeting-rooms-reservation/static/media/refTwo.f06c3c8b3fa49f1ed798.png",
     "static/media/refOne.png": "/meeting-rooms-reservation/static/media/refOne.c9dd5fbbb32894219fe8.png",
@@ -31,14 +31,14 @@
     "static/media/envelope.svg": "/meeting-rooms-reservation/static/media/envelope.da7bc66e955910c5de009b1fb1558669.svg",
     "index.html": "/meeting-rooms-reservation/index.html",
     "static/media/titleWaves.svg": "/meeting-rooms-reservation/static/media/titleWaves.ff9f4d1004112d57494e.svg",
-    "static/media/carouselWaves.svg": "/meeting-rooms-reservation/static/media/carouselWaves.45e8b4ed6b86f31ccdf7.svg",
     "static/media/stepsWaves.svg": "/meeting-rooms-reservation/static/media/stepsWaves.d1a8eb24f8f2b5271530.svg",
     "static/media/loginBg.svg": "/meeting-rooms-reservation/static/media/loginBg.e3314e72ad96c13cdcb7.svg",
-    "main.7f762f3a.css.map": "/meeting-rooms-reservation/static/css/main.7f762f3a.css.map",
-    "main.1e3b1731.js.map": "/meeting-rooms-reservation/static/js/main.1e3b1731.js.map"
+    "static/media/carouselWaves.svg": "/meeting-rooms-reservation/static/media/carouselWaves.cc3795d53240840d68e0.svg",
+    "main.f3d54897.css.map": "/meeting-rooms-reservation/static/css/main.f3d54897.css.map",
+    "main.003672fd.js.map": "/meeting-rooms-reservation/static/js/main.003672fd.js.map"
   },
   "entrypoints": [
-    "static/css/main.7f762f3a.css",
-    "static/js/main.1e3b1731.js"
+    "static/css/main.f3d54897.css",
+    "static/js/main.003672fd.js"
   ]
 }
