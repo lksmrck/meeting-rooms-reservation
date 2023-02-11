@@ -18,7 +18,7 @@ const Footer: FC<FooterProps> = ({ landingRefs }) => {
   };
 
   return (
-    <footer className="flex flex-col justify-start  text-white bg-violet-800  shadow-sm mt-auto w-screen  relative ">
+    <footer className="flex flex-col justify-start  text-white bg-purpleMain  shadow-sm mt-auto w-screen  relative ">
       <div className="  h-full flex flex-col justify-between ">
         <div className="flex justify-center [&>div]:mx-8 [&>div]:my-8  [&>div]:md:mx-20">
           <div

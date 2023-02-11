@@ -42,7 +42,7 @@ const Navbar: FC = () => {
   };
 
   return (
-    <div className="h-20 bg-violet-800 flex shadow-lg shadow-slate-300">
+    <div className="h-20 bg-purpleMain flex shadow-lg shadow-slate-300">
       <nav className="flex justify-between items-center w-screen">
         <ul
           className="flex items-center cursor-pointer"

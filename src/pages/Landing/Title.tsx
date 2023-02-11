@@ -17,7 +17,7 @@ const Title: FC<TitleProps> = ({ contactRef }) => {
   return (
     <section className="flex flex-col md:flex-row  items-center justify-center bg-cover  bg-center bg-no-repeat bg-titleWaves h-screen relative ">
       <div
-        className="bg-violet-800 w-full h-full absolute top-0 left-0 "
+        className="bg-purpleMain w-full h-full absolute top-0 left-0 "
         style={{
           clipPath: largeScreen
             ? "circle(350px at right -130px)"

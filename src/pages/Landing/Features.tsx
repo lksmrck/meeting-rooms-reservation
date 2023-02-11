@@ -5,7 +5,7 @@ import { featureBoxes } from "../../data/data";
 
 const Features = forwardRef<HTMLDivElement>((props, ref) => {
   return (
-    <div className="h-3/4 bg-features pb-28 md:pb-20  " ref={ref}>
+    <div className="h-3/4 bg-purpleMain pb-28 md:pb-20  " ref={ref}>
       <div className="flex justify-center items-center h-full overflow-hidden">
         <ul className="flex flex-col m-10 lg:flex-row ">
           {featureBoxes.map((feature: Feature, index: number) => {

@@ -15,6 +15,7 @@ module.exports = {
       height: {
         //Výška contentu = 100vh - výška navbaru
         content: "calc(100vh - 5rem)",
+        "75vh": "75vh",
       },
       spacing: {
         0.25: "0.0625rem",
@@ -87,7 +88,7 @@ module.exports = {
         loginBg: "url('/src/assets/bgs/loginBg.svg')",
       },
       backgroundColor: {
-        features: "#461c70",
+        purpleMain: "#461c70",
         contactUs: "#efe5e5",
       },
     },

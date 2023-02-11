@@ -6,7 +6,7 @@ import ContactForm from "../../components/landing/ContactForm";
 const ContactUs = forwardRef<HTMLDivElement>((props, ref) => {
   return (
     <div
-      className=" h-screen flex flex-col justify-center items-center bg-cover bg-center bg-no-repeat bg-contactUs "
+      className="h-75vh flex flex-col justify-center items-center bg-cover bg-center bg-no-repeat bg-contactUs pb-20 "
       ref={ref}
     >
       <h1 className="font-outline font-bold text-4xl md:text-5xl mt-14 md:mt-20">
