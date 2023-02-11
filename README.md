@@ -39,10 +39,15 @@ In order to run this project locally, simply fork and clone the repository or do
 
 - Open the project in your prefered code editor.
 
-Create .env file in the root of your directory. Add:
+Create .env file in the root of your directory and add following variables, based on your Firebase project setup:
 
 ```
-REACT_APP_FIREBASE_API_KEY = *your Firebase API key*
+REACT_APP_FIREBASE_API_KEY
+REACT_APP_FIREBASE_AUTH_DOMAIN
+REACT_APP_FIREBASE_PROJECT_ID
+REACT_APP_FIREBASE_STORAGE_BUCKET
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID
+REACT_APP_FIREBASE_APP_ID
 ```
 
 ```
