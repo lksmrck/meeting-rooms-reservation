@@ -77,7 +77,7 @@ const Navbar: FC = () => {
                 </div>
               )}
 
-              <div className="flex flex-col md:flex-row text-white bg-violet-900 h-10 rounded-lg justify-center items-center p-2 md:p-3 mr-2 md:mr-4 md:max-w-80 max-w-48">
+              <div className="flex flex-col md:flex-row text-white bg-violet-800 h-10 rounded-lg justify-center items-center p-2 md:p-3 mr-2 md:mr-4 md:max-w-80 max-w-48">
                 <h2 className="text-xs font-bold lg:text-base self-center ">
                   {user.email}
                 </h2>

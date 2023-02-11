@@ -1,7 +1,5 @@
+/* Style pro Companies.tsx component */
 .companies {
-  /*   -webkit-box-shadow: inset 0px -68px 24px -25px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: inset 0px -68px 24px -25px rgba(0, 0, 0, 0.75);
-  box-shadow: inset 0px -68px 24px -25px rgba(0, 0, 0, 0.75); */
   -webkit-box-shadow: inset 0px -68px 24px -18px rgba(239, 229, 229, 1);
   -moz-box-shadow: inset 0px -68px 24px -18px rgba(239, 229, 229, 1);
   box-shadow: inset 0px -68px 24px -18px rgba(239, 229, 229, 1);
