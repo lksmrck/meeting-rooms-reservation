@@ -56,7 +56,6 @@ const MeetingDetail: FC<MeetingDetailProps> = ({
   const [updatedGuests, setUpdatedGuests] = useState(updatedMeeting.guests);
   const [missingFormData, setMissingFormData] = useState(false);
 
-  //State na local loading - aby nebyl problém se synchronizací s Firebase (update a nasledny fetch updated)
   const [fbIsLoading, setFbIsLoading] = useState(false);
 
   const { user } = useAuth();
@@ -193,8 +192,6 @@ const MeetingDetail: FC<MeetingDetailProps> = ({
         )}
 
         <ModalFooter className="[&>button]:m-1 ">
-          {/* Buttons se zobrazují, pokud se zrovna neloaduje (deleting a updating mtg) */}
-          {/* Delete a Edit meeting buttons se zobrazí pouze, pokud daný user meeting vytvořil! */}
           {clickedMeeting.creator === user!.email &&
             !isEditing &&
             !fbIsLoading &&

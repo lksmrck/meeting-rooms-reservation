@@ -35,8 +35,6 @@ const Routes: FC<RoutesProps> = ({ gatherLandingRefs }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  //Při každé změně route se obnoví session timer pro automatické odhlášení
-  //+ když je error, tak při změně URL dá error state na false
   useEffect(() => {
     if (user) {
       timeCheck(setUser);
@@ -64,12 +62,12 @@ const Routes: FC<RoutesProps> = ({ gatherLandingRefs }) => {
       />
       <Route path="/login" element={<Auth />} />
       <Route path="/unauthorized" element={<Unauthorized />} />
-      {/* 2. Protected routes - musí být logged in + práva User nebo Admin */}
+      {/* 2. Protected routes -> logged in + ADMIN or USER rights */}
       <Route element={<ProtectedRoutes allowedRights={[ADMIN, USER]} />}>
         <Route path="/datepick" element={<Home />} />
         <Route path="/reserve" element={<Reserve />} />
         <Route path="/overview" element={<DailyOverview />} />
-        {/* 3. Protected routes - musí být logged in + práva Admin */}
+        {/* 3. Protected routes -> logged in + ADMIN rights */}
         <Route element={<ProtectedRoutes allowedRights={[ADMIN]} />}>
           <Route path="/settings" element={<Settings />} />
           <Route path="/settings/rooms" element={<RoomsList />} />

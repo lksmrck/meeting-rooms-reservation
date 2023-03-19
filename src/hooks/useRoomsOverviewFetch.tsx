@@ -25,19 +25,16 @@ export const useRoomsOverviewFetch = () => {
       collection(db, `companies/${company}/rooms`)
     );
 
-    //Stáhnou se data z Firebase, projedou se meetingy, a pokud jsou nějaké plánované meetingy ve vybraném dnu, tak se uloží do proměnné níže - za všechny místnosti.
     let todaysMeetings: Meeting[] = [];
-    //Pomocná proměnná - Rozpad bloků + id místnosti
+    //Helper
     let blocksBreakdown: BlocksBreakdown[] = [];
-    //Rooms dané firmy (id a jméno)
     let companyRooms: CompanyRoom[] = [];
 
-    //Vytvořím proměnné s meetingy v daném dnu + jejich breakdown pro lepší pracování s daty.
     querySnapshot.forEach((doc) => {
       companyRooms.push({ id: doc.data().id, name: doc.data().name });
 
       if (!doc.data().meetings) return;
-      //Vyfiltrované pouze meetingy, které jsou v kliknutém dnu
+      //Filtered meetins in picked day
       const filteredMeetings = doc
         .data()
         .meetings.filter((meeting: Meeting) => {
@@ -45,7 +42,6 @@ export const useRoomsOverviewFetch = () => {
         });
       if (!filteredMeetings) return;
 
-      //Vyfiltrované meetingy daného dne se přidají do todaysMeetings a property blocks se přidá do blocksBreakdown např. jako {room: 1, block: 3}
       filteredMeetings.forEach((meeting: Meeting) => {
         todaysMeetings.push(meeting);
         meeting.blocks.forEach((block: number) => {
@@ -54,22 +50,18 @@ export const useRoomsOverviewFetch = () => {
       });
     });
 
-    //updatedRooms => vezmou se stáhnuté rooms z firebase a ke každé se přidá roomData property, ve které se upraví jednotlivé bloky na reserved: true, pokud jsou v daném dnu zarezervované
     const updatedRooms: Room[] = companyRooms.map((room: CompanyRoom) => {
-      //Vyfiltrované dnešní meetingy podle dané room
       const filteredTodaysMeetings = todaysMeetings.filter(
         (meeting: Meeting) => {
           return meeting.room == room.id;
         }
       );
-      //Helper proměnná
+      //Helper
       const blocks = blocksBreakdown.map((bd: BlocksBreakdown) => {
         if (bd.room == room.id) return bd.block;
       });
 
-      //Úprava roomData array, které půjde ke každé room (obsahuje blocky, časy, reserved a selected booleans)
       const newDataArray = roomData.map((oneRoom: RoomData) => {
-        //Pomocné array - v případě, že daný block má rezervovaný meeting, tak v této proměnné budou čísla všech bloků, kterých se rezervovaný meeting týká, např. [2,3,4]
         let meetingBlocks: number[] = [];
 
         filteredTodaysMeetings.forEach((meeting: Meeting) => {

@@ -25,8 +25,6 @@ const Footer: FC<FooterProps> = ({ landingRefs }) => {
             className="mx-24 cursor-pointer"
             onClick={() => navigate("/home")}
           >
-            {/*  <img alt="logo" src={logoDogFooter} height="60px" width="60px" /> */}
-            {/*   <h1>logo</h1> */}
             <h4 className="font-solid text-xl mt-5">Room Reserver</h4>
           </div>
 

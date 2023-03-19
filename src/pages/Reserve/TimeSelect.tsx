@@ -27,7 +27,6 @@ type TimeSelectProps = {
 
 const TimeSelect: FC<TimeSelectProps> = ({ setBlocksPickError }) => {
   const navigate = useNavigate();
-  //Datum + roomID z params
 
   const [searchParams, setSearchParams] = useSearchParams();
   const pickedRoomId = searchParams.get("room");
@@ -40,29 +39,13 @@ const TimeSelect: FC<TimeSelectProps> = ({ setBlocksPickError }) => {
 
   const [selectedBlocks, setSelectedBlocks] = useState(0);
 
-  const setBlocksError = () => {
-    setBlocksPickError({
-      error: true,
-      message: "Please select only consecutive blocks.",
-    });
-  };
-
-  const removeBlocksError = () => {
-    setBlocksPickError({
-      error: false,
-      message: "",
-    });
-  };
-
-  //Meeting details:
-  //Detail meetingů v daném dnu ve vybrané místnosti
   const [meetingsDetail, setMeetingsDetail] = useState([] as Meeting[]);
   const [openDetail, setOpenDetail] = useState(false);
   const [clickedMeeting, setClickedMeeting] = useState({} as Meeting);
 
   const { fetchMeetings, isLoading } = useMeetingsFetch();
 
-  //Počítadlo vybraných bloků k rezervaci - s každým vybraným blokem přičte 1 do local state,
+  //Calculation of picked blocks
   useEffect(() => {
     let isCurrent = true;
     if (!isCurrent) return;
@@ -91,12 +74,25 @@ const TimeSelect: FC<TimeSelectProps> = ({ setBlocksPickError }) => {
     };
   }, []);
 
-  const blockClickHandler = (blockNumber: number): void | null => {
-    //Logika -> Vybírá se právě 1 schůzka. Tzn, že lze vybírat jen souvislé časové bloky - nelze vybrat např. blok 7:00-7:30 a k tomu 12:00-12:30,
-    //ale lze vybrat postupně všechny bloky od 7:00 až do 12:30.
+  const setBlocksError = () => {
+    setBlocksPickError({
+      error: true,
+      message: "Please select only consecutive blocks.",
+    });
+  };
 
-    //Podminky
-    //0.Pokud se klikne na rezerovavný block, tak zbytek funkce nepokračuje a místo toho zobrazí meeting
+  const removeBlocksError = () => {
+    setBlocksPickError({
+      error: false,
+      message: "",
+    });
+  };
+
+  const blockClickHandler = (blockNumber: number): void | null => {
+    //Logic: Only one meeting can be reserved at the time, therefore user needs to pick only consecutive time blocks.
+
+    //Conditoons:
+    //0. If user clicks on already reserved block -> That already reserved meeting is shown:
     const clickReservedCheck = pickedRoom.roomData.find((room: RoomData) => {
       return room.block === blockNumber && room.reserved;
     });
@@ -110,16 +106,16 @@ const TimeSelect: FC<TimeSelectProps> = ({ setBlocksPickError }) => {
       setOpenDetail(true);
     }
 
-    //1. Pokud ještě není vybrán žádný blok, lze kliknout na kterýkoliv a vybrat.
+    //1. If there is no block picked yet, user can click on every block:
     if (!clickReservedCheck && pickedRoom && selectedBlocks === 0) {
       const updatedRoom = updateRoomData(pickedRoom, blockNumber);
       setPickedRoom(updatedRoom);
     }
-    //2. Pokud je právě 1 vybraný blok, tak lze vybrat pouze blok+1 nebo blok-1 nebo odvybrat vybraný blok
+    //2. If there is 1 block already picked, user can pick only block+1 or block-1 or remove already picked block:
     if (!clickReservedCheck && pickedRoom && selectedBlocks === 1) {
       const reservedBlock = pickedRoom.roomData.filter((data: RoomData) => {
         return data.selected;
-      }); //uložen rezervovaný object
+      });
 
       if (
         blockNumber === reservedBlock[0].block ||
@@ -133,19 +129,18 @@ const TimeSelect: FC<TimeSelectProps> = ({ setBlocksPickError }) => {
         setBlocksError();
       }
     }
-    //3. Pokud je více než 1 vybraný blok, tak:
+    //3. If there is more than 1 picked block:
     if (!clickReservedCheck && pickedRoom && selectedBlocks > 1) {
-      //Vyfiltorvání bloků, u kterých je selected = true
       const newSelectedBlocks = pickedRoom.roomData.filter((data: RoomData) => {
         return data.selected;
       });
-      // 3.1 Získám nejmenší block ID (n) (pak půjde kliknout pouze n-1 (přidat) nebo n (odebrat))
+      //3.1 Lowest of picked blockIDs (n), and then user can click only on n-1 (add) or n (remove):
       const minBlock = Math.min(
         ...newSelectedBlocks.map((obj: RoomData) => {
           return obj.block;
         })
       );
-      // 3.2. Získám největší block ID (n) (pak půjde kliknout pouze n+1 (přidat) nebo n (odebrat))
+      //3.2 Highest of picked blockIDs (n), and then user can click only on n+1 (add) or n (remove):
       const maxBlock = Math.max(
         ...newSelectedBlocks.map((obj: RoomData) => {
           return obj.block;
@@ -167,7 +162,6 @@ const TimeSelect: FC<TimeSelectProps> = ({ setBlocksPickError }) => {
     }
   };
 
-  //Konečný return - 2 sloupce 1. s časovými bloky, 2. vybraná místnost
   return (
     <div className="flex flex-col">
       <div className="-ml-2">

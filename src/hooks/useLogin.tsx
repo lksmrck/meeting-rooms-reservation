@@ -18,8 +18,7 @@ const useLogin = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  //Odkud se user prokliknul
-  const redirectTo = /* location.state?.from?.pathname ||  */ "/datepick";
+  const redirectTo = "/datepick";
 
   const loginUser = async (email: string, password: string): Promise<void> => {
     setIsLoading(true);

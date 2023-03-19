@@ -8,16 +8,14 @@ type OneRoomDomProps = {
 };
 
 const OneRoomDom: FC<OneRoomDomProps> = ({ pickedRoom, blockClickHandler }) => {
-  // DOM PRO ROOM - Const ve které je DOM, už roztříděný podle meetingů, kde divy mají alkované rozměry, podle toho, jaké meetingy v daném dnu jsou.
   let meetingsHelper: number[] = [];
-  //Const pro sloupec s timeblocky dané místnosti - zobrazení tak, aby meetingy tvořily jeden velký blok a nerezervované bloky byly samostatně.
+
   const roomDom = pickedRoom.roomData.map((roomData: RoomData) => {
     const selectedBlock = pickedRoom.roomData?.find(
       (room: RoomData) => room.block === roomData.block
     );
     let height;
 
-    //Check zda bloky v meetingBlocks u každého bloku jsou obsaženy v meetingsHelper array.
     const includedInHelper = meetingsHelper.some((no: number) =>
       roomData.meetingBlocks?.includes(no)
     );
@@ -27,10 +25,9 @@ const OneRoomDom: FC<OneRoomDomProps> = ({ pickedRoom, blockClickHandler }) => {
     }
 
     if (roomData.reserved && !includedInHelper) {
-      //Vypočítaná výška
+      //Calculated height
       height = roomData.meetingBlocks!.length * 2.5;
 
-      //Přičte block do meetingHelper, aby se vědělo, že pro tento meeting byl již DOM vytvořen
       roomData.meetingBlocks?.forEach((block: number) => {
         meetingsHelper.push(block);
       });

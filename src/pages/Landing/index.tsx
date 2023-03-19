@@ -19,7 +19,6 @@ const Landing: FC<LandingProps> = ({ gatherLandingRefs }) => {
     contactRef: useRef<HTMLDivElement>(null),
   };
 
-  //Pošle refs na jednotlivé oddíly do state v App kvůli scrollu po kliknutí na footer
   useEffect(() => {
     gatherLandingRefs(landingRefs);
   }, []);

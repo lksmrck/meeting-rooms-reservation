@@ -6,7 +6,6 @@ import useAuth from "../../hooks/useAuth";
 import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 
 interface HamburgerMenuProps {
-  /*   isUserLogged: boolean; */
   loginLogoutHandler: () => void;
 }
 

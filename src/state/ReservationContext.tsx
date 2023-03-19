@@ -25,7 +25,6 @@ export const ReservationContextProvider: FC<{
   //Rooms data
   const [roomsData, setRoomsData] = useState([] as Room[]);
 
-  //Vybraná místnost - komplet data o rezervacích
   const [pickedRoom, setPickedRoom] = useState(
     getLocalStorage("pickedRoom") || ({} as Room)
   );

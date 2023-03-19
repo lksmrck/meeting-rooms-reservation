@@ -54,7 +54,7 @@ export const useUsersAdminFncs = () => {
           ...formData,
           password: hashedPassword,
         });
-        //3. Create user in Firebase overall DB (vytáhne se odtud jen company a uid, aby se pak mohla tahat data.)
+        //3. Create user in Firebase overall DB
         setDoc(doc(db, `users`, user.uid), {
           ...formData,
           password: hashedPassword,

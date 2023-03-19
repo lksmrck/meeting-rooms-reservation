@@ -8,15 +8,12 @@ const DatePick: FC = () => {
   const navigate = useNavigate();
 
   const pickDateHandler = (date: Date): void => {
-    //State ke controllingu component value
     setDate(date);
-    //Date to string bez mezer --> pro porovnání s datem z FIrebase v DailyOverview componentu
+
     const adjustedDate = dateFormatter(date);
 
     const dateParams = dateToParams(adjustedDate);
 
-    /* navigate(`/date/${dateParams}/overview`); */
-    /*  navigate(`/overview?date=${dateParams}`); */
     navigate({ pathname: `/overview`, search: `?date=${dateParams}` });
   };
 

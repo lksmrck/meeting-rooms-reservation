@@ -37,21 +37,16 @@ const ReservationForm: FC<ReservationFormProps> = ({
   const { pickedRoom } = useContext(ReservationContext);
   const { addMeeting } = useAddMeeting();
 
-  //Date + room ID z params
-
   const [searchParams, setSearchParams] = useSearchParams();
   const pickedRoomId = searchParams.get("room");
   const pickedDate = searchParams.get("date");
 
   const formatedDate = paramsToDate(pickedDate!);
 
-  //Po submitnutí je button disabled, aby se nedalo kliknout víckrát během jednoho submitu
   const [disabledBtn, setDisabledBtn] = useState(false);
 
-  //Data z formu
   const [formData, setFormData] = useState({ name: "", type: CALL });
 
-  //Guests
   const [guests, setGuests] = useState<string[] | []>([]);
   const [isGuestModalOpen, setIsGuestModalOpen] = useState(false);
   const onAddGuests = (guests: string[]) => {
@@ -73,7 +68,6 @@ const ReservationForm: FC<ReservationFormProps> = ({
     setDisabledBtn(true);
     setMissingFormDataError(false);
 
-    //Čísla vybraných bloků k rezervaci
     let blocks: number[] = [];
     pickedRoom.roomData.forEach((data: RoomData) => {
       if (data.selected) blocks.push(data.block);
@@ -91,7 +85,6 @@ const ReservationForm: FC<ReservationFormProps> = ({
       guests,
     };
 
-    //Check, zda je vyplněný název meetingu a vybrané bloky. Zbytek dat je nepovinný, nebo se vezme automaticky.
     if (blocks.length > 0 && name && name.length >= 1) {
       addMeeting(
         newMeeting,

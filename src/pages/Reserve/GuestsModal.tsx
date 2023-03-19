@@ -39,12 +39,10 @@ const GuestsModal: FC<GuestsModalProps> = ({
     return index + 1;
   });
 
-  //Array na základě kt. se pak mapujou inputy - pokud jsou už ve state nějací guesti, tak bude počáteční state array s čísly guestů např [1,2,3]. Pokud nejsou guesti ve state, tak bude initial state [1]
   const [inputsNumber, setInputsNumber] = useState<number[]>(
     initialInputsNumber.length > 1 ? initialInputsNumber : [1]
   );
 
-  //Přidá každého guesta do array a removuje při odebrání inputu.
   const onChangeGuests = (e: ChangeEvent<HTMLInputElement>): void => {
     let modifiedGuestsArray: string[] = [...guests];
     modifiedGuestsArray[Number(e.target.name) - 1] = e.target.value;
@@ -58,7 +56,7 @@ const GuestsModal: FC<GuestsModalProps> = ({
 
   const submitGuestsHandler = (e: SyntheticEvent): void => {
     let cleanedGuestsArray: string[] = [];
-    //Validace pro případ, že user nechá nevyplněné pole pro guesty
+
     guests.forEach((guest: string) => {
       if (!guest) return;
       if (guest.length < 1) return;

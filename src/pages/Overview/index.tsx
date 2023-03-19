@@ -26,7 +26,6 @@ const Overview: FC = () => {
 
   const { roomsOverviewFetch, isLoading } = useRoomsOverviewFetch();
 
-  //1. Firebase query - stáhne všechny rooms za danou firmu včetně meetingů a zpracované meetingy vč. upravených objektů o meetingy ve vybraném dnu uloží do state. Viz. funkce..
   useEffect(() => {
     let isCurrent = true;
 
@@ -38,12 +37,10 @@ const Overview: FC = () => {
   }, []);
 
   const clickBlockHandler = (room: number, block: number): void => {
-    //Uloží do Contextu room a block, na které user clicknul, aby se dalo pak použít v detailní rezervaci jako přednastaveno
-
     const clickedRoom = roomsData.find((roomData: Room) => {
       return roomData.id === room;
     });
-    //přidána property selected: false ke každému bloku. U reserve se tam bude přidělovat kliknutí a podle toho se barvit.
+
     const adjustedRoomData = clickedRoom!.roomData.map((data: RoomData) => {
       if (data.block === block && !data.reserved) {
         return { ...data, selected: true };
@@ -52,7 +49,7 @@ const Overview: FC = () => {
     });
 
     const adjustedClickedRoom = { ...clickedRoom, roomData: adjustedRoomData };
-    //Pošle se vyfiltrovaná room do react contextu. Odtud se pak bere v Reserve componentu
+
     setPickedRoom(adjustedClickedRoom as Room);
 
     navigate({
@@ -61,11 +58,11 @@ const Overview: FC = () => {
     });
   };
 
-  //Vypočítá šířku celého obsahu podle počtu místnosti - = 5rem) na místnost + 5rem za time blocks.
+  //Calculated width of content based on number of rooms (5rem per room + 5rem per timeBlocks)
   const roomsNumber = roomsData.length;
   const displayWidth = roomsNumber * 5 + 5;
 
-  //Počet sloupců pro GRID
+  //Number of GRID columns
   const displayCols = roomsNumber + 1;
 
   return (
@@ -87,10 +84,7 @@ const Overview: FC = () => {
 
         {roomsData.length > 0 ? (
           <section
-            className={` ${
-              isLoading ? "flex" : "grid"
-            } gap-5  ml-3   `} /* mt-2 */
-            //Custom in-line style, protože Tailwind neumožňuje dynamic styling - takto udělá grid podle počtu místností (const displayCols) a přidá dynamicky width contentu.
+            className={` ${isLoading ? "flex" : "grid"} gap-5  ml-3   `}
             style={{
               gridTemplateColumns: `repeat(${displayCols}, minmax(0, 1fr))`,
               minWidth: `${displayWidth}rem`,

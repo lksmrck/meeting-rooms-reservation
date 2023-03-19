@@ -9,7 +9,6 @@ import AppContext from "../../state/AppContext";
 import { ADMIN } from "../../data/constants";
 import HamburgerMenu from "./HamburgerMenu";
 import { useMediaQuery } from "@chakra-ui/react";
-import LogoImage from "./LogoImage";
 
 const Navbar: FC = () => {
   const navigate = useNavigate();
@@ -54,10 +53,6 @@ const Navbar: FC = () => {
           <li className=" ml-8 text-white font-solid text-lg md:text-2xl animate-bounceInRight">
             Room Reserver
           </li>
-
-          {/*    <li className="h-14 ml-2 mt-3 md:mt-0 md:ml-4">
-            {displayLogo && <LogoImage />}
-          </li> */}
         </ul>
         <div className="flex justify-center ">
           {user && (

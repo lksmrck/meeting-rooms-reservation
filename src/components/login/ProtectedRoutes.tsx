@@ -8,13 +8,6 @@ const ProtectedRoutes: FC<{ allowedRights: string[] }> = ({
   const { user } = useAuth();
   const location = useLocation();
 
-  //Pages dostupné po loginu
-  //1. Je user přihlášený? Ano - přesměruje na stránku, Ne - přesměruje na login
-
-  //Restricted pages pouze pro admina
-  //2. Má user rights na to vidět stránku? Pokud ne, tak:
-  //3. Je user přihlášený? Ano - přesměruje na Unauthorized page, Ne - přesměruje na login
-
   if (user?.rights == null)
     return <Navigate to="/login" state={{ from: location }} replace />;
 
@@ -23,7 +16,7 @@ const ProtectedRoutes: FC<{ allowedRights: string[] }> = ({
   ) : user ? (
     <Navigate to="/unauthorized" state={{ from: location }} replace />
   ) : (
-    <Navigate to="/login" /* state={{ from: location }} replace */ /> //Při neautorizovaném vstupu přesměruje na /login, a umožní userovi jít back na původní lokaci, které chtěl předtím dosáhnout a po přihlášení přesměruje na tuto url.
+    <Navigate to="/login" />
   );
 };
 export default ProtectedRoutes;

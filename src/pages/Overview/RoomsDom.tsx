@@ -10,11 +10,7 @@ type RoomsDomProps = {
 };
 
 const RoomsDom: FC<RoomsDomProps> = ({ roomsData, clickBlockHandler }) => {
-  //V případě, že název room je dlouhý (delší než 7 znaků), tak se zobrazí prvních 7 znaků a pak 3 tečky.
-
-  //Vytvoří DOM pro místnosti uzpůsobený pro Grid
   const roomsDom = roomsData.map((room: Room) => {
-    //Pokud je v daném bloku a daném dnu meeting, tak se zde sleduje, jestli už byl na blok vytvořen DOM
     let meetingsHelper: number[] = [];
     let height;
 
@@ -33,7 +29,6 @@ const RoomsDom: FC<RoomsDomProps> = ({ roomsData, clickBlockHandler }) => {
           if (roomData.reserved && !includedInHelper) {
             height = roomData.meetingBlocks!.length * 2.5;
 
-            //Přičte block do meetingHelper, aby se vědělo, že pro tento meeting byl již DOM vytvořen
             roomData.meetingBlocks?.forEach((block: number) => {
               meetingsHelper.push(block);
             });

@@ -44,10 +44,8 @@ const DetailDomEditMode: FC<DetailDomEditModeProps> = ({
     return data;
   });
 
-  //Upravená pickedRoom tak, že u blocků ,které jsou v meetingu, který jde do editu se nastaví reserved = false
   const localPickedRoom = { ...pickedRoom, roomData: adjustedRoomData };
 
-  //State pro edit time => vyfiltrované bloky, které mají reserved = false {block: 1, start: 7:00, end: 7:00, reserved: false, selected: false}
   const possibleStartTime = localPickedRoom.roomData.filter(
     (data: RoomData) => {
       return data.reserved === false;
@@ -56,9 +54,8 @@ const DetailDomEditMode: FC<DetailDomEditModeProps> = ({
 
   const [endTimeOptions, setEndTimeOptions] = useState<RoomData[]>([]);
   useEffect(() => {
-    //Loop, na přiřazení možného končícího času meetingu (updatuje se vždy po zadání počátečního času)
     let possibleEndTime: RoomData[] = [];
-    //Loop začne od i => vybrané počáteční datum meetingu
+
     let i = localPickedRoom.roomData.findIndex(
       (block) => block.start === updatedTime.start
     );

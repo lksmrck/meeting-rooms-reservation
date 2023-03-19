@@ -5,7 +5,6 @@ import { Button } from "@chakra-ui/react";
 import TimeSelect from "./TimeSelect";
 
 const Reserve: FC = () => {
-  //Velikost displeje. Při sm displeji je form skrytý a zobrazeno open form button
   const [mediumScreenMax] = useMediaQuery("(max-width: 768px)");
   const [openedForm, setOpenedForm] = useState(false);
 

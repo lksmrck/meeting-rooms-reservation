@@ -5,7 +5,6 @@ import { Meeting } from "../types/types";
 import AppContext from "../state/AppContext";
 import AuthContext from "../state/AuthContext";
 
-//Detail meetingů v daném vybraném dnu.
 export const useMeetingsFetch = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { setError } = useContext(AppContext);

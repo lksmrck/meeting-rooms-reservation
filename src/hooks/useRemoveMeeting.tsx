@@ -5,7 +5,6 @@ import AppContext from "../state/AppContext";
 import { Meeting } from "../types/types";
 import AuthContext from "../state/AuthContext";
 
-//Detail meetingů v daném vybraném dnu.
 export const useRemoveMeeting = () => {
   const { setError } = useContext(AppContext);
   const { user } = useContext(AuthContext);

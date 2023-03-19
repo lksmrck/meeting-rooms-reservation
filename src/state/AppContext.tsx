@@ -17,7 +17,6 @@ const AppContext = createContext({} as AppContextInterface);
 export const AppContextProvider: FC<{
   children: ReactNode;
 }> = ({ children }) => {
-  //Zohlednit toto v custom hooks nebo odebrat upplne!
   const [isContextLoading, setIsContextLoading] = useState(false);
   const [error, setError] = useState({ error: false, message: "" } as Error);
 
