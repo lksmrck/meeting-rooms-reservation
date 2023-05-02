@@ -5,13 +5,13 @@ import {
   useNavigate,
   useLocation,
 } from "react-router-dom";
-import Landing from "../pages/Landing";
+
 import DailyOverview from "../pages/Overview";
 import Reserve from "../pages/Reserve";
 import Home from "../pages/Datepick";
 import Auth from "../pages/Login";
 import useAuth from "../hooks/useAuth";
-import { useContext } from "react";
+import { useContext, lazy, Suspense } from "react";
 import AppContext from "../state/AppContext";
 import NotFound from "../pages/screens/NotFound";
 import ProtectedRoutes from "../components/login/ProtectedRoutes";
@@ -24,12 +24,16 @@ import { LandingRefsObject } from "../types/types";
 import ErrorScreen from "../pages/screens/ErrorScreen";
 import Settings from "../pages/Admin/index";
 import { timeCheck } from "../utils/timeCheck";
+import LoadingSpinner from "../components/ui/LoadingSpinner/LoadingSpinner";
+import Landing from "../pages/Landing/index";
 
 type RoutesProps = {
   gatherLandingRefs: (refs: LandingRefsObject) => void;
 };
 
 const Routes: FC<RoutesProps> = ({ gatherLandingRefs }) => {
+  /* const Landing = lazy(() => import("../pages/Landing")); */
+
   const { user, setUser } = useAuth();
   const { error, setError } = useContext(AppContext);
   const navigate = useNavigate();
@@ -65,6 +69,7 @@ const Routes: FC<RoutesProps> = ({ gatherLandingRefs }) => {
       {/* 2. Protected routes -> logged in + ADMIN or USER rights */}
       <Route element={<ProtectedRoutes allowedRights={[ADMIN, USER]} />}>
         <Route path="/datepick" element={<Home />} />
+
         <Route path="/reserve" element={<Reserve />} />
         <Route path="/overview" element={<DailyOverview />} />
         {/* 3. Protected routes -> logged in + ADMIN rights */}
