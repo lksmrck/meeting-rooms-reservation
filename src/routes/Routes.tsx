@@ -11,7 +11,7 @@ import Reserve from "../pages/Reserve";
 import Home from "../pages/Datepick";
 import Auth from "../pages/Login";
 import useAuth from "../hooks/useAuth";
-import { useContext, lazy, Suspense } from "react";
+import { useContext } from "react";
 import AppContext from "../state/AppContext";
 import NotFound from "../pages/screens/NotFound";
 import ProtectedRoutes from "../components/login/ProtectedRoutes";
@@ -24,7 +24,6 @@ import { LandingRefsObject } from "../types/types";
 import ErrorScreen from "../pages/screens/ErrorScreen";
 import Settings from "../pages/Admin/index";
 import { timeCheck } from "../utils/timeCheck";
-import LoadingSpinner from "../components/ui/LoadingSpinner/LoadingSpinner";
 import Landing from "../pages/Landing/index";
 
 type RoutesProps = {
@@ -32,8 +31,6 @@ type RoutesProps = {
 };
 
 const Routes: FC<RoutesProps> = ({ gatherLandingRefs }) => {
-  /* const Landing = lazy(() => import("../pages/Landing")); */
-
   const { user, setUser } = useAuth();
   const { error, setError } = useContext(AppContext);
   const navigate = useNavigate();

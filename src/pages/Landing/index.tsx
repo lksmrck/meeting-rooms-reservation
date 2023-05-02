@@ -1,17 +1,20 @@
-import { useRef, FC, useEffect } from "react";
-import Title from "./Title";
-import Features from "./Features";
-import Steps from "./Steps";
-import Reference from "./Reference";
-import ContactUs from "./ContactUs";
-import Companies from "./Companies";
+import { useRef, FC, useEffect, lazy, Suspense } from "react";
+
 import { LandingRefsObject } from "../../types/types";
+import LoadingSpinner from "../../components/ui/LoadingSpinner/LoadingSpinner";
 
 type LandingProps = {
   gatherLandingRefs: (refs: LandingRefsObject) => void;
 };
 
 const Landing: FC<LandingProps> = ({ gatherLandingRefs }) => {
+  const Title = lazy(() => import("./Title"));
+  const Features = lazy(() => import("./Features"));
+  const Steps = lazy(() => import("./Steps"));
+  const Reference = lazy(() => import("./Reference"));
+  const Companies = lazy(() => import("./Companies"));
+  const ContactUs = lazy(() => import("./ContactUs"));
+
   const landingRefs = {
     featuresRef: useRef<HTMLDivElement>(null),
     stepsRef: useRef<HTMLDivElement>(null),
@@ -25,12 +28,20 @@ const Landing: FC<LandingProps> = ({ gatherLandingRefs }) => {
 
   return (
     <div className="h-auto w-full overflow-x-hidden  ">
-      <Title contactRef={landingRefs.contactRef} />
-      <Features ref={landingRefs.featuresRef} />
-      <Steps ref={landingRefs.stepsRef} />
-      <Reference ref={landingRefs.referencesRef} />
-      <Companies />
-      <ContactUs ref={landingRefs.contactRef} />
+      <Suspense
+        fallback={
+          <div className="h-screen flex items-center justify-center bg-titleWaves bg-cover  bg-center">
+            <LoadingSpinner />
+          </div>
+        }
+      >
+        <Title contactRef={landingRefs.contactRef} />
+        <Features ref={landingRefs.featuresRef} />
+        <Steps ref={landingRefs.stepsRef} />
+        <Reference ref={landingRefs.referencesRef} />
+        <Companies />
+        <ContactUs ref={landingRefs.contactRef} />
+      </Suspense>
     </div>
   );
 };
