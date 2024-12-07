@@ -4,10 +4,10 @@
 
 You can try the demo [HERE](https://lksmrck.github.io/meeting-rooms-reservation/) based on following data:
 
-[//]: #  diff
-[//]: #  + login: novak@novak.com
-[//]: #  + password: 123123
-[//]: # 
+``` diff
+ + login: novak@novak.com
+ + password: 123123
+ ```
 
 <img src="./readme/screenshots.JPG" />
 
